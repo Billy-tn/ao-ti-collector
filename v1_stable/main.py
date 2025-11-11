@@ -1,402 +1,439 @@
 import csv
+import datetime as dt
 import io
-import re
-import json
+import sys
+from typing import Dict, List, Optional, Tuple
+
 import requests
-from dateutil import parser as dateparser  # gardé si tu veux parser/normaliser les dates plus tard
 
 # =========================
-# Config
+# CONFIG
 # =========================
 
-SEAO_DATASET_ID = "d23b2e02-085d-43e5-9e6e-e1d558ebfdd5"
-CANADABUYS_TENDERS_ID = "6abd20d4-7a1c-4b38-baa2-9525d0bb2fd2"
+# Fenêtre en jours pour filtrer les AO (SEAO + CanadaBuys)
+WINDOW_DAYS = 60
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/120.0 Safari/537.36"
-    ),
-    "Accept": "*/*",
-    "Accept-Language": "en,fr;q=0.9",
-    # On se présente comme venant de la page officielle open data CanadaBuys
-    "Referer": "https://canadabuys.canada.ca/en/procurement-and-contracting-data",
-}
+# Fichiers de sortie
+OUTPUT_ALL = "ao_output_v1.csv"
+OUTPUT_FOCUS = "ao_output_v1_ats_only.csv"
 
-KEYWORD_RE = re.compile(
-    r"(\bATS\b|syst(?:è|e)me de suivi des candidatures|suivi des candidatures|"
-    r"logiciel de recrutement|acquisition de talents?|solution de recrutement|"
-    r"plateforme de recrutement|\bapplicant tracking system\b|"
-    r"\brecruit(?:ment)? software\b|\btalent acquisition\b|"
-    r"\brecruiting platform\b)",
-    re.IGNORECASE,
+# Jeu de données SEAO (Données Québec)
+SEAO_PACKAGE_ID = "systeme-electronique-dappel-doffres-seao"
+SEAO_PACKAGE_URL = (
+    "https://www.donneesquebec.ca/recherche/api/3/action/package_show"
 )
 
+# CanadaBuys (tenders fédéraux)
+CANADABUYS_CSV_URL = (
+    "https://canadabuys.canada.ca/opendata/pub/newTenderNotice-nouvelAvisAppelOffres.csv"
+)
+
+# Mots-clés stratégiques (fichier FOCUS)
+# - ATS / recrutement
+# - CRM / gestion de la relation client
+# - Solutions TI structurantes (ERP / Odoo / ServiceNow / etc.)
+KEYWORDS_FOCUS = [
+    # ATS / recrutement
+    "ats",
+    "applicant tracking",
+    "talent acquisition",
+    "recrutement",
+    "recruitment",
+    "gestion des candidatures",
+    # CRM
+    "crm",
+    "customer relationship management",
+    "gestion de la relation client",
+    "relation client",
+    "salesforce",
+    "microsoft dynamics",
+    "hubspot",
+    # ERP / plateformes
+    "erp",
+    "oracle",
+    "sap",
+    "odoo",
+    "workday",
+    "dynamics 365",
+    # it / plateforme service / itsm
+    "servicenow",
+    "itsm",
+    "ticketing",
+    "support client",
+    "portail client",
+    # nuage / infra / data (souvent liés aux projets structurants)
+    "cloud",
+    "infonuagique",
+    "azure",
+    "aws",
+    "gcp",
+    "datawarehouse",
+    " entrepôt de données",
+]
+
 # =========================
-# HTTP utils
+# OUTILS
 # =========================
 
-def fetch_json(url):
-    r = requests.get(url, headers=HEADERS, timeout=30)
-    r.raise_for_status()
-    return r.json()
 
-def fetch_text(url):
-    r = requests.get(url, headers=HEADERS, timeout=60)
-    r.raise_for_status()
-    return r.text
+def log(msg: str) -> None:
+    print(msg, file=sys.stdout, flush=True)
+
+
+def parse_date(value: str) -> Optional[dt.date]:
+    """Parse une date en provenance des différentes sources."""
+    if not value:
+        return None
+
+    value = value.strip()
+
+    # Formats fréquents : 2025-11-10, 2025-11-10T13:45:00Z, 2025/11/10
+    for fmt in ("%Y-%m-%d", "%Y/%m/%d"):
+        try:
+            return dt.datetime.strptime(value[:10], fmt).date()
+        except ValueError:
+            pass
+
+    # ISO-like
+    try:
+        return dt.datetime.fromisoformat(value.replace("Z", "")).date()
+    except Exception:
+        return None
+
+
+def match_focus_keywords(text: str, keywords: List[str]) -> List[str]:
+    text_l = (text or "").lower()
+    matched = [kw for kw in keywords if kw.lower() in text_l]
+    # dédoublonner proprement
+    return sorted(set(matched))
+
 
 # =========================
-# CKAN utils
+# SEAO - RÉCUP / NORMALISATION
 # =========================
 
-def ckan_package_show(base, dataset_id):
-    url = f"{base}/package_show?id={dataset_id}"
-    js = fetch_json(url)
-    if not js.get("success"):
-        raise RuntimeError(f"CKAN failed for {url}")
-    return js["result"]
 
-def is_json_resource(res):
-    fmt = (res.get("format") or "").lower()
-    url = (res.get("url") or "").lower()
-    return "json" in fmt or "json" in url
+def get_seao_resources() -> List[Tuple[str, str]]:
+    """
+    Récupère via l'API CKAN la liste des ressources JSON (hebdo_*.json, mensuel_*.json)
+    et renvoie [(name, url), ...].
 
-def pick_latest_resources(resources, hint=None):
-    def score(r):
-        name = (r.get("name") or r.get("title") or "").lower()
-        url = (r.get("url") or "").lower()
-        last = (r.get("last_modified") or r.get("created") or "")
+    On ne charge pas ici, on filtre ensuite par fenêtre de dates.
+    """
+    try:
+        resp = requests.get(
+            SEAO_PACKAGE_URL,
+            params={"id": SEAO_PACKAGE_ID},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        resources = data.get("result", {}).get("resources", [])
+    except Exception as e:
+        log(f"ERREUR: impossible de charger la liste des ressources SEAO ({e})")
+        return []
+
+    results: List[Tuple[str, str]] = []
+    for r in resources:
         fmt = (r.get("format") or "").lower()
-        hint_boost = 1 if (hint and hint in name) else 0
-        fmt_boost = 1 if any(x in fmt or x in url for x in ["json", "csv"]) else 0
-        return (hint_boost, fmt_boost, last, name, url)
-    return sorted(resources, key=score, reverse=True)
+        name = (r.get("name") or "").lower()
+        url = r.get("url") or ""
+        if fmt == "json" and url and (
+            name.startswith("hebdo_") or name.startswith("mensuel_")
+        ):
+            results.append((name, url))
 
-# =========================
-# Normalisation générique
-# =========================
+    # dédoublonnage par URL
+    unique: Dict[str, str] = {}
+    for name, url in results:
+        unique[url] = name
 
-def normalize_record(rec, source):
-    """Mappe un enregistrement brut (SEAO ou CanadaBuys) vers notre modèle commun."""
+    out = [(name, url) for url, name in unique.items()]
+    return out
 
-    def g(keys):
-        for k in keys:
-            if k in rec and rec[k]:
-                v = rec[k]
-                if isinstance(v, (dict, list)):
-                    v = json.dumps(v, ensure_ascii=False)
-                s = str(v).strip()
-                if s:
-                    return s
-        return ""
 
-    def g_pattern(any_parts=None, all_parts=None):
-        any_parts = [p.lower() for p in (any_parts or [])]
-        all_parts = [p.lower() for p in (all_parts or [])]
-        for k, v in rec.items():
-            lk = k.lower()
-            if any_parts and not any(p in lk for p in any_parts):
-                continue
-            if all_parts and not all(p in lk for p in all_parts):
-                continue
-            if v:
-                if isinstance(v, (dict, list)):
-                    v = json.dumps(v, ensure_ascii=False)
-                s = str(v).strip()
-                if s:
-                    return s
-        return ""
+def extract_period_from_name(name: str) -> Tuple[Optional[dt.date], Optional[dt.date]]:
+    """
+    Extrait (date_debut, date_fin) à partir d'un nom du type:
+    hebdo_YYYYMMDD_YYYYMMDD.json ou mensuel_YYYYMMDD_YYYYMMDD.json
+    """
+    base = name.replace(".json", "")
+    parts = base.split("_")
+    if len(parts) < 3:
+        return None, None
+    try:
+        start = dt.datetime.strptime(parts[1], "%Y%m%d").date()
+        end = dt.datetime.strptime(parts[2], "%Y%m%d").date()
+        return start, end
+    except Exception:
+        return None, None
 
-    def g_smart(exact_keys=None, any_parts=None, all_parts=None):
-        v = g(exact_keys or [])
-        if v:
-            return v
-        return g_pattern(any_parts, all_parts)
 
-    # Titre
-    title = g_smart(
-        [
-            "tenderNoticeTitle-en","tenderNoticeTitle-fr",
-            "tenderTitle-en","tenderTitle-fr",
-            "titre","title","objet","noticeTitleEn","noticeTitleFr",
-            "nomProjet","descriptionCourte","summary","name"
-        ],
-        any_parts=["title","titre"]
+def normalize_seao_release(release: dict) -> Optional[dict]:
+    tender = release.get("tender", {}) or {}
+    buyer_name = ""
+
+    # buyer direct
+    buyer = release.get("buyer") or {}
+    buyer_name = buyer.get("name") or ""
+
+    # sinon, tenter parties
+    if not buyer_name:
+        for p in release.get("parties") or []:
+            roles = p.get("roles") or []
+            if any(r.lower() == "buyer" for r in roles):
+                buyer_name = p.get("name") or ""
+                break
+
+    title = tender.get("title") or release.get("title") or ""
+    description = tender.get("description") or ""
+
+    # date : release.date prioritaire, sinon tenderPeriod
+    date_str = (
+        release.get("date")
+        or (tender.get("tenderPeriod") or {}).get("startDate")
+        or (tender.get("tenderPeriod") or {}).get("endDate")
     )
+    pub_date = parse_date(date_str)
+    if not pub_date:
+        return None
 
-    # Description
-    description = g_smart(
-        [
-            "tenderNoticeDescription-en","tenderNoticeDescription-fr",
-            "tenderDescription-en","tenderDescription-fr",
-            "description","desc","descriptionDetaillee",
-            "longDescriptionEn","longDescriptionFr","notes"
-        ],
-        any_parts=["description"]
-    )
+    # URL : on reste conservateur -> on prend la première URL de document si dispo
+    url = ""
+    for doc in tender.get("documents") or []:
+        if doc.get("url"):
+            url = doc["url"]
+            break
 
-    # Acheteur
-    buyer = g_smart(
-        [
-            "buyerName","procuringEntity-en","procuringEntity-fr",
-            "organizationName-en","organizationName-fr",
-            "organisme","organisation","acheteur","agency"
-        ],
-        any_parts=["buyer","organisme","organisation","agency"]
-    )
-
-    # Statut
-    status = g_smart(
-        [
-            "tenderNoticeStatus-en","tenderNoticeStatus-fr","tenderNoticeStatus-code",
-            "status","statut","noticeStatus","etat"
-        ],
-        any_parts=["status","statut"]
-    )
-
-    # Date publication
-    pub_date = g_smart(
-        [
-            "tenderNoticePublishedDate","tenderPublicationDate","tenderNoticePublicationDate",
-            "datePublication","publicationDate","publishedDate",
-            "date_publication","issueDate"
-        ],
-        any_parts=["publish","publication","issue","date"]
-    )
-
-    # Date clôture
-    close_date = g_smart(
-        [
-            "tenderNoticeClosingDate","tenderClosingDate",
-            "dateLimite","closingDate","bidClosingDate",
-            "deadline","date_fermeture"
-        ],
-        any_parts=["closing","clôture","deadline"]
-    )
-
-    # Référence
-    refnum = g_smart(
-        [
-            "tenderNoticeNumber","tenderNoticeUuid","legacyNoticeId",
-            "numero","noAvis","reference","referenceNumber",
-            "solicitationNumber","no_dossier","reference_no"
-        ],
-        all_parts=["tender","number"]
-    ) or g_pattern(all_parts=["reference"])
-
-    # Lien
-    link = g_smart(
-        [
-            "tenderNoticeUrl-en","tenderNoticeUrl-fr","tenderNoticeUrl",
-            "url","lienAvis","noticeURL","tenderURL","link","links"
-        ],
-        any_parts=["url","http"]
-    )
-
-    # Catégorie
-    category = g_smart(
-        [
-            "unspscCodes","unspscCode",
-            "categorie","unspsc","category","naicsCodes","categories"
-        ],
-        any_parts=["unspsc","category","naics"]
-    )
-
-    # Budget
-    budget = g_smart(
-        [
-            "estimatedValue","estimatedValueRange",
-            "montant","budget","valeurEstimee"
-        ],
-        any_parts=["value","budget","montant"]
-    )
-
-    # Type d'avis
-    notice_type = g_smart(
-        [
-            "tenderNoticeType-en","tenderNoticeType-fr","tenderNoticeType-code",
-            "type","noticeType","typeAvis","notice_format"
-        ],
-        any_parts=["type"]
-    )
-
-    # Fuseau
-    timezone = g_smart(
-        [
-            "closingTimeZone","timezone","fuseau"
-        ],
-        any_parts=["timezone","fuseau"]
-    )
-
-    # Langue
-    language = g_smart(
-        [
-            "tenderNoticeLanguage","languageCode",
-            "language","langue","lang"
-        ],
-        any_parts=["lang"]
-    )
-
-    combined = " ".join(
-        x for x in [title, description, category, notice_type, buyer, refnum] if x
+    ocid = (
+        release.get("ocid")
+        or release.get("id")
+        or tender.get("id")
+        or ""
     )
 
     return {
-        "Plateforme": source,
-        "Référence": refnum,
-        "Acheteur": buyer,
-        "Titre": title,
-        "Type": notice_type,
-        "Statut": status,
-        "Date de publication": pub_date,
-        "Date de clôture": close_date,
-        "Fuseau horaire": timezone,
-        "Catégories/UNSPSC": category,
-        "Budget (si publié)": budget,
-        "Lien": link,
-        "Langue": language,
-        "Mots-clés détectés ?": "Oui" if KEYWORD_RE.search(combined) else "Non",
-        "Extrait recherche": combined[:300],
+        "source": "SEAO",
+        "title": title.strip(),
+        "url": url.strip(),
+        "published_at": pub_date,
+        "country": "CA",
+        "region": "QC",
+        "portal_name": "SEAO",
+        "matched_keywords": "",
+        "raw_summary": description.strip(),
+        "source_domain": "seao.gouv.qc.ca",
+        "confidence": 0.9,
+        "ocid": ocid,
+        "buyer": buyer_name.strip(),
     }
 
-# =========================
-# CanadaBuys CSV
-# =========================
 
-def parse_canadabuys_csv(text):
-    reader = csv.DictReader(io.StringIO(text))
-    out = []
-    for row in reader:
-        if not any((v or "").strip() for v in row.values()):
-            continue
-        out.append(normalize_record(row, "CanadaBuys"))
-    return out
-
-# =========================
-# Fetch SEAO
-# =========================
-
-def fetch_seao():
-    base = "https://www.donneesquebec.ca/recherche/api/3/action"
-    pack = ckan_package_show(base, SEAO_DATASET_ID)
-    resources = pack.get("resources", [])
-    candidates = [r for r in resources if is_json_resource(r)]
-    candidates = pick_latest_resources(candidates)
-    if not candidates:
+def load_seao(window_start: dt.date, window_end: dt.date) -> List[dict]:
+    resources = get_seao_resources()
+    if not resources:
+        log("SEAO -> aucune ressource trouvée via l'API Données Québec.")
         return []
 
-    url = candidates[0]["url"]
-    js = fetch_json(url)
+    selected: List[Tuple[str, str]] = []
+    for name, url in resources:
+        start, end = extract_period_from_name(name)
+        if not start or not end:
+            continue
+        # on ne garde que les fichiers qui intersectent la fenêtre
+        if end < window_start or start > window_end:
+            continue
+        selected.append((name, url))
 
-    items = []
-    if isinstance(js, list):
-        items = js
-    elif isinstance(js, dict):
-        for k in ["avis", "tenders", "notices", "records", "items", "results", "data"]:
-            if isinstance(js.get(k), list):
-                items = js[k]
-                break
-        if not items:
-            items = [js]
+    # tri pour un affichage plus stable
+    selected.sort(key=lambda x: x[0])
 
-    rows = [
-        normalize_record(rec, "SEAO")
-        for rec in items
-        if isinstance(rec, dict)
-    ]
+    all_rows: List[dict] = []
+    total_releases = 0
+
+    for name, url in selected:
+        try:
+            resp = requests.get(url, timeout=120)
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:
+            log(f"SEAO fichier {name} -> ERREUR chargement ({e})")
+            continue
+
+        releases = data.get("releases") or []
+        total_releases += len(releases)
+        log(f"SEAO fichier {name} -> {len(releases)} enregistrements (releases)")
+
+        for rel in releases:
+            row = normalize_seao_release(rel)
+            if not row:
+                continue
+            pub_date = row["published_at"]
+            if window_start <= pub_date <= window_end:
+                all_rows.append(row)
+
+    log(f"SEAO brut total -> {total_releases} enregistrements scannés")
+    log(f"SEAO -> {len(all_rows)} lignes retenues dans la fenêtre")
+    return all_rows
+
+
+# =========================
+# CANADABUYS - RÉCUP / NORMALISATION
+# =========================
+
+
+def load_canadabuys(window_start: dt.date, window_end: dt.date) -> List[dict]:
+    try:
+        resp = requests.get(CANADABUYS_CSV_URL, timeout=60)
+        resp.raise_for_status()
+    except Exception as e:
+        log(f"CanadaBuys -> ERREUR chargement CSV ({e})")
+        return []
+
+    content = resp.content.decode("utf-8-sig", errors="ignore")
+    reader = csv.DictReader(io.StringIO(content))
+
+    rows: List[dict] = []
+    for r in reader:
+        title = (r.get("Tender Notice Title") or "").strip()
+        if not title:
+            continue
+
+        date_str = (
+            r.get("Publication Date")
+            or r.get("PublicationDate")
+            or r.get("Date de publication")
+            or ""
+        )
+        pub_date = parse_date(date_str)
+        if not pub_date:
+            continue
+        if not (window_start <= pub_date <= window_end):
+            continue
+
+        buyer = (
+            r.get("Organization Name")
+            or r.get("Procuring Organization")
+            or r.get("Organization")
+            or ""
+        ).strip()
+
+        url = (
+            r.get("Tender Notice Link")
+            or r.get("URL du préavis d'appel d'offres")
+            or r.get("URL")
+            or ""
+        ).strip()
+
+        summary = (r.get("Description") or r.get("Summary") or "").strip()
+
+        row = {
+            "source": "CanadaBuys",
+            "title": title,
+            "url": url,
+            "published_at": pub_date,
+            "country": "CA",
+            "region": "CA-FED",
+            "portal_name": "CanadaBuys",
+            "matched_keywords": "",
+            "raw_summary": summary,
+            "source_domain": "canadabuys.canada.ca",
+            "confidence": 0.9,
+            "ocid": (r.get("Notice ID") or r.get("Reference Number") or "").strip(),
+            "buyer": buyer,
+        }
+        rows.append(row)
+
+    log(f"CanadaBuys -> {len(rows)} lignes retenues via {CANADABUYS_CSV_URL}")
     return rows
 
-# =========================
-# Fetch CanadaBuys
-# =========================
-
-def fetch_canadabuys():
-    base = "https://open.canada.ca/data/api/3/action"
-    try:
-        pack = ckan_package_show(base, CANADABUYS_TENDERS_ID)
-    except Exception as e:
-        print("CanadaBuys CKAN error:", e)
-        return []
-
-    resources = pack.get("resources", [])
-    candidates = pick_latest_resources(resources, hint="tender")
-
-    for res in candidates[:5]:
-        url = res.get("url")
-        if not url:
-            continue
-        try:
-            text = fetch_text(url)
-            url_lower = url.lower()
-
-            if url_lower.endswith(".csv"):
-                rows = parse_canadabuys_csv(text)
-            else:
-                try:
-                    js = json.loads(text)
-                except Exception:
-                    continue
-
-                if isinstance(js, list):
-                    items = js
-                elif isinstance(js, dict):
-                    items = (
-                        js.get("results")
-                        or js.get("data")
-                        or js.get("notices")
-                        or js.get("items")
-                        or []
-                    )
-                else:
-                    items = []
-
-                rows = [
-                    normalize_record(rec, "CanadaBuys")
-                    for rec in items
-                    if isinstance(rec, dict)
-                ]
-
-            if rows:
-                return rows
-
-        except requests.HTTPError as e:
-            # On log, mais on ne tue pas le script
-            print(f"CanadaBuys HTTP error on {url}:", e)
-        except Exception as e:
-            print(f"CanadaBuys error on {url}:", e)
-
-    return []
 
 # =========================
-# Flags & export
+# ÉCRITURE CSV
 # =========================
 
-def add_ats_flag(row):
-    text = f"{row.get('Titre','')} {row.get('Extrait recherche','')}"
-    row["Est ATS ?"] = "Oui" if KEYWORD_RE.search(text) else "Non"
-    return row
 
-def main():
-    seao_rows = fetch_seao()
-    cbuys_rows = fetch_canadabuys()
-    all_rows = [add_ats_flag(r) for r in (seao_rows + cbuys_rows)]
+FIELDNAMES = [
+    "source",
+    "title",
+    "url",
+    "published_at",
+    "country",
+    "region",
+    "portal_name",
+    "matched_keywords",
+    "raw_summary",
+    "source_domain",
+    "confidence",
+    "ocid",
+    "buyer",
+]
 
-    headers = [
-        "Plateforme","Référence","Acheteur","Titre","Type","Statut",
-        "Date de publication","Date de clôture","Fuseau horaire",
-        "Catégories/UNSPSC","Budget (si publié)","Lien","Langue",
-        "Mots-clés détectés ?","Extrait recherche","Est ATS ?"
-    ]
 
-    with open("ao_output_v1.csv", "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=headers)
-        w.writeheader()
-        for r in all_rows:
-            w.writerow({h: r.get(h, "") for h in headers})
+def write_csv(path: str, rows: List[dict]) -> None:
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        for row in rows:
+            row_out = dict(row)
+            # normaliser date -> ISO
+            if isinstance(row_out.get("published_at"), dt.date):
+                row_out["published_at"] = row_out["published_at"].isoformat()
+            writer.writerow(row_out)
 
-    print(f"Exporté {len(all_rows)} lignes dans ao_output_v1.csv")
+
+# =========================
+# MAIN
+# =========================
+
+
+def main() -> None:
+    today = dt.date.today()
+    window_start = today - dt.timedelta(days=WINDOW_DAYS)
+
+    log(f"Fenêtre de collecte : {window_start.isoformat()} -> {today.isoformat()}")
+
+    # 1) Charger SEAO
+    seao_rows = load_seao(window_start, today)
+
+    # 2) Charger CanadaBuys
+    cb_rows = load_canadabuys(window_start, today)
+
+    # 3) Fusionner (SEAO + CanadaBuys)
+    all_rows = seao_rows + cb_rows
+
+    # 4) Construire le fichier FOCUS (ATS / CRM / etc.)
+    focus_rows: List[dict] = []
+    for row in all_rows:
+        text = " ".join(
+            [
+                str(row.get("title", "")),
+                str(row.get("raw_summary", "")),
+                str(row.get("buyer", "")),
+            ]
+        )
+        matched = match_focus_keywords(text, KEYWORDS_FOCUS)
+        if matched:
+            r = dict(row)
+            r["matched_keywords"] = ",".join(matched)
+            focus_rows.append(r)
+
+    # 5) Export
+    write_csv(OUTPUT_ALL, all_rows)
+    write_csv(OUTPUT_FOCUS, focus_rows)
+
+    log(f"Exporté {len(all_rows)} lignes dans {OUTPUT_ALL} (tous AO)")
+    log(
+        f"Exporté {len(focus_rows)} lignes dans {OUTPUT_FOCUS} "
+        f"(AO filtrés par mots-clés stratégiques: ATS/CRM/ERP/etc.)"
+    )
+
+    log(
+        "\nNOTE: Les AO publiés aujourd'hui sur SEAO n'apparaissent ici "
+        "que lorsqu'ils sont intégrés dans les fichiers hebdo/mensuel officiels "
+        "sur Données Québec. Si un AO du jour manque, vérifier directement sur SEAO."
+    )
+
 
 if __name__ == "__main__":
     main()
