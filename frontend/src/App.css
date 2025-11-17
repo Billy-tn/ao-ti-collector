@@ -1,0 +1,416 @@
+/* --------------------
+   Reset de base
+-------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #101622, #05070d 55%, #020308);
+  color: #f5f7ff;
+}
+
+/* Pour que l’app prenne toute la hauteur */
+#root {
+  min-height: 100vh;
+}
+
+/* --------------------
+   Coquille générale
+-------------------- */
+
+.app-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+/* Header */
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.app-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.app-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.app-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Petit badge API */
+.api-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(120, 150, 255, 0.12);
+  border: 1px solid rgba(120, 150, 255, 0.3);
+  color: #aebfff;
+}
+
+/* --------------------
+   Carte des filtres
+-------------------- */
+
+.filters-card {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  padding: 16px 18px 14px;
+  border-radius: 14px;
+  background: rgba(10, 14, 30, 0.9);
+  border: 1px solid rgba(102, 118, 200, 0.4);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Ligne principale (pays/portail/mot-clé/bouton) */
+
+.filters-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.filters-row__group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.field-select,
+.field-text {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 150, 200, 0.4);
+  background: rgba(12, 17, 34, 0.9);
+  color: #f5f7ff;
+  font-size: 0.86rem;
+}
+
+.field-select:focus,
+.field-text:focus {
+  outline: none;
+  border-color: #7ea6ff;
+  box-shadow: 0 0 0 1px rgba(126, 166, 255, 0.5);
+}
+
+/* Bouton principal */
+
+.btn-primary {
+  align-self: flex-end;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #3c7aff, #6a5bff);
+  color: #fff;
+  font-size: 0.86rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Ligne des colonnes + filtre rapide */
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.chips-row__label {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-right: 4px;
+}
+
+/* Chips (sélecteurs de colonnes) */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 150, 200, 0.5);
+  font-size: 0.78rem;
+  cursor: pointer;
+  background: rgba(8, 12, 28, 0.95);
+  color: #e3e7ff;
+}
+
+.chip--active {
+  background: linear-gradient(135deg, #3f72ff, #6f58ff);
+  border-color: transparent;
+  color: #fff;
+}
+
+.chip input[type="checkbox"] {
+  pointer-events: none;
+}
+
+/* Filtre rapide (un seul champ) */
+
+.quick-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.quick-filter-row .field-select {
+  max-width: 150px;
+}
+
+/* --------------------
+   Tableau + panneau détail
+-------------------- */
+
+.results-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(320px, 0.9fr);
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* Quand il n'y a PAS de panneau de détail → 1 seule colonne */
+.results-layout--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Wrapper du tableau, carte sombre */
+
+.table-wrapper {
+  background: rgba(9, 13, 28, 0.96);
+  border-radius: 14px;
+  border: 1px solid rgba(90, 110, 190, 0.45);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Tableau */
+
+.tenders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tenders-table th,
+.tenders-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(40, 50, 100, 0.7);
+}
+
+.tenders-table thead {
+  background: rgba(16, 22, 46, 0.9);
+}
+
+.tenders-table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  cursor: default;
+}
+
+.tenders-table th.sortable {
+  cursor: pointer;
+}
+
+.tenders-table tbody tr {
+  cursor: pointer;
+}
+
+.tenders-table tbody tr:nth-child(even) {
+  background: rgba(9, 13, 28, 0.9);
+}
+
+.tenders-table tbody tr:hover {
+  background: rgba(35, 57, 120, 0.85);
+}
+
+.tenders-table__row--selected {
+  background: rgba(63, 99, 201, 0.92) !important;
+}
+
+.tenders-table__cell--link {
+  text-align: right;
+}
+
+/* Bouton "Ouvrir" dans le tableau */
+
+.btn-link {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(180, 198, 255, 0.7);
+  background: transparent;
+  color: #e5ecff;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  background: rgba(180, 198, 255, 0.15);
+}
+
+/* Message d'état */
+
+.table-empty {
+  padding: 14px 16px 16px;
+  font-size: 0.86rem;
+  opacity: 0.8;
+}
+
+/* Alert d'erreur */
+
+.alert-error {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(180, 41, 60, 0.16);
+  border: 1px solid rgba(230, 70, 100, 0.7);
+  font-size: 0.84rem;
+}
+
+/* --------------------
+   Panneau de détail
+-------------------- */
+
+.detail-panel {
+  background: rgba(9, 11, 26, 0.95);
+  border-radius: 14px;
+  border: 1px solid rgba(120, 140, 220, 0.65);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 540px;
+  overflow-y: auto;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detail-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.detail-sub {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.detail-close {
+  border-radius: 999px;
+  border: none;
+  padding: 4px 10px;
+  background: rgba(35, 40, 80, 0.95);
+  color: #f5f7ff;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.detail-close:hover {
+  background: rgba(60, 68, 130, 0.95);
+}
+
+/* Items */
+
+.detail-section-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.detail-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.detail-item-label {
+  opacity: 0.65;
+}
+
+.detail-item-value {
+  font-weight: 500;
+}
+
+/* Bouton dans le panneau */
+
+.detail-open-btn {
+  margin-top: 10px;
+  align-self: stretch;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #3c7aff, #6a5bff);
+  color: #fff;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.detail-open-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* --------------------
+   Responsif
+-------------------- */
+
+@media (max-width: 980px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 880px) {
+  .results-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-panel {
+    order: -1; /* détail au-dessus du tableau sur mobile */
+  }
+}
