@@ -57,6 +57,18 @@ type SortState = {
   direction: "asc" | "desc";
 };
 
+type CategoryReport = {
+  total_tenders: number;
+  distinct_categories: number;
+  categories: { category: string; count: number }[];
+};
+
+type KeywordReport = {
+  total_tenders: number;
+  distinct_keywords: number;
+  keywords: { keyword: string; count: number }[];
+};
+
 const API_BASE_URL =
   ((import.meta as any).env?.VITE_API_BASE_URL as string | undefined)?.replace(
     /\/+$/,
@@ -129,11 +141,20 @@ const App: React.FC = () => {
     direction: "desc",
   });
 
-  // Sélection pour panneau de détail
+  // Sélection pour panneau de détail (fermé par défaut)
   const [selectedTender, setSelectedTender] = useState<Tender | null>(null);
 
+  // Rapports
+  const [categoryReport, setCategoryReport] = useState<CategoryReport | null>(
+    null
+  );
+  const [keywordReport, setKeywordReport] = useState<KeywordReport | null>(
+    null
+  );
+  const [reportLoading, setReportLoading] = useState(false);
+
   // -------------------------------------------------------------------
-  // Chargement des portails et AO
+  // Chargement des portails
   // -------------------------------------------------------------------
 
   useEffect(() => {
@@ -151,6 +172,10 @@ const App: React.FC = () => {
     };
     fetchPortals();
   }, []);
+
+  // -------------------------------------------------------------------
+  // Chargement des AO + rapports
+  // -------------------------------------------------------------------
 
   const fetchTenders = async () => {
     try {
@@ -173,10 +198,48 @@ const App: React.FC = () => {
       if (!res.ok) throw new Error(await res.text());
       const data: Tender[] = await res.json();
       setTenders(data);
-      if (data.length > 0) {
-        setSelectedTender(data[0]);
-      } else {
-        setSelectedTender(null);
+      setSelectedTender(null);
+
+      // --- Rapports (catégories + mots-clés) ---
+      const reportParams = new URLSearchParams();
+      if (countryFilter && countryFilter !== "ALL") {
+        reportParams.set("country", countryFilter);
+      }
+      if (portalFilter && portalFilter !== "ALL") {
+        reportParams.set("portal", portalFilter);
+      }
+      if (query.trim()) {
+        reportParams.set("q", query.trim());
+      }
+      reportParams.set("top_n", "5");
+      reportParams.set("max_rows", "5000");
+
+      setReportLoading(true);
+      try {
+        const [catRes, keyRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/report/categories?${reportParams.toString()}`),
+          fetch(`${API_BASE_URL}/report/keywords?${reportParams.toString()}`),
+        ]);
+
+        if (catRes.ok) {
+          const catData: CategoryReport = await catRes.json();
+          setCategoryReport(catData);
+        } else {
+          setCategoryReport(null);
+        }
+
+        if (keyRes.ok) {
+          const keyData: KeywordReport = await keyRes.json();
+          setKeywordReport(keyData);
+        } else {
+          setKeywordReport(null);
+        }
+      } catch (e) {
+        console.error("Erreur rapports:", e);
+        setCategoryReport(null);
+        setKeywordReport(null);
+      } finally {
+        setReportLoading(false);
       }
     } catch (e: any) {
       console.error(e);
@@ -237,7 +300,7 @@ const App: React.FC = () => {
   const filteredTenders = useMemo(() => {
     let rows = [...tenders];
 
-    // Filtres principaux (sécurité)
+    // Filtres principaux
     if (countryFilter !== "ALL") {
       rows = rows.filter(
         (t) => (t.country || "").toUpperCase() === countryFilter.toUpperCase()
@@ -271,7 +334,7 @@ const App: React.FC = () => {
       );
     }
 
-    // 🔍 Filtre rapide (dynamique)
+    // 🔍 Filtre rapide
     if (quickValue.trim()) {
       const v = quickValue.trim().toLowerCase();
       rows = rows.filter((t) => {
@@ -310,6 +373,21 @@ const App: React.FC = () => {
 
     return rows;
   }, [tenders, countryFilter, portalFilter, query, quickField, quickValue, sortState]);
+
+  // 🎁 Petit résumé en bas du tableau
+  const summary = useMemo(() => {
+    const total = filteredTenders.length;
+    const portals = new Set(
+      filteredTenders.map((t) => t.portal || t.source || "")
+    ).size;
+    const withScore = filteredTenders.filter((t) => t.score != null);
+    const avgScore = withScore.length
+      ? withScore.reduce((sum, t) => sum + (t.score || 0), 0) /
+        withScore.length
+      : null;
+
+    return { total, portals, avgScore };
+  }, [filteredTenders]);
 
   // -------------------------------------------------------------------
   // Helpers
@@ -354,7 +432,7 @@ const App: React.FC = () => {
           </p>
         </div>
         <div className="app-api-hint">
-          API: <code>{API_BASE_URL}</code>
+          API&nbsp;: <code>{API_BASE_URL}</code>
         </div>
       </header>
 
@@ -460,6 +538,69 @@ const App: React.FC = () => {
           </div>
         </section>
 
+        {/* Rapport express */}
+        {categoryReport && keywordReport && (
+          <section className="report-card">
+            <div className="report-header">
+              <h2>Rapport express</h2>
+              {reportLoading && (
+                <span className="report-badge">Mise à jour…</span>
+              )}
+            </div>
+            <div className="report-kpis">
+              <div className="report-kpi">
+                <span className="report-kpi-label">AO analysés</span>
+                <span className="report-kpi-value">
+                  {categoryReport.total_tenders}
+                </span>
+              </div>
+              <div className="report-kpi">
+                <span className="report-kpi-label">Catégories distinctes</span>
+                <span className="report-kpi-value">
+                  {categoryReport.distinct_categories}
+                </span>
+              </div>
+              <div className="report-kpi">
+                <span className="report-kpi-label">Mots-clés distincts</span>
+                <span className="report-kpi-value">
+                  {keywordReport.distinct_keywords}
+                </span>
+              </div>
+            </div>
+
+            <div className="report-columns">
+              <div className="report-column">
+                <h3>Top catégories</h3>
+                {categoryReport.categories.length === 0 && (
+                  <p className="report-empty">Aucune catégorie détectée.</p>
+                )}
+                <ul>
+                  {categoryReport.categories.slice(0, 5).map((c) => (
+                    <li key={c.category}>
+                      <span className="report-item-label">{c.category}</span>
+                      <span className="report-item-count">{c.count}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="report-column">
+                <h3>Top mots-clés</h3>
+                {keywordReport.keywords.length === 0 && (
+                  <p className="report-empty">Aucun mot-clé détecté.</p>
+                )}
+                <ul>
+                  {keywordReport.keywords.slice(0, 5).map((k) => (
+                    <li key={k.keyword}>
+                      <span className="report-item-label">{k.keyword}</span>
+                      <span className="report-item-count">{k.count}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
         {error && <div className="error-banner">{error}</div>}
 
         {/* Tableau + panneau detail */}
@@ -481,11 +622,11 @@ const App: React.FC = () => {
                         key={col.key}
                         onClick={() => handleSort(col.key)}
                         className={
-                          col.align === "center"
-                            ? "col-center"
+                          (col.align === "center"
+                            ? "col-center "
                             : col.align === "right"
-                            ? "col-right"
-                            : "col-left"
+                            ? "col-right "
+                            : "col-left ") + "th-sortable"
                         }
                       >
                         <span className="th-label">
@@ -514,17 +655,17 @@ const App: React.FC = () => {
                 {filteredTenders.map((t) => (
                   <tr
                     key={t.id}
-                    className={
-                      selectedTender?.id === t.id ? "row--selected" : ""
-                    }
+                    className={selectedTender?.id === t.id ? "row--selected" : ""}
                     onClick={() => handleRowClick(t)}
-                    style={{ cursor: "pointer" }}
                   >
                     {ALL_COLUMNS.filter((c) => isColumnVisible(c.key)).map(
                       (col) => {
                         let value: React.ReactNode = (t as any)[col.key];
 
-                        if (col.key === "published_at" || col.key === "closing_at") {
+                        if (
+                          col.key === "published_at" ||
+                          col.key === "closing_at"
+                        ) {
                           value = formatDate(value as string | null);
                         } else if (col.key === "budget") {
                           value = formatBudget(value as number | null);
@@ -537,7 +678,7 @@ const App: React.FC = () => {
                             ? "col-center"
                             : col.align === "right"
                             ? "col-right"
-                            : "";
+                            : "col-left";
 
                         return (
                           <td key={col.key} className={className}>
@@ -567,7 +708,15 @@ const App: React.FC = () => {
               </tbody>
             </table>
             <div className="table-footer">
-              {filteredTenders.length} lignes affichées (max 200)
+              <span>{summary.total} lignes affichées (max 200)</span>
+              <span className="table-footer-sep">•</span>
+              <span>{summary.portals} portails</span>
+              {summary.avgScore != null && (
+                <>
+                  <span className="table-footer-sep">•</span>
+                  <span>Score moyen {summary.avgScore.toFixed(1)}</span>
+                </>
+              )}
             </div>
           </div>
 
