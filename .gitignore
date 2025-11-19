@@ -1,0 +1,13 @@
+# Environnement virtuel
+.venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Fichiers générés
+*.csv
+*.log
+
+# Uvicorn / autres
+*.sqlite3

@@ -2,71 +2,36 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
-type Portal = {
-  code: string;
-  name: string;
+type Tender = {
+  id: number | string;
+  title: string;
+  portal: string;
+  source: string;
+  buyer: string;
   country: string;
   region?: string | null;
-  base_url?: string | null;
-  api_type?: string | null;
-  is_active?: boolean | 0 | 1;
+  budget?: number | string | null;
+  published?: string | null;
+  closing?: string | null;
+  link?: string | null;
 };
 
-type Tender = {
-  id: number;
-  source: string;
-  portal: string;
-  country: string | null;
-  region: string | null;
-  buyer: string | null;
-  title: string;
-  url: string;
-  published_at: string | null;
-  closing_at: string | null;
-  budget: number | null;
-  category: string | null;
-  matched_keywords: string | null;
-  score: number | null;
+type UserProfile = {
+  id: string;
+  email: string;
+  full_name: string;
+  activity_type: string;
+  main_specialty: string;
 };
 
-type ColumnKey =
-  | "id"
-  | "title"
-  | "portal"
-  | "source"
-  | "buyer"
-  | "country"
-  | "region"
-  | "budget"
-  | "published_at"
-  | "closing_at"
-  | "score";
+type LoginStep = "credentials" | "mfa" | "done";
 
-type QuickField =
-  | "title"
-  | "buyer"
-  | "portal"
-  | "source"
-  | "country"
-  | "region"
-  | "category"
-  | "matched_keywords";
-
-type SortState = {
-  key: ColumnKey;
-  direction: "asc" | "desc";
-};
-
-type CategoryReport = {
-  total_tenders: number;
-  distinct_categories: number;
-  categories: { category: string; count: number }[];
-};
-
-type KeywordReport = {
-  total_tenders: number;
-  distinct_keywords: number;
-  keywords: { keyword: string; count: number }[];
+type AoAnalysisResult = {
+  filename: string;
+  size_bytes: number;
+  summary: string;
+  main_requirements: string[];
+  risks: string[];
 };
 
 const API_BASE_URL =
@@ -75,722 +40,457 @@ const API_BASE_URL =
     ""
   ) || "/api";
 
-const ALL_COLUMNS: {
-  key: ColumnKey;
-  label: string;
-  align?: "left" | "center" | "right";
-  locked?: boolean;
-}[] = [
-  { key: "id", label: "ID", align: "left", locked: true },
-  { key: "title", label: "Titre", align: "left", locked: true },
-  { key: "portal", label: "Portail" },
-  { key: "source", label: "Source" },
-  { key: "buyer", label: "Acheteur" },
-  { key: "country", label: "Pays", align: "center" },
-  { key: "region", label: "Région", align: "center" },
-  { key: "budget", label: "Budget", align: "right" },
-  { key: "published_at", label: "Publiée", align: "center" },
-  { key: "closing_at", label: "Fermeture", align: "center" },
-  { key: "score", label: "Score", align: "right" },
-];
-
-const QUICK_FIELD_OPTIONS: { value: QuickField; label: string }[] = [
-  { value: "title", label: "Titre" },
-  { value: "buyer", label: "Acheteur" },
-  { value: "portal", label: "Portail" },
-  { value: "source", label: "Source" },
-  { value: "country", label: "Pays" },
-  { value: "region", label: "Région" },
-  { value: "category", label: "Catégorie" },
-  { value: "matched_keywords", label: "Mots-clés" },
-];
-
 const App: React.FC = () => {
-  const [portals, setPortals] = useState<Portal[]>([]);
+  // Auth
+  const [authStep, setAuthStep] = useState<LoginStep>("credentials");
+  const [loginEmail, setLoginEmail] = useState("bilel@example.com");
+  const [loginPassword, setLoginPassword] = useState("password");
+  const [mfaCode, setMfaCode] = useState("");
+  const [tempToken, setTempToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authLoading, setAuthLoading] = useState(false);
+
+  // AO list
   const [tenders, setTenders] = useState<Tender[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  // Filtres principaux
-  const [countryFilter, setCountryFilter] = useState<string>("ALL");
-  const [portalFilter, setPortalFilter] = useState<string>("ALL");
-  const [query, setQuery] = useState<string>("");
-
-  // 🔍 Un seul filtre rapide dynamique
-  const [quickField, setQuickField] = useState<QuickField>("title");
-  const [quickValue, setQuickValue] = useState<string>("");
-
-  // Colonnes visibles
-  const [visibleColumns, setVisibleColumns] = useState<Set<ColumnKey>>(
-    () =>
-      new Set<ColumnKey>([
-        "id",
-        "title",
-        "portal",
-        "source",
-        "buyer",
-        "country",
-        "budget",
-        "published_at",
-      ])
-  );
-
-  // Tri
-  const [sortState, setSortState] = useState<SortState>({
-    key: "published_at",
-    direction: "desc",
-  });
-
-  // Sélection pour panneau de détail (fermé par défaut)
   const [selectedTender, setSelectedTender] = useState<Tender | null>(null);
+  const [q, setQ] = useState("");
+  const [loadingTenders, setLoadingTenders] = useState(false);
+  const [tendersError, setTendersError] = useState<string | null>(null);
 
-  // Rapports
-  const [categoryReport, setCategoryReport] = useState<CategoryReport | null>(
-    null
-  );
-  const [keywordReport, setKeywordReport] = useState<KeywordReport | null>(
-    null
-  );
-  const [reportLoading, setReportLoading] = useState(false);
+  // Analyse IA
+  const [analysis, setAnalysis] = useState<AoAnalysisResult | null>(null);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
+  const [analysisLoading, setAnalysisLoading] = useState(false);
 
-  // -------------------------------------------------------------------
-  // Chargement des portails
-  // -------------------------------------------------------------------
-
-  useEffect(() => {
-    const fetchPortals = async () => {
-      try {
-        const res = await fetch(
-          `${API_BASE_URL}/portals?only_active=true&country=ALL`
-        );
-        if (!res.ok) throw new Error(await res.text());
-        const data = await res.json();
-        setPortals(data);
-      } catch (e: any) {
-        console.error(e);
-      }
-    };
-    fetchPortals();
-  }, []);
+  const isAuthenticated = useMemo(() => !!accessToken, [accessToken]);
 
   // -------------------------------------------------------------------
-  // Chargement des AO + rapports
+  // Auth
   // -------------------------------------------------------------------
 
-  const fetchTenders = async () => {
+  const handleLogin = async () => {
+    setAuthError(null);
+    setAuthLoading(true);
     try {
-      setLoading(true);
-      setError(null);
-
-      const params = new URLSearchParams();
-      params.set("limit", "200");
-      if (countryFilter && countryFilter !== "ALL") {
-        params.set("country", countryFilter);
-      }
-      if (portalFilter && portalFilter !== "ALL") {
-        params.set("portal", portalFilter);
-      }
-      if (query.trim()) {
-        params.set("q", query.trim());
-      }
-
-      const res = await fetch(`${API_BASE_URL}/tenders?${params.toString()}`);
-      if (!res.ok) throw new Error(await res.text());
-      const data: Tender[] = await res.json();
-      setTenders(data);
-      setSelectedTender(null);
-
-      // --- Rapports (catégories + mots-clés) ---
-      const reportParams = new URLSearchParams();
-      if (countryFilter && countryFilter !== "ALL") {
-        reportParams.set("country", countryFilter);
-      }
-      if (portalFilter && portalFilter !== "ALL") {
-        reportParams.set("portal", portalFilter);
-      }
-      if (query.trim()) {
-        reportParams.set("q", query.trim());
-      }
-      reportParams.set("top_n", "5");
-      reportParams.set("max_rows", "5000");
-
-      setReportLoading(true);
-      try {
-        const [catRes, keyRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/report/categories?${reportParams.toString()}`),
-          fetch(`${API_BASE_URL}/report/keywords?${reportParams.toString()}`),
-        ]);
-
-        if (catRes.ok) {
-          const catData: CategoryReport = await catRes.json();
-          setCategoryReport(catData);
-        } else {
-          setCategoryReport(null);
-        }
-
-        if (keyRes.ok) {
-          const keyData: KeywordReport = await keyRes.json();
-          setKeywordReport(keyData);
-        } else {
-          setKeywordReport(null);
-        }
-      } catch (e) {
-        console.error("Erreur rapports:", e);
-        setCategoryReport(null);
-        setKeywordReport(null);
-      } finally {
-        setReportLoading(false);
-      }
-    } catch (e: any) {
-      console.error(e);
-      setError("Erreur lors du chargement des appels d’offres.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchTenders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // -------------------------------------------------------------------
-  // Gestion colonnes
-  // -------------------------------------------------------------------
-
-  const toggleColumn = (key: ColumnKey) => {
-    const colMeta = ALL_COLUMNS.find((c) => c.key === key);
-    if (colMeta?.locked) return;
-
-    setVisibleColumns((prev) => {
-      const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
-      return next;
-    });
-  };
-
-  const isColumnVisible = (key: ColumnKey) => visibleColumns.has(key);
-
-  // -------------------------------------------------------------------
-  // Tri
-  // -------------------------------------------------------------------
-
-  const handleSort = (key: ColumnKey) => {
-    setSortState((prev) => {
-      if (prev.key === key) {
-        return {
-          key,
-          direction: prev.direction === "asc" ? "desc" : "asc",
-        };
-      }
-      return { key, direction: "asc" };
-    });
-  };
-
-  const sortIcon = (key: ColumnKey) => {
-    if (sortState.key !== key) return "↕";
-    return sortState.direction === "asc" ? "↑" : "↓";
-  };
-
-  // -------------------------------------------------------------------
-  // Filtres + Tri
-  // -------------------------------------------------------------------
-
-  const filteredTenders = useMemo(() => {
-    let rows = [...tenders];
-
-    // Filtres principaux
-    if (countryFilter !== "ALL") {
-      rows = rows.filter(
-        (t) => (t.country || "").toUpperCase() === countryFilter.toUpperCase()
-      );
-    }
-    if (portalFilter !== "ALL") {
-      rows = rows.filter(
-        (t) =>
-          t.portal.toUpperCase() === portalFilter.toUpperCase() ||
-          t.source.toUpperCase() === portalFilter.toUpperCase()
-      );
-    }
-    if (query.trim()) {
-      const terms = query
-        .split(/\s+/)
-        .map((t) => t.toLowerCase())
-        .filter(Boolean);
-      rows = rows.filter((t) =>
-        terms.every((term) => {
-          const title = (t.title || "").toLowerCase();
-          const buyer = (t.buyer || "").toLowerCase();
-          const source = (t.source || "").toLowerCase();
-          const portal = (t.portal || "").toLowerCase();
-          return (
-            title.includes(term) ||
-            buyer.includes(term) ||
-            source.includes(term) ||
-            portal.includes(term)
-          );
-        })
-      );
-    }
-
-    // 🔍 Filtre rapide
-    if (quickValue.trim()) {
-      const v = quickValue.trim().toLowerCase();
-      rows = rows.filter((t) => {
-        const raw = ((t as any)[quickField] ?? "").toString().toLowerCase();
-        return raw.includes(v);
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginEmail,
+          password: loginPassword,
+        }),
       });
-    }
 
-    // Tri
-    rows.sort((a, b) => {
-      const { key, direction } = sortState;
-      const dir = direction === "asc" ? 1 : -1;
-
-      const va = (a as any)[key];
-      const vb = (b as any)[key];
-
-      if (key === "published_at" || key === "closing_at") {
-        const sa = (va || "") as string;
-        const sb = (vb || "") as string;
-        if (sa === sb) return 0;
-        return sa > sb ? dir : -dir;
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.detail || "Erreur de connexion");
       }
 
-      if (key === "id" || key === "budget" || key === "score") {
-        const na = va == null ? -Infinity : Number(va);
-        const nb = vb == null ? -Infinity : Number(vb);
-        if (na === nb) return 0;
-        return na > nb ? dir : -dir;
+      const data = await res.json();
+      setTempToken(data.temp_token);
+      setAuthStep("mfa");
+    } catch (e: any) {
+      setAuthError(e.message || "Erreur inconnue");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleVerifyMfa = async () => {
+    if (!tempToken) return;
+    setAuthError(null);
+    setAuthLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/verify-mfa`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          temp_token: tempToken,
+          code: mfaCode,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.detail || "Erreur MFA");
       }
 
-      const sa = (va || "").toString().toLowerCase();
-      const sb = (vb || "").toString().toLowerCase();
-      if (sa === sb) return 0;
-      return sa > sb ? dir : -dir;
-    });
-
-    return rows;
-  }, [tenders, countryFilter, portalFilter, query, quickField, quickValue, sortState]);
-
-  // 🎁 Petit résumé en bas du tableau
-  const summary = useMemo(() => {
-    const total = filteredTenders.length;
-    const portals = new Set(
-      filteredTenders.map((t) => t.portal || t.source || "")
-    ).size;
-    const withScore = filteredTenders.filter((t) => t.score != null);
-    const avgScore = withScore.length
-      ? withScore.reduce((sum, t) => sum + (t.score || 0), 0) /
-        withScore.length
-      : null;
-
-    return { total, portals, avgScore };
-  }, [filteredTenders]);
-
-  // -------------------------------------------------------------------
-  // Helpers
-  // -------------------------------------------------------------------
-
-  const formatDate = (value: string | null) => {
-    if (!value) return "—";
-    return value;
-  };
-
-  const formatBudget = (value: number | null) => {
-    if (value == null || isNaN(value)) return "—";
-    if (value >= 1_000_000) {
-      return `${(value / 1_000_000).toFixed(1)} M$`;
+      const data = await res.json();
+      setAccessToken(data.access_token);
+      setCurrentUser(data.user);
+      setAuthStep("done");
+    } catch (e: any) {
+      setAuthError(e.message || "Erreur inconnue");
+    } finally {
+      setAuthLoading(false);
     }
-    if (value >= 1_000) {
-      return `${(value / 1_000).toFixed(1)} k$`;
-    }
-    return `${value.toFixed(0)} $`;
   };
 
-  const handleRowClick = (t: Tender) => {
-    setSelectedTender(t);
-  };
-
-  const handleCloseDetail = () => {
+  const handleLogout = () => {
+    setAccessToken(null);
+    setCurrentUser(null);
+    setAuthStep("credentials");
+    setTenders([]);
     setSelectedTender(null);
   };
 
   // -------------------------------------------------------------------
-  // Rendu
+  // Fetch AO
+  // -------------------------------------------------------------------
+
+  const fetchTenders = async () => {
+    if (!accessToken) return;
+    setLoadingTenders(true);
+    setTendersError(null);
+    try {
+      const params = new URLSearchParams();
+      params.set("limit", "200");
+      if (q.trim()) params.set("q", q.trim());
+
+      const res = await fetch(`${API_BASE_URL}/tenders?${params.toString()}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.detail || "Erreur de chargement des AO");
+      }
+
+      const data = await res.json();
+      setTenders(data.items || data);
+      setSelectedTender((prev) => prev ?? (data.items || data)[0] ?? null);
+    } catch (e: any) {
+      setTendersError(e.message || "Erreur inconnue");
+    } finally {
+      setLoadingTenders(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchTenders();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
+  // -------------------------------------------------------------------
+  // Analyse IA / upload
+  // -------------------------------------------------------------------
+
+  const handleUploadAoFile = async (file: File) => {
+    if (!accessToken) return;
+    setAnalysis(null);
+    setAnalysisError(null);
+    setAnalysisLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch(`${API_BASE_URL}/tools/analyze-ao`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.detail || "Erreur lors de l'analyse");
+      }
+
+      const data: AoAnalysisResult = await res.json();
+      setAnalysis(data);
+    } catch (e: any) {
+      setAnalysisError(e.message || "Erreur inconnue");
+    } finally {
+      setAnalysisLoading(false);
+    }
+  };
+
+  const onFileInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      void handleUploadAoFile(file);
+      e.target.value = "";
+    }
+  };
+
+  // -------------------------------------------------------------------
+  // Rendering
+  // -------------------------------------------------------------------
+
+  if (!isAuthenticated) {
+    return (
+      <div className="app-root">
+        <div className="login-card glass-card">
+          <h1 className="app-title">AO Collector</h1>
+          <p className="app-subtitle">Connexion avec MFA et profils métiers.</p>
+
+          {authStep === "credentials" && (
+            <>
+              <label className="field-label">
+                Email
+                <input
+                  className="text-input"
+                  type="email"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                />
+              </label>
+              <label className="field-label">
+                Mot de passe
+                <input
+                  className="text-input"
+                  type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                />
+              </label>
+
+              <button
+                className="primary-btn"
+                onClick={handleLogin}
+                disabled={authLoading}
+              >
+                {authLoading ? "Connexion..." : "Se connecter"}
+              </button>
+            </>
+          )}
+
+          {authStep === "mfa" && (
+            <>
+              <p className="hint">
+                Entrez le code MFA correspondant à l&apos;email choisi (voir
+                dessous).
+              </p>
+              <label className="field-label">
+                Code MFA
+                <input
+                  className="text-input"
+                  value={mfaCode}
+                  onChange={(e) => setMfaCode(e.target.value)}
+                  placeholder="123456, 654321, 999999..."
+                />
+              </label>
+              <button
+                className="primary-btn"
+                onClick={handleVerifyMfa}
+                disabled={authLoading}
+              >
+                {authLoading ? "Vérification..." : "Valider le code"}
+              </button>
+            </>
+          )}
+
+          {authError && <div className="error-banner">{authError}</div>}
+
+          <div className="test-profiles">
+            <div>Profils de test :</div>
+            <ul>
+              <li>bilel@example.com / MFA 123456</li>
+              <li>cloud.consultant@example.com / MFA 654321</li>
+              <li>odoo.partner@example.com / MFA 999999</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // -------------------------------------------------------------------
+  // Ecran principal
   // -------------------------------------------------------------------
 
   return (
     <div className="app-root">
-      <header className="app-header">
-        <div className="app-title">
-          <h1>AO Collector — Recherche</h1>
-          <p>
-            Résultats chargés automatiquement. Ajuste les filtres et clique{" "}
-            <strong>Rechercher</strong>.
-          </p>
+      <header className="top-bar">
+        <div>
+          <div className="top-title">AO Collector — Recherche</div>
+          {currentUser && (
+            <div className="top-subtitle">
+              Bonjour{" "}
+              <strong className="accent">{currentUser.full_name}</strong> ·{" "}
+              {currentUser.activity_type} · Spécialité :{" "}
+              <span className="accent">{currentUser.main_specialty}</span>
+            </div>
+          )}
         </div>
-        <div className="app-api-hint">
-          API&nbsp;: <code>{API_BASE_URL}</code>
+        <div className="top-right">
+          <button className="ghost-btn" onClick={handleLogout}>
+            Se déconnecter
+          </button>
         </div>
       </header>
 
-      <main className="app-main">
-        {/* Carte filtres */}
-        <section className="filters-card">
-          <div className="filters-row">
-            <div className="filter-group">
-              <label>Pays</label>
-              <select
-                value={countryFilter}
-                onChange={(e) => setCountryFilter(e.target.value)}
-              >
-                <option value="ALL">Tous</option>
-                <option value="CA">Canada</option>
-                <option value="QC">Québec (si codé)</option>
-              </select>
-            </div>
-
-            <div className="filter-group">
-              <label>Portail</label>
-              <select
-                value={portalFilter}
-                onChange={(e) => setPortalFilter(e.target.value)}
-              >
-                <option value="ALL">Tous</option>
-                {portals.map((p) => (
-                  <option key={p.code} value={p.code}>
-                    {p.code} — {p.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="filter-group filter-group-wide">
-              <label>Mot-clé</label>
+      <main className="layout">
+        <section className="search-panel glass-card">
+          <div className="search-row">
+            <label className="field-label small">
+              Mot-clé
               <input
-                placeholder="ex: crm, servicenow, odoo, oracle…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") fetchTenders();
-                }}
+                className="text-input"
+                placeholder="ex: crm, servicenow, odoo..."
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
               />
-            </div>
-
-            <div className="filter-group filter-group-button">
-              <button onClick={fetchTenders} disabled={loading}>
-                {loading ? "Chargement…" : "Rechercher"}
-              </button>
-            </div>
+            </label>
+            <button
+              className="primary-btn"
+              onClick={fetchTenders}
+              disabled={loadingTenders}
+            >
+              {loadingTenders ? "Recherche..." : "Rechercher"}
+            </button>
           </div>
-
-          {/* Colonnes */}
-          <div className="columns-toggle-bar">
-            <span className="columns-label">Colonnes :</span>
-            {ALL_COLUMNS.map((col) => {
-              const checked = isColumnVisible(col.key);
-              const locked = !!col.locked;
-              return (
-                <label
-                  key={col.key}
-                  className={
-                    "column-chip" +
-                    (checked ? " column-chip--active" : "") +
-                    (locked ? " column-chip--locked" : "")
-                  }
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    disabled={locked}
-                    onChange={() => toggleColumn(col.key)}
-                  />
-                  {col.label}
-                </label>
-              );
-            })}
-          </div>
-
-          {/* 🔍 Filtre rapide unique */}
-          <div className="quick-filters-row">
-            <div className="quick-filter">
-              <label>Filtre rapide</label>
-              <div className="quick-filter-inner">
-                <select
-                  value={quickField}
-                  onChange={(e) => setQuickField(e.target.value as QuickField)}
-                >
-                  {QUICK_FIELD_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  placeholder="Contient…"
-                  value={quickValue}
-                  onChange={(e) => setQuickValue(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
+          {tendersError && <div className="error-banner">{tendersError}</div>}
         </section>
 
-        {/* Rapport express */}
-        {categoryReport && keywordReport && (
-          <section className="report-card">
-            <div className="report-header">
-              <h2>Rapport express</h2>
-              {reportLoading && (
-                <span className="report-badge">Mise à jour…</span>
-              )}
+        <section className="results-layout">
+          <div className="tenders-table glass-card">
+            <div className="table-header">
+              <span>ID</span>
+              <span>Titre</span>
+              <span>Portail</span>
+              <span>Acheteur</span>
+              <span>Pays</span>
+              <span>Publiée</span>
+              <span>Fermeture</span>
             </div>
-            <div className="report-kpis">
-              <div className="report-kpi">
-                <span className="report-kpi-label">AO analysés</span>
-                <span className="report-kpi-value">
-                  {categoryReport.total_tenders}
-                </span>
-              </div>
-              <div className="report-kpi">
-                <span className="report-kpi-label">Catégories distinctes</span>
-                <span className="report-kpi-value">
-                  {categoryReport.distinct_categories}
-                </span>
-              </div>
-              <div className="report-kpi">
-                <span className="report-kpi-label">Mots-clés distincts</span>
-                <span className="report-kpi-value">
-                  {keywordReport.distinct_keywords}
-                </span>
-              </div>
-            </div>
-
-            <div className="report-columns">
-              <div className="report-column">
-                <h3>Top catégories</h3>
-                {categoryReport.categories.length === 0 && (
-                  <p className="report-empty">Aucune catégorie détectée.</p>
-                )}
-                <ul>
-                  {categoryReport.categories.slice(0, 5).map((c) => (
-                    <li key={c.category}>
-                      <span className="report-item-label">{c.category}</span>
-                      <span className="report-item-count">{c.count}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="report-column">
-                <h3>Top mots-clés</h3>
-                {keywordReport.keywords.length === 0 && (
-                  <p className="report-empty">Aucun mot-clé détecté.</p>
-                )}
-                <ul>
-                  {keywordReport.keywords.slice(0, 5).map((k) => (
-                    <li key={k.keyword}>
-                      <span className="report-item-label">{k.keyword}</span>
-                      <span className="report-item-count">{k.count}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {error && <div className="error-banner">{error}</div>}
-
-        {/* Tableau + panneau detail */}
-        <section
-          className={
-            selectedTender
-              ? "results-layout"
-              : "results-layout results-layout--single"
-          }
-        >
-          {/* Tableau */}
-          <div className="table-wrapper">
-            <table className="tenders-table">
-              <thead>
-                <tr>
-                  {ALL_COLUMNS.filter((c) => isColumnVisible(c.key)).map(
-                    (col) => (
-                      <th
-                        key={col.key}
-                        onClick={() => handleSort(col.key)}
-                        className={
-                          (col.align === "center"
-                            ? "col-center "
-                            : col.align === "right"
-                            ? "col-right "
-                            : "col-left ") + "th-sortable"
-                        }
-                      >
-                        <span className="th-label">
-                          {col.label}
-                          <span className="th-sort-icon">
-                            {sortIcon(col.key)}
-                          </span>
-                        </span>
-                      </th>
-                    )
-                  )}
-                  <th className="col-center">
-                    <span className="th-label">Lien</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredTenders.length === 0 && (
-                  <tr>
-                    <td colSpan={ALL_COLUMNS.length + 1} className="empty-row">
-                      Aucun résultat pour ces critères.
-                    </td>
-                  </tr>
-                )}
-
-                {filteredTenders.map((t) => (
-                  <tr
-                    key={t.id}
-                    className={selectedTender?.id === t.id ? "row--selected" : ""}
-                    onClick={() => handleRowClick(t)}
-                  >
-                    {ALL_COLUMNS.filter((c) => isColumnVisible(c.key)).map(
-                      (col) => {
-                        let value: React.ReactNode = (t as any)[col.key];
-
-                        if (
-                          col.key === "published_at" ||
-                          col.key === "closing_at"
-                        ) {
-                          value = formatDate(value as string | null);
-                        } else if (col.key === "budget") {
-                          value = formatBudget(value as number | null);
-                        } else if (value == null || value === "") {
-                          value = "—";
-                        }
-
-                        const className =
-                          col.align === "center"
-                            ? "col-center"
-                            : col.align === "right"
-                            ? "col-right"
-                            : "col-left";
-
-                        return (
-                          <td key={col.key} className={className}>
-                            {value}
-                          </td>
-                        );
-                      }
-                    )}
-
-                    <td className="col-center">
-                      {t.url ? (
-                        <button
-                          className="link-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            window.open(t.url, "_blank");
-                          }}
-                        >
-                          Ouvrir
-                        </button>
-                      ) : (
-                        "—"
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="table-footer">
-              <span>{summary.total} lignes affichées (max 200)</span>
-              <span className="table-footer-sep">•</span>
-              <span>{summary.portals} portails</span>
-              {summary.avgScore != null && (
-                <>
-                  <span className="table-footer-sep">•</span>
-                  <span>Score moyen {summary.avgScore.toFixed(1)}</span>
-                </>
+            <div className="table-body">
+              {tenders.map((t) => (
+                <button
+                  key={t.id}
+                  className={
+                    "table-row" +
+                    (selectedTender && selectedTender.id === t.id
+                      ? " row-selected"
+                      : "")
+                  }
+                  onClick={() => setSelectedTender(t)}
+                >
+                  <span>{t.id}</span>
+                  <span>{t.title}</span>
+                  <span>{t.portal}</span>
+                  <span>{t.buyer}</span>
+                  <span>{t.country}</span>
+                  <span>{t.published || "—"}</span>
+                  <span>{t.closing || "—"}</span>
+                </button>
+              ))}
+              {tenders.length === 0 && !loadingTenders && (
+                <div className="empty-state">Aucun résultat pour ces critères.</div>
               )}
             </div>
           </div>
 
-          {/* Panneau de détail */}
-          {selectedTender && (
-            <aside className="detail-panel">
-              <div className="detail-header">
-                <div>
-                  <h2>{selectedTender.title}</h2>
-                  <div className="detail-id">
-                    #{selectedTender.id} · {selectedTender.portal} ·{" "}
-                    {selectedTender.source}
+          <div className="detail-panel glass-card">
+            {selectedTender ? (
+              <>
+                <h2 className="detail-title">{selectedTender.title}</h2>
+                <div className="detail-grid">
+                  <div>
+                    <div className="detail-label">Portail</div>
+                    <div>{selectedTender.portal}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Source</div>
+                    <div>{selectedTender.source}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Acheteur</div>
+                    <div>{selectedTender.buyer}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Pays</div>
+                    <div>{selectedTender.country}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Budget</div>
+                    <div>{selectedTender.budget ?? "—"}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Publiée</div>
+                    <div>{selectedTender.published ?? "—"}</div>
+                  </div>
+                  <div>
+                    <div className="detail-label">Fermeture</div>
+                    <div>{selectedTender.closing ?? "—"}</div>
                   </div>
                 </div>
-                <button className="detail-close" onClick={handleCloseDetail}>
-                  Fermer
-                </button>
-              </div>
 
-              <dl className="detail-grid">
-                <div>
-                  <dt>Acheteur</dt>
-                  <dd>{selectedTender.buyer || "—"}</dd>
-                </div>
-                <div>
-                  <dt>Pays</dt>
-                  <dd>{selectedTender.country || "—"}</dd>
-                </div>
-                <div>
-                  <dt>Région</dt>
-                  <dd>{selectedTender.region || "—"}</dd>
-                </div>
-                <div>
-                  <dt>Budget</dt>
-                  <dd>{formatBudget(selectedTender.budget)}</dd>
-                </div>
-                <div>
-                  <dt>Publiée</dt>
-                  <dd>{formatDate(selectedTender.published_at)}</dd>
-                </div>
-                <div>
-                  <dt>Fermeture</dt>
-                  <dd>{formatDate(selectedTender.closing_at)}</dd>
-                </div>
-                <div>
-                  <dt>Catégorie</dt>
-                  <dd>{selectedTender.category || "—"}</dd>
-                </div>
-                <div>
-                  <dt>Mots-clés détectés</dt>
-                  <dd>{selectedTender.matched_keywords || "—"}</dd>
-                </div>
-                <div>
-                  <dt>Score</dt>
-                  <dd>
-                    {selectedTender.score != null
-                      ? selectedTender.score.toFixed(2)
-                      : "—"}
-                  </dd>
-                </div>
-              </dl>
+                <div className="detail-actions">
+                  {selectedTender.link && (
+                    <a
+                      className="ghost-btn"
+                      href={selectedTender.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Ouvrir l&apos;appel d&apos;offres
+                    </a>
+                  )}
 
-              <div className="detail-actions">
-                {selectedTender.url && (
-                  <button
-                    className="primary"
-                    onClick={() => window.open(selectedTender.url, "_blank")}
-                  >
-                    Ouvrir l’appel d’offres
-                  </button>
-                )}
+                  <label className="primary-btn file-btn">
+                    Analyser l&apos;AO (IA)
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.xlsx,.xls"
+                      onChange={onFileInputChange}
+                      style={{ display: "none" }}
+                    />
+                  </label>
+                </div>
+
+                <div className="analysis-panel">
+                  {analysisLoading && (
+                    <div className="hint">Analyse en cours...</div>
+                  )}
+                  {analysisError && (
+                    <div className="error-banner">{analysisError}</div>
+                  )}
+                  {analysis && (
+                    <>
+                      <div className="analysis-header">
+                        <div>Fichier : {analysis.filename}</div>
+                        <div>Taille : {analysis.size_bytes} octets</div>
+                      </div>
+                      <p className="analysis-summary">{analysis.summary}</p>
+                      <div className="analysis-columns">
+                        <div>
+                          <div className="detail-label">
+                            Exigences principales
+                          </div>
+                          <ul>
+                            {analysis.main_requirements.map((r, i) => (
+                              <li key={i}>{r}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <div className="detail-label">Risques identifiés</div>
+                          <ul>
+                            {analysis.risks.map((r, i) => (
+                              <li key={i}>{r}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="empty-state">
+                Sélectionne un appel d&apos;offres dans la liste.
               </div>
-            </aside>
-          )}
+            )}
+          </div>
         </section>
       </main>
     </div>
