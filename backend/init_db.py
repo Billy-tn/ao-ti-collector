@@ -1,193 +1,252 @@
-import csv
+from __future__ import annotations
+
 import os
-from typing import List, Optional
+import csv
+import sqlite3
+from typing import List, Tuple
 
-from sqlalchemy.orm import Session
+# Emplacement de la base SQLite
+DB_PATH = os.path.join(os.path.dirname(__file__), "..", "ao.db")
 
-from .database import Base, engine, SessionLocal
-from .models import Tender, KeywordProfile, KeywordTerm, SourcePortal
-
-AO_CSV_PATH = "./v1_stable/ao_output_v1.csv"
-PORTALS_CSV_PATH = "./config/portals_sources.csv"
-
-
-def bool_from_oui_non(value: str) -> bool:
-    if not value:
-        return False
-    v = value.strip().lower()
-    return v in ("oui", "yes", "true", "1")
+# Fichiers d'entrée
+PORTALS_CSV_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "portals_sources.csv")
+AO_CSV_PATH = os.path.join(os.path.dirname(__file__), "..", "v1_stable", "ao_output_v1.csv")
 
 
-def extract_domain(url: str) -> str:
-    if not url:
-        return ""
-    url = url.strip()
-    if not url:
-        return ""
-    if "://" in url:
-        url = url.split("://", 1)[1]
-    return url.split("/", 1)[0].lower()
+def get_connection() -> sqlite3.Connection:
+    con = sqlite3.connect(DB_PATH)
+    return con
 
 
-def load_portals(db: Session) -> List[SourcePortal]:
+def create_tables(con: sqlite3.Connection) -> None:
+    cur = con.cursor()
+
+    # On repart propre
+    cur.execute("DROP TABLE IF EXISTS tenders")
+    cur.execute("DROP TABLE IF EXISTS source_portals")
+
+    # Table des AO normalisés pour le frontend
+    cur.execute(
+        """
+        CREATE TABLE tenders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            plateforme TEXT,
+            reference TEXT,
+            acheteur TEXT,
+            titre TEXT,
+            type TEXT,
+            statut TEXT,
+            date_publication TEXT,
+            date_cloture TEXT,
+            fuseau_horaire TEXT,
+            categories_unspsc TEXT,
+            categorie_principale TEXT,
+            budget TEXT,
+            lien TEXT,
+            mots_cles_detectes TEXT,
+            score_pertinence REAL,
+            extrait_recherche TEXT,
+            est_ats INTEGER,
+            resume_ao TEXT,
+            pays TEXT,
+            region TEXT,
+            portail TEXT,
+            source_portal_id INTEGER
+        )
+        """
+    )
+
+    # Table des portails (simple pour l'instant)
+    cur.execute(
+        """
+        CREATE TABLE source_portals (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            code TEXT,
+            label TEXT,
+            country TEXT,
+            is_active INTEGER DEFAULT 1
+        )
+        """
+    )
+
+    con.commit()
+
+
+def load_portals(con: sqlite3.Connection) -> None:
     if not os.path.exists(PORTALS_CSV_PATH):
         print(f"[WARN] Fichier portails non trouvé: {PORTALS_CSV_PATH}")
-        return []
+        return
 
-    portals = []
-    with open(PORTALS_CSV_PATH, newline="", encoding="utf-8-sig") as f:
+    cur = con.cursor()
+    items: List[Tuple[str, str, str, int]] = []
+
+    with open(PORTALS_CSV_PATH, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            name = (row.get("Nom de la source") or "").strip()
-            if not name:
-                continue
+            code = (row.get("code") or row.get("portal_code") or "").strip()
+            label = (row.get("label") or row.get("portal_label") or "").strip()
+            country = (row.get("country") or row.get("pays") or "").strip()
+            is_active_raw = (row.get("is_active") or row.get("active") or "1").strip()
+            try:
+                is_active = int(is_active_raw)
+            except ValueError:
+                is_active = 1
+            items.append((code, label, country, is_active))
 
-            sp = SourcePortal(
-                name=name,
-                country=(row.get("Pays/Province") or "").strip(),
-                level=(row.get("Niveau") or "").strip(),
-                platform=(row.get("Plateforme") or "").strip(),
-                main_url=(row.get("URL principale") or "").strip(),
-                api_official=bool_from_oui_non(row.get("API officielle") or ""),
-                api_url=(row.get("Lien API / Données") or "").strip(),
-                formats=(row.get("Formats") or "").strip(),
-                access_notes=(row.get("Notes") or "").strip(),
-                scraping_allowed=(row.get("Scraping autorisé (selon CGU)") or "").strip(),
-                recommended_method=(row.get("Méthode conseillée (API/CSV/RSS/alertes)") or "").strip(),
-                ti_keywords=(row.get("Mots-clés TI (OR)") or "").strip(),
-                search_url=(row.get("Lien recherche AO (filtre)") or "").strip(),
-                pipeline_status=(row.get("Statut pipeline") or "").strip(),
-            )
-            db.add(sp)
-            portals.append(sp)
-
-    db.commit()
-    print(f"[OK] Portails chargés: {len(portals)}")
-    return portals
-
-
-def normalize_country(raw: str) -> str:
-    if not raw:
-        return ""
-    txt = raw.lower()
-    if "québec" in txt or "quebec" in txt:
-        return "CA-QC"
-    if "canada" in txt and "québec" not in txt:
-        return "CA-FED"
-    if "états" in txt or "us" in txt or "usa" in txt:
-        return "US"
-    if "royaume" in txt or "uk" in txt:
-        return "UK"
-    if "union européenne" in txt or "eu" in txt:
-        return "EU"
-    return raw.strip()
-
-
-def match_portal_for_tender(row: dict, portals: List[SourcePortal]) -> (str, str, Optional[int]):
-    plateforme = (row.get("Plateforme") or "").strip()
-    lien = (row.get("Lien") or "").strip()
-    domain = extract_domain(lien)
-
-    for sp in portals:
-        if plateforme and (
-            plateforme.lower() == (sp.platform or "").lower()
-            or plateforme.lower() == (sp.name or "").lower()
-        ):
-            return normalize_country(sp.country), sp.name, sp.id
-
-    for sp in portals:
-        main_domain = extract_domain(sp.main_url or "")
-        if main_domain and main_domain in domain:
-            return normalize_country(sp.country), sp.name, sp.id
-
-    if "seao.gouv.qc.ca" in domain:
-        return "CA-QC", "SEAO", None
-    if "canadabuys.canada.ca" in domain:
-        return "CA-FED", "CanadaBuys", None
-
-    return "", plateforme or "", None
-
-
-def init_db():
-    Base.metadata.drop_all(bind=engine)
-    Base.metadata.create_all(bind=engine)
-
-    db: Session = SessionLocal()
-
-    portals = load_portals(db)
-
-    if os.path.exists(AO_CSV_PATH):
-        with open(AO_CSV_PATH, newline="", encoding="utf-8-sig") as f:
-            reader = csv.DictReader(f)
-            count = 0
-            for row in reader:
-                pays, portail, portal_id = match_portal_for_tender(row, portals)
-
-                est_ats = (row.get("Est ATS ?") or "").strip().lower() == "oui"
-                budget_raw = (row.get("Budget (si publié)") or row.get("Budget (si publi\u00e9)") or "").strip()
-                try:
-                    budget = float(str(budget_raw).replace(",", ".")) if budget_raw else None
-                except Exception:
-                    budget = None
-
-                tender = Tender(
-                    plateforme=row.get("Plateforme") or "",
-                    reference=row.get("Référence") or row.get("Reference") or "",
-                    acheteur=row.get("Acheteur") or "",
-                    titre=row.get("Titre") or "",
-                    type=row.get("Type") or "",
-                    statut=row.get("Statut") or "",
-                    date_publication=row.get("Date de publication") or "",
-                    date_cloture=row.get("Date de clôture") or "",
-                    fuseau_horaire=row.get("Fuseau horaire") or "",
-                    categories_unspsc=row.get("Catégories/UNSPSC") or "",
-                    lien=row.get("Lien") or "",
-                    budget=budget,
-                    mots_cles_detectes=row.get("Mots-clés détectés ?") or "",
-                    extrait_recherche=row.get("Extrait recherche") or "",
-                    est_ats=est_ats,
-                    resume_ao=row.get("Résumé AO") or "",
-                    pays=pays,
-                    portail=portail,
-                    source_portal_id=portal_id,
-                )
-                db.add(tender)
-                count += 1
-
-        db.commit()
-        print(f"[OK] AO importés: {count}")
-    else:
-        print(f"[WARN] Fichier AO non trouvé: {AO_CSV_PATH}")
-
-    existing_ats = (
-        db.query(KeywordProfile)
-        .filter(KeywordProfile.name == "ATS")
-        .first()
-    )
-    if not existing_ats:
-        ats = KeywordProfile(
-            name="ATS",
-            description="Appels d'offres liés aux ATS / recrutement",
-            active=True,
+    if items:
+        cur.executemany(
+            "INSERT INTO source_portals (code, label, country, is_active) VALUES (?, ?, ?, ?)",
+            items,
         )
-        db.add(ats)
-        db.flush()
+        con.commit()
+        print(f"[OK] Portails importés: {len(items)}")
+    else:
+        print("[INFO] Aucun portail à importer.")
 
-        default_terms = [
-            "ATS",
-            "applicant tracking system",
-            "système de suivi des candidatures",
-            "logiciel de recrutement",
-            "talent acquisition",
-            "plateforme de recrutement",
-        ]
-        for t in default_terms:
-            db.add(KeywordTerm(profile_id=ats.id, term=t))
 
-    db.commit()
-    db.close()
-    print("[OK] Base initialisée.")
+def load_tenders(con: sqlite3.Connection) -> None:
+    if not os.path.exists(AO_CSV_PATH):
+        print(f"[WARN] Fichier AO non trouvé: {AO_CSV_PATH}")
+        return
+
+    cur = con.cursor()
+    items: List[Tuple] = []
+
+    with open(AO_CSV_PATH, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+
+        def g(row, *keys, default=""):
+            for k in keys:
+                if k in row and row[k] is not None:
+                    v = str(row[k]).strip()
+                    if v != "":
+                        return v
+            return default
+
+        for row in reader:
+            plateforme = g(row, "plateforme", "portal", "portal_label")
+            reference = g(row, "reference", "ref", "reference_ao")
+            acheteur = g(row, "acheteur", "buyer_name")
+            titre = g(row, "titre", "title")
+            type_ao = g(row, "type", "tender_type")
+            statut = g(row, "statut", "status")
+            date_publication = g(row, "date_publication", "publication_date")
+            date_cloture = g(row, "date_cloture", "closing_date")
+            fuseau_horaire = g(row, "fuseau_horaire", "timezone")
+            categories_unspsc = g(row, "categories_unspsc", "unspsc_categories")
+            categorie_principale = g(row, "categorie_principale", "main_category")
+            budget = g(row, "budget", "estimated_budget")
+            lien = g(row, "lien", "url", "link")
+            mots_cles_detectes = g(row, "mots_cles_detectes", "matched_keywords")
+            score_pertinence_raw = g(row, "score_pertinence", "relevance_score", default="")
+            extrait_recherche = g(row, "extrait_recherche", "search_excerpt")
+            est_ats_raw = g(row, "est_ats", "is_ats", "flag_ats", default="0")
+            resume_ao = g(row, "resume_ao", "summary")
+            pays = g(row, "pays", "country")
+            region = g(row, "region")
+            portail = g(row, "portail", "portal_label", "portal")
+            source_portal_id_raw = g(row, "source_portal_id", "portal_id", default="")
+
+            # casting "safe"
+            try:
+                score_pertinence = float(score_pertinence_raw.replace(",", ".")) if score_pertinence_raw else None
+            except ValueError:
+                score_pertinence = None
+
+            try:
+                est_ats = int(est_ats_raw)
+            except ValueError:
+                est_ats = 0
+
+            try:
+                source_portal_id = int(source_portal_id_raw) if source_portal_id_raw else None
+            except ValueError:
+                source_portal_id = None
+
+            items.append(
+                (
+                    plateforme,
+                    reference,
+                    acheteur,
+                    titre,
+                    type_ao,
+                    statut,
+                    date_publication,
+                    date_cloture,
+                    fuseau_horaire,
+                    categories_unspsc,
+                    categorie_principale,
+                    budget,
+                    lien,
+                    mots_cles_detectes,
+                    score_pertinence,
+                    extrait_recherche,
+                    est_ats,
+                    resume_ao,
+                    pays,
+                    region,
+                    portail,
+                    source_portal_id,
+                )
+            )
+
+    if items:
+        cur.executemany(
+            """
+            INSERT INTO tenders (
+                plateforme,
+                reference,
+                acheteur,
+                titre,
+                type,
+                statut,
+                date_publication,
+                date_cloture,
+                fuseau_horaire,
+                categories_unspsc,
+                categorie_principale,
+                budget,
+                lien,
+                mots_cles_detectes,
+                score_pertinence,
+                extrait_recherche,
+                est_ats,
+                resume_ao,
+                pays,
+                region,
+                portail,
+                source_portal_id
+            ) VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            )
+            """,
+            items,
+        )
+        con.commit()
+        print(f"[OK] AO importés: {len(items)}")
+    else:
+        print("[INFO] Aucun AO à importer.")
+
+
+def main() -> None:
+    print(f"[INFO] Initialisation de la base SQLite: {DB_PATH}")
+    con = get_connection()
+    try:
+        create_tables(con)
+        print("[OK] Tables créées.")
+
+        load_portals(con)
+        load_tenders(con)
+
+        # petit check de contrôle
+        cur = con.cursor()
+        cur.execute("SELECT COUNT(*) FROM tenders")
+        nb_tenders = cur.fetchone()[0]
+        print(f"[INFO] AO chargés en base: {nb_tenders}")
+    finally:
+        con.close()
+        print("[OK] Base initialisée.")
 
 
 if __name__ == "__main__":
-    init_db()
+    main()

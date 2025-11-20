@@ -1,52 +1,75 @@
 # backend/pdf_tools.py
 from __future__ import annotations
 
-from typing import Optional
+from typing import List
 
-from fastapi import APIRouter, File, UploadFile, Depends
-from pydantic import BaseModel
+from fastapi import APIRouter, UploadFile, File, Depends
+from fastapi.responses import JSONResponse
 
 from . import auth
 
-router = APIRouter(prefix="/tools", tags=["tools"])
+router = APIRouter(tags=["ao-pdf", "documents"])
 
 
-class AoAnalysisResult(BaseModel):
-    filename: str
-    size_bytes: int
-    summary: str
-    main_requirements: list[str]
-    risks: list[str]
-
-
-@router.post("/analyze-ao", response_model=AoAnalysisResult)
-async def analyze_ao(
+@router.post("/ao/analyse-pdf")
+async def analyse_ao_pdf(
     file: UploadFile = File(...),
-    current_user: Optional[auth.AuthenticatedUser] = Depends(auth.get_current_user_optional),
-) -> AoAnalysisResult:
+    current_user: auth.UserProfile = Depends(auth.get_current_user),
+):
     """
-    Stub d'analyse IA : on ne lit pas vraiment le fichier, on renvoie juste
-    un exemple structuré pour la démo.
+    Téléversement d'un PDF d'AO (téléchargé depuis SEAO / CanadaBuys).
+    Pour l'instant : stub → on retourne juste des infos de base.
+    Plus tard : on branchera l'IA ici.
     """
     content = await file.read()
-    size = len(content)
+    size_bytes = len(content)
 
-    user_label = current_user.profile.full_name if current_user else "profil inconnu"
+    return JSONResponse(
+        {
+            "status": "ok",
+            "filename": file.filename,
+            "content_type": file.content_type,
+            "size_bytes": size_bytes,
+            "message": (
+                "PDF reçu. Analyse IA à brancher (stub backend). "
+                "Tu peux déjà afficher ce résultat dans l'IHM."
+            ),
+        }
+    )
 
-    return AoAnalysisResult(
-        filename=file.filename,
-        size_bytes=size,
-        summary=(
-            f"Analyse factice du document pour {user_label}. "
-            "Le vrai moteur IA sera branché plus tard."
-        ),
-        main_requirements=[
-            "Fournir une solution logicielle conforme aux normes de sécurité du secteur public",
-            "Assurer la migration des données existantes sans interruption de service",
-            "Prévoir un plan de formation pour les utilisateurs clés",
-        ],
-        risks=[
-            "Sous-estimation de l'effort d'intégration avec les systèmes existants",
-            "Dépendance à un fournisseur unique sans plan de sortie",
-        ],
+
+@router.post("/documents/upload")
+async def upload_documents(
+    files: List[UploadFile] = File(...),
+    current_user: auth.UserProfile = Depends(auth.get_current_user),
+):
+    """
+    Téléversement générique de documents (.pdf, .docx, .xlsx, etc.).
+    Pour l'instant : on ne stocke rien, on retourne juste un résumé.
+    """
+    infos = []
+    total_size = 0
+
+    for f in files:
+        data = await f.read()
+        size = len(data)
+        total_size += size
+        infos.append(
+            {
+                "filename": f.filename,
+                "content_type": f.content_type,
+                "size_bytes": size,
+            }
+        )
+
+    return JSONResponse(
+        {
+            "status": "ok",
+            "count": len(files),
+            "total_size_bytes": total_size,
+            "files": infos,
+            "message": (
+                "Documents reçus. Traitement IA / indexation à brancher plus tard."
+            ),
+        }
     )

@@ -1,496 +1,427 @@
-// frontend/src/App.tsx
 import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
+import LoginPage from "./LoginPage";
 
-type Tender = {
-  id: number | string;
-  title: string;
-  portal: string;
-  source: string;
-  buyer: string;
-  country: string;
-  region?: string | null;
-  budget?: number | string | null;
-  published?: string | null;
-  closing?: string | null;
-  link?: string | null;
-};
+export interface Tender {
+  id: number;
+  titre: string;
+  acheteur: string;
+  pays: string;
+  region: string | null;
+  date_publication: string;
+  date_cloture: string;
+  portail: string;
+  lien: string;
+  // backend peut renvoyer est_ats etc.
+  [key: string]: any;
+}
 
-type UserProfile = {
+interface UserProfile {
   id: string;
   email: string;
   full_name: string;
-  activity_type: string;
-  main_specialty: string;
-};
+  activity_type?: string;
+  main_specialty?: string;
+}
 
-type LoginStep = "credentials" | "mfa" | "done";
+interface TendersResponse {
+  items: Tender[];
+  count: number;
+  user?: UserProfile;
+}
 
-type AoAnalysisResult = {
-  filename: string;
-  size_bytes: number;
-  summary: string;
-  main_requirements: string[];
-  risks: string[];
-};
-
-const API_BASE_URL =
-  ((import.meta as any).env?.VITE_API_BASE_URL as string | undefined)?.replace(
-    /\/+$/,
-    ""
-  ) || "/api";
+const DEFAULT_LIMIT = 200;
 
 const App: React.FC = () => {
-  // Auth
-  const [authStep, setAuthStep] = useState<LoginStep>("credentials");
-  const [loginEmail, setLoginEmail] = useState("bilel@example.com");
-  const [loginPassword, setLoginPassword] = useState("password");
-  const [mfaCode, setMfaCode] = useState("");
-  const [tempToken, setTempToken] = useState<string | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [authLoading, setAuthLoading] = useState(false);
-
-  // AO list
+  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
   const [tenders, setTenders] = useState<Tender[]>([]);
-  const [selectedTender, setSelectedTender] = useState<Tender | null>(null);
-  const [q, setQ] = useState("");
-  const [loadingTenders, setLoadingTenders] = useState(false);
-  const [tendersError, setTendersError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Analyse IA
-  const [analysis, setAnalysis] = useState<AoAnalysisResult | null>(null);
-  const [analysisError, setAnalysisError] = useState<string | null>(null);
-  const [analysisLoading, setAnalysisLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchField, setSearchField] = useState<"title_buyer" | "title" | "buyer">("title_buyer");
+  const [atsOnly, setAtsOnly] = useState(false);
+  const [selectedTenderId, setSelectedTenderId] = useState<number | null>(null);
 
-  const isAuthenticated = useMemo(() => !!accessToken, [accessToken]);
-
-  // -------------------------------------------------------------------
-  // Auth
-  // -------------------------------------------------------------------
-
-  const handleLogin = async () => {
-    setAuthError(null);
-    setAuthLoading(true);
-    try {
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: loginEmail,
-          password: loginPassword,
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.detail || "Erreur de connexion");
+  // Récupère token + user au démarrage
+  useEffect(() => {
+    const storedToken = localStorage.getItem("ao_token");
+    const storedUser = localStorage.getItem("ao_user");
+    if (storedToken) setToken(storedToken);
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        // ignore
       }
-
-      const data = await res.json();
-      setTempToken(data.temp_token);
-      setAuthStep("mfa");
-    } catch (e: any) {
-      setAuthError(e.message || "Erreur inconnue");
-    } finally {
-      setAuthLoading(false);
     }
-  };
+  }, []);
 
-  const handleVerifyMfa = async () => {
-    if (!tempToken) return;
-    setAuthError(null);
-    setAuthLoading(true);
-    try {
-      const res = await fetch(`${API_BASE_URL}/auth/verify-mfa`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          temp_token: tempToken,
-          code: mfaCode,
-        }),
-      });
+  // Charge les AO quand token / filtres changent
+  useEffect(() => {
+    if (!token) return;
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.detail || "Erreur MFA");
+    const controller = new AbortController();
+
+    async function fetchTenders() {
+      setLoading(true);
+      setError(null);
+      try {
+        const params = new URLSearchParams();
+        params.set("limit", String(DEFAULT_LIMIT));
+        if (search.trim()) params.set("q", search.trim());
+        params.set("field", searchField);
+        if (atsOnly) params.set("ats_only", "true");
+
+        const res = await fetch(`/api/tenders?${params.toString()}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          signal: controller.signal,
+        });
+
+        if (!res.ok) {
+          const body = await res.json().catch(() => null);
+          const msg = body?.detail || "Erreur lors du chargement des AO.";
+          throw new Error(msg);
+        }
+
+        const data = (await res.json()) as TendersResponse;
+        setTenders(data.items || []);
+        if (!user && data.user) {
+          setUser(data.user);
+          localStorage.setItem("ao_user", JSON.stringify(data.user));
+        }
+      } catch (err: any) {
+        if (err.name === "AbortError") return;
+        console.error("Erreur fetch AO:", err);
+        setError(
+          err.message === "Failed to fetch"
+            ? "Serveur injoignable. Vérifie que le backend tourne sur le port 8000."
+            : err.message
+        );
+      } finally {
+        setLoading(false);
       }
-
-      const data = await res.json();
-      setAccessToken(data.access_token);
-      setCurrentUser(data.user);
-      setAuthStep("done");
-    } catch (e: any) {
-      setAuthError(e.message || "Erreur inconnue");
-    } finally {
-      setAuthLoading(false);
     }
-  };
+
+    fetchTenders();
+    return () => controller.abort();
+  }, [token, search, searchField, atsOnly, user]);
+
+  const selectedTender = useMemo(
+    () => tenders.find((t) => t.id === selectedTenderId) || null,
+    [tenders, selectedTenderId]
+  );
+
+  const stats = useMemo(() => {
+    const total = tenders.length;
+    const ats = tenders.filter((t) => t.est_ats).length;
+    const caQc = tenders.filter(
+      (t) => t.pays === "CA" && (t.region === "QC" || t.region === "CA / QC" || t.region === "CA/QC")
+    ).length;
+    return { total, ats, caQc };
+  }, [tenders]);
 
   const handleLogout = () => {
-    setAccessToken(null);
-    setCurrentUser(null);
-    setAuthStep("credentials");
+    setToken(null);
+    setUser(null);
     setTenders([]);
-    setSelectedTender(null);
+    setSelectedTenderId(null);
+    localStorage.removeItem("ao_token");
+    localStorage.removeItem("ao_user");
   };
 
-  // -------------------------------------------------------------------
-  // Fetch AO
-  // -------------------------------------------------------------------
-
-  const fetchTenders = async () => {
-    if (!accessToken) return;
-    setLoadingTenders(true);
-    setTendersError(null);
-    try {
-      const params = new URLSearchParams();
-      params.set("limit", "200");
-      if (q.trim()) params.set("q", q.trim());
-
-      const res = await fetch(`${API_BASE_URL}/tenders?${params.toString()}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.detail || "Erreur de chargement des AO");
-      }
-
-      const data = await res.json();
-      setTenders(data.items || data);
-      setSelectedTender((prev) => prev ?? (data.items || data)[0] ?? null);
-    } catch (e: any) {
-      setTendersError(e.message || "Erreur inconnue");
-    } finally {
-      setLoadingTenders(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchTenders();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
-
-  // -------------------------------------------------------------------
-  // Analyse IA / upload
-  // -------------------------------------------------------------------
-
-  const handleUploadAoFile = async (file: File) => {
-    if (!accessToken) return;
-    setAnalysis(null);
-    setAnalysisError(null);
-    setAnalysisLoading(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const res = await fetch(`${API_BASE_URL}/tools/analyze-ao`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => null);
-        throw new Error(data?.detail || "Erreur lors de l'analyse");
-      }
-
-      const data: AoAnalysisResult = await res.json();
-      setAnalysis(data);
-    } catch (e: any) {
-      setAnalysisError(e.message || "Erreur inconnue");
-    } finally {
-      setAnalysisLoading(false);
-    }
-  };
-
-  const onFileInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      void handleUploadAoFile(file);
-      e.target.value = "";
-    }
-  };
-
-  // -------------------------------------------------------------------
-  // Rendering
-  // -------------------------------------------------------------------
-
-  if (!isAuthenticated) {
+  if (!token) {
     return (
       <div className="app-root">
-        <div className="login-card glass-card">
-          <h1 className="app-title">AO Collector</h1>
-          <p className="app-subtitle">Connexion avec MFA et profils métiers.</p>
-
-          {authStep === "credentials" && (
-            <>
-              <label className="field-label">
-                Email
-                <input
-                  className="text-input"
-                  type="email"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                />
-              </label>
-              <label className="field-label">
-                Mot de passe
-                <input
-                  className="text-input"
-                  type="password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                />
-              </label>
-
-              <button
-                className="primary-btn"
-                onClick={handleLogin}
-                disabled={authLoading}
-              >
-                {authLoading ? "Connexion..." : "Se connecter"}
-              </button>
-            </>
-          )}
-
-          {authStep === "mfa" && (
-            <>
-              <p className="hint">
-                Entrez le code MFA correspondant à l&apos;email choisi (voir
-                dessous).
-              </p>
-              <label className="field-label">
-                Code MFA
-                <input
-                  className="text-input"
-                  value={mfaCode}
-                  onChange={(e) => setMfaCode(e.target.value)}
-                  placeholder="123456, 654321, 999999..."
-                />
-              </label>
-              <button
-                className="primary-btn"
-                onClick={handleVerifyMfa}
-                disabled={authLoading}
-              >
-                {authLoading ? "Vérification..." : "Valider le code"}
-              </button>
-            </>
-          )}
-
-          {authError && <div className="error-banner">{authError}</div>}
-
-          <div className="test-profiles">
-            <div>Profils de test :</div>
-            <ul>
-              <li>bilel@example.com / MFA 123456</li>
-              <li>cloud.consultant@example.com / MFA 654321</li>
-              <li>odoo.partner@example.com / MFA 999999</li>
-            </ul>
-          </div>
-        </div>
+        <LoginPage
+          onAuthenticated={(newToken, newUser) => {
+            setToken(newToken);
+            setUser(newUser);
+          }}
+        />
       </div>
     );
   }
 
-  // -------------------------------------------------------------------
-  // Ecran principal
-  // -------------------------------------------------------------------
-
   return (
     <div className="app-root">
-      <header className="top-bar">
-        <div>
-          <div className="top-title">AO Collector — Recherche</div>
-          {currentUser && (
-            <div className="top-subtitle">
-              Bonjour{" "}
-              <strong className="accent">{currentUser.full_name}</strong> ·{" "}
-              {currentUser.activity_type} · Spécialité :{" "}
-              <span className="accent">{currentUser.main_specialty}</span>
+      <header className="app-header">
+        <div className="user-pill">
+          <div className="avatar-circle">B</div>
+          <div className="user-meta">
+            <div className="user-line">
+              <span className="status-dot" />
+              <span>
+                Connecté en tant que{" "}
+                <strong>{user?.full_name || "Bilel — Stratège AO TI"}</strong>
+              </span>
             </div>
-          )}
+            <div className="user-sub">
+              {user?.activity_type || "Consultant TI / Intégrateur"} ·{" "}
+              <span className="user-highlight">
+                {user?.main_specialty || "Intégration ERP & IA"}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="top-right">
-          <button className="ghost-btn" onClick={handleLogout}>
-            Se déconnecter
-          </button>
-        </div>
+
+        <button className="logout-button" onClick={handleLogout}>
+          Se déconnecter
+        </button>
       </header>
 
-      <main className="layout">
-        <section className="search-panel glass-card">
-          <div className="search-row">
-            <label className="field-label small">
-              Mot-clé
-              <input
-                className="text-input"
-                placeholder="ex: crm, servicenow, odoo..."
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-              />
-            </label>
-            <button
-              className="primary-btn"
-              onClick={fetchTenders}
-              disabled={loadingTenders}
-            >
-              {loadingTenders ? "Recherche..." : "Rechercher"}
-            </button>
+      <main className="app-main">
+        <h1 className="page-title">AO Collector — Recherche</h1>
+        <p className="page-subtitle">
+          Tableau de bord des appels d’offres TI (SEAO &amp; CanadaBuys) avec
+          pré-filtrage ATS et préparation à l’analyse IA.
+        </p>
+
+        <section className="kpi-row">
+          <div className="kpi-card">
+            <div className="kpi-label">AO chargés</div>
+            <div className="kpi-value">{stats.total}</div>
           </div>
-          {tendersError && <div className="error-banner">{tendersError}</div>}
+          <div className="kpi-card">
+            <div className="kpi-label">AO ATS</div>
+            <div className="kpi-value">{stats.ats}</div>
+          </div>
+          <div className="kpi-card">
+            <div className="kpi-label">AO CA (QC) dans la fenêtre</div>
+            <div className="kpi-value">
+              {stats.caQc} <span className="kpi-suffix">/ {stats.total}</span>
+            </div>
+          </div>
         </section>
 
-        <section className="results-layout">
-          <div className="tenders-table glass-card">
-            <div className="table-header">
-              <span>ID</span>
+        <section className="filter-banner">
+          <span className="filter-icon">⚡</span>
+          <span className="filter-text">
+            {search
+              ? `Filtre actif — "${search}" (${searchField === "title_buyer"
+                  ? "titre + acheteur"
+                  : searchField === "title"
+                  ? "titre"
+                  : "acheteur"})`
+              : "Aucun filtre spécifique — dernières AO chargées."}
+          </span>
+        </section>
+
+        <section className="search-row">
+          <div className="search-main">
+            <span className="search-icon">🔍</span>
+            <input
+              className="search-input"
+              placeholder="Recherche intelligente (ex : crm, servicenow, odoo, cybersécurité...)"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") e.preventDefault();
+              }}
+            />
+          </div>
+          <button
+            className="primary-button"
+            onClick={() => setSearch((s) => s.trim())}
+          >
+            Rechercher
+          </button>
+        </section>
+
+        <section className="search-options">
+          <div className="search-field-group">
+            <span className="search-option-label">Champ :</span>
+            <label className="radio-pill">
+              <input
+                type="radio"
+                name="field"
+                checked={searchField === "title_buyer"}
+                onChange={() => setSearchField("title_buyer")}
+              />
+              <span>Titre + acheteur</span>
+            </label>
+            <label className="radio-pill">
+              <input
+                type="radio"
+                name="field"
+                checked={searchField === "title"}
+                onChange={() => setSearchField("title")}
+              />
               <span>Titre</span>
-              <span>Portail</span>
+            </label>
+            <label className="radio-pill">
+              <input
+                type="radio"
+                name="field"
+                checked={searchField === "buyer"}
+                onChange={() => setSearchField("buyer")}
+              />
               <span>Acheteur</span>
-              <span>Pays</span>
-              <span>Publiée</span>
-              <span>Fermeture</span>
+            </label>
+          </div>
+
+          <label className="checkbox-option">
+            <input
+              type="checkbox"
+              checked={atsOnly}
+              onChange={(e) => setAtsOnly(e.target.checked)}
+            />
+            <span>Filtrer sur AO ATS uniquement</span>
+          </label>
+        </section>
+
+        {error && <div className="alert error">{error}</div>}
+
+        <section
+          className={`results-layout ${
+            selectedTender ? "results-layout--with-detail" : "results-layout--single"
+          }`}
+        >
+          {/* Tableau des AO */}
+          <div className="card table-card">
+            <div className="card-header">
+              <div>
+                <h2>Liste des AO</h2>
+                <p className="card-subtitle">
+                  {stats.total} résultat(s)
+                  {atsOnly ? " — filtrés ATS" : ""}
+                </p>
+              </div>
             </div>
-            <div className="table-body">
-              {tenders.map((t) => (
-                <button
-                  key={t.id}
-                  className={
-                    "table-row" +
-                    (selectedTender && selectedTender.id === t.id
-                      ? " row-selected"
-                      : "")
-                  }
-                  onClick={() => setSelectedTender(t)}
-                >
-                  <span>{t.id}</span>
-                  <span>{t.title}</span>
-                  <span>{t.portal}</span>
-                  <span>{t.buyer}</span>
-                  <span>{t.country}</span>
-                  <span>{t.published || "—"}</span>
-                  <span>{t.closing || "—"}</span>
-                </button>
-              ))}
-              {tenders.length === 0 && !loadingTenders && (
-                <div className="empty-state">Aucun résultat pour ces critères.</div>
-              )}
+
+            <div className="ao-table-wrapper">
+              <table className="ao-table">
+                <thead>
+                  <tr>
+                    <th>Titre</th>
+                    <th>Acheteur</th>
+                    <th>Lieu</th>
+                    <th>Dates</th>
+                    <th>Portail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading && (
+                    <tr>
+                      <td colSpan={5} className="table-loading">
+                        Chargement des appels d’offres...
+                      </td>
+                    </tr>
+                  )}
+                  {!loading && tenders.length === 0 && (
+                    <tr>
+                      <td colSpan={5} className="table-empty">
+                        Aucun résultat pour ces critères.
+                      </td>
+                    </tr>
+                  )}
+                  {!loading &&
+                    tenders.map((t) => {
+                      const isSelected = t.id === selectedTenderId;
+                      return (
+                        <tr
+                          key={t.id}
+                          className={isSelected ? "row-selected" : ""}
+                          onClick={() =>
+                            setSelectedTenderId(isSelected ? null : t.id)
+                          }
+                        >
+                          <td>{t.titre || "—"}</td>
+                          <td>{t.acheteur || "—"}</td>
+                          <td>{t.pays ? `${t.pays} / ${t.region || "?"}` : "—"}</td>
+                          <td>
+                            {t.date_publication || "?"} → {t.date_cloture || "?"}
+                          </td>
+                          <td>{t.portail || "—"}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          <div className="detail-panel glass-card">
-            {selectedTender ? (
-              <>
-                <h2 className="detail-title">{selectedTender.title}</h2>
-                <div className="detail-grid">
-                  <div>
-                    <div className="detail-label">Portail</div>
-                    <div>{selectedTender.portal}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Source</div>
-                    <div>{selectedTender.source}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Acheteur</div>
-                    <div>{selectedTender.buyer}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Pays</div>
-                    <div>{selectedTender.country}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Budget</div>
-                    <div>{selectedTender.budget ?? "—"}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Publiée</div>
-                    <div>{selectedTender.published ?? "—"}</div>
-                  </div>
-                  <div>
-                    <div className="detail-label">Fermeture</div>
-                    <div>{selectedTender.closing ?? "—"}</div>
-                  </div>
+          {/* Panneau détail AO */}
+          {selectedTender && (
+            <div className="card detail-card detail-enter">
+              <div className="detail-header">
+                <div>
+                  <div className="detail-label">Détail de l’AO</div>
+                  <h2 className="detail-title">{selectedTender.titre}</h2>
                 </div>
+                <button
+                  className="secondary-button"
+                  onClick={() => setSelectedTenderId(null)}
+                >
+                  Fermer
+                </button>
+              </div>
 
+              <div className="detail-grid">
+                <div className="detail-row">
+                  <span className="detail-key">Acheteur :</span>
+                  <span className="detail-value">
+                    {selectedTender.acheteur || "—"}
+                  </span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-key">Pays / Région :</span>
+                  <span className="detail-value">
+                    {selectedTender.pays || "—"}{" "}
+                    {selectedTender.region ? `(${selectedTender.region})` : ""}
+                  </span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-key">Dates :</span>
+                  <span className="detail-value">
+                    {selectedTender.date_publication || "?"} →{" "}
+                    {selectedTender.date_cloture || "?"}
+                  </span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-key">Portail :</span>
+                  <span className="detail-value">
+                    {selectedTender.portail || "—"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="detail-section">
+                <h3>Analyse IA &amp; documents</h3>
+                <p className="detail-description">
+                  Téléverse le PDF officiel de l’AO ou des documents annexes
+                  (Word, Excel, PDF…) pour préparer l’analyse IA de cette
+                  opportunité.
+                </p>
                 <div className="detail-actions">
-                  {selectedTender.link && (
+                  <button className="primary-button subtle">
+                    PDF AO (portail)
+                  </button>
+                  <button className="secondary-button subtle">
+                    Docs annexes
+                  </button>
+                </div>
+              </div>
+
+              <div className="detail-footer-link">
+                {selectedTender.lien && (
+                  <>
+                    Lien officiel :{" "}
                     <a
-                      className="ghost-btn"
-                      href={selectedTender.link}
+                      href={selectedTender.lien}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Ouvrir l&apos;appel d&apos;offres
+                      Ouvrir l’AO
                     </a>
-                  )}
-
-                  <label className="primary-btn file-btn">
-                    Analyser l&apos;AO (IA)
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx,.xlsx,.xls"
-                      onChange={onFileInputChange}
-                      style={{ display: "none" }}
-                    />
-                  </label>
-                </div>
-
-                <div className="analysis-panel">
-                  {analysisLoading && (
-                    <div className="hint">Analyse en cours...</div>
-                  )}
-                  {analysisError && (
-                    <div className="error-banner">{analysisError}</div>
-                  )}
-                  {analysis && (
-                    <>
-                      <div className="analysis-header">
-                        <div>Fichier : {analysis.filename}</div>
-                        <div>Taille : {analysis.size_bytes} octets</div>
-                      </div>
-                      <p className="analysis-summary">{analysis.summary}</p>
-                      <div className="analysis-columns">
-                        <div>
-                          <div className="detail-label">
-                            Exigences principales
-                          </div>
-                          <ul>
-                            {analysis.main_requirements.map((r, i) => (
-                              <li key={i}>{r}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <div className="detail-label">Risques identifiés</div>
-                          <ul>
-                            {analysis.risks.map((r, i) => (
-                              <li key={i}>{r}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </>
-            ) : (
-              <div className="empty-state">
-                Sélectionne un appel d&apos;offres dans la liste.
+                  </>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </section>
       </main>
     </div>
