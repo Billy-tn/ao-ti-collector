@@ -4,15 +4,18 @@ import LoginPage from "./LoginPage";
 
 export interface Tender {
   id: number;
-  titre: string;
-  acheteur: string;
-  pays: string;
+  source: string;
+  title: string;
+  url: string;
+  published_at: string;
+  country: string;
   region: string | null;
-  date_publication: string;
-  date_cloture: string;
-  portail: string;
-  lien: string;
-  // backend peut renvoyer est_ats etc.
+  portal_name: string;
+  buyer: string;
+  matched_keywords?: string | null;
+  raw_summary?: string | null;
+  categorie_principale?: string | null;
+  score_pertinence?: number | null;
   [key: string]: any;
 }
 
@@ -44,7 +47,7 @@ const App: React.FC = () => {
   const [atsOnly, setAtsOnly] = useState(false);
   const [selectedTenderId, setSelectedTenderId] = useState<number | null>(null);
 
-  // Récupère token + user au démarrage
+  // Chargement token + user depuis localStorage
   useEffect(() => {
     const storedToken = localStorage.getItem("ao_token");
     const storedUser = localStorage.getItem("ao_user");
@@ -58,7 +61,7 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Charge les AO quand token / filtres changent
+  // Chargement des AO quand token / filtres changent
   useEffect(() => {
     if (!token) return;
 
@@ -117,9 +120,15 @@ const App: React.FC = () => {
 
   const stats = useMemo(() => {
     const total = tenders.length;
-    const ats = tenders.filter((t) => t.est_ats).length;
+    const ats = tenders.filter((t) =>
+      (t.matched_keywords || "").toLowerCase().includes("ats")
+    ).length;
     const caQc = tenders.filter(
-      (t) => t.pays === "CA" && (t.region === "QC" || t.region === "CA / QC" || t.region === "CA/QC")
+      (t) =>
+        t.country === "CA" &&
+        (t.region === "QC" ||
+          t.region === "CA / QC" ||
+          t.region === "CA/QC")
     ).length;
     return { total, ats, caQc };
   }, [tenders]);
@@ -176,8 +185,8 @@ const App: React.FC = () => {
       <main className="app-main">
         <h1 className="page-title">AO Collector — Recherche</h1>
         <p className="page-subtitle">
-          Tableau de bord des appels d’offres TI (SEAO &amp; CanadaBuys) avec
-          pré-filtrage ATS et préparation à l’analyse IA.
+          Tableau de bord des appels d’offres (SEAO &amp; CanadaBuys) avec
+          pré-filtrage et préparation à l’analyse IA.
         </p>
 
         <section className="kpi-row">
@@ -186,13 +195,14 @@ const App: React.FC = () => {
             <div className="kpi-value">{stats.total}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">AO ATS</div>
+            <div className="kpi-label">AO suspects ATS</div>
             <div className="kpi-value">{stats.ats}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">AO CA (QC) dans la fenêtre</div>
+            <div className="kpi-label">AO CA (QC)</div>
             <div className="kpi-value">
-              {stats.caQc} <span className="kpi-suffix">/ {stats.total}</span>
+              {stats.caQc}{" "}
+              <span className="kpi-suffix">/ {stats.total}</span>
             </div>
           </div>
         </section>
@@ -298,9 +308,9 @@ const App: React.FC = () => {
                   <tr>
                     <th>Titre</th>
                     <th>Acheteur</th>
+                    <th>Source</th>
                     <th>Lieu</th>
-                    <th>Dates</th>
-                    <th>Portail</th>
+                    <th>Publication</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -329,13 +339,15 @@ const App: React.FC = () => {
                             setSelectedTenderId(isSelected ? null : t.id)
                           }
                         >
-                          <td>{t.titre || "—"}</td>
-                          <td>{t.acheteur || "—"}</td>
-                          <td>{t.pays ? `${t.pays} / ${t.region || "?"}` : "—"}</td>
+                          <td>{t.title || "—"}</td>
+                          <td>{t.buyer || "—"}</td>
+                          <td>{t.portal_name || t.source || "—"}</td>
                           <td>
-                            {t.date_publication || "?"} → {t.date_cloture || "?"}
+                            {t.country
+                              ? `${t.country}${t.region ? " / " + t.region : ""}`
+                              : t.region || "—"}
                           </td>
-                          <td>{t.portail || "—"}</td>
+                          <td>{t.published_at || "?"}</td>
                         </tr>
                       );
                     })}
@@ -350,7 +362,7 @@ const App: React.FC = () => {
               <div className="detail-header">
                 <div>
                   <div className="detail-label">Détail de l’AO</div>
-                  <h2 className="detail-title">{selectedTender.titre}</h2>
+                  <h2 className="detail-title">{selectedTender.title}</h2>
                 </div>
                 <button
                   className="secondary-button"
@@ -364,27 +376,26 @@ const App: React.FC = () => {
                 <div className="detail-row">
                   <span className="detail-key">Acheteur :</span>
                   <span className="detail-value">
-                    {selectedTender.acheteur || "—"}
+                    {selectedTender.buyer || "—"}
+                  </span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-key">Source / Portail :</span>
+                  <span className="detail-value">
+                    {selectedTender.portal_name || selectedTender.source || "—"}
                   </span>
                 </div>
                 <div className="detail-row">
                   <span className="detail-key">Pays / Région :</span>
                   <span className="detail-value">
-                    {selectedTender.pays || "—"}{" "}
+                    {selectedTender.country || "—"}{" "}
                     {selectedTender.region ? `(${selectedTender.region})` : ""}
                   </span>
                 </div>
                 <div className="detail-row">
-                  <span className="detail-key">Dates :</span>
+                  <span className="detail-key">Publication :</span>
                   <span className="detail-value">
-                    {selectedTender.date_publication || "?"} →{" "}
-                    {selectedTender.date_cloture || "?"}
-                  </span>
-                </div>
-                <div className="detail-row">
-                  <span className="detail-key">Portail :</span>
-                  <span className="detail-value">
-                    {selectedTender.portail || "—"}
+                    {selectedTender.published_at || "?"}
                   </span>
                 </div>
               </div>
@@ -407,11 +418,11 @@ const App: React.FC = () => {
               </div>
 
               <div className="detail-footer-link">
-                {selectedTender.lien && (
+                {selectedTender.url && (
                   <>
                     Lien officiel :{" "}
                     <a
-                      href={selectedTender.lien}
+                      href={selectedTender.url}
                       target="_blank"
                       rel="noreferrer"
                     >
