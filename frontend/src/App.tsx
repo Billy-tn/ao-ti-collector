@@ -2,21 +2,46 @@ import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import LoginPage from "./LoginPage";
 
+// =======================
+// Types
+// =======================
+
+const API_BASE = "/api";
+
+interface RawTender {
+  id: number;
+  // nouveaux champs backend (anglais)
+  title?: string;
+  url?: string;
+  published_at?: string;
+  country?: string;
+  region?: string;
+  portal_name?: string;
+  buyer?: string;
+  categorie_principale?: string;
+  est_ats?: number | boolean | string;
+
+  // anciens champs (français) si jamais ils réapparaissent
+  titre?: string;
+  lien?: string;
+  date_publication?: string;
+  date_cloture?: string;
+  pays?: string;
+  portail?: string;
+  [key: string]: any;
+}
+
 export interface Tender {
   id: number;
-  source: string;
-  title: string;
-  url: string;
-  published_at: string;
-  country: string;
-  region: string | null;
-  portal_name: string;
-  buyer: string;
-  matched_keywords?: string | null;
-  raw_summary?: string | null;
-  categorie_principale?: string | null;
-  score_pertinence?: number | null;
-  [key: string]: any;
+  titre: string;
+  acheteur: string;
+  pays: string;
+  region: string;
+  date_publication: string;
+  date_cloture: string;
+  portail: string;
+  lien: string;
+  est_ats: boolean;
 }
 
 interface UserProfile {
@@ -28,29 +53,73 @@ interface UserProfile {
 }
 
 interface TendersResponse {
-  items: Tender[];
+  items: RawTender[];
   count: number;
   user?: UserProfile;
 }
 
+// =======================
+// Helpers
+// =======================
+
 const DEFAULT_LIMIT = 200;
+
+function normalizeTender(raw: RawTender): Tender {
+  const titre = raw.titre || raw.title || "";
+  const acheteur = raw.acheteur || raw.buyer || "";
+  const pays = raw.pays || raw.country || "";
+  const region = raw.region || "";
+  const date_publication = raw.date_publication || raw.published_at || "";
+  const date_cloture = raw.date_cloture || ""; // pas toujours dispo côté backend
+  const portail = raw.portail || raw.portal_name || raw.source || "";
+  const lien = raw.lien || raw.url || "";
+
+  const est_ats =
+    typeof raw.est_ats === "boolean"
+      ? raw.est_ats
+      : raw.est_ats === 1 || raw.est_ats === "1";
+
+  return {
+    id: raw.id,
+    titre,
+    acheteur,
+    pays,
+    region,
+    date_publication,
+    date_cloture,
+    portail,
+    lien,
+    est_ats: Boolean(est_ats),
+  };
+}
+
+// =======================
+// Composant principal
+// =======================
 
 const App: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
+
   const [tenders, setTenders] = useState<Tender[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [search, setSearch] = useState("");
-  const [searchField, setSearchField] = useState<"title_buyer" | "title" | "buyer">("title_buyer");
+  // recherche : saisie vs requête effective
+  const [searchText, setSearchText] = useState("");
+  const [query, setQuery] = useState("");
+  const [searchField, setSearchField] = useState<
+    "title_buyer" | "title" | "buyer"
+  >("title_buyer");
   const [atsOnly, setAtsOnly] = useState(false);
+
   const [selectedTenderId, setSelectedTenderId] = useState<number | null>(null);
 
-  // Chargement token + user depuis localStorage
+  // Récupère token + user au démarrage
   useEffect(() => {
     const storedToken = localStorage.getItem("ao_token");
     const storedUser = localStorage.getItem("ao_user");
+
     if (storedToken) setToken(storedToken);
     if (storedUser) {
       try {
@@ -61,7 +130,7 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Chargement des AO quand token / filtres changent
+  // Charge les AO quand token / filtres changent
   useEffect(() => {
     if (!token) return;
 
@@ -70,19 +139,46 @@ const App: React.FC = () => {
     async function fetchTenders() {
       setLoading(true);
       setError(null);
+
       try {
         const params = new URLSearchParams();
         params.set("limit", String(DEFAULT_LIMIT));
-        if (search.trim()) params.set("q", search.trim());
+
+        if (query.trim()) params.set("q", query.trim());
+
+        // champs supportés côté backend : title_buyer / title / buyer
         params.set("field", searchField);
+
         if (atsOnly) params.set("ats_only", "true");
 
-        const res = await fetch(`/api/tenders?${params.toString()}`, {
+        const res = await fetch(`${API_BASE}/tenders?${params.toString()}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
           signal: controller.signal,
         });
+
+        // Gestion token invalide ou expiré
+        if (res.status === 401) {
+          let detail = "Token invalide ou expiré.";
+          try {
+            const body = await res.json();
+            if (body?.detail) detail = body.detail;
+          } catch {
+            /* ignore */
+          }
+
+          setError(detail);
+
+          // on force le retour à l'écran de login
+          setToken(null);
+          setUser(null);
+          setTenders([]);
+          setSelectedTenderId(null);
+          localStorage.removeItem("ao_token");
+          localStorage.removeItem("ao_user");
+          return;
+        }
 
         if (!res.ok) {
           const body = await res.json().catch(() => null);
@@ -91,7 +187,10 @@ const App: React.FC = () => {
         }
 
         const data = (await res.json()) as TendersResponse;
-        setTenders(data.items || []);
+        const normalized = (data.items || []).map(normalizeTender);
+
+        setTenders(normalized);
+
         if (!user && data.user) {
           setUser(data.user);
           localStorage.setItem("ao_user", JSON.stringify(data.user));
@@ -111,7 +210,7 @@ const App: React.FC = () => {
 
     fetchTenders();
     return () => controller.abort();
-  }, [token, search, searchField, atsOnly, user]);
+  }, [token, query, searchField, atsOnly, user]);
 
   const selectedTender = useMemo(
     () => tenders.find((t) => t.id === selectedTenderId) || null,
@@ -120,15 +219,14 @@ const App: React.FC = () => {
 
   const stats = useMemo(() => {
     const total = tenders.length;
-    const ats = tenders.filter((t) =>
-      (t.matched_keywords || "").toLowerCase().includes("ats")
-    ).length;
+    const ats = tenders.filter((t) => t.est_ats).length;
     const caQc = tenders.filter(
       (t) =>
-        t.country === "CA" &&
+        t.pays === "CA" &&
         (t.region === "QC" ||
           t.region === "CA / QC" ||
-          t.region === "CA/QC")
+          t.region === "CA/QC" ||
+          t.region === "QC / CA")
     ).length;
     return { total, ats, caQc };
   }, [tenders]);
@@ -142,6 +240,10 @@ const App: React.FC = () => {
     localStorage.removeItem("ao_user");
   };
 
+  // =======================
+  // Si pas de token → Login
+  // =======================
+
   if (!token) {
     return (
       <div className="app-root">
@@ -149,11 +251,19 @@ const App: React.FC = () => {
           onAuthenticated={(newToken, newUser) => {
             setToken(newToken);
             setUser(newUser);
+            localStorage.setItem("ao_token", newToken);
+            if (newUser) {
+              localStorage.setItem("ao_user", JSON.stringify(newUser));
+            }
           }}
         />
       </div>
     );
   }
+
+  // =======================
+  // Dashboard AO
+  // =======================
 
   return (
     <div className="app-root">
@@ -185,62 +295,70 @@ const App: React.FC = () => {
       <main className="app-main">
         <h1 className="page-title">AO Collector — Recherche</h1>
         <p className="page-subtitle">
-          Tableau de bord des appels d’offres (SEAO &amp; CanadaBuys) avec
-          pré-filtrage et préparation à l’analyse IA.
+          Tableau de bord des appels d’offres TI (SEAO &amp; CanadaBuys) avec
+          pré-filtrage ATS et préparation à l’analyse IA.
         </p>
 
+        {/* KPIs */}
         <section className="kpi-row">
           <div className="kpi-card">
             <div className="kpi-label">AO chargés</div>
             <div className="kpi-value">{stats.total}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">AO suspects ATS</div>
+            <div className="kpi-label">AO ATS</div>
             <div className="kpi-value">{stats.ats}</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">AO CA (QC)</div>
+            <div className="kpi-label">AO CA (QC) dans la fenêtre</div>
             <div className="kpi-value">
-              {stats.caQc}{" "}
-              <span className="kpi-suffix">/ {stats.total}</span>
+              {stats.caQc} <span className="kpi-suffix">/ {stats.total}</span>
             </div>
           </div>
         </section>
 
+        {/* Bandeau filtre actif */}
         <section className="filter-banner">
           <span className="filter-icon">⚡</span>
           <span className="filter-text">
-            {search
-              ? `Filtre actif — "${search}" (${searchField === "title_buyer"
-                  ? "titre + acheteur"
-                  : searchField === "title"
-                  ? "titre"
-                  : "acheteur"})`
+            {query
+              ? `Filtre actif — "${query}" (${
+                  searchField === "title_buyer"
+                    ? "titre + acheteur"
+                    : searchField === "title"
+                    ? "titre"
+                    : "acheteur"
+                })`
               : "Aucun filtre spécifique — dernières AO chargées."}
           </span>
         </section>
 
+        {/* Recherche */}
         <section className="search-row">
           <div className="search-main">
             <span className="search-icon">🔍</span>
             <input
               className="search-input"
               placeholder="Recherche intelligente (ex : crm, servicenow, odoo, cybersécurité...)"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") e.preventDefault();
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  setQuery(searchText.trim());
+                }
               }}
             />
           </div>
           <button
             className="primary-button"
-            onClick={() => setSearch((s) => s.trim())}
+            onClick={() => setQuery(searchText.trim())}
           >
             Rechercher
           </button>
         </section>
 
+        {/* Options de recherche */}
         <section className="search-options">
           <div className="search-field-group">
             <span className="search-option-label">Champ :</span>
@@ -283,11 +401,15 @@ const App: React.FC = () => {
           </label>
         </section>
 
+        {/* Erreur globale */}
         {error && <div className="alert error">{error}</div>}
 
+        {/* Layout résultats + détail */}
         <section
           className={`results-layout ${
-            selectedTender ? "results-layout--with-detail" : "results-layout--single"
+            selectedTender
+              ? "results-layout--with-detail"
+              : "results-layout--single"
           }`}
         >
           {/* Tableau des AO */}
@@ -308,9 +430,9 @@ const App: React.FC = () => {
                   <tr>
                     <th>Titre</th>
                     <th>Acheteur</th>
-                    <th>Source</th>
                     <th>Lieu</th>
-                    <th>Publication</th>
+                    <th>Dates</th>
+                    <th>Portail</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -339,15 +461,18 @@ const App: React.FC = () => {
                             setSelectedTenderId(isSelected ? null : t.id)
                           }
                         >
-                          <td>{t.title || "—"}</td>
-                          <td>{t.buyer || "—"}</td>
-                          <td>{t.portal_name || t.source || "—"}</td>
+                          <td>{t.titre || "—"}</td>
+                          <td>{t.acheteur || "—"}</td>
                           <td>
-                            {t.country
-                              ? `${t.country}${t.region ? " / " + t.region : ""}`
-                              : t.region || "—"}
+                            {t.pays
+                              ? `${t.pays}${t.region ? " / " + t.region : ""}`
+                              : "—"}
                           </td>
-                          <td>{t.published_at || "?"}</td>
+                          <td>
+                            {t.date_publication || "?"} →{" "}
+                            {t.date_cloture || "?"}
+                          </td>
+                          <td>{t.portail || "—"}</td>
                         </tr>
                       );
                     })}
@@ -362,7 +487,7 @@ const App: React.FC = () => {
               <div className="detail-header">
                 <div>
                   <div className="detail-label">Détail de l’AO</div>
-                  <h2 className="detail-title">{selectedTender.title}</h2>
+                  <h2 className="detail-title">{selectedTender.titre}</h2>
                 </div>
                 <button
                   className="secondary-button"
@@ -376,26 +501,27 @@ const App: React.FC = () => {
                 <div className="detail-row">
                   <span className="detail-key">Acheteur :</span>
                   <span className="detail-value">
-                    {selectedTender.buyer || "—"}
-                  </span>
-                </div>
-                <div className="detail-row">
-                  <span className="detail-key">Source / Portail :</span>
-                  <span className="detail-value">
-                    {selectedTender.portal_name || selectedTender.source || "—"}
+                    {selectedTender.acheteur || "—"}
                   </span>
                 </div>
                 <div className="detail-row">
                   <span className="detail-key">Pays / Région :</span>
                   <span className="detail-value">
-                    {selectedTender.country || "—"}{" "}
+                    {selectedTender.pays || "—"}{" "}
                     {selectedTender.region ? `(${selectedTender.region})` : ""}
                   </span>
                 </div>
                 <div className="detail-row">
-                  <span className="detail-key">Publication :</span>
+                  <span className="detail-key">Dates :</span>
                   <span className="detail-value">
-                    {selectedTender.published_at || "?"}
+                    {selectedTender.date_publication || "?"} →{" "}
+                    {selectedTender.date_cloture || "?"}
+                  </span>
+                </div>
+                <div className="detail-row">
+                  <span className="detail-key">Portail :</span>
+                  <span className="detail-value">
+                    {selectedTender.portail || "—"}
                   </span>
                 </div>
               </div>
@@ -418,11 +544,11 @@ const App: React.FC = () => {
               </div>
 
               <div className="detail-footer-link">
-                {selectedTender.url && (
+                {selectedTender.lien && (
                   <>
                     Lien officiel :{" "}
                     <a
-                      href={selectedTender.url}
+                      href={selectedTender.lien}
                       target="_blank"
                       rel="noreferrer"
                     >
