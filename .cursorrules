@@ -1,0 +1,26 @@
+# AO TI Collector — Cursor rules
+
+## Objectif
+Aider à développer une app AO Collector (FastAPI + React) dans Codespaces.
+
+## Règles de dev
+- Procéder étape par étape, changements minimaux, pas de refactor massif.
+- Toujours garder la version fonctionnelle (branch/tag déjà faits).
+- Si tu touches au backend: vérifier /docs et un curl simple.
+- Si tu touches au frontend: vérifier que le tableau charge et que les appels API passent.
+
+## Stack
+- Backend: FastAPI (backend/main.py), auth (backend/auth.py), sqlite DB (ao.db)
+- Frontend: React/TS (frontend/src/App.tsx, LoginPage.tsx)
+- Auth: Bearer token dans header Authorization: "Bearer <token>"
+- LocalStorage clés: ao_token, ao_user
+
+## Conventions attendues
+- Code clair, commentaires courts si nécessaire.
+- Messages d’erreur en français côté API (déjà le cas).
+- Ne pas casser MFA/Swagger Authorize.
+
+## Tests rapides à proposer
+- curl /api/auth/login → temp_token
+- curl /api/auth/verify-mfa → access_token
+- curl /api/tenders avec Authorization Bearer → 200
