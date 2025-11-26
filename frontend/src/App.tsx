@@ -62,7 +62,7 @@ interface TendersResponse {
 // Helpers
 // =======================
 
-const DEFAULT_LIMIT = 200;
+const DEFAULT_LIMIT = 100;
 
 function normalizeTender(raw: RawTender): Tender {
   const titre = raw.titre || raw.title || "";
