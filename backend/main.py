@@ -9,6 +9,7 @@ from datetime import datetime
 from fastapi import FastAPI, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
+from fastapi.openapi.utils import get_openapi
 from . import auth, pdf_tools
 
 # ----------------------------------------------------------------------
@@ -55,6 +56,51 @@ def _ensure_search_logs_table(con: sqlite3.Connection) -> None:
 # ----------------------------------------------------------------------
 
 app = FastAPI(title="AO Collector", version="1.0")
+
+
+def custom_openapi():
+    # cache
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        routes=app.routes,
+    )
+
+    # Déclare le "scheme" Bearer pour Swagger UI (bouton Authorize)
+    components = schema.setdefault("components", {})
+    schemes = components.setdefault("securitySchemes", {})
+    schemes["BearerAuth"] = {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+    }
+
+    # Ajoute automatiquement la sécurité aux endpoints qui déclarent
+    # un header "Authorization" (généré par Header(...) dans auth.py)
+    for path_item in schema.get("paths", {}).values():
+        if not isinstance(path_item, dict):
+            continue
+        for operation in path_item.values():
+            if not isinstance(operation, dict):
+                continue
+            params = operation.get("parameters", []) or []
+            has_auth_header = any(
+                isinstance(p, dict)
+                and p.get("in") == "header"
+                and p.get("name", "").lower() == "authorization"
+                for p in params
+            )
+            if has_auth_header:
+                operation["security"] = [{"BearerAuth": []}]
+
+    app.openapi_schema = schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 app.add_middleware(
     CORSMiddleware,
