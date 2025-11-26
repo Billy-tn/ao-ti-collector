@@ -136,25 +136,28 @@ def list_portals(
     country: str = Query(default="ALL"),
 ):
     con = get_db()
-    sql = """
-        SELECT DISTINCT
-            portal_code AS code,
-            portal_label AS label,
-            country
-        FROM tenders
-        WHERE 1=1
-    """
-    params: List[Any] = []
+    try:
+        # NOTE: la table tenders contient portal_name (pas portal_code/portal_label)
+        sql = """
+            SELECT DISTINCT
+                portal_name AS code,
+                portal_name AS label,
+                country
+            FROM tenders
+            WHERE portal_name IS NOT NULL AND portal_name != ''
+        """
+        params: List[Any] = []
 
-    if country != "ALL":
-        sql += " AND country = ?"
-        params.append(country)
+        if country != "ALL":
+            sql += " AND country = ?"
+            params.append(country)
 
-    sql += " ORDER BY country, portal_label"
+        sql += " ORDER BY country, portal_name"
 
-    rows = con.execute(sql, params).fetchall()
-    return rows
-
+        rows = con.execute(sql, params).fetchall()
+        return rows
+    finally:
+        con.close()
 
 # ----------------------------------------------------------------------
 # Tenders (tableau principal) – protégé par token
@@ -176,40 +179,43 @@ def list_tenders(
     """
 
     con = get_db()
-    _ensure_search_logs_table(con)
-
-    # 🔹 Requête *très* simple : pas de WHERE, pas de colonnes nommées
-    sql = """
+    try:
+        _ensure_search_logs_table(con)
+        
+        # 🔹 Requête *très* simple : pas de WHERE, pas de colonnes nommées
+        sql = """
         SELECT *
         FROM tenders
         LIMIT ?
-    """
-    params: list[Any] = [limit]
-
-    rows = con.execute(sql, params).fetchall()
-
-    # 🔹 On log quand même la recherche pour garder l’historique
-    con.execute(
+        """
+        params: list[Any] = [limit]
+        
+        rows = con.execute(sql, params).fetchall()
+        
+        # 🔹 On log quand même la recherche pour garder l’historique
+        con.execute(
         """
         INSERT INTO search_logs (searched_at, country, portal_code, q, limit_requested, results_count)
         VALUES (?, ?, ?, ?, ?, ?)
         """,
         (
-            datetime.utcnow().isoformat(),
-            country,
-            None if portal == "ALL" else portal,
-            q,
-            limit,
-            len(rows),
+        datetime.utcnow().isoformat(),
+        country,
+        None if portal == "ALL" else portal,
+        q,
+        limit,
+        len(rows),
         ),
-    )
-    con.commit()
-
-    return {
+        )
+        con.commit()
+        
+        return {
         "items": rows,                 # contient toutes les colonnes existantes
         "count": len(rows),
         "user": current_user.profile.dict(),
-    }
+        }
+    finally:
+        con.close()
 
 
 
