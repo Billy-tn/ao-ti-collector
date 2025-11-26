@@ -359,47 +359,40 @@ const App: React.FC = () => {
         </section>
 
         {/* Options de recherche */}
-        <section className="search-options">
-          <div className="search-field-group">
-            <span className="search-option-label">Champ :</span>
-            <label className="radio-pill">
-              <input
-                type="radio"
-                name="field"
-                checked={searchField === "title_buyer"}
-                onChange={() => setSearchField("title_buyer")}
-              />
-              <span>Titre + acheteur</span>
-            </label>
-            <label className="radio-pill">
-              <input
-                type="radio"
-                name="field"
-                checked={searchField === "title"}
-                onChange={() => setSearchField("title")}
-              />
-              <span>Titre</span>
-            </label>
-            <label className="radio-pill">
-              <input
-                type="radio"
-                name="field"
-                checked={searchField === "buyer"}
-                onChange={() => setSearchField("buyer")}
-              />
-              <span>Acheteur</span>
-            </label>
-          </div>
+                  {/* Portails (autres sources) */}
+          <section className="card" style={{ marginTop: 14 }}>
+            <div className="card-header">
+              <div>
+                <h2>Autres portails (à brancher)</h2>
+                <p className="card-subtitle">
+                  Section “placeholder” pour préparer l’ajout de MERX & autres, sans casser v3.
+                </p>
+              </div>
+            </div>
 
-          <label className="checkbox-option">
-            <input
-              type="checkbox"
-              checked={atsOnly}
-              onChange={(e) => setAtsOnly(e.target.checked)}
-            />
-            <span>Filtrer sur AO ATS uniquement</span>
-          </label>
-        </section>
+            <div style={{ padding: 14, display: "grid", gap: 10 }}>
+              <div>
+                <strong>Priorité Canada (hors SEAO / CanadaBuys)</strong>
+                <ul style={{ margin: "8px 0 0 18px" }}>
+                  <li>MERX</li>
+                  <li>Biddingo</li>
+                  <li>BC Bid</li>
+                  <li>SaskTenders</li>
+                  <li>Bonfire / bids&tenders (portails municipaux)</li>
+                </ul>
+              </div>
+
+              <div style={{ opacity: 0.9 }}>
+                <strong>Prochaine étape (v4)</strong>
+                <div style={{ marginTop: 6 }}>
+                  1) Ajouter une table/onglet “SOURCES” côté app (ou fichier CSV) <br />
+                  2) Ajouter un endpoint `/api/sources` <br />
+                  3) Brancher l’UI + collecteurs
+                </div>
+              </div>
+            </div>
+          </section>
+
 
         {/* Erreur globale */}
         {error && <div className="alert error">{error}</div>}
