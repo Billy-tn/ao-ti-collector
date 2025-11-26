@@ -11,3 +11,7 @@ __pycache__/
 
 # Uvicorn / autres
 *.sqlite3
+
+# SQLite runtime files
+*.db-wal
+*.db-shm
