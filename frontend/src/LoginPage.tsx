@@ -1,33 +1,42 @@
 import React, { useState } from "react";
 
-type LoginResponse = {
-  temp_token: string;
-  message: string;
-};
+type Step = "credentials" | "mfa";
 
-type VerifyResponse = {
+interface LoginResponse {
+  message: string;
+  mfa_required: boolean;
+  temp_token?: string | null;
+  access_token?: string | null;
+  token_type?: string;
+  user?: any;
+}
+
+interface VerifyMfaResponse {
   access_token: string;
   token_type: string;
   user: any;
-};
-
-interface LoginPageProps {
-  onAuthenticated: (token: string, user: any) => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onAuthenticated }) => {
-  const [step, setStep] = useState<"credentials" | "mfa">("credentials");
+export default function LoginPage({
+  onAuthenticated,
+}: {
+  onAuthenticated: (token: string, user: any) => void;
+}) {
+  const [step, setStep] = useState<Step>("credentials");
+
   const [email, setEmail] = useState("bilel@example.com");
   const [password, setPassword] = useState("password");
-  const [mfaCode, setMfaCode] = useState("123456");
+
   const [tempToken, setTempToken] = useState<string | null>(null);
+  const [mfaCode, setMfaCode] = useState("123456");
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmitCredentials(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+  async function handleLogin() {
     setLoading(true);
+    setError(null);
+
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -35,37 +44,45 @@ const LoginPage: React.FC<LoginPageProps> = ({ onAuthenticated }) => {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = (await res.json().catch(() => null)) as LoginResponse | null;
+
       if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        const msg = body?.detail || body?.message || "Erreur de connexion";
-        throw new Error(msg);
+        throw new Error((data as any)?.detail || "Erreur de connexion.");
       }
 
-      const data = (await res.json()) as LoginResponse;
-      setTempToken(data.temp_token);
-      setStep("mfa");
-    } catch (err: any) {
-      console.error("Login error:", err);
-      setError(
-        err.message === "Failed to fetch"
-          ? "Serveur injoignable. Vérifie que le backend tourne sur le port 8000."
-          : err.message
-      );
+      // ✅ MFA OFF: on reçoit directement access_token + user
+      if (data && data.mfa_required === false && data.access_token) {
+        localStorage.setItem("ao_token", data.access_token);
+        if (data.user) localStorage.setItem("ao_user", JSON.stringify(data.user));
+        onAuthenticated(data.access_token, data.user);
+        return;
+      }
+
+      // ✅ MFA ON: temp_token puis écran MFA
+      if (data?.temp_token) {
+        setTempToken(data.temp_token);
+        setStep("mfa");
+        return;
+      }
+
+      throw new Error("Réponse login inattendue (pas de token).");
+    } catch (e: any) {
+      setError(e?.message || "Erreur inconnue.");
     } finally {
       setLoading(false);
     }
   }
 
-  async function handleSubmitMfa(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleVerifyMfa() {
     if (!tempToken) {
-      setError("Session MFA invalide, recommence la connexion.");
+      setError("Token MFA manquant. Recommence la connexion.");
       setStep("credentials");
       return;
     }
 
-    setError(null);
     setLoading(true);
+    setError(null);
+
     try {
       const res = await fetch("/api/auth/verify-mfa", {
         method: "POST",
@@ -73,125 +90,135 @@ const LoginPage: React.FC<LoginPageProps> = ({ onAuthenticated }) => {
         body: JSON.stringify({ temp_token: tempToken, code: mfaCode }),
       });
 
+      const data = (await res.json().catch(() => null)) as VerifyMfaResponse | null;
+
       if (!res.ok) {
-        const body = await res.json().catch(() => null);
-        const msg = body?.detail || body?.message || "Code MFA invalide";
-        throw new Error(msg);
+        throw new Error((data as any)?.detail || "Code MFA invalide.");
       }
 
-      const data = (await res.json()) as VerifyResponse;
+      if (!data?.access_token) {
+        throw new Error("Réponse MFA inattendue (pas de access_token).");
+      }
+
       localStorage.setItem("ao_token", data.access_token);
       localStorage.setItem("ao_user", JSON.stringify(data.user));
       onAuthenticated(data.access_token, data.user);
-    } catch (err: any) {
-      console.error("MFA error:", err);
-      setError(
-        err.message === "Failed to fetch"
-          ? "Serveur injoignable. Vérifie que le backend tourne sur le port 8000."
-          : err.message
-      );
+    } catch (e: any) {
+      setError(e?.message || "Erreur inconnue.");
     } finally {
       setLoading(false);
     }
   }
 
-  const isCredentialsStep = step === "credentials";
-
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-badge">AO COLLECTOR</div>
-        <h1 className="login-title">Connexion sécurisée</h1>
-        <p className="login-subtitle">
-          Accède à ton tableau de bord AO (SEAO &amp; CanadaBuys)
-          <br />
-          avec pré-filtrage ATS et IA.
-        </p>
+    <div style={{ maxWidth: 560, margin: "40px auto", padding: 16 }}>
+      <h1 style={{ marginBottom: 6 }}>AO Collector</h1>
+      <p style={{ marginTop: 0, opacity: 0.8 }}>
+        Connecte-toi pour accéder au tableau des appels d’offres.
+      </p>
 
-        <div className="login-steps">
+      {error && (
+        <div
+          style={{
+            background: "#3b0d0d",
+            color: "#ffd6d6",
+            padding: 12,
+            borderRadius: 10,
+            margin: "12px 0",
+          }}
+        >
+          {error}
+        </div>
+      )}
+
+      {step === "credentials" && (
+        <div style={{ display: "grid", gap: 10 }}>
+          <label>
+            Email
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ width: "100%", padding: 10, borderRadius: 10, marginTop: 6 }}
+            />
+          </label>
+
+          <label>
+            Mot de passe
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ width: "100%", padding: 10, borderRadius: 10, marginTop: 6 }}
+            />
+          </label>
+
           <button
-            type="button"
-            className={`login-step ${isCredentialsStep ? "active" : ""}`}
-            onClick={() => setStep("credentials")}
+            onClick={handleLogin}
+            disabled={loading}
+            style={{
+              padding: 12,
+              borderRadius: 12,
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
           >
-            1. Identifiants
+            {loading ? "Connexion..." : "Se connecter"}
           </button>
+
+          <div style={{ fontSize: 12, opacity: 0.75 }}>
+            Astuce: si MFA est activé, tu passeras à l’étape code (verify-mfa).
+          </div>
+        </div>
+      )}
+
+      {step === "mfa" && (
+        <div style={{ display: "grid", gap: 10 }}>
+          <div style={{ opacity: 0.85 }}>
+            Code MFA (factice). Temp token: <code>{tempToken}</code>
+          </div>
+
+          <label>
+            Code
+            <input
+              value={mfaCode}
+              onChange={(e) => setMfaCode(e.target.value)}
+              style={{ width: "100%", padding: 10, borderRadius: 10, marginTop: 6 }}
+            />
+          </label>
+
           <button
-            type="button"
-            className={`login-step ${!isCredentialsStep ? "active" : ""}`}
-            disabled={!tempToken}
-            onClick={() => tempToken && setStep("mfa")}
+            onClick={handleVerifyMfa}
+            disabled={loading}
+            style={{
+              padding: 12,
+              borderRadius: 12,
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
           >
-            2. Code MFA
+            {loading ? "Vérification..." : "Valider le code"}
+          </button>
+
+          <button
+            onClick={() => {
+              setStep("credentials");
+              setTempToken(null);
+              setError(null);
+            }}
+            style={{
+              padding: 12,
+              borderRadius: 12,
+              border: "1px solid rgba(255,255,255,0.2)",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+          >
+            Retour
           </button>
         </div>
-
-        {error && <div className="login-error">{error}</div>}
-
-        {isCredentialsStep ? (
-          <form onSubmit={handleSubmitCredentials} className="login-form">
-            <label className="login-label">
-              Email
-              <input
-                className="login-input"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
-              />
-            </label>
-
-            <label className="login-label">
-              Mot de passe
-              <input
-                className="login-input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-              />
-            </label>
-
-            <button className="login-button" type="submit" disabled={loading}>
-              {loading ? "Connexion..." : "Se connecter"}
-            </button>
-          </form>
-        ) : (
-          <form onSubmit={handleSubmitMfa} className="login-form">
-            <label className="login-label">
-              Code MFA (démo : 123456)
-              <input
-                className="login-input"
-                type="text"
-                value={mfaCode}
-                onChange={(e) => setMfaCode(e.target.value)}
-                maxLength={6}
-              />
-            </label>
-
-            <button className="login-button" type="submit" disabled={loading}>
-              {loading ? "Validation..." : "Valider le code"}
-            </button>
-
-            <button
-              type="button"
-              className="login-secondary-button"
-              onClick={() => {
-                setStep("credentials");
-                setTempToken(null);
-              }}
-            >
-              ← Revenir aux identifiants
-            </button>
-          </form>
-        )}
-
-        <p className="login-demo">
-          Démo interne : <code>bilel@example.com</code> / <code>password</code>
-        </p>
-      </div>
+      )}
     </div>
   );
-};
-
-export default LoginPage;
+}

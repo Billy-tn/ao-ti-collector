@@ -10,7 +10,7 @@ from fastapi import FastAPI, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.openapi.utils import get_openapi
-from . import auth, pdf_tools
+from . import auth, pdf_tools, ai_tools
 
 # ----------------------------------------------------------------------
 # Config / DB helpers
@@ -113,6 +113,7 @@ app.add_middleware(
 # on monte les routers sous /api
 app.include_router(auth.router, prefix="/api")
 app.include_router(pdf_tools.router, prefix="/api")
+app.include_router(ai_tools.router, prefix="/api")
 
 
 # ----------------------------------------------------------------------
