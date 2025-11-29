@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.openapi.utils import get_openapi
 from . import auth, pdf_tools, ai_tools
+from .portal_registry import list_portals, add_candidate
 from backend import auth, pdf_tools, ai_tools
 
 # ----------------------------------------------------------------------
@@ -245,3 +246,55 @@ def report_keywords(
     current_user: auth.AuthenticatedUser = Depends(auth.get_current_user),
 ):
     return {"items": [], "total": 0}
+
+
+@app.get("/api/portals")
+def get_portals():
+    return list_portals(enabled_only=True)
+
+
+from pydantic import BaseModel
+
+class PortalCandidateIn(BaseModel):
+    discovered_url: str
+    label: str = ""
+    country: str = ""
+    source_type: str = "html"
+
+@app.get("/api/portals/candidates")
+def list_portal_candidates():
+    # Simple fetch from DB (will be improved later)
+    import sqlite3
+    from backend.portal_registry import DB_PATH, ensure_portal_registry
+
+    conn = sqlite3.connect(str(DB_PATH))
+    conn.row_factory = sqlite3.Row
+    try:
+        ensure_portal_registry(conn)
+        rows = conn.execute(
+            "SELECT id, discovered_url, label, country, source_type, status, created_at FROM portal_candidates ORDER BY id DESC"
+        ).fetchall()
+        return [
+            {
+                "id": r["id"],
+                "discovered_url": r["discovered_url"],
+                "label": r["label"],
+                "country": r["country"],
+                "source_type": r["source_type"],
+                "status": r["status"],
+                "created_at": r["created_at"],
+            }
+            for r in rows
+        ]
+    finally:
+        conn.close()
+
+@app.post("/api/portals/candidates")
+def create_portal_candidate(payload: PortalCandidateIn):
+    return add_candidate(
+        discovered_url=payload.discovered_url,
+        label=payload.label,
+        country=payload.country,
+        source_type=payload.source_type,
+        evidence={"source": "manual"},
+    )
