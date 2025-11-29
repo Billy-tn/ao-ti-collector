@@ -11,9 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.openapi.utils import get_openapi
 from . import auth, pdf_tools, ai_tools
-from .portal_registry import list_portals, add_candidate
-from backend import auth, pdf_tools, ai_tools
-
+from .portal_registry import list_portals as registry_list_portals, add_candidate
 # ----------------------------------------------------------------------
 # Config / DB helpers
 # ----------------------------------------------------------------------
@@ -134,33 +132,13 @@ def root() -> Dict[str, str]:
 
 
 @app.get("/api/portals")
-def list_portals(
+def list_portals_endpoint(
     only_active: bool = Query(default=True),
     country: str = Query(default="ALL"),
 ):
-    con = get_db()
-    try:
-        # NOTE: la table tenders contient portal_name (pas portal_code/portal_label)
-        sql = """
-            SELECT DISTINCT
-                portal_name AS code,
-                portal_name AS label,
-                country
-            FROM tenders
-            WHERE portal_name IS NOT NULL AND portal_name != ''
-        """
-        params: List[Any] = []
-
-        if country != "ALL":
-            sql += " AND country = ?"
-            params.append(country)
-
-        sql += " ORDER BY country, portal_name"
-
-        rows = con.execute(sql, params).fetchall()
-        return rows
-    finally:
-        con.close()
+    # country est gardé pour compat front, mais la registry est globale pour l'instant.
+    # (On filtrera plus tard si on stocke country par portail.)
+    return registry_list_portals(enabled_only=only_active)
 
 # ----------------------------------------------------------------------
 # Tenders (tableau principal) – protégé par token

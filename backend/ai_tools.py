@@ -15,8 +15,22 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import HTMLResponse, StreamingResponse
 
 from .auth import AuthenticatedUser, get_current_user
+from . import file_extractors
+from .ai_extractors import build_structured_analysis
 
 router = APIRouter(prefix="/ai", tags=["ai"])
+
+# ============================================================
+# FILE TEXT EXTRACTION (PDF/DOCX/XLSX/TXT) + multi-files
+# ============================================================
+
+MAX_FILES = 40
+MAX_TOTAL_BYTES = 30 * 1024 * 1024   # 30 MB total
+MAX_SINGLE_BYTES = 12 * 1024 * 1024  # 12 MB / file
+
+
+def extract_text_from_any(filename: str, content_type: str, data: bytes) -> str:
+    return file_extractors.extract_text_from_any(filename, content_type, data)
 
 # ------------------------------------------------------------
 # In-memory store for generated analyses

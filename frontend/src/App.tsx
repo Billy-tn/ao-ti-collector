@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import LoginPage from "./LoginPage";
+import PortalCandidates from "./components/PortalCandidates";
+
 
 const API_BASE = "/api";
 const DEFAULT_LIMIT = 100;
@@ -1182,6 +1184,8 @@ const App: React.FC = () => {
             {tabBtn("reports", "Rapports", "3")}
             {tabBtn("portals", "Portails", "4")}
             {tabBtn("others", "Autres portails", "5")}
+            
+
           </div>
         </div>
       </div>
@@ -1561,22 +1565,34 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {tab === "others" && (
-        <div className="ao-card" style={{ marginTop: 14 }}>
-          <SectionTitle title="Autres portails (roadmap)" right={<Pill tone="warn">Placeholder</Pill>} />
-          <div className="ao-card__body">
-            <div className="ao-drop">
-              <div>
-                <strong>MERX • Bids & Tenders • BC Bid • Alberta Purchasing</strong>
-                <div className="ao-small" style={{ marginTop: 4 }}>
-                  Ici on liste les portails à ajouter + la stratégie d’ingestion.
-                </div>
-              </div>
-              <Pill tone="info">Next sprint</Pill>
+  {tab === "others" && (
+  <div style={{ display: "flex", flexDirection: "column", gap: 14, marginTop: 14 }}>
+    {/* Section: candidats (MERX etc.) */}
+    <div className="ao-card">
+      <SectionTitle title="Candidats (à valider)" right={<Pill tone="info">Registry</Pill>} />
+      <div className="ao-card__body">
+        <PortalCandidates token={token} />
+      </div>
+    </div>
+
+    {/* Section: roadmap (ce que tu avais déjà) */}
+    <div className="ao-card">
+      <SectionTitle title="Autres portails (roadmap)" right={<Pill tone="warn">Placeholder</Pill>} />
+      <div className="ao-card__body">
+        <div className="ao-drop">
+          <div>
+            <strong>MERX • Bids &amp; Tenders • BC Bid • Alberta Purchasing</strong>
+            <div className="ao-small" style={{ marginTop: 4 }}>
+              Ici on liste les portails à ajouter + la stratégie d’ingestion.
             </div>
           </div>
+          <Pill tone="info">Next sprint</Pill>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
+
 
       <div className="ao-banner" style={{ marginTop: 14 }}>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
