@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.openapi.utils import get_openapi
 from . import auth, pdf_tools, ai_tools
+from backend import auth, pdf_tools, ai_tools
 
 # ----------------------------------------------------------------------
 # Config / DB helpers

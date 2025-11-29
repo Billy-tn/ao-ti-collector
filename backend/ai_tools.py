@@ -1,37 +1,71 @@
 # backend/ai_tools.py
 from __future__ import annotations
 
+import io
 import os
 import re
 import sqlite3
-import tempfile
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, date
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
-from fastapi.responses import HTMLResponse, FileResponse, Response
+from fastapi.responses import HTMLResponse, StreamingResponse
 
-from .auth import AuthenticatedUser, get_current_user, get_current_user_optional
+from .auth import AuthenticatedUser, get_current_user
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
-# In-memory store (dev): analysis_id -> full payload
+# ------------------------------------------------------------
+# In-memory store for generated analyses
+# (If uvicorn restarts, these are lost; that's OK for v4)
+# ------------------------------------------------------------
 ANALYSES: Dict[str, Dict[str, Any]] = {}
 
+# Where is the SQLite DB?
+REPO_ROOT = Path(__file__).resolve().parents[1]
+AO_DB_PATH = REPO_ROOT / "ao.db"
 
-# ============================================================
-# PDF TEXT EXTRACTION (robust, multi-engines)
-# ============================================================
+# ------------------------------------------------------------
+# Small utilities
+# ------------------------------------------------------------
+
+def _utc_iso() -> str:
+    return datetime.utcnow().isoformat(timespec="microseconds") + "Z"
+
+
+def _normalize_spaces(s: str) -> str:
+    return re.sub(r"\s+", " ", (s or "")).strip()
+
+
+def _safe_filename(name: str) -> str:
+    name = (name or "report").strip()
+    name = re.sub(r"[^\w\-.() \[\]]+", "", name, flags=re.UNICODE).strip()
+    return name or "report"
+
+
+def _strip_non_textual_noise(s: str) -> str:
+    # helps reduce garbage when extracted from tables
+    s = s.replace("\x00", " ")
+    s = re.sub(r"[ \t]+\n", "\n", s)
+    return s
+
+
+# ------------------------------------------------------------
+# PDF TEXT EXTRACTION (multi-engines)
+# ------------------------------------------------------------
 
 def _extract_text_pymupdf(pdf_bytes: bytes) -> str:
     import fitz  # PyMuPDF
     text_parts: List[str] = []
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    for page in doc:
-        text_parts.append(page.get_text("text") or "")
-    doc.close()
+    try:
+        for page in doc:
+            text_parts.append(page.get_text("text") or "")
+    finally:
+        doc.close()
     return "\n".join(text_parts).strip()
 
 
@@ -59,7 +93,7 @@ def _extract_text_pypdf(pdf_bytes: bytes) -> str:
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     """
-    Try engines in order:
+    Try extraction engines in order:
       1) PyMuPDF (fitz)
       2) pdfplumber
       3) pypdf (fallback)
@@ -68,7 +102,8 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     for fn in (_extract_text_pymupdf, _extract_text_pdfplumber, _extract_text_pypdf):
         try:
             txt = fn(pdf_bytes)
-            if txt and len(txt.strip()) > 20:
+            txt = _strip_non_textual_noise(txt)
+            if txt and len(txt.strip()) > 50:
                 return txt
         except Exception as e:
             errors.append(f"{fn.__name__}: {e}")
@@ -79,87 +114,23 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
     )
 
 
-# ============================================================
-# DB ENRICHMENT (fallback)
-# ============================================================
-
-def _db_path() -> str:
-    # project root default: ao.db
-    return os.getenv("AO_DB_PATH", "ao.db")
-
-
-def _fetch_tender_from_db(tender_id: int) -> Optional[Dict[str, Any]]:
-    path = _db_path()
-    if not os.path.exists(path):
-        return None
-
-    con: Optional[sqlite3.Connection] = None
-    try:
-        con = sqlite3.connect(path)
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        cur.execute(
-            """
-            SELECT
-              id,
-              title,
-              url,
-              published_at,
-              portal_name,
-              buyer,
-              source,
-              country,
-              region
-            FROM tenders
-            WHERE id = ?
-            LIMIT 1
-            """,
-            (tender_id,),
-        )
-        row = cur.fetchone()
-        if not row:
-            return None
-        d = dict(row)
-        return {
-            "id": d.get("id"),
-            "title": d.get("title"),
-            "url": d.get("url"),
-            "published_at": d.get("published_at"),
-            "portal_name": d.get("portal_name") or d.get("source"),
-            "buyer": d.get("buyer"),
-            "country": d.get("country"),
-            "region": d.get("region"),
-        }
-    except Exception:
-        return None
-    finally:
-        try:
-            if con:
-                con.close()
-        except Exception:
-            pass
-
-
-# ============================================================
-# FIELD PARSING (FR/EN) + anti-faux-positifs
-# ============================================================
+# ------------------------------------------------------------
+# Date parsing helpers (FR/EN)
+# ------------------------------------------------------------
 
 _FR_MONTHS = {
     "janvier": "01",
-    "février": "02",
-    "fevrier": "02",
+    "février": "02", "fevrier": "02",
     "mars": "03",
     "avril": "04",
     "mai": "05",
     "juin": "06",
     "juillet": "07",
-    "août": "08",
-    "aout": "08",
+    "août": "08", "aout": "08",
     "septembre": "09",
     "octobre": "10",
     "novembre": "11",
-    "décembre": "12",
-    "decembre": "12",
+    "décembre": "12", "decembre": "12",
 }
 
 _EN_MONTHS = {
@@ -177,314 +148,366 @@ _EN_MONTHS = {
     "december": "12",
 }
 
-
-def _normalize_spaces(s: str) -> str:
-    return re.sub(r"[ \t]+", " ", (s or "").strip())
-
-
-def _to_iso_date(day: str, month: str, year: str) -> str:
-    d = day.zfill(2)
-    m = month.zfill(2)
-    return f"{year}-{m}-{d}"
-
-
-def _parse_ymd(s: str) -> Optional[date]:
-    if not s:
-        return None
-    s = str(s).strip()
-    if len(s) >= 10:
-        s = s[:10]
+def _date_in_reasonable_range(iso: str) -> bool:
+    # Keep wide enough to not discard older reference docs,
+    # but blocks crazy false positives.
     try:
-        return date.fromisoformat(s)
+        y = int(iso[:4])
+        return 2010 <= y <= 2035
+    except Exception:
+        return False
+
+
+def _to_iso(y: int, m: int, d: int) -> Optional[str]:
+    try:
+        date(y, m, d)
+        return f"{y:04d}-{m:02d}-{d:02d}"
     except Exception:
         return None
-
-
-def _looks_like_url_fragment(s: str) -> bool:
-    low = (s or "").lower()
-    return ("http" in low) or ("/" in s) or ("www." in low) or ("." in low and " " not in s)
 
 
 def _find_date_candidates(text: str) -> List[str]:
-    t = text.lower()
+    """
+    Finds candidates in the given text chunk and returns ISO dates.
+    Supports:
+      - yyyy-mm-dd
+      - dd/mm/yyyy or dd-mm-yyyy
+      - "2 février 2024" / "February 2, 2024"
+    """
     out: List[str] = []
+    t = text
 
-    # 1) YYYY-MM-DD
-    for m in re.finditer(r"\b(20\d{2})-(\d{1,2})-(\d{1,2})\b", t):
-        year, mm, dd = m.group(1), m.group(2), m.group(3)
-        out.append(_to_iso_date(dd, mm, year))
+    # yyyy-mm-dd
+    for m in re.finditer(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", t):
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        iso = _to_iso(y, mo, d)
+        if iso:
+            out.append(iso)
 
-    # 2) DD/MM/YYYY or DD-MM-YYYY
+    # dd/mm/yyyy or dd-mm-yyyy
     for m in re.finditer(r"\b(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\b", t):
-        dd, mm, year = m.group(1), m.group(2), m.group(3)
-        out.append(_to_iso_date(dd, mm, year))
+        d, mo, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        iso = _to_iso(y, mo, d)
+        if iso:
+            out.append(iso)
 
-    # 3) DD month YYYY (FR/EN)
-    for m in re.finditer(r"\b(\d{1,2})\s+([a-zéûôàèîç]+)\s+(20\d{2})\b", t):
-        dd, month_name, year = m.group(1), m.group(2), m.group(3)
-        if month_name in _FR_MONTHS:
-            out.append(_to_iso_date(dd, _FR_MONTHS[month_name], year))
-        elif month_name in _EN_MONTHS:
-            out.append(_to_iso_date(dd, _EN_MONTHS[month_name], year))
+    low = t.lower()
 
+    # FR: "2 février 2024"
+    for m in re.finditer(r"\b(\d{1,2})\s+([a-zéèêàùâîôûç]+)\s+(20\d{2})\b", low):
+        d = int(m.group(1))
+        mon = m.group(2)
+        y = int(m.group(3))
+        if mon in _FR_MONTHS:
+            iso = _to_iso(y, int(_FR_MONTHS[mon]), d)
+            if iso:
+                out.append(iso)
+
+    # EN: "february 2, 2024" or "february 2 2024"
+    for m in re.finditer(r"\b([a-z]+)\s+(\d{1,2})(?:,)?\s+(20\d{2})\b", low):
+        mon = m.group(1)
+        d = int(m.group(2))
+        y = int(m.group(3))
+        if mon in _EN_MONTHS:
+            iso = _to_iso(y, int(_EN_MONTHS[mon]), d)
+            if iso:
+                out.append(iso)
+
+    # de-dup while preserving order
     seen = set()
-    uniq: List[str] = []
-    for d in out:
-        if d not in seen:
-            uniq.append(d)
-            seen.add(d)
+    uniq = []
+    for x in out:
+        if x not in seen:
+            seen.add(x)
+            uniq.append(x)
     return uniq
 
 
-def _date_in_reasonable_range(iso_date: str) -> bool:
-    try:
-        y = int(iso_date[:4])
-    except Exception:
-        return False
-    now_y = datetime.utcnow().year
-    return (now_y - 2) <= y <= (now_y + 3)
-
-
-# --- buyer filter ---
-_BUYER_BAD_WORDS = {
-    "complémentaire", "complementaire",
-    "additionnel", "additionnelle",
-    "essentiel", "obligatoire", "optionnel",
-    "classification", "catégorie", "categorie",
-    "référence", "reference", "description",
-    "exigence", "exigences", "fonctionnelle", "fonctionnelles",
-    "solution", "soumissionnaire", "propriétaire", "proprietaire",
-}
-
-# IMPORTANT: pas "service" ici (trop générique)
-_BUYER_GOOD_HINTS = {
-    "minist", "gouvernement", "ville", "municip",
-    "centre de services scolaire", "commission scolaire",
-    "universit", "cisss", "ciusss", "hôpital", "hopital",
-    "société", "societe", "agence",
-}
-
-_BUYER_BAD_PHRASES = {
-    "de chaque soumission",
-    "en réponse à",
-    "en reponse a",
-    "relatif à",
-    "relatif a",
-    "relative à",
-    "relative a",
-}
-
-
-def _clean_buyer_candidate(s: str) -> str:
-    s = _normalize_spaces(s)
-    return s.strip(" -–—:;|")
-
-
-def _is_plausible_buyer(s: str) -> bool:
-    if not s:
-        return False
-    low = s.lower().strip()
-
-    if _looks_like_url_fragment(s):
-        return False
-    if len(low) < 10:
-        return False
-    if re.match(r"^(de|du|des|d’|d'|pour|afin)\b", low):
-        return False
-    if any(w in low for w in _BUYER_BAD_WORDS):
-        return False
-    if any(p in low for p in _BUYER_BAD_PHRASES):
-        return False
-
-    if any(h in low for h in _BUYER_GOOD_HINTS):
-        return True
-    if re.search(r"\b(ville\s+de|minist[èe]re\s+de|centre\s+de\s+services\s+scolaire)\b", low):
-        return True
-
-    return False
-
-
-def _pick_closing_date(text: str) -> Optional[str]:
+def _pick_date_by_anchors(text: str, anchors: List[str]) -> Optional[str]:
     low = text.lower()
-    anchors = [
-        "date limite",
-        "date et heure limites",
-        "date de clôture",
-        "date de cloture",
-        "clôture",
-        "cloture",
-        "réception des soumissions",
-        "reception des soumissions",
-        "deadline",
-        "closing date",
-        "submission deadline",
-    ]
-
     for a in anchors:
         idx = low.find(a)
         if idx != -1:
-            window = low[max(0, idx - 250) : min(len(low), idx + 700)]
+            window = low[max(0, idx - 250): min(len(low), idx + 1200)]
             cands = _find_date_candidates(window)
             cands = [d for d in cands if _date_in_reasonable_range(d)]
             if cands:
                 return cands[0]
+    return None
 
-    all_dates = _find_date_candidates(low)
-    all_dates = [d for d in all_dates if _date_in_reasonable_range(d)]
-    return all_dates[0] if all_dates else None
+
+def _pick_closing_date(text: str) -> Optional[str]:
+    # Anchor-based extraction is usually more reliable than global scan
+    anchors = [
+        "date de clôture", "date cloture", "clôture", "cloture",
+        "date limite", "date et heure limite", "soumissions doivent être reçues",
+        "closing date", "closing time", "tenders must be received", "deadline",
+    ]
+    dt = _pick_date_by_anchors(text, anchors)
+    if dt:
+        return dt
+
+    # fallback: first reasonable date found in doc
+    cands = _find_date_candidates(text[:20000])
+    cands = [d for d in cands if _date_in_reasonable_range(d)]
+    return cands[0] if cands else None
+
+
+def extract_key_dates(text: str) -> Dict[str, Optional[str]]:
+    return {
+        "closing_date": _pick_closing_date(text),
+        "questions_deadline": _pick_date_by_anchors(text, [
+            "date limite de questions", "date limite des questions", "questions jusqu", "questions au plus tard",
+            "question deadline", "questions must be received by", "questions doivent être reçues",
+        ]),
+        "site_visit_date": _pick_date_by_anchors(text, [
+            "visite", "visite des lieux", "visite obligatoire", "réunion d'information", "reunion d'information",
+            "site visit", "mandatory site visit",
+        ]),
+        "addenda_deadline": _pick_date_by_anchors(text, [
+            "addenda", "date limite addenda", "dernier addenda", "end of addendum",
+        ]),
+        "opening_date": _pick_date_by_anchors(text, [
+            "ouverture des soumissions", "opening of tenders", "ouverture publique",
+        ]),
+    }
+
+
+# ------------------------------------------------------------
+# Buyer and estimated value heuristics (anti-false-positives)
+# ------------------------------------------------------------
+
+BUYER_LINE_PATTERNS = [
+    r"\b(minist[eè]re\s+de\s+[^.\n]{3,120})",
+    r"\b(ville\s+de\s+[^.\n]{3,120})",
+    r"\b(centre\s+de\s+services\s+scolaire\s+[^.\n]{3,120})",
+    r"\b(commission\s+scolaire\s+[^.\n]{3,120})",
+    r"\b(agence\s+[^.\n]{3,120})",
+    r"\b(universit[eé]\s+[^.\n]{3,120})",
+    r"\b(cisss\s+[^.\n]{3,120})",
+    r"\b(ciuss\s+[^.\n]{3,120})",
+]
+
+BAD_BUYER_SNIPPETS = {
+    "complémentaire (additionnel)",
+    "complementaire (additionnel)",
+    "essentiel (obligatoire)",
+    "obligatoire",
+    "additionnel",
+    "ministeres-organismes/",
+    "cybersecurite-",
+}
 
 
 def _pick_buyer(text: str) -> Optional[str]:
-    lines = [l.strip() for l in text.splitlines() if l.strip()]
-    low_lines = [l.lower() for l in lines]
+    low = text.lower()
 
-    keys = [
-        "organisme",
-        "organisme public",
-        "acheteur",
-        "client",
-        "donneur d'ouvrage",
-        "donneur d’ouvrage",
-        "autorité contractante",
-        "contracting authority",
-        "organisation",
-    ]
+    # Priority 1: look for explicit labelled blocks
+    anchors = ["organisme", "client", "propriétaire", "donneur d'ouvrage", "acheteur", "buyer"]
+    for a in anchors:
+        idx = low.find(a)
+        if idx != -1:
+            window = text[max(0, idx - 200): min(len(text), idx + 800)]
+            # try to find a good looking line near anchor
+            for line in window.splitlines():
+                l = _normalize_spaces(line)
+                ll = l.lower()
+                if len(l) < 6 or len(l) > 140:
+                    continue
+                if any(b in ll for b in BAD_BUYER_SNIPPETS):
+                    continue
+                if re.search(r"https?://", ll):
+                    continue
+                # pick lines that resemble org names
+                if re.search(r"(minist[eè]re|ville|centre|commission|gouvernement|universit[eé]|agence|direction)", ll):
+                    return l
 
-    for i, ll in enumerate(low_lines):
-        for k in keys:
-            if ll.startswith(k):
-                if ":" in lines[i]:
-                    val = _clean_buyer_candidate(lines[i].split(":", 1)[1])
-                    if _is_plausible_buyer(val):
-                        return val[:200]
-                if i + 1 < len(lines):
-                    nxt = _clean_buyer_candidate(lines[i + 1])
-                    if _is_plausible_buyer(nxt):
-                        return nxt[:200]
+    # Priority 2: pattern-based global scan (first ~40k chars)
+    sample = text[:40000]
+    low_sample = sample.lower()
 
-    strong_patterns = [
-        r"\b(Minist[èe]re\s+de\s+[^,\n]{6,160})",
-        r"\b(Centre\s+de\s+services\s+scolaire[^,\n]{6,160})",
-        r"\b(Ville\s+de\s+[^,\n]{2,120})",
-        r"\b(Gouvernement\s+du\s+Qu[ée]bec[^,\n]{0,80})",
-    ]
-    for p in strong_patterns:
-        m = re.search(p, text, flags=re.IGNORECASE)
+    for pat in BUYER_LINE_PATTERNS:
+        m = re.search(pat, low_sample, flags=re.IGNORECASE)
         if m:
-            val = _clean_buyer_candidate(m.group(1))
-            if _is_plausible_buyer(val):
-                return val[:200]
+            cand = _normalize_spaces(m.group(1))
+            if cand and len(cand) <= 140 and cand.lower() not in BAD_BUYER_SNIPPETS:
+                return cand
 
     return None
 
 
-def _parse_money_candidates(text: str) -> List[str]:
-    """
-    Règles anti faux-positifs:
-      - monnaie explicite ($/CAD/USD) près du nombre, OU
-      - mot-clé budget + nombre (>= 1000) + marqueur monnaie dans la fenêtre
-    """
-    t = text.replace("\u00a0", " ").replace("\u202f", " ")
-    low = t.lower()
-    cands: List[str] = []
-
-    money_with_cur = re.compile(
-        r"\b(?P<num>\d{1,3}(?:[ ,.\u202f]\d{3})+(?:[.,]\d{2})?|\d+(?:[.,]\d{2})?)\s*(?P<cur>\$|cad|c\$|usd)\b",
-        flags=re.IGNORECASE,
-    )
-    for m in money_with_cur.finditer(t):
-        cands.append(m.group("num"))
-
-    keywords = [
-        "valeur estim",
-        "budget",
-        "montant",
-        "plafond",
-        "enveloppe",
-        "estimated value",
-        "estimate",
-    ]
-    money_num = re.compile(r"\b(?P<num>\d{1,3}(?:[ ,.\u202f]\d{3})+|\d{4,})(?:[.,]\d{2})?\b")
-    for m in money_num.finditer(t):
-        start = max(0, m.start() - 80)
-        end = min(len(low), m.end() + 80)
-        window = low[start:end]
-        if any(k in window for k in keywords) and re.search(r"(\$|\bcad\b|\bc\$\b|\busd\b)", window):
-            cands.append(m.group("num"))
-
-    out: List[str] = []
-    seen = set()
-    for x in cands:
-        if x not in seen:
-            out.append(x)
-            seen.add(x)
-    return out
-
-
-def _normalize_money_value(raw: str) -> Optional[float]:
-    s = (raw or "").strip()
-    if not s:
-        return None
-    s = s.replace(" ", "").replace("\u202f", "").replace("\t", "")
-
-    # If has ",xx" decimal => comma decimal
-    if re.search(r",\d{2}\b", s):
-        s = s.replace(",", ".")
-    else:
-        s = s.replace(",", "")
-
-    # handle "12.345.678"
-    if re.fullmatch(r"\d{1,3}(\.\d{3})+", s):
-        s = s.replace(".", "")
-
-    if s.count(".") > 1 and not re.search(r"\.\d{2}\b", s):
-        s = s.replace(".", "")
-
-    if not re.fullmatch(r"\d+(\.\d{1,2})?", s):
-        return None
-
-    try:
-        return float(s)
-    except Exception:
-        return None
-
-
 def _pick_estimated_value(text: str) -> Optional[str]:
-    cands = _parse_money_candidates(text)
-    if not cands:
-        return None
+    """
+    Attempts to find budget/estimated value by searching around money anchors.
+    """
+    low = text.lower()
+    anchors = [
+        "valeur estim", "valeur approximative", "budget", "montant", "plafond",
+        "estimated value", "budgetary", "maximum amount", "ceiling",
+    ]
+    for a in anchors:
+        idx = low.find(a)
+        if idx != -1:
+            window = text[max(0, idx - 200): min(len(text), idx + 1200)]
+            # Try $ 12,345.67 or 12 345,67 $ or 12 345 CAD
+            money = re.findall(
+                r"(?i)\b(\$?\s*\d[\d\s.,]{1,18}\s*(?:\$|cad|c\$|dollars)?)\b",
+                window,
+            )
+            for m in money:
+                s = _normalize_spaces(m)
+                # must have a currency hint
+                if not re.search(r"(?i)\$|cad|c\$|dollar", s):
+                    continue
 
-    best: Tuple[float, str] | None = None
-    for c in cands:
-        val = _normalize_money_value(c)
-        if val is None:
+                # Extract numeric
+                num = re.sub(r"(?i)[^\d.,]", "", s)
+                num = num.replace(" ", "")
+                # heuristics for separators
+                if num.count(",") > 0 and num.count(".") == 0:
+                    # could be decimal comma OR thousands commas; assume thousands commas if 3-digit groups
+                    pass
+                # keep only digits
+                digits = re.sub(r"[^\d]", "", num)
+                if not digits:
+                    continue
+                try:
+                    val = int(digits)
+                except Exception:
+                    continue
+
+                # sanity (avoid nonsense extremely small amounts and crazy huge)
+                if val < 500:  # 92 CAD false positives etc.
+                    continue
+                if val > 5_000_000_000:
+                    continue
+
+                # keep currency format
+                if "cad" in s.lower() or "c$" in s.lower():
+                    return f"{val} CAD"
+                if "$" in s:
+                    return f"{val} CAD"
+                return f"{val} CAD"
+
+    return None
+
+
+# ------------------------------------------------------------
+# Extract lists in sections: mandatory req / deliverables / criteria
+# ------------------------------------------------------------
+
+def _extract_list_under_heading(text: str, headings: List[str], max_lines: int = 80) -> List[str]:
+    lines = [l.rstrip() for l in text.splitlines()]
+    low = [l.lower().strip() for l in lines]
+
+    start = -1
+    for i, ll in enumerate(low):
+        if any(h in ll for h in headings):
+            start = i
+            break
+    if start == -1:
+        return []
+
+    items: List[str] = []
+    for j in range(start + 1, min(len(lines), start + 1 + max_lines)):
+        raw = lines[j].strip()
+        if not raw:
+            if items:
+                break
             continue
-        if val < 1000:
-            continue
-        if (best is None) or (val > best[0]):
-            best = (val, c)
 
-    if not best:
-        return None
+        # Stop if another big heading starts
+        if re.match(r"^[A-ZÉÈÀÙÂÊÎÔÛ0-9][A-ZÉÈÀÙÂÊÎÔÛ\s\-]{10,}$", raw):
+            break
 
-    normalized = _normalize_money_value(best[1])
-    if normalized is None:
-        return None
+        # bullet / numbering
+        if re.match(r"^(\-|\•|\*|\d+[\.\)])\s+", raw):
+            items.append(_normalize_spaces(re.sub(r"^(\-|\•|\*|\d+[\.\)])\s+", "", raw))[:350])
+        elif items and len(raw) < 220:
+            # continuation line
+            items[-1] = _normalize_spaces(items[-1] + " " + raw)[:420]
+        else:
+            # try to capture short meaningful lines anyway (common in PDFs)
+            if 30 <= len(raw) <= 220 and any(k in raw.lower() for k in ["%", "points", "pond", "poids", "crit", "livr"]):
+                items.append(_normalize_spaces(raw)[:350])
 
-    if float(normalized).is_integer():
-        return f"{int(normalized)} CAD"
-    return f"{normalized} CAD"
+    # de-dup
+    out, seen = [], set()
+    for x in items:
+        k = x.lower()
+        if k not in seen:
+            out.append(x)
+            seen.add(k)
+    return out[:30]
 
+
+def extract_deliverables(text: str) -> List[str]:
+    return _extract_list_under_heading(
+        text,
+        ["livrables", "produits livrables", "deliverables", "rapports", "documentation", "matériel livré", "materiel livre"],
+    )
+
+
+def extract_evaluation_criteria(text: str) -> List[str]:
+    crit = _extract_list_under_heading(
+        text,
+        ["critères d’évaluation", "criteres d'evaluation", "critères d'évaluation", "évaluation", "evaluation", "grille d’évaluation", "grille d'évaluation", "pondération", "ponderation", "weighting"],
+    )
+
+    # prioritize entries with weights/%
+    pct = [c for c in crit if re.search(r"\b\d{1,3}\s*%|\bpond|\bpoids|\bpoints\b", c.lower())]
+    rest = [c for c in crit if c not in pct]
+    return (pct + rest)[:30]
+
+
+def extract_mandatory_requirements(text: str) -> List[str]:
+    """
+    For table-like docs where a row ends with "Essentiel (obligatoire)",
+    capture the likely description line(s) right before it.
+    """
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+    out: List[str] = []
+
+    for i, l in enumerate(lines):
+        low = l.lower()
+        if "essentiel" in low and "oblig" in low:
+            prev = lines[i - 1] if i - 1 >= 0 else ""
+            prev2 = lines[i - 2] if i - 2 >= 0 else ""
+            cand = prev
+            if len(prev) < 50 and prev2 and len(prev2) < 250:
+                cand = prev2 + " " + prev
+            cand = _normalize_spaces(cand)
+            if cand and 20 <= len(cand) <= 450:
+                out.append(cand[:450])
+
+    # fallback: common requirement lines with "doit/must/shall" and "obligatoire"
+    if not out:
+        for l in lines:
+            low = l.lower()
+            if ("obligatoire" in low or "must" in low or "shall" in low) and ("doit" in low or "must" in low or "shall" in low):
+                if 30 <= len(l) <= 280:
+                    out.append(_normalize_spaces(l)[:450])
+
+    uniq, seen = [], set()
+    for x in out:
+        k = x.lower()
+        if k not in seen:
+            uniq.append(x)
+            seen.add(k)
+    return uniq[:40]
+
+
+# ------------------------------------------------------------
+# Core parse_fields
+# ------------------------------------------------------------
 
 def parse_fields(text: str) -> Dict[str, Any]:
+    """
+    Returns fields extracted from PDF text only.
+    """
     closing_date = _pick_closing_date(text)
     buyer = _pick_buyer(text)
     estimated_value = _pick_estimated_value(text)
-
-    if closing_date and not _date_in_reasonable_range(closing_date):
-        closing_date = None
-    if buyer and not _is_plausible_buyer(buyer):
-        buyer = None
 
     return {
         "closing_date": closing_date,
@@ -493,101 +516,181 @@ def parse_fields(text: str) -> Dict[str, Any]:
     }
 
 
-def compute_confidence(text_len: int, pdf_fields: Dict[str, Any], db_fields: Dict[str, Any]) -> float:
-    c = 0.20
-    if text_len >= 500:
-        c += 0.25
-    if text_len >= 2000:
-        c += 0.10
+# ------------------------------------------------------------
+# DB enrichment (ao.db)
+# ------------------------------------------------------------
 
-    pdf_hits = sum(1 for k in ("closing_date", "buyer", "estimated_value") if pdf_fields.get(k))
-    c += pdf_hits * 0.18
+def _db_get_tender_by_id(tender_id: int) -> Dict[str, Any]:
+    """
+    Best-effort: tries to read tender fields from SQLite ao.db.
+    Returns {} if db not available or no table/record.
+    """
+    if tender_id is None:
+        return {}
+    if not AO_DB_PATH.exists():
+        return {}
 
-    db_hits = sum(1 for k in ("buyer", "portal_name", "published_at", "url", "title") if db_fields.get(k))
-    c += min(0.15, db_hits * 0.03)
-
-    if pdf_hits <= 1:
-        c = min(c, 0.60 + min(0.10, db_hits * 0.02))
-
-    return max(0.10, min(0.90, c))
-
-
-def next_actions_from_fields(fields: Dict[str, Any]) -> List[str]:
-    actions = [
-        "Identifier les exigences obligatoires",
-        "Lister les livrables + critères d’évaluation",
+    # We don't want hard coupling to schema changes. We'll attempt common column names.
+    possible_tables = ["tenders", "ao", "ao_tenders", "tender"]
+    possible_cols = [
+        "id", "title", "url", "portal_name", "published_at", "buyer", "country", "region"
     ]
-    if not fields.get("closing_date"):
-        actions.insert(0, "Extraire les dates clés (clôture / visite / questions)")
+
+    try:
+        con = sqlite3.connect(str(AO_DB_PATH))
+        con.row_factory = sqlite3.Row
+    except Exception:
+        return {}
+
+    try:
+        cur = con.cursor()
+        tables = [r["name"] for r in cur.execute("SELECT name FROM sqlite_master WHERE type='table';").fetchall()]
+        table = next((t for t in possible_tables if t in tables), None)
+        if not table:
+            return {}
+
+        # Determine which columns exist
+        cols = [r["name"] for r in cur.execute(f"PRAGMA table_info({table});").fetchall()]
+        wanted = [c for c in possible_cols if c in cols]
+        if "id" not in cols:
+            return {}
+
+        sel = ", ".join(wanted) if wanted else "*"
+        row = cur.execute(f"SELECT {sel} FROM {table} WHERE id = ?", (tender_id,)).fetchone()
+        if not row:
+            return {}
+
+        d = dict(row)
+        # normalize keys we rely on
+        out = {
+            "title": d.get("title"),
+            "url": d.get("url"),
+            "portal_name": d.get("portal_name") or d.get("source"),
+            "published_at": d.get("published_at"),
+            "buyer": d.get("buyer"),
+            "country": d.get("country"),
+            "region": d.get("region"),
+        }
+        return {k: v for k, v in out.items() if v not in (None, "", "null")}
+    except Exception:
+        return {}
+    finally:
+        try:
+            con.close()
+        except Exception:
+            pass
+
+
+# ------------------------------------------------------------
+# Summary, confidence, next actions
+# ------------------------------------------------------------
+
+def build_summary(text_len: int, pdf_fields: Dict[str, Any], db_fields: Dict[str, Any]) -> str:
+    pdf_keys = [k for k, v in pdf_fields.items() if v not in (None, "", [], {}) and k not in ("mandatory_requirements", "deliverables", "evaluation_criteria", "key_dates")]
+    db_keys = [k for k, v in db_fields.items() if v not in (None, "", [], {})]
+
+    parts = [f"Texte extrait ({text_len} caractères)."]
+    parts.append("PDF: " + (", ".join(pdf_keys) if pdf_keys else "aucun champ fiable détecté"))
+    if db_keys:
+        parts.append("DB: " + ", ".join(sorted(set(db_keys))))
+    return " ".join(parts)
+
+
+def compute_confidence(text_len: int, extracted_fields: Dict[str, Any]) -> float:
+    score = 0.25
+    if text_len > 20_000:
+        score += 0.20
+    if text_len > 80_000:
+        score += 0.15
+
+    # core fields
+    if extracted_fields.get("closing_date"):
+        score += 0.12
+    if extracted_fields.get("buyer"):
+        score += 0.12
+    if extracted_fields.get("estimated_value"):
+        score += 0.10
+
+    # structure fields
+    if extracted_fields.get("mandatory_requirements"):
+        score += 0.08
+    if extracted_fields.get("deliverables"):
+        score += 0.06
+    if extracted_fields.get("evaluation_criteria"):
+        score += 0.06
+
+    return float(max(0.2, min(score, 0.95)))
+
+
+def build_next_actions(extracted_fields: Dict[str, Any]) -> List[str]:
+    actions: List[str] = []
+
+    kd = extracted_fields.get("key_dates") or {}
+    if kd.get("closing_date"):
+        actions.append(f"Valider la date de clôture ({kd.get('closing_date')}) dans le document")
     else:
-        actions.insert(0, f"Valider la date de clôture ({fields['closing_date']}) dans le document")
+        actions.append("Extraire les dates clés (clôture / visite / questions)")
 
-    if not fields.get("buyer"):
+    if not extracted_fields.get("mandatory_requirements"):
+        actions.append("Identifier les exigences obligatoires")
+
+    if not extracted_fields.get("deliverables"):
+        actions.append("Lister les livrables + critères d’évaluation")
+    else:
+        # even if deliverables exist, criteria may not
+        if not extracted_fields.get("evaluation_criteria"):
+            actions.append("Lister les critères d’évaluation et la pondération")
+
+    if not extracted_fields.get("buyer"):
         actions.append("Identifier l’organisme acheteur dans le cahier")
-    if not fields.get("estimated_value"):
+
+    if not extracted_fields.get("estimated_value"):
         actions.append("Chercher la valeur estimée / budget / plafond (si présent)")
-    return actions
+
+    # de-dup
+    out, seen = [], set()
+    for a in actions:
+        if a not in seen:
+            out.append(a)
+            seen.add(a)
+    return out
 
 
-def build_summary(text_len: int, final_fields: Dict[str, Any], db_fields: Dict[str, Any]) -> str:
-    found_pdf = [k for k in ("closing_date", "buyer", "estimated_value") if final_fields.get(k)]
-    found_db = [k for k in ("title", "portal_name", "published_at", "url", "buyer") if db_fields.get(k)]
+# ------------------------------------------------------------
+# HTML Report rendering
+# ------------------------------------------------------------
 
-    if not found_pdf and not found_db:
-        return f"Texte extrait ({text_len} caractères). Aucun champ clé détecté automatiquement."
-
-    bits: List[str] = [f"Texte extrait ({text_len} caractères)."]
-    if found_pdf:
-        bits.append(f"PDF: {', '.join(found_pdf)}.")
-    if found_db:
-        bits.append(f"DB: {', '.join(sorted(set(found_db)))}.")
-    return " ".join(bits)
-
-
-def _escape_html(s: Any) -> str:
+def _html_escape(s: Any) -> str:
     s = "" if s is None else str(s)
-    s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    s = s.replace('"', "&quot;").replace("'", "&#39;")
-    return s
+    return (
+        s.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
 
 
-def _render_report_html(payload: Dict[str, Any]) -> str:
-    r = payload.get("result", {}) or {}
-    f = (r.get("extracted_fields", {}) or {})
-    warnings = r.get("warnings") or []
-    next_actions = r.get("next_actions") or []
-    inputs = payload.get("inputs", {}) or {}
+def render_report_html(analysis: Dict[str, Any]) -> str:
+    result = analysis.get("result", {})
+    fields = result.get("extracted_fields", {}) or {}
+    title = fields.get("title") or analysis.get("db_enriched", {}).get("title") or "Rapport d’analyse AO"
 
-    title = f.get("title") or f"Analyse {payload.get('analysis_id')}"
-    url = f.get("url") or ""
+    key_dates = fields.get("key_dates") or {}
+    mandatory = fields.get("mandatory_requirements") or []
+    deliverables = fields.get("deliverables") or []
+    criteria = fields.get("evaluation_criteria") or []
 
-    def row(label: str, val: Any) -> str:
-        return f"""
-          <div class="row">
-            <div class="k">{_escape_html(label)}</div>
-            <div class="v">{_escape_html(val) if val else '<span class="muted">—</span>'}</div>
-          </div>
-        """
-
-    warnings_html = ""
-    if warnings:
-        warnings_html = "<div class='box warn'><h3>⚠️ Warnings</h3><ul>" + "".join(
-            f"<li>{_escape_html(w)}</li>" for w in warnings
-        ) + "</ul></div>"
-
-    actions_html = "<ul class='ul'>" + "".join(f"<li>{_escape_html(a)}</li>" for a in next_actions) + "</ul>"
-
-    files_html = "<ul class='ul'>" + "".join(
-        f"<li>{_escape_html(x.get('filename'))} <span class='muted'>({x.get('size_bytes')} bytes)</span></li>"
-        for x in (inputs.get("files") or [])
-    ) + "</ul>"
+    def li(items: List[str]) -> str:
+        if not items:
+            return '<div class="muted">Non détecté.</div>'
+        return "<ul>" + "".join(f"<li>{_html_escape(x)}</li>" for x in items) + "</ul>"
 
     return f"""<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{_escape_html(title)}</title>
+  <title>{_html_escape(title)}</title>
   <style>
     :root {{
       --bg: #0b1220;
@@ -596,164 +699,323 @@ def _render_report_html(payload: Dict[str, Any]) -> str:
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.65);
       --accent: #7dd3fc;
-      --warn: #fbbf24;
-      --ok: #34d399;
+      --good: #86efac;
+      --warn: #fde68a;
     }}
+    *{{box-sizing:border-box}}
     body {{
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(125,211,252,.18), transparent 55%),
-                  radial-gradient(1200px 600px at 90% 40%, rgba(52,211,153,.12), transparent 55%),
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(125,211,252,.20), transparent 60%),
+                  radial-gradient(900px 600px at 110% 0%, rgba(134,239,172,.12), transparent 55%),
                   var(--bg);
       color: var(--text);
+      padding: 28px;
     }}
-    .wrap {{ max-width: 980px; margin: 32px auto; padding: 0 16px; }}
+    .wrap {{ max-width: 980px; margin: 0 auto; }}
     .top {{
-      display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;
-      gap: 12px; margin-bottom: 18px;
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom: 18px;
     }}
-    .h1 {{ font-size: 22px; font-weight: 800; letter-spacing: .2px; }}
-    .pill {{
-      display:inline-flex; align-items:center; gap:8px; padding: 8px 12px;
-      border: 1px solid var(--border); background: rgba(255,255,255,.04);
-      border-radius: 999px; color: var(--muted); font-size: 13px;
+    .h1 {{ font-size: 22px; font-weight: 800; letter-spacing: .2px; margin: 0; }}
+    .badge {{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px; border: 1px solid var(--border); border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      font-size: 13px; color: var(--muted);
     }}
-    .grid {{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }}
-    @media (max-width: 860px) {{ .grid {{ grid-template-columns: 1fr; }} }}
+    .grid {{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }}
+    @media (max-width: 880px) {{
+      .grid {{ grid-template-columns: 1fr; }}
+    }}
     .card {{
-      border: 1px solid var(--border);
       background: var(--card);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.28);
-    }}
-    .card h2 {{ margin: 0 0 10px; font-size: 16px; }}
-    .card h3 {{ margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 700; }}
-    .muted {{ color: var(--muted); }}
-    .row {{
-      display:grid; grid-template-columns: 220px 1fr; gap: 10px;
-      padding: 8px 0;
-      border-top: 1px dashed rgba(255,255,255,.10);
-    }}
-    .row:first-of-type {{ border-top: 0; }}
-    .k {{ color: var(--muted); font-size: 13px; }}
-    .v {{ font-size: 14px; }}
-    a {{ color: var(--accent); text-decoration: none; }}
-    a:hover {{ text-decoration: underline; }}
-    .box {{
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,.035);
-      margin-top: 12px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
     }}
-    .warn {{ border-color: rgba(251,191,36,.35); }}
-    .warn h3 {{ color: var(--warn); }}
-    .ul {{ margin: 8px 0 0; padding-left: 18px; }}
-    .small {{ font-size: 12px; }}
-    .footer {{ margin-top: 12px; color: var(--muted); font-size: 12px; }}
-    .btns {{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px;
+    .card h2 {{
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.80);
     }}
-    .btn {{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 10px 12px; border-radius: 12px;
+    .kv {{ display:grid; grid-template-columns: 180px 1fr; gap: 8px 14px; }}
+    .k {{ color: var(--muted); font-size: 13px; }}
+    .v {{ font-size: 13px; }}
+    a {{ color: var(--accent); text-decoration: none; }}
+    a:hover {{ text-decoration: underline; }}
+    ul {{ margin: 8px 0 0 18px; padding: 0; }}
+    li {{ margin: 6px 0; color: rgba(255,255,255,.85); font-size: 13px; line-height: 1.35; }}
+    .muted {{ color: var(--muted); font-size: 13px; }}
+    .bar {{
+      height: 8px; background: rgba(255,255,255,.08);
+      border: 1px solid var(--border); border-radius: 999px;
+      overflow: hidden; margin-top: 8px;
+    }}
+    .fill {{
+      height: 100%;
+      width: {int((result.get("confidence") or 0.0) * 100)}%;
+      background: linear-gradient(90deg, rgba(125,211,252,.85), rgba(134,239,172,.85));
+    }}
+    .row {{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }}
+    .pill {{
+      padding: 6px 10px; border: 1px solid var(--border);
+      border-radius: 999px; background: rgba(255,255,255,.04);
+      font-size: 12px; color: rgba(255,255,255,.8);
+    }}
+    .actions a {{
+      display:inline-block; margin-right: 10px; margin-top: 8px;
+      padding: 8px 12px; border-radius: 12px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
+      background: rgba(255,255,255,.04);
       font-size: 13px;
     }}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <div class="h1">{_escape_html(title)}</div>
-        <div class="muted small">analysis_id: {_escape_html(payload.get("analysis_id"))}</div>
-      </div>
-      <div class="pill">confidence: <b style="color: var(--ok)">{_escape_html(r.get("confidence"))}</b></div>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <h1 class="h1">{_html_escape(title)}</h1>
+      <div class="muted" style="margin-top:6px;">Analysis ID: {_html_escape(analysis.get("analysis_id"))} · {_html_escape(analysis.get("created_at"))}</div>
     </div>
-
-    <div class="grid">
-      <div class="card">
-        <h2>📌 Snapshot AO</h2>
-        {row("Portail", f.get("portal_name"))}
-        {row("Publié le", f.get("published_at"))}
-        {row("Acheteur", f.get("buyer"))}
-        {row("Date de clôture", f.get("closing_date"))}
-        {row("Valeur estimée", f.get("estimated_value"))}
-        {row("Tender ID", f.get("tender_id"))}
-        <div class="box">
-          <h3>Lien</h3>
-          <div class="v">{f'<a href="{_escape_html(url)}" target="_blank" rel="noreferrer">{_escape_html(url)}</a>' if url else '<span class="muted">—</span>'}</div>
-        </div>
-
-        <div class="box">
-          <h3>Résumé</h3>
-          <div class="v">{_escape_html(r.get("summary"))}</div>
-        </div>
-
-        {warnings_html}
-
-        <div class="box">
-          <h3>Next actions</h3>
-          {actions_html}
-        </div>
-
-        <div class="btns">
-          <a class="btn" href="/api/ai/report/docx/{_escape_html(payload.get("analysis_id"))}">⬇️ Télécharger Word</a>
-          <a class="btn" href="/api/ai/report/pdf/{_escape_html(payload.get("analysis_id"))}">⬇️ Télécharger PDF</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>📎 Fichiers & Debug</h2>
-        <div class="box">
-          <h3>Fichiers reçus</h3>
-          {files_html}
-        </div>
-
-        <div class="box">
-          <h3>Champs extraits (JSON)</h3>
-          <pre style="white-space: pre-wrap; color: var(--text); margin: 0; font-size: 12px;">{_escape_html(f)}</pre>
-        </div>
-
-        <div class="box">
-          <h3>Texte (sample)</h3>
-          <pre style="white-space: pre-wrap; color: var(--muted); margin: 0; font-size: 12px;">{_escape_html((r.get("debug") or {}).get("text_sample"))}</pre>
-        </div>
-
-        <div class="footer">
-          Note: rapport généré côté backend (dev). Si le backend redémarre, les rapports en mémoire disparaissent.
-        </div>
-      </div>
+    <div class="badge">
+      <span>Confiance</span>
+      <strong style="color: var(--good);">{_html_escape(result.get("confidence"))}</strong>
+      <div class="bar" style="width:120px;"><div class="fill"></div></div>
     </div>
   </div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <h2>Résumé</h2>
+    <div class="muted">{_html_escape(result.get("summary"))}</div>
+    <div class="actions">
+      <a href="/api/ai/report/docx/{_html_escape(analysis.get("analysis_id"))}">Télécharger Word (DOCX)</a>
+      <a href="/api/ai/report/pdf/{_html_escape(analysis.get("analysis_id"))}">Télécharger PDF</a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Informations</h2>
+      <div class="kv">
+        <div class="k">Portail</div><div class="v">{_html_escape(fields.get("portal_name"))}</div>
+        <div class="k">Publication</div><div class="v">{_html_escape(fields.get("published_at"))}</div>
+        <div class="k">Acheteur</div><div class="v">{_html_escape(fields.get("buyer"))}</div>
+        <div class="k">Valeur estimée</div><div class="v">{_html_escape(fields.get("estimated_value"))}</div>
+        <div class="k">URL</div><div class="v"><a href="{_html_escape(fields.get("url") or "")}">{_html_escape(fields.get("url") or "")}</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Dates clés</h2>
+      <div class="kv">
+        <div class="k">Clôture</div><div class="v">{_html_escape(key_dates.get("closing_date"))}</div>
+        <div class="k">Questions</div><div class="v">{_html_escape(key_dates.get("questions_deadline"))}</div>
+        <div class="k">Visite</div><div class="v">{_html_escape(key_dates.get("site_visit_date"))}</div>
+        <div class="k">Addenda</div><div class="v">{_html_escape(key_dates.get("addenda_deadline"))}</div>
+        <div class="k">Ouverture</div><div class="v">{_html_escape(key_dates.get("opening_date"))}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Exigences obligatoires (détectées)</h2>
+      {li(mandatory)}
+    </div>
+
+    <div class="card">
+      <h2>Livrables</h2>
+      {li(deliverables)}
+
+      <h2 style="margin-top:14px;">Critères d’évaluation</h2>
+      {li(criteria)}
+    </div>
+
+    <div class="card" style="grid-column: 1 / -1;">
+      <h2>Prochaines actions</h2>
+      {li(result.get("next_actions") or [])}
+    </div>
+  </div>
+</div>
 </body>
-</html>"""
+</html>
+"""
 
 
-# ============================================================
-# ROUTES
-# ============================================================
+# ------------------------------------------------------------
+# DOCX / PDF generation
+# ------------------------------------------------------------
+
+def _analysis_to_plain_sections(analysis: Dict[str, Any]) -> Dict[str, Any]:
+    result = analysis.get("result", {}) or {}
+    fields = result.get("extracted_fields", {}) or {}
+
+    return {
+        "title": fields.get("title") or "Rapport d’analyse AO",
+        "summary": result.get("summary"),
+        "confidence": result.get("confidence"),
+        "fields": fields,
+        "next_actions": result.get("next_actions") or [],
+    }
+
+
+def render_docx_bytes(analysis: Dict[str, Any]) -> bytes:
+    try:
+        from docx import Document  # python-docx
+    except Exception as e:
+        raise HTTPException(
+            status_code=501,
+            detail=f"Export DOCX indisponible (python-docx non installé). Installe: pip install python-docx. Détails: {e}",
+        )
+
+    s = _analysis_to_plain_sections(analysis)
+    fields = s["fields"]
+    kd = fields.get("key_dates") or {}
+
+    doc = Document()
+    doc.add_heading(str(s["title"]), level=0)
+
+    doc.add_paragraph(f"Confiance: {s['confidence']}")
+    doc.add_paragraph(str(s["summary"] or ""))
+
+    doc.add_heading("Informations", level=1)
+    for k in ["portal_name", "published_at", "buyer", "estimated_value", "url"]:
+        if fields.get(k) not in (None, "", [], {}):
+            doc.add_paragraph(f"{k}: {fields.get(k)}")
+
+    doc.add_heading("Dates clés", level=1)
+    for k in ["closing_date", "questions_deadline", "site_visit_date", "addenda_deadline", "opening_date"]:
+        v = kd.get(k)
+        doc.add_paragraph(f"{k}: {v}")
+
+    doc.add_heading("Exigences obligatoires", level=1)
+    for x in (fields.get("mandatory_requirements") or []):
+        doc.add_paragraph(str(x), style="List Bullet")
+
+    doc.add_heading("Livrables", level=1)
+    for x in (fields.get("deliverables") or []):
+        doc.add_paragraph(str(x), style="List Bullet")
+
+    doc.add_heading("Critères d’évaluation", level=1)
+    for x in (fields.get("evaluation_criteria") or []):
+        doc.add_paragraph(str(x), style="List Bullet")
+
+    doc.add_heading("Prochaines actions", level=1)
+    for x in (s["next_actions"] or []):
+        doc.add_paragraph(str(x), style="List Bullet")
+
+    buf = io.BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
+def render_pdf_bytes(analysis: Dict[str, Any]) -> bytes:
+    try:
+        from reportlab.lib.pagesizes import LETTER
+        from reportlab.lib.units import inch
+        from reportlab.pdfgen import canvas
+    except Exception as e:
+        raise HTTPException(
+            status_code=501,
+            detail=f"Export PDF indisponible (reportlab non installé). Installe: pip install reportlab. Détails: {e}",
+        )
+
+    s = _analysis_to_plain_sections(analysis)
+    fields = s["fields"]
+    kd = fields.get("key_dates") or {}
+
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=LETTER)
+    width, height = LETTER
+
+    def draw_line(txt: str, y: float) -> float:
+        txt = str(txt or "")
+        # basic wrap
+        max_chars = 100
+        parts = [txt[i:i+max_chars] for i in range(0, len(txt), max_chars)] or [""]
+        for p in parts:
+            c.drawString(0.75 * inch, y, p)
+            y -= 12
+        return y
+
+    y = height - 0.9 * inch
+    c.setFont("Helvetica-Bold", 14)
+    y = draw_line(s["title"], y)
+    c.setFont("Helvetica", 10)
+    y = draw_line(f"Confiance: {s['confidence']}", y)
+    y = draw_line(s["summary"] or "", y)
+    y -= 8
+
+    c.setFont("Helvetica-Bold", 11)
+    y = draw_line("Informations", y)
+    c.setFont("Helvetica", 10)
+    for k in ["portal_name", "published_at", "buyer", "estimated_value", "url"]:
+        if fields.get(k) not in (None, "", [], {}):
+            y = draw_line(f"{k}: {fields.get(k)}", y)
+    y -= 8
+
+    c.setFont("Helvetica-Bold", 11)
+    y = draw_line("Dates clés", y)
+    c.setFont("Helvetica", 10)
+    for k in ["closing_date", "questions_deadline", "site_visit_date", "addenda_deadline", "opening_date"]:
+        y = draw_line(f"{k}: {kd.get(k)}", y)
+    y -= 8
+
+    def list_block(title: str, items: List[str]) -> None:
+        nonlocal y
+        c.setFont("Helvetica-Bold", 11)
+        y = draw_line(title, y)
+        c.setFont("Helvetica", 10)
+        if not items:
+            y = draw_line("Non détecté.", y)
+            y -= 6
+            return
+        for it in items[:25]:
+            y = draw_line(f"- {it}", y)
+            if y < 1.0 * inch:
+                c.showPage()
+                y = height - 0.9 * inch
+                c.setFont("Helvetica", 10)
+        y -= 8
+
+    list_block("Exigences obligatoires", fields.get("mandatory_requirements") or [])
+    list_block("Livrables", fields.get("deliverables") or [])
+    list_block("Critères d’évaluation", fields.get("evaluation_criteria") or [])
+    list_block("Prochaines actions", s.get("next_actions") or [])
+
+    c.showPage()
+    c.save()
+    return buf.getvalue()
+
+
+# ------------------------------------------------------------
+# API routes
+# ------------------------------------------------------------
 
 @router.post("/analyze")
 async def analyze_ao(
+    user: AuthenticatedUser = Depends(get_current_user),
     tender_id: Optional[int] = Form(default=None),
     notes: Optional[str] = Form(default=None),
     files: List[UploadFile] = File(...),
-    user: AuthenticatedUser = Depends(get_current_user),
-):
-    analysis_id = f"ana_{uuid.uuid4().hex[:12]}"
-    created_at = datetime.utcnow().isoformat() + "Z"
+) -> Dict[str, Any]:
+    if not files:
+        raise HTTPException(status_code=422, detail="Aucun fichier reçu.")
 
-    file_infos: List[Dict[str, Any]] = []
-    text_parts: List[str] = []
+    # 1) Extract text for each PDF
+    combined_parts: List[str] = []
+    file_meta: List[Dict[str, Any]] = []
 
     for f in files:
         content = await f.read()
-        file_infos.append(
+        file_meta.append(
             {
                 "filename": f.filename,
                 "content_type": f.content_type,
@@ -761,89 +1023,56 @@ async def analyze_ao(
             }
         )
 
-        if (f.content_type != "application/pdf") and (not (f.filename or "").lower().endswith(".pdf")):
+        if (f.content_type or "").lower() != "application/pdf" and not (f.filename or "").lower().endswith(".pdf"):
             raise HTTPException(status_code=422, detail=f"Fichier non-PDF: {f.filename}")
 
-        text = extract_text_from_pdf(content)
-        text_parts.append(text)
+        txt = extract_text_from_pdf(content)
+        combined_parts.append(f"\n\n===== FILE: {f.filename} =====\n\n{txt}")
 
-    combined_text = "\n\n".join([t for t in text_parts if t]).strip()
+    combined_text = "\n".join(combined_parts).strip()
     text_len = len(combined_text)
 
+    # 2) PDF parsing
     pdf_fields = parse_fields(combined_text)
 
-    db_enriched: Dict[str, Any] = {}
-    if tender_id is not None:
-        row = _fetch_tender_from_db(int(tender_id))
-        if row:
-            db_enriched = {
-                "title": row.get("title"),
-                "url": row.get("url"),
-                "portal_name": row.get("portal_name"),
-                "published_at": row.get("published_at"),
-                "buyer": row.get("buyer"),
-                "country": row.get("country"),
-                "region": row.get("region"),
-            }
+    # 3) Structured extraction
+    key_dates = extract_key_dates(combined_text)
+    pdf_fields["closing_date"] = key_dates.get("closing_date") or pdf_fields.get("closing_date")
+    mandatory_requirements = extract_mandatory_requirements(combined_text)
+    deliverables = extract_deliverables(combined_text)
+    evaluation_criteria = extract_evaluation_criteria(combined_text)
 
-    warnings: List[str] = []
+    # 4) DB enrichment
+    db_enriched = _db_get_tender_by_id(int(tender_id)) if tender_id is not None else {}
 
-    buyer_final = pdf_fields.get("buyer") or db_enriched.get("buyer")
-    closing_final = pdf_fields.get("closing_date")
-    value_final = pdf_fields.get("estimated_value")
-
-    # Sanity: closing >= published_at
-    pub = _parse_ymd(db_enriched.get("published_at") or "")
-    clo = _parse_ymd(closing_final or "")
-    if clo and pub and clo < pub:
-        warnings.append(
-            f"closing_date rejetée ({closing_final}) car antérieure à published_at ({db_enriched.get('published_at')})."
-        )
-        closing_final = None
-
-    # Sanity buyer
-    if buyer_final and not _is_plausible_buyer(str(buyer_final)):
-        warnings.append(f"buyer rejeté (faux positif): {str(buyer_final)[:140]}")
-        buyer_final = db_enriched.get("buyer")
-
+    # 5) Decide final extracted fields (prefer DB for stable metadata; prefer PDF for dates/budget/requirements)
     extracted_fields: Dict[str, Any] = {
         "tender_id": tender_id,
-        "closing_date": closing_final,
-        "buyer": buyer_final,
-        "estimated_value": value_final,
-        # DB fields for display
+        "closing_date": pdf_fields.get("closing_date"),
+        "buyer": pdf_fields.get("buyer") or db_enriched.get("buyer"),
+        "estimated_value": pdf_fields.get("estimated_value"),
         "title": db_enriched.get("title"),
         "url": db_enriched.get("url"),
         "portal_name": db_enriched.get("portal_name"),
         "published_at": db_enriched.get("published_at"),
         "country": db_enriched.get("country"),
         "region": db_enriched.get("region"),
+        "key_dates": key_dates,
+        "mandatory_requirements": mandatory_requirements,
+        "deliverables": deliverables,
+        "evaluation_criteria": evaluation_criteria,
     }
+    extracted_fields = {k: v for k, v in extracted_fields.items() if v not in ("", None)}
 
-    confidence = compute_confidence(text_len=text_len, pdf_fields=pdf_fields, db_fields=db_enriched)
+    # 6) Summary + actions + confidence
+    summary = build_summary(text_len=text_len, pdf_fields=pdf_fields, db_fields=db_enriched)
+    confidence = compute_confidence(text_len=text_len, extracted_fields=extracted_fields)
+    next_actions = build_next_actions(extracted_fields)
 
-    # ✅ summary basé sur les champs FINALS (et pas le parsed brut)
-    final_for_summary = {
-        "closing_date": closing_final,
-        "buyer": buyer_final,
-        "estimated_value": value_final,
-    }
-    summary = build_summary(text_len=text_len, final_fields=final_for_summary, db_fields=db_enriched)
+    analysis_id = f"ana_{uuid.uuid4().hex[:12]}"
+    created_at = _utc_iso()
 
-    result: Dict[str, Any] = {
-        "summary": summary,
-        "extracted_fields": extracted_fields,
-        "next_actions": next_actions_from_fields(extracted_fields),
-        "confidence": confidence,
-        "warnings": warnings,
-        "debug": {
-            "text_chars": text_len,
-            "text_sample": combined_text[:900],
-            "db_enriched": {k: v for k, v in db_enriched.items() if v is not None},
-        },
-    }
-
-    payload = {
+    payload: Dict[str, Any] = {
         "status": "ok",
         "analysis_id": analysis_id,
         "created_at": created_at,
@@ -851,171 +1080,68 @@ async def analyze_ao(
             "tender_id": tender_id,
             "notes": notes,
             "file_count": len(files),
-            "files": file_infos,
+            "files": file_meta,
         },
-        "result": result,
+        "result": {
+            "summary": summary,
+            "extracted_fields": extracted_fields,
+            "next_actions": next_actions,
+            "confidence": round(confidence, 2),
+            "debug": {
+                "text_chars": text_len,
+                "text_sample": combined_text[:1200],
+            },
+        },
         "user": user.profile.model_dump(),
+        "report_urls": {
+            "html": f"/api/ai/report/html/{analysis_id}",
+            "docx": f"/api/ai/report/docx/{analysis_id}",
+            "pdf": f"/api/ai/report/pdf/{analysis_id}",
+        },
+        # internal cache
+        "db_enriched": db_enriched,
     }
 
-    # Store for report endpoints (dev)
     ANALYSES[analysis_id] = payload
     return payload
 
 
 @router.get("/report/html/{analysis_id}", response_class=HTMLResponse)
-def report_html(
-    analysis_id: str,
-    _user: Optional[AuthenticatedUser] = Depends(get_current_user_optional),
-):
-    payload = ANALYSES.get(analysis_id)
-    if not payload:
-        raise HTTPException(status_code=404, detail="analysis_id introuvable (mémoire vidée ? serveur redémarré ?)")
-    html = _render_report_html(payload)
-    return HTMLResponse(content=html)
+def report_html(analysis_id: str, user: AuthenticatedUser = Depends(get_current_user)) -> HTMLResponse:
+    analysis = ANALYSES.get(analysis_id)
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analysis introuvable (serveur redémarré ?). Relance l'analyse.")
+    html = render_report_html(analysis)
+    return HTMLResponse(content=html, status_code=200)
 
 
 @router.get("/report/docx/{analysis_id}")
-def report_docx(
-    analysis_id: str,
-    _user: Optional[AuthenticatedUser] = Depends(get_current_user_optional),
-):
-    payload = ANALYSES.get(analysis_id)
-    if not payload:
-        raise HTTPException(status_code=404, detail="analysis_id introuvable (mémoire vidée ? serveur redémarré ? serveur redémarré ?)")
-    try:
-        from docx import Document
-    except Exception:
-        raise HTTPException(status_code=500, detail="Dépendance manquante: pip install python-docx")
+def report_docx(analysis_id: str, user: AuthenticatedUser = Depends(get_current_user)) -> StreamingResponse:
+    analysis = ANALYSES.get(analysis_id)
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analysis introuvable (serveur redémarré ?). Relance l'analyse.")
 
-    r = payload["result"]
-    f = r["extracted_fields"]
-
-    doc = Document()
-    doc.add_heading(f.get("title") or "Rapport d’analyse AO", level=1)
-    doc.add_paragraph(f"analysis_id: {payload.get('analysis_id')}")
-    doc.add_paragraph(f"created_at: {payload.get('created_at')}")
-    doc.add_paragraph("")
-
-    doc.add_heading("Résumé", level=2)
-    doc.add_paragraph(r.get("summary") or "")
-
-    doc.add_heading("Snapshot", level=2)
-    for k in ("portal_name", "published_at", "buyer", "closing_date", "estimated_value", "url", "tender_id"):
-        doc.add_paragraph(f"{k}: {f.get(k)}")
-
-    warnings = r.get("warnings") or []
-    if warnings:
-        doc.add_heading("Warnings", level=2)
-        for w in warnings:
-            doc.add_paragraph(f"- {w}")
-
-    doc.add_heading("Next actions", level=2)
-    for a in (r.get("next_actions") or []):
-        doc.add_paragraph(f"- {a}")
-
-    # Save to temp file
-    tmpdir = tempfile.mkdtemp(prefix="ao_report_")
-    path = os.path.join(tmpdir, f"{analysis_id}.docx")
-    doc.save(path)
-
-    return FileResponse(
-        path,
+    b = render_docx_bytes(analysis)
+    title = _safe_filename((analysis.get("result", {}).get("extracted_fields", {}) or {}).get("title") or analysis_id)
+    filename = f"{title}__{analysis_id}.docx"
+    return StreamingResponse(
+        io.BytesIO(b),
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        filename=f"ao-report-{analysis_id}.docx",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
 
 
 @router.get("/report/pdf/{analysis_id}")
-def report_pdf(
-    analysis_id: str,
-    _user: Optional[AuthenticatedUser] = Depends(get_current_user_optional),
-):
-    """
-    PDF simple via reportlab (pas de rendu CSS complet comme HTML).
-    """
-    payload = ANALYSES.get(analysis_id)
-    if not payload:
-        raise HTTPException(status_code=404, detail="analysis_id introuvable (mémoire vidée ? serveur redémarré ?)")
-    try:
-        from reportlab.lib.pagesizes import letter
-        from reportlab.pdfgen import canvas
-    except Exception:
-        raise HTTPException(status_code=500, detail="Dépendance manquante: pip install reportlab")
+def report_pdf(analysis_id: str, user: AuthenticatedUser = Depends(get_current_user)) -> StreamingResponse:
+    analysis = ANALYSES.get(analysis_id)
+    if not analysis:
+        raise HTTPException(status_code=404, detail="Analysis introuvable (serveur redémarré ?). Relance l'analyse.")
 
-    r = payload["result"]
-    f = r["extracted_fields"]
-
-    tmpdir = tempfile.mkdtemp(prefix="ao_report_pdf_")
-    path = os.path.join(tmpdir, f"{analysis_id}.pdf")
-
-    c = canvas.Canvas(path, pagesize=letter)
-    width, height = letter
-
-    y = height - 50
-    c.setFont("Helvetica-Bold", 14)
-    c.drawString(50, y, (f.get("title") or "Rapport d’analyse AO")[:95])
-    y -= 18
-
-    c.setFont("Helvetica", 9)
-    c.drawString(50, y, f"analysis_id: {analysis_id}   created_at: {payload.get('created_at')}")
-    y -= 18
-
-    def draw_block(title: str, lines: List[str]) -> None:
-        nonlocal y
-        c.setFont("Helvetica-Bold", 11)
-        c.drawString(50, y, title)
-        y -= 14
-        c.setFont("Helvetica", 9)
-        for ln in lines:
-            for chunk in _wrap(ln, 95):
-                if y < 60:
-                    c.showPage()
-                    y = height - 50
-                    c.setFont("Helvetica", 9)
-                c.drawString(50, y, chunk)
-                y -= 12
-        y -= 8
-
-    def _wrap(s: str, maxlen: int) -> List[str]:
-        s = s or ""
-        words = s.split()
-        out = []
-        cur = ""
-        for w in words:
-            if len(cur) + len(w) + 1 <= maxlen:
-                cur = (cur + " " + w).strip()
-            else:
-                if cur:
-                    out.append(cur)
-                cur = w
-        if cur:
-            out.append(cur)
-        return out or [""]
-
-    draw_block("Résumé", [r.get("summary") or ""])
-    draw_block(
-        "Snapshot",
-        [
-            f"Portail: {f.get('portal_name')}",
-            f"Publié le: {f.get('published_at')}",
-            f"Acheteur: {f.get('buyer')}",
-            f"Clôture: {f.get('closing_date')}",
-            f"Valeur estimée: {f.get('estimated_value')}",
-            f"URL: {f.get('url')}",
-            f"Tender ID: {f.get('tender_id')}",
-        ],
-    )
-
-    warnings = r.get("warnings") or []
-    if warnings:
-        draw_block("Warnings", [f"- {w}" for w in warnings])
-
-    draw_block("Next actions", [f"- {a}" for a in (r.get("next_actions") or [])])
-
-    c.save()
-
-    return FileResponse(
-        path,
+    b = render_pdf_bytes(analysis)
+    title = _safe_filename((analysis.get("result", {}).get("extracted_fields", {}) or {}).get("title") or analysis_id)
+    filename = f"{title}__{analysis_id}.pdf"
+    return StreamingResponse(
+        io.BytesIO(b),
         media_type="application/pdf",
-        filename=f"ao-report-{analysis_id}.pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

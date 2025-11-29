@@ -15,3 +15,6 @@ __pycache__/
 # SQLite runtime files
 *.db-wal
 *.db-shm
+
+# local scratch
+/tmp/
