@@ -161,6 +161,38 @@ function pick(obj: any, path: string[]) {
   return cur;
 }
 
+
+function findAnalysisId(analysis: any): string | null {
+  const candidates = [
+    analysis?.analysis_id,
+    analysis?.id,
+    analysis?.result?.analysis_id,
+    analysis?.result?.id,
+    analysis?.meta?.analysis_id,
+  ].filter(Boolean);
+
+  const v = candidates[0];
+  return v != null ? String(v) : null;
+}
+
+function downloadBlob(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}
+
+function openHtmlInNewTab(html: string) {
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  window.open(url, "_blank", "noopener,noreferrer");
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}
+
 // -----------------------
 // Small UI bits (no deps)
 // -----------------------
@@ -339,6 +371,9 @@ function AnalyzeBox({
   onClearFiles,
   onNotes,
   onAnalyze,
+
+  token,
+  onError,
 }: {
   tender: Tender;
   analyzing: boolean;
@@ -349,9 +384,58 @@ function AnalyzeBox({
   onClearFiles: () => void;
   onNotes: (v: string) => void;
   onAnalyze: () => void;
+
+  token: string | null;
+  onError: (msg: string) => void;
 }) {
   const [isDragging, setIsDragging] = useState(false);
+  const [downloading, setDownloading] = useState<null | "html" | "pdf" | "docx">(null);
+
   const allPdf = files.length > 0 && files.every(isProbablyPdf);
+  const analysisId = findAnalysisId(analysis);
+
+  const fetchReport = async (kind: "html" | "pdf" | "docx") => {
+    if (!token) {
+      onError("Non connecté. Reconnecte-toi.");
+      return;
+    }
+    if (!analysisId) {
+      onError("Impossible de trouver analysis_id dans la réponse d’analyse.");
+      return;
+    }
+
+    setDownloading(kind);
+    try {
+      const res = await fetch(`${API_BASE}/ai/report/${kind}/${encodeURIComponent(analysisId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.status === 401) throw new Error("Session expirée (401). Reconnecte-toi.");
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(text || `Erreur report ${kind} (${res.status})`);
+      }
+
+      if (kind === "html") {
+        const html = await res.text();
+        const tokenParam = encodeURIComponent(token);
+        // Make the embedded download links work (they can't send Authorization headers).
+        const html2 = html
+          .replaceAll(`/api/ai/report/pdf/${analysisId}`, `/api/ai/report/pdf/${analysisId}?token=${tokenParam}`)
+          .replaceAll(`/api/ai/report/docx/${analysisId}`, `/api/ai/report/docx/${analysisId}?token=${tokenParam}`);
+        openHtmlInNewTab(html2);
+        return;
+      }
+
+      const blob = await res.blob();
+      const ext = kind === "pdf" ? "pdf" : "docx";
+      downloadBlob(blob, `AO_${tender.id}_report.${ext}`);
+    } catch (e: any) {
+      onError(e?.message || "Erreur génération report");
+    } finally {
+      setDownloading(null);
+    }
+  };
 
   return (
     <div style={{ display: "grid", gap: 10 }}>
@@ -454,6 +538,21 @@ function AnalyzeBox({
         </Pill>
 
         <Pill tone="neutral">tender_id={tender.id}</Pill>
+
+        {analysis ? (
+          <>
+            <span style={{ opacity: 0.35 }}>|</span>
+            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("html")}>
+              {downloading === "html" ? "HTML..." : "HTML"}
+            </button>
+            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("pdf")}>
+              {downloading === "pdf" ? "PDF..." : "PDF"}
+            </button>
+            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("docx")}>
+              {downloading === "docx" ? "Word..." : "Word"}
+            </button>
+          </>
+        ) : null}
       </div>
 
       {analysis ? (
@@ -1055,7 +1154,8 @@ const App: React.FC = () => {
 
       if (!e.ctrlKey && !e.metaKey && !e.altKey) {
         if (e.key === "1") setTab("ao");
-        if (e.key === "2") setTab("ai");
+        if (e.key === "2") // stay on AO tab to show reports
+                        // setTab("ai");
         if (e.key === "3") setTab("reports");
         if (e.key === "4") setTab("portals");
         if (e.key === "5") setTab("others");
@@ -1414,6 +1514,8 @@ const App: React.FC = () => {
                         setAnalyzingId(null);
                       }
                     }}
+                  token={token}
+                    onError={(msg) => setError(msg)}
                   />
                 </>
               )}

@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Dict, List, Optional
 
-from fastapi import APIRouter, Header, HTTPException, status
+from fastapi import APIRouter, Header, HTTPException, status, Query
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -207,7 +207,13 @@ def _extract_token(authorization: Optional[str]) -> str:
     return parts[1]
 
 
-def get_current_user(authorization: Optional[str] = Header(default=None)) -> AuthenticatedUser:
+def get_current_user(
+    authorization: Optional[str] = Header(default=None),
+    token: Optional[str] = Query(default=None, description="Dev-only fallback: pass access token as ?token=... when headers are not possible."),
+) -> AuthenticatedUser:
+    # If no Authorization header (e.g., direct link download), allow ?token=... as a fallback.
+    if not authorization and token:
+        authorization = f"Bearer {token}"
     token = _extract_token(authorization)
     token_info = ACCESS_TOKENS.get(token)
     if not token_info:
@@ -221,10 +227,13 @@ def get_current_user(authorization: Optional[str] = Header(default=None)) -> Aut
     return AuthenticatedUser(email=email, profile=user_entry["profile"])  # type: ignore
 
 
-def get_current_user_optional(authorization: Optional[str] = Header(default=None)) -> Optional[AuthenticatedUser]:
-    if not authorization:
+def get_current_user_optional(
+    authorization: Optional[str] = Header(default=None),
+    token: Optional[str] = Query(default=None),
+) -> Optional[AuthenticatedUser]:
+    if not authorization and not token:
         return None
     try:
-        return get_current_user(authorization)
+        return get_current_user(authorization=authorization, token=token)
     except HTTPException:
         return None
