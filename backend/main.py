@@ -1,17 +1,17 @@
-# backend/main.py
 from __future__ import annotations
 
 import os
 import sqlite3
-from typing import Any, Dict, List, Tuple
 from datetime import datetime
+from typing import Any, Dict, List, Tuple, Optional
 
-from fastapi import FastAPI, Query, Depends
+from fastapi import Depends, FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-
 from fastapi.openapi.utils import get_openapi
-from . import auth, pdf_tools, ai_tools
-from backend import auth, pdf_tools, ai_tools
+
+from . import ai_tools, auth, pdf_tools
+from pydantic import BaseModel
+from backend.collect_ted import run as run_ted
 
 # ----------------------------------------------------------------------
 # Config / DB helpers
@@ -24,9 +24,7 @@ DB_PATH = os.environ.get(
 
 
 def _dict_factory(cursor: sqlite3.Cursor, row: Tuple[Any, ...]) -> Dict[str, Any]:
-    """
-    Transforme un tuple SQLite en dict: {nom_colonne: valeur}
-    """
+    """Transforme un tuple SQLite en dict: {nom_colonne: valeur}"""
     return {col[0]: row[idx] for idx, col in enumerate(cursor.description)}
 
 
@@ -78,9 +76,10 @@ def custom_openapi():
         "scheme": "bearer",
         "bearerFormat": "JWT",
     }
+    
 
     # Ajoute automatiquement la sécurité aux endpoints qui déclarent
-    # un header "Authorization" (généré par Header(...) dans auth.py)
+    # un header "Authorization"
     for path_item in schema.get("paths", {}).values():
         if not isinstance(path_item, dict):
             continue
@@ -111,14 +110,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# on monte les routers sous /api
+# Routers sous /api
 app.include_router(auth.router, prefix="/api")
 app.include_router(pdf_tools.router, prefix="/api")
 app.include_router(ai_tools.router, prefix="/api")
 
-
 # ----------------------------------------------------------------------
-# Root / health
+# Root
 # ----------------------------------------------------------------------
 
 
@@ -128,7 +126,9 @@ def root() -> Dict[str, str]:
 
 
 # ----------------------------------------------------------------------
-# Portails (liste déroulante)
+# Portails
+#  - /api/portals : registry (source_portals) -> affiche tous les portails même si 0 AO collecté
+#  - /api/portals/observed : portails observés dans tenders.portal_name (debug)
 # ----------------------------------------------------------------------
 
 
@@ -139,90 +139,135 @@ def list_portals(
 ):
     con = get_db()
     try:
-        # NOTE: la table tenders contient portal_name (pas portal_code/portal_label)
         sql = """
-            SELECT DISTINCT
-                portal_name AS code,
-                portal_name AS label,
-                country
-            FROM tenders
-            WHERE portal_name IS NOT NULL AND portal_name != ''
+            SELECT
+                code AS code,
+                name AS label,
+                country AS country,
+                region AS region,
+                base_url AS base_url,
+                api_type AS api_type,
+                is_active AS is_active,
+                notes AS notes
+            FROM source_portals
+            WHERE 1=1
         """
         params: List[Any] = []
+
+        if only_active:
+            sql += " AND is_active = 1"
 
         if country != "ALL":
             sql += " AND country = ?"
             params.append(country)
 
-        sql += " ORDER BY country, portal_name"
-
-        rows = con.execute(sql, params).fetchall()
-        return rows
+        sql += " ORDER BY country, region, code"
+        return con.execute(sql, params).fetchall()
     finally:
         con.close()
 
+
+@app.get("/api/portals/observed")
+def list_portals_observed(
+    country: str = Query(default="ALL"),
+):
+    """Retourne les portails réellement présents dans tenders (collecte déjà faite)."""
+    con = get_db()
+    try:
+        sql = """
+            SELECT DISTINCT
+                portal_name AS code,
+                portal_name AS label,
+                country AS country
+            FROM tenders
+            WHERE portal_name IS NOT NULL AND portal_name != ''
+        """
+        params: List[Any] = []
+        if country != "ALL":
+            sql += " AND country = ?"
+            params.append(country)
+
+        sql += " ORDER BY country, portal_name"
+        return con.execute(sql, params).fetchall()
+    finally:
+        con.close()
+
+
+
+class CollectRunRequest(BaseModel):
+    portal: str
+    limit: int = 100
+    start_token: Optional[str] = None
+    pd_days: int = 90
+    terms: Optional[str] = None
+    query: Optional[str] = None
+    per_page: int = 100
+
+
+@app.post("/api/collect/run")
+def collect_run(
+    payload: CollectRunRequest,
+    current_user: auth.AuthenticatedUser = Depends(auth.get_current_user),
+):
+    portal = (payload.portal or "").strip().upper()
+    limit = int(payload.limit or 100)
+
+    if limit < 1 or limit > 500:
+        return {"error": "limit must be between 1 and 500"}
+
+    if portal == "TED_EU":
+        return run_ted(limit=limit)
+
+    return {"error": f"Unsupported portal: {portal}"}
+
+
 # ----------------------------------------------------------------------
-# Tenders (tableau principal) – protégé par token
+# Tenders – protégé par token
 # ----------------------------------------------------------------------
 
 
 @app.get("/api/tenders")
 def list_tenders(
     limit: int = Query(default=200, ge=1, le=5000),
-    q: str | None = Query(default=None),          # pour l'instant on ne filtre pas dessus
-    country: str = Query(default="ALL"),          # idem
-    portal: str = Query(default="ALL"),           # idem
+    q: str | None = Query(default=None),
+    country: str = Query(default="ALL"),
+    portal: str = Query(default="ALL"),
     current_user: auth.AuthenticatedUser = Depends(auth.get_current_user),
 ):
-    """
-    Version ultra-sécurisée : on ne référence *aucun* nom de colonne.
-    On renvoie simplement toutes les colonnes de la table `tenders`
-    (la row_factory transforme en dict automatiquement).
-    """
-
     con = get_db()
     try:
         _ensure_search_logs_table(con)
-        
-        # 🔹 Requête *très* simple : pas de WHERE, pas de colonnes nommées
+
         sql = """
         SELECT *
         FROM tenders
         LIMIT ?
         """
-        params: list[Any] = [limit]
-        
-        rows = con.execute(sql, params).fetchall()
-        
-        # 🔹 On log quand même la recherche pour garder l’historique
+        rows = con.execute(sql, [limit]).fetchall()
+
         con.execute(
-        """
-        INSERT INTO search_logs (searched_at, country, portal_code, q, limit_requested, results_count)
-        VALUES (?, ?, ?, ?, ?, ?)
-        """,
-        (
-        datetime.utcnow().isoformat(),
-        country,
-        None if portal == "ALL" else portal,
-        q,
-        limit,
-        len(rows),
-        ),
+            """
+            INSERT INTO search_logs (searched_at, country, portal_code, q, limit_requested, results_count)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (
+                datetime.utcnow().isoformat(),
+                country,
+                None if portal == "ALL" else portal,
+                q,
+                limit,
+                len(rows),
+            ),
         )
         con.commit()
-        
-        return {
-        "items": rows,                 # contient toutes les colonnes existantes
-        "count": len(rows),
-        "user": current_user.profile.dict(),
-        }
+
+        return {"items": rows, "count": len(rows), "user": current_user.profile.dict()}
     finally:
         con.close()
 
 
-
 # ----------------------------------------------------------------------
-# Rapports (stub pour ne pas casser le front)
+# Rapports (stub)
 # ----------------------------------------------------------------------
 
 
@@ -233,7 +278,6 @@ def report_categories(
     max_rows: int = Query(default=5000),
     current_user: auth.AuthenticatedUser = Depends(auth.get_current_user),
 ):
-    # On renvoie un rapport vide (pas de calcul SQL compliqué pour l'instant)
     return {"items": [], "total": 0}
 
 

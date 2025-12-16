@@ -237,3 +237,69 @@ def get_current_user_optional(
         return get_current_user(authorization=authorization, token=token)
     except HTTPException:
         return None
+
+# === AO_AUTH_DISABLED BYPASS (AUTO) ===
+import os as _os
+import asyncio as _asyncio
+
+def _dev_user():
+    # user dev minimal
+    return {"id":"dev","email":"dev@local","full_name":"Dev User"}
+
+# capture une éventuelle implémentation existante/importée
+try:
+    _REAL_GET_CURRENT_USER = get_current_user  # type: ignore[name-defined]
+except Exception:
+    _REAL_GET_CURRENT_USER = None
+
+async def get_current_user(*args, **kwargs):  # noqa: F811
+    """DEV: bypass auth/MFA si AO_AUTH_DISABLED=1 (par défaut)."""
+    if _os.getenv("AO_AUTH_DISABLED", "1") == "1":
+        return _dev_user()
+
+    if _REAL_GET_CURRENT_USER is None:
+        raise RuntimeError("Auth activée (AO_AUTH_DISABLED=0) mais pas de get_current_user réel trouvé.")
+
+    # supporter sync ou async
+    if _asyncio.iscoroutinefunction(_REAL_GET_CURRENT_USER):
+        return await _REAL_GET_CURRENT_USER(*args, **kwargs)
+    return _REAL_GET_CURRENT_USER(*args, **kwargs)
+
+# === AO_AUTH_DISABLED BYPASS FIX (AUTO) ===
+from typing import Optional as _Optional
+from fastapi import Header as _Header
+import os as _os2
+
+def _bypass_user_safe():
+    try:
+        # on privilégie l'admin fake si présent
+        if "admin@example.com" in FAKE_USERS:
+            email = "admin@example.com"
+        else:
+            email = next(iter(FAKE_USERS.keys()))
+        prof = FAKE_USERS[email]["profile"]
+        return AuthenticatedUser(email=email, profile=prof)  # type: ignore
+    except Exception:
+        # fallback minimal
+        return AuthenticatedUser(
+            email="dev@local",
+            profile=UserProfile(
+                id="dev",
+                email="dev@local",
+                full_name="Dev User",
+                activity_type="dev",
+                main_specialty="IT",
+                history=[],
+            ),
+        )
+
+def get_current_user(authorization: _Optional[str] = _Header(default=None)) -> AuthenticatedUser:
+    # bypass complet (dev)
+    if _os2.getenv("AO_AUTH_DISABLED", "0").lower() in ("1", "true", "yes", "y"):
+        return _bypass_user_safe()
+
+    # sinon -> on retombe sur l'implémentation originale (si elle existe)
+    try:
+        return _REAL_GET_CURRENT_USER(authorization=authorization)  # type: ignore
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Auth non disponible")
