@@ -67,6 +67,8 @@ interface TendersResponse {
   user?: UserProfile;
 }
 
+type ObservedPortal = { code: string; label?: string; country?: string };
+
 // -----------------------
 // Helpers
 // -----------------------
@@ -81,9 +83,7 @@ function normalizeTender(raw: RawTender): Tender {
   const lien = raw.lien || raw.url || "";
 
   const est_ats =
-    typeof raw.est_ats === "boolean"
-      ? raw.est_ats
-      : raw.est_ats === 1 || raw.est_ats === "1";
+    typeof raw.est_ats === "boolean" ? raw.est_ats : raw.est_ats === 1 || raw.est_ats === "1";
 
   return {
     id: raw.id,
@@ -161,7 +161,6 @@ function pick(obj: any, path: string[]) {
   return cur;
 }
 
-
 function findAnalysisId(analysis: any): string | null {
   const candidates = [
     analysis?.analysis_id,
@@ -225,13 +224,7 @@ function Kbd({ children }: { children: React.ReactNode }) {
   return <span className="ao-kbd">{children}</span>;
 }
 
-function SectionTitle({
-  title,
-  right,
-}: {
-  title: string;
-  right?: React.ReactNode;
-}) {
+function SectionTitle({ title, right }: { title: string; right?: React.ReactNode }) {
   return (
     <div className="ao-section-title">
       <div className="ao-section-title__left">{title}</div>
@@ -286,7 +279,7 @@ function AutoTableOrJson({ value }: { value: any }) {
 }
 
 // -----------------------
-// Analysis Summary Card (future-proof)
+// Analysis Summary Card
 // -----------------------
 function AnalysisSummary({ analysis }: { analysis: any }) {
   const status = analysis?.status ?? "—";
@@ -309,7 +302,9 @@ function AnalysisSummary({ analysis }: { analysis: any }) {
           <Pill tone={status === "ok" ? "good" : "warn"} title="Status">
             status: {String(status)}
           </Pill>
-          {createdAt ? <Pill tone="neutral">created: {String(createdAt).replace("T", " ").replace("Z", "")}</Pill> : null}
+          {createdAt ? (
+            <Pill tone="neutral">created: {String(createdAt).replace("T", " ").replace("Z", "")}</Pill>
+          ) : null}
           <Pill tone={confidenceTone(confidence)} title="Confiance (0..1)">
             confidence: {clamp01(confidence).toFixed(2)}
           </Pill>
@@ -371,7 +366,6 @@ function AnalyzeBox({
   onClearFiles,
   onNotes,
   onAnalyze,
-
   token,
   onError,
 }: {
@@ -384,7 +378,6 @@ function AnalyzeBox({
   onClearFiles: () => void;
   onNotes: (v: string) => void;
   onAnalyze: () => void;
-
   token: string | null;
   onError: (msg: string) => void;
 }) {
@@ -395,14 +388,8 @@ function AnalyzeBox({
   const analysisId = findAnalysisId(analysis);
 
   const fetchReport = async (kind: "html" | "pdf" | "docx") => {
-    if (!token) {
-      onError("Non connecté. Reconnecte-toi.");
-      return;
-    }
-    if (!analysisId) {
-      onError("Impossible de trouver analysis_id dans la réponse d’analyse.");
-      return;
-    }
+    if (!token) return onError("Non connecté. Reconnecte-toi.");
+    if (!analysisId) return onError("Impossible de trouver analysis_id dans la réponse d’analyse.");
 
     setDownloading(kind);
     try {
@@ -419,7 +406,6 @@ function AnalyzeBox({
       if (kind === "html") {
         const html = await res.text();
         const tokenParam = encodeURIComponent(token);
-        // Make the embedded download links work (they can't send Authorization headers).
         const html2 = html
           .replaceAll(`/api/ai/report/pdf/${analysisId}`, `/api/ai/report/pdf/${analysisId}?token=${tokenParam}`)
           .replaceAll(`/api/ai/report/docx/${analysisId}`, `/api/ai/report/docx/${analysisId}?token=${tokenParam}`);
@@ -464,23 +450,20 @@ function AnalyzeBox({
           if (picked.length) onPickFiles(picked);
         }}
       >
-        <div>
-          <strong>PDF à analyser</strong>
-          <div className="ao-small" style={{ marginTop: 4 }}>
+        <div style={{ display: "grid", gap: 6 }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <strong>PDF à analyser</strong>
+            <Pill tone={files.length === 0 ? "warn" : allPdf ? "good" : "bad"}>
+              {files.length === 0 ? "PDF requis" : allPdf ? "PDF ✅" : "PDF ❌"}
+            </Pill>
+          </div>
+          <div className="ao-small" style={{ opacity: 0.9 }}>
             Glisse-dépose ici, ou sélectionne un fichier.{" "}
-            <span style={{ opacity: 0.7 }}>({summarizeFiles(files)})</span>
+            <span style={{ opacity: 0.75 }}>({summarizeFiles(files)})</span>
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-          {files.length > 0 ? (
-            <Pill tone={allPdf ? "good" : "bad"} title={allPdf ? "Tout est en PDF" : "Au moins un fichier n’est pas PDF"}>
-              {allPdf ? "PDF ✅" : "PDF ❌"}
-            </Pill>
-          ) : (
-            <Pill tone="warn">PDF requis</Pill>
-          )}
-
           <label className="ao-btn ao-btn-good" style={{ cursor: "pointer" }}>
             Choisir
             <input
@@ -493,7 +476,7 @@ function AnalyzeBox({
           </label>
 
           <button className="ao-btn" disabled={files.length === 0 || analyzing} onClick={onClearFiles}>
-            Clear
+            Vider
           </button>
         </div>
       </div>
@@ -523,7 +506,7 @@ function AnalyzeBox({
         />
       </div>
 
-      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+      <div className="ao-actionbar">
         <button
           className="ao-btn ao-btn-primary"
           disabled={analyzing || files.length === 0}
@@ -533,31 +516,33 @@ function AnalyzeBox({
           {analyzing ? "Analyse..." : "Lancer l’analyse IA"}
         </button>
 
-        <Pill tone="info" title="Endpoint">
-          POST /api/ai/analyze
-        </Pill>
+        <div className="ao-actionbar__meta">
+          <Pill tone="neutral">AO #{tender.id}</Pill>
+          <Pill tone="info">POST /api/ai/analyze</Pill>
 
-        <Pill tone="neutral">tender_id={tender.id}</Pill>
-
-        {analysis ? (
-          <>
-            <span style={{ opacity: 0.35 }}>|</span>
-            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("html")}>
-              {downloading === "html" ? "HTML..." : "HTML"}
-            </button>
-            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("pdf")}>
-              {downloading === "pdf" ? "PDF..." : "PDF"}
-            </button>
-            <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("docx")}>
-              {downloading === "docx" ? "Word..." : "Word"}
-            </button>
-          </>
-        ) : null}
+          {analysis ? (
+            <>
+              <span style={{ opacity: 0.35 }}>|</span>
+              <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("html")}>
+                {downloading === "html" ? "HTML..." : "HTML"}
+              </button>
+              <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("pdf")}>
+                {downloading === "pdf" ? "PDF..." : "PDF"}
+              </button>
+              <button className="ao-btn" disabled={!!downloading} onClick={() => fetchReport("docx")}>
+                {downloading === "docx" ? "Word..." : "Word"}
+              </button>
+            </>
+          ) : null}
+        </div>
       </div>
 
       {analysis ? (
         <div className="ao-card" style={{ boxShadow: "none" }}>
-          <SectionTitle title="Analyse (résumé)" right={<Pill tone={confidenceTone(pick(analysis, ["result", "confidence"]) ?? 0)}>IA</Pill>} />
+          <SectionTitle
+            title="Analyse (résumé)"
+            right={<Pill tone={confidenceTone(pick(analysis, ["result", "confidence"]) ?? 0)}>IA</Pill>}
+          />
           <div className="ao-card__body">
             <AnalysisSummary analysis={analysis} />
             <div style={{ height: 10 }} />
@@ -597,7 +582,7 @@ const App: React.FC = () => {
   const [atsOnly, setAtsOnly] = useState(false);
   const [limit, setLimit] = useState(DEFAULT_LIMIT);
 
-  // Filters (robust)
+  // Filters
   const [portalFilter, setPortalFilter] = useState<string>("ALL");
   const [countryFilter, setCountryFilter] = useState<string>("ALL");
 
@@ -615,6 +600,9 @@ const App: React.FC = () => {
   const [portals, setPortals] = useState<any[] | null>(null);
   const [loadingPortals, setLoadingPortals] = useState(false);
 
+  const [observedPortals, setObservedPortals] = useState<ObservedPortal[] | null>(null);
+  const [loadingObservedPortals, setLoadingObservedPortals] = useState(false);
+
   const [reportKeywords, setReportKeywords] = useState<any>(null);
   const [reportCategories, setReportCategories] = useState<any>(null);
   const [loadingReports, setLoadingReports] = useState(false);
@@ -623,10 +611,13 @@ const App: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   // -----------------------
-  // CSS injection (FIX WHITE SELECT + LIST VISIBILITY)
+  // CSS injection (FULL) + fixes for details panel
   // -----------------------
   const injectedCss = useMemo(
     () => `
+    *{ box-sizing:border-box; }
+    html, body{ margin:0; padding:0; }
+
     :root{
       --ao-bg0:#0b1020;
       --ao-bg1:#0f172a;
@@ -724,7 +715,6 @@ const App: React.FC = () => {
     .ao-section-title__left{ font-weight: 900; letter-spacing: .2px; }
     .ao-section-title__right{ display:flex; gap:8px; align-items:center; color: var(--ao-dim); font-size: 12px; }
 
-    /* ---- INPUTS / SELECTS (FIX "WHITE" look) ---- */
     .ao-input, .ao-select{
       background: rgba(15,23,42,.88);
       border: 1px solid rgba(255,255,255,.16);
@@ -755,6 +745,7 @@ const App: React.FC = () => {
       background: rgba(255,255,255,.05);
       color: var(--ao-dim);
       user-select:none;
+      white-space: nowrap;
     }
     .ao-pill-good{ background: rgba(34,197,94,.16); border-color: rgba(34,197,94,.28); color: rgba(255,255,255,.88); }
     .ao-pill-bad{ background: rgba(239,68,68,.16); border-color: rgba(239,68,68,.28); color: rgba(255,255,255,.88); }
@@ -770,9 +761,15 @@ const App: React.FC = () => {
       color: var(--ao-dim);
     }
 
-    .ao-list{ display:flex; flex-direction:column; gap:10px; padding: 12px 14px; }
+    .ao-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 12px 14px;
+      max-height: calc(100vh - 340px);
+      overflow:auto;
+    }
 
-    /* ---- LIST ITEMS: visible without hover (FIX) ---- */
     .ao-tender{
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.14);
@@ -831,8 +828,70 @@ const App: React.FC = () => {
     .ao-th, .ao-td{ padding: 10px 10px; border-bottom: 1px solid rgba(255,255,255,.08); text-align:left; vertical-align: top; color: rgba(255,255,255,.86); }
     .ao-th{ color: rgba(255,255,255,.70); font-weight: 800; }
 
+    /* DETAILS PANEL */
+    .ao-grid{ align-items: start; }
+    .ao-detail-card{
+      position: sticky;
+      top: 14px;
+    }
+    .ao-detail-body{
+      max-height: calc(100vh - 210px);
+      overflow: auto;
+      padding: 14px;
+    }
+    .ao-detail-header{
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.08);
+    }
+    .ao-detail-title{
+      font-size: 16px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      line-height: 1.25;
+      color: rgba(255,255,255,.95);
+    }
+    .ao-detail-meta{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ao-detail-link{
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      overflow-wrap: anywhere;
+    }
+    .ao-detail-link a{
+      color: rgba(255,255,255,.92);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(255,255,255,.28);
+    }
+    .ao-detail-link a:hover{ border-bottom-color: rgba(255,255,255,.55); }
+
+    .ao-actionbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 0 0 0;
+    }
+    .ao-actionbar__meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
     @media (max-width: 980px){
       .ao-grid{ grid-template-columns: 1fr !important; }
+      .ao-detail-card{ position: relative; top: 0; }
+      .ao-detail-body{ max-height: none; }
+      .ao-list{ max-height: none; }
     }
   `,
     []
@@ -860,6 +919,7 @@ const App: React.FC = () => {
     setSelectedFilesById({});
     setNotesById({});
     setPortals(null);
+    setObservedPortals(null);
     setReportKeywords(null);
     setReportCategories(null);
     localStorage.removeItem("ao_token");
@@ -911,7 +971,6 @@ const App: React.FC = () => {
     setTimeout(() => setNotice(null), 2000);
   }, []);
 
-  // ✅ Robust callback to match ANY LoginPage signature
   const handleAuthCallback = useCallback(
     (...args: any[]) => {
       let foundToken: string | null = null;
@@ -940,7 +999,23 @@ const App: React.FC = () => {
   const LoginPageAny = LoginPage as any;
 
   // -----------------------
-  // Fetch tenders (backend) — with safe override
+  // Fetch observed portals
+  // -----------------------
+  const fetchObservedPortals = useCallback(async () => {
+    if (!token) return;
+    setLoadingObservedPortals(true);
+    try {
+      const data = await apiFetchJson("/portals/observed?country=ALL");
+      setObservedPortals(Array.isArray(data) ? (data as ObservedPortal[]) : []);
+    } catch (e: any) {
+      setError(e?.message || "Erreur portails observés");
+    } finally {
+      setLoadingObservedPortals(false);
+    }
+  }, [token, apiFetchJson]);
+
+  // -----------------------
+  // Fetch tenders
   // -----------------------
   const fetchTenders = useCallback(
     async (opts?: { q?: string }) => {
@@ -955,13 +1030,10 @@ const App: React.FC = () => {
         params.set("limit", String(limit));
         params.set("country", countryFilter);
         params.set("portal", portalFilter);
+        params.set("ats_only", atsOnly ? "1" : "0");
+        params.set("search_field", searchField);
 
-        // send to backend if supported
-        if (effectiveQ) {
-          params.set("q", effectiveQ);
-          params.set("search_field", searchField);
-        }
-        if (atsOnly) params.set("ats_only", "1");
+        if (effectiveQ) params.set("q", effectiveQ);
 
         const data = (await apiFetchJson(`/tenders?${params.toString()}`)) as TendersResponse;
 
@@ -982,24 +1054,31 @@ const App: React.FC = () => {
     [token, query, limit, portalFilter, countryFilter, searchField, atsOnly, apiFetchJson]
   );
 
+  // initial load
   useEffect(() => {
     if (!token) return;
+    fetchObservedPortals();
     fetchTenders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
+  // refetch when filters change
+  useEffect(() => {
+    if (!token) return;
+    fetchTenders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [portalFilter, countryFilter, atsOnly, limit, searchField]);
+
   // -----------------------
-  // Portal/Country options derived from data (prevents mismatch)
+  // Dropdown options
   // -----------------------
   const portalOptions = useMemo(() => {
-    const set = new Set<string>();
-    for (const t of tenders) {
-      const p = (t.portail || "").trim();
-      if (p) set.add(p);
-    }
-    const arr = Array.from(set).sort((a, b) => a.localeCompare(b));
-    return ["ALL", ...arr];
-  }, [tenders]);
+    const codes = (observedPortals || [])
+      .map((p) => String(p.code || "").trim())
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+    return ["ALL", ...codes];
+  }, [observedPortals]);
 
   const countryOptions = useMemo(() => {
     const set = new Set<string>();
@@ -1007,31 +1086,28 @@ const App: React.FC = () => {
       const c = (t.pays || "").trim();
       if (c) set.add(c);
     }
+    for (const p of observedPortals || []) {
+      const c = String(p.country || "").trim();
+      if (c) set.add(c);
+    }
     const arr = Array.from(set).sort((a, b) => a.localeCompare(b));
     return ["ALL", ...arr];
-  }, [tenders]);
+  }, [tenders, observedPortals]);
 
   // -----------------------
-  // Fallback filtering (frontend) => always works
+  // Visible list (safe)
   // -----------------------
   const visibleTenders = useMemo(() => {
     let list = [...tenders];
 
-    if (portalFilter !== "ALL") {
-      list = list.filter((t) => (t.portail || "").trim() === portalFilter);
-    }
-
-    if (countryFilter !== "ALL") {
-      list = list.filter((t) => (t.pays || "").trim() === countryFilter);
-    }
-
+    if (portalFilter !== "ALL") list = list.filter((t) => (t.portail || "").trim() === portalFilter);
+    if (countryFilter !== "ALL") list = list.filter((t) => (t.pays || "").trim() === countryFilter);
     if (atsOnly) list = list.filter((t) => t.est_ats);
 
-    const q = query.trim().toLowerCase();
-    if (!q) return list;
+    const ql = query.trim().toLowerCase();
+    if (!ql) return list;
 
-    const hit = (s: string) => (s || "").toLowerCase().includes(q);
-
+    const hit = (s: string) => (s || "").toLowerCase().includes(ql);
     return list.filter((t) => {
       if (searchField === "title") return hit(t.titre);
       if (searchField === "buyer") return hit(t.acheteur);
@@ -1040,7 +1116,7 @@ const App: React.FC = () => {
   }, [tenders, portalFilter, countryFilter, atsOnly, query, searchField]);
 
   // -----------------------
-  // Fetch portals & reports (on demand)
+  // Fetch portals & reports
   // -----------------------
   const fetchPortals = useCallback(async () => {
     if (!token) return;
@@ -1061,10 +1137,7 @@ const App: React.FC = () => {
     setError(null);
     setLoadingReports(true);
     try {
-      const [kw, cat] = await Promise.allSettled([
-        apiFetchJson("/report/keywords"),
-        apiFetchJson("/report/categories"),
-      ]);
+      const [kw, cat] = await Promise.allSettled([apiFetchJson("/report/keywords"), apiFetchJson("/report/categories")]);
 
       setReportKeywords(kw.status === "fulfilled" ? kw.value : { error: kw.reason?.message || "Erreur keywords" });
       setReportCategories(cat.status === "fulfilled" ? cat.value : { error: cat.reason?.message || "Erreur categories" });
@@ -1082,15 +1155,11 @@ const App: React.FC = () => {
   }, [token, tab, portals, reportKeywords, reportCategories, fetchPortals, fetchReports]);
 
   // -----------------------
-  // Tender selection
+  // Selection
   // -----------------------
   const selectedTender = useMemo(() => {
     if (selectedTenderId == null) return null;
-    return (
-      visibleTenders.find((t) => t.id === selectedTenderId) ||
-      tenders.find((t) => t.id === selectedTenderId) ||
-      null
-    );
+    return visibleTenders.find((t) => t.id === selectedTenderId) || tenders.find((t) => t.id === selectedTenderId) || null;
   }, [selectedTenderId, visibleTenders, tenders]);
 
   // -----------------------
@@ -1154,8 +1223,7 @@ const App: React.FC = () => {
 
       if (!e.ctrlKey && !e.metaKey && !e.altKey) {
         if (e.key === "1") setTab("ao");
-        if (e.key === "2") // stay on AO tab to show reports
-                        // setTab("ai");
+        if (e.key === "2") setTab("ai");
         if (e.key === "3") setTab("reports");
         if (e.key === "4") setTab("portals");
         if (e.key === "5") setTab("others");
@@ -1294,10 +1362,7 @@ const App: React.FC = () => {
       {notice && <div className="ao-banner ao-banner--ok">{notice}</div>}
 
       {tab === "ao" && (
-        <div
-          className="ao-grid"
-          style={{ display: "grid", gridTemplateColumns: "1.2fr .8fr", gap: 14, marginTop: 14 }}
-        >
+        <div className="ao-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr .8fr", gap: 14, marginTop: 14 }}>
           {/* Left */}
           <div className="ao-card">
             <SectionTitle
@@ -1325,11 +1390,7 @@ const App: React.FC = () => {
                 placeholder="Rechercher (titre/acheteur)…"
               />
 
-              <select
-                className="ao-select"
-                value={searchField}
-                onChange={(e) => setSearchField(e.target.value as SearchField)}
-              >
+              <select className="ao-select" value={searchField} onChange={(e) => setSearchField(e.target.value as SearchField)}>
                 <option value="title_buyer">Titre + Acheteur</option>
                 <option value="title">Titre</option>
                 <option value="buyer">Acheteur</option>
@@ -1360,10 +1421,10 @@ const App: React.FC = () => {
                 Limite
                 <input
                   className="ao-input"
-                  style={{ width: 100, minWidth: 100 }}
+                  style={{ width: 110, minWidth: 110 }}
                   type="number"
                   min={1}
-                  max={500}
+                  max={5000}
                   value={limit}
                   onChange={(e) => setLimit(Number(e.target.value) || DEFAULT_LIMIT)}
                 />
@@ -1380,17 +1441,15 @@ const App: React.FC = () => {
               <Pill tone={query ? "info" : "neutral"} title="Recherche active">
                 {query ? `Filtre: ${query}` : "Aucun filtre"}
               </Pill>
+
+              {loadingObservedPortals ? <Pill tone="warn">Portails…</Pill> : null}
             </div>
 
             <div className="ao-list">
               {visibleTenders.map((t) => {
                 const isActive = t.id === selectedTenderId;
                 return (
-                  <div
-                    key={t.id}
-                    className={cx("ao-tender", isActive && "ao-tender--active")}
-                    onClick={() => setSelectedTenderId(t.id)}
-                  >
+                  <div key={t.id} className={cx("ao-tender", isActive && "ao-tender--active")} onClick={() => setSelectedTenderId(t.id)}>
                     <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
                       <div className="ao-tender__title">{t.titre || "(Sans titre)"}</div>
                       <div className="ao-small">{fmtDate(t.date_publication)}</div>
@@ -1423,7 +1482,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Right */}
-          <div className="ao-card">
+          <div className="ao-card ao-detail-card">
             <SectionTitle
               title="Détails + IA"
               right={
@@ -1437,8 +1496,8 @@ const App: React.FC = () => {
               }
             />
 
-            <div className="ao-card__body">
-              {!selectedTender ? (
+            {!selectedTender ? (
+              <div className="ao-card__body">
                 <div className="ao-drop">
                   <div>
                     <strong>Choisis un appel d’offres</strong>
@@ -1448,54 +1507,38 @@ const App: React.FC = () => {
                   </div>
                   <Pill tone="info">AO → Analyse</Pill>
                 </div>
-              ) : (
-                <>
-                  <div style={{ display: "grid", gap: 8 }}>
-                    <div style={{ fontSize: 16, fontWeight: 900, letterSpacing: 0.2 }}>
-                      {selectedTender.titre || "(Sans titre)"}
-                    </div>
+              </div>
+            ) : (
+              <>
+                <div className="ao-detail-header">
+                  <div className="ao-detail-title">{selectedTender.titre || "(Sans titre)"}</div>
 
-                    <div className="ao-small">
-                      <span style={{ marginRight: 8 }}>
-                        <b>{selectedTender.portail}</b>
-                      </span>
-                      {selectedTender.acheteur ? <span>• {selectedTender.acheteur}</span> : null}
-                      {selectedTender.est_ats ? (
-                        <span>
-                          {" "}
-                          • <b>ATS</b>
-                        </span>
-                      ) : null}
-                      {selectedTender.date_publication ? <span> • {fmtDate(selectedTender.date_publication)}</span> : null}
-                      {selectedTender.pays ? <span> • {selectedTender.pays}</span> : null}
-                    </div>
-
-                    {selectedTender.lien ? (
-                      <div className="ao-small">
-                        Lien:{" "}
-                        <a
-                          href={selectedTender.lien}
-                          target="_blank"
-                          rel="noreferrer"
-                          style={{ color: "rgba(255,255,255,.9)", textDecoration: "underline" }}
-                        >
-                          {selectedTender.lien}
-                        </a>
-                      </div>
-                    ) : null}
+                  <div className="ao-detail-meta">
+                    <Pill tone="info">{selectedTender.portail || "Portail"}</Pill>
+                    {selectedTender.est_ats ? <Pill tone="warn">ATS</Pill> : null}
+                    {selectedTender.date_publication ? <Pill>{fmtDate(selectedTender.date_publication)}</Pill> : null}
+                    {selectedTender.pays ? <Pill tone="neutral">{selectedTender.pays}</Pill> : null}
+                    {selectedTender.acheteur ? <Pill>{selectedTender.acheteur}</Pill> : null}
                   </div>
 
-                  <div style={{ height: 12 }} />
+                  {selectedTender.lien ? (
+                    <div className="ao-detail-link">
+                      Lien officiel:{" "}
+                      <a href={selectedTender.lien} target="_blank" rel="noreferrer">
+                        {selectedTender.lien}
+                      </a>
+                    </div>
+                  ) : null}
+                </div>
 
+                <div className="ao-detail-body">
                   <AnalyzeBox
                     tender={selectedTender}
                     analyzing={analyzingId === selectedTender.id}
                     analysis={analysisById[selectedTender.id]}
                     files={selectedFilesById[selectedTender.id] || []}
                     notes={notesById[selectedTender.id] || ""}
-                    onPickFiles={(files) =>
-                      setSelectedFilesById((prev) => ({ ...prev, [selectedTender.id]: files }))
-                    }
+                    onPickFiles={(files) => setSelectedFilesById((prev) => ({ ...prev, [selectedTender.id]: files }))}
                     onClearFiles={() => setSelectedFilesById((prev) => ({ ...prev, [selectedTender.id]: [] }))}
                     onNotes={(v) => setNotesById((prev) => ({ ...prev, [selectedTender.id]: v }))}
                     onAnalyze={async () => {
@@ -1514,22 +1557,19 @@ const App: React.FC = () => {
                         setAnalyzingId(null);
                       }
                     }}
-                  token={token}
+                    token={token}
                     onError={(msg) => setError(msg)}
                   />
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
 
       {tab === "ai" && (
         <div className="ao-card" style={{ marginTop: 14 }}>
-          <SectionTitle
-            title="Analyses IA"
-            right={<span className="ao-small">{Object.keys(analysisById).length} analyse(s)</span>}
-          />
+          <SectionTitle title="Analyses IA" right={<span className="ao-small">{Object.keys(analysisById).length} analyse(s)</span>} />
           <div className="ao-card__body">
             {Object.keys(analysisById).length === 0 ? (
               <div className="ao-drop">
