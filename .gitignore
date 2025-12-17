@@ -23,3 +23,6 @@ __pycache__/
 ao.db
 *.bak
 *.bak.*
+
+# local dev artifacts
+ao.db
