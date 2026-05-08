@@ -38,15 +38,47 @@ interface RawTender {
 
 export interface Tender {
   id: number;
+
   titre: string;
   acheteur: string;
+
   pays: string;
   region: string;
+
   date_publication: string;
   date_cloture: string;
+
   portail: string;
+
   lien: string;
+
   est_ats: boolean;
+
+  summary?: string;
+
+  category?: string;
+
+  procurement_method?: string;
+
+  supplier_name?: string;
+
+  award_amount?: number;
+
+  award_currency?: string;
+
+  award_status?: string;
+
+  contact_name?: string;
+
+  contact_email?: string;
+
+  notice_type?: string;
+
+  delivery_region?: string;
+
+  documents_url?: string;
+
+  confidence?: number;
 }
 
 interface UserProfile {
@@ -88,17 +120,61 @@ function normalizeTender(raw: RawTender): Tender {
       : raw.est_ats === 1 || raw.est_ats === "1";
 
   return {
-    id: raw.id,
-    titre,
-    acheteur,
-    pays,
-    region,
-    date_publication,
-    date_cloture,
-    portail,
-    lien,
-    est_ats: Boolean(est_ats),
-  };
+  id: raw.id,
+
+  titre,
+  acheteur,
+
+  pays,
+  region,
+
+  date_publication,
+  date_cloture,
+
+  portail,
+  lien,
+
+  est_ats: Boolean(est_ats),
+
+  summary:
+    raw.summary || "",
+
+  category:
+    raw.category || "",
+
+  procurement_method:
+    raw.procurement_method || "",
+
+  supplier_name:
+    raw.supplier_name || "",
+
+  award_amount:
+    raw.award_amount || 0,
+
+  award_currency:
+    raw.award_currency || "",
+
+  award_status:
+    raw.award_status || "",
+
+  contact_name:
+    raw.contact_name || "",
+
+  contact_email:
+    raw.contact_email || "",
+
+  notice_type:
+    raw.notice_type || "",
+
+  delivery_region:
+    raw.delivery_region || "",
+
+  documents_url:
+    raw.documents_url || "",
+
+  confidence:
+    raw.confidence || 0,
+};
 }
 
 function safeJsonParse<T>(raw: string | null): T | null {
@@ -1388,9 +1464,177 @@ const App: React.FC = () => {
                       </div>
                     ) : null}
                   </div>
+<div
+  className="ao-card"
+  style={{
+    marginTop: 12,
+    boxShadow: "none",
+  }}
+>
+  <SectionTitle
+    title="Procurement Intelligence"
+    right={
+      <Pill tone="info">
+        confidence {selectedTender.confidence || 0}
+      </Pill>
+    }
+  />
 
+  <div className="ao-card__body">
+
+    <div style={{ display: "grid", gap: 8 }}>
+
+      <p>
+        <strong>Category:</strong>{" "}
+        {selectedTender.category || "-"}
+      </p>
+
+      <p>
+        <strong>Procurement Method:</strong>{" "}
+        {selectedTender.procurement_method || "-"}
+      </p>
+
+      <p>
+        <strong>Supplier:</strong>{" "}
+        {selectedTender.supplier_name || "-"}
+      </p>
+
+      <p>
+        <strong>Award:</strong>{" "}
+        {selectedTender.award_amount || 0}{" "}
+        {selectedTender.award_currency || ""}
+      </p>
+
+      <p>
+        <strong>Award Status:</strong>{" "}
+        {selectedTender.award_status || "-"}
+      </p>
+
+      <p>
+        <strong>Contact:</strong>{" "}
+        {selectedTender.contact_name || "-"}
+      </p>
+
+      <p>
+        <strong>Email:</strong>{" "}
+        {selectedTender.contact_email || "-"}
+      </p>
+
+      <p>
+        <strong>Notice Type:</strong>{" "}
+        {selectedTender.notice_type || "-"}
+      </p>
+
+      <p>
+        <strong>Delivery Region:</strong>{" "}
+        {selectedTender.delivery_region || "-"}
+      </p>
+
+      <div>
+        <strong>Summary:</strong>
+
+        <div
+          className="ao-small"
+          style={{
+            marginTop: 6,
+            lineHeight: 1.5,
+          }}
+        >
+          {selectedTender.summary || "-"}
+        </div>
+      </div>
+
+      {selectedTender.documents_url && (
+        <div style={{ marginTop: 10 }}>
+          <a
+            href={selectedTender.documents_url}
+            target="_blank"
+            rel="noreferrer"
+            className="ao-btn ao-btn-primary"
+          >
+            Open Documents
+          </a>
+        </div>
+      )}
+
+    </div>
+
+  </div>
+</div>
                   <div style={{ height: 12 }} />
+<div
+  className="ao-card"
+  style={{
+    marginTop: 12,
+    boxShadow: "none",
+  }}
+>
+  <SectionTitle
+    title="Quick AI Analysis"
+    right={
+      <Pill tone="good">
+        extracted
+      </Pill>
+    }
+  />
 
+  <div className="ao-card__body">
+
+    <button
+      className="ao-btn ao-btn-primary"
+      onClick={async () => {
+
+        try {
+
+          setError(null);
+
+          setNotice(null);
+
+          const response =
+            await fetch(
+              "API_BASE/api/ai/analyze-extracted/canadabuys_0_0.txt"
+            );
+
+          const data =
+            await response.json();
+
+          setAnalysisById(
+            (prev) => ({
+              ...prev,
+              [selectedTender.id]: data,
+            })
+          );
+
+          setNotice(
+            "AI extraction completed ✅"
+          );
+
+          setTab("ai");
+
+        } catch (err: any) {
+
+          setError(
+            err.message ||
+            "AI analysis failed"
+          );
+        }
+      }}
+    >
+      Analyze Extracted PDF
+    </button>
+
+    <div
+      className="ao-small"
+      style={{
+        marginTop: 10,
+      }}
+    >
+      Uses extracted local TXT files
+      generated automatically from PDFs.
+    </div>
+
+  </div>
+</div>
                   <AnalyzeBox
                     tender={selectedTender}
                     analyzing={analyzingId === selectedTender.id}

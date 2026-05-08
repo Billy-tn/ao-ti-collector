@@ -17,7 +17,9 @@ class SEAOConnector(BaseConnector):
     name = "SEAO"
 
     def get_resources(self):
+
         try:
+
             resp = requests.get(
                 SEAO_PACKAGE_URL,
                 params={"id": SEAO_PACKAGE_ID},
@@ -34,9 +36,11 @@ class SEAOConnector(BaseConnector):
             ).get("resources", [])
 
         except Exception as e:
+
             print(
                 f"[SEAO] ERROR loading resources: {e}"
             )
+
             return []
 
     def parse_date(self, value: str):
@@ -50,7 +54,9 @@ class SEAOConnector(BaseConnector):
             "%Y-%m-%d",
             "%Y/%m/%d",
         ):
+
             try:
+
                 return dt.datetime.strptime(
                     value[:10],
                     fmt,
@@ -60,6 +66,7 @@ class SEAOConnector(BaseConnector):
                 pass
 
         try:
+
             return dt.datetime.fromisoformat(
                 value.replace("Z", "")
             ).date()
@@ -83,6 +90,10 @@ class SEAOConnector(BaseConnector):
             or ""
         )
 
+        # --------------------------------------------------
+        # Buyer
+        # --------------------------------------------------
+
         buyer_name = ""
 
         buyer = release.get("buyer") or {}
@@ -99,10 +110,16 @@ class SEAOConnector(BaseConnector):
                     r.lower() == "buyer"
                     for r in roles
                 ):
+
                     buyer_name = (
                         p.get("name") or ""
                     )
+
                     break
+
+        # --------------------------------------------------
+        # Dates
+        # --------------------------------------------------
 
         date_str = (
             release.get("date")
@@ -112,7 +129,13 @@ class SEAOConnector(BaseConnector):
             ).get("startDate")
         )
 
-        pub_date = self.parse_date(date_str)
+        pub_date = self.parse_date(
+            date_str
+        )
+
+        # --------------------------------------------------
+        # Documents
+        # --------------------------------------------------
 
         url = ""
         documents_url = ""
@@ -128,9 +151,15 @@ class SEAOConnector(BaseConnector):
                 if not url:
                     url = doc["url"]
 
-                documents_url = doc["url"]
+                documents_url = (
+                    doc["url"]
+                )
 
                 break
+
+        # --------------------------------------------------
+        # Metadata
+        # --------------------------------------------------
 
         category = (
             tender.get(
@@ -156,10 +185,67 @@ class SEAOConnector(BaseConnector):
         )
 
         if items:
+
             summary = (
-                items[0].get("description")
+                items[0].get(
+                    "description"
+                )
                 or ""
             )
+
+        # --------------------------------------------------
+        # Awards
+        # --------------------------------------------------
+
+        supplier_name = ""
+
+        award_amount = 0.0
+
+        award_currency = ""
+
+        award_status = ""
+
+        awards = (
+            release.get("awards") or []
+        )
+
+        if awards:
+
+            award = awards[0]
+
+            award_status = (
+                award.get("status")
+                or ""
+            )
+
+            value = (
+                award.get("value")
+                or {}
+            )
+
+            award_amount = (
+                value.get("amount")
+                or 0.0
+            )
+
+            award_currency = (
+                value.get("currency")
+                or ""
+            )
+
+            suppliers = (
+                award.get("suppliers")
+                or []
+            )
+
+            if suppliers:
+
+                supplier_name = (
+                    suppliers[0].get(
+                        "name"
+                    )
+                    or ""
+                )
 
         return Tender(
             source="SEAO",
@@ -172,7 +258,9 @@ class SEAOConnector(BaseConnector):
 
             buyer=buyer_name.strip(),
 
-            published_at=str(pub_date or ""),
+            published_at=str(
+                pub_date or ""
+            ),
 
             country="CA",
 
@@ -195,6 +283,22 @@ class SEAOConnector(BaseConnector):
 
             documents_url=(
                 documents_url.strip()
+            ),
+
+            supplier_name=(
+                supplier_name.strip()
+            ),
+
+            award_amount=float(
+                award_amount or 0.0
+            ),
+
+            award_currency=(
+                award_currency.strip()
+            ),
+
+            award_status=(
+                award_status.strip()
             ),
         )
 
@@ -226,6 +330,7 @@ class SEAOConnector(BaseConnector):
             )
 
             try:
+
                 resp = requests.get(
                     resource_url,
                     timeout=120,
@@ -243,6 +348,7 @@ class SEAOConnector(BaseConnector):
                 for release in releases[:20]:
 
                     try:
+
                         tender = (
                             self.normalize_release(
                                 release
@@ -253,17 +359,20 @@ class SEAOConnector(BaseConnector):
                             tender
                             and tender.title
                         ):
+
                             tenders.append(
                                 tender
                             )
 
                     except Exception as e:
+
                         print(
                             f"[SEAO] "
                             f"normalize error: {e}"
                         )
 
             except Exception as e:
+
                 print(
                     f"[SEAO] "
                     f"resource load error: {e}"

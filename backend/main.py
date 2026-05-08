@@ -1,4 +1,3 @@
-# backend/main.py
 from __future__ import annotations
 
 import os
@@ -6,7 +5,7 @@ import sqlite3
 from typing import Any, Dict, Tuple
 from datetime import datetime
 
-from fastapi import FastAPI, Query, Depends
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from pydantic import BaseModel
@@ -31,6 +30,7 @@ def _dict_factory(
     cursor: sqlite3.Cursor,
     row: Tuple[Any, ...],
 ) -> Dict[str, Any]:
+
     return {
         col[0]: row[idx]
         for idx, col in enumerate(cursor.description)
@@ -38,23 +38,34 @@ def _dict_factory(
 
 
 def get_db() -> sqlite3.Connection:
+
     con = sqlite3.connect(DB_PATH)
+
     con.row_factory = _dict_factory
+
     return con
 
 
 def _ensure_search_logs_table(
     con: sqlite3.Connection,
 ) -> None:
+
     con.execute(
         """
         CREATE TABLE IF NOT EXISTS search_logs (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             searched_at TEXT NOT NULL,
+
             country TEXT,
+
             portal_code TEXT,
+
             q TEXT,
+
             limit_requested INTEGER,
+
             results_count INTEGER
         )
         """
@@ -98,31 +109,6 @@ def custom_openapi():
         "bearerFormat": "JWT",
     }
 
-    for path_item in schema.get("paths", {}).values():
-
-        if not isinstance(path_item, dict):
-            continue
-
-        for operation in path_item.values():
-
-            if not isinstance(operation, dict):
-                continue
-
-            params = operation.get("parameters", []) or []
-
-            has_auth_header = any(
-                isinstance(p, dict)
-                and p.get("in") == "header"
-                and p.get("name", "").lower()
-                == "authorization"
-                for p in params
-            )
-
-            if has_auth_header:
-                operation["security"] = [
-                    {"BearerAuth": []}
-                ]
-
     app.openapi_schema = schema
 
     return app.openapi_schema
@@ -143,7 +129,9 @@ app.add_middleware(
 # ----------------------------------------------------------------------
 
 app.include_router(auth.router, prefix="/api")
+
 app.include_router(pdf_tools.router, prefix="/api")
+
 app.include_router(ai_tools.router, prefix="/api")
 
 # ----------------------------------------------------------------------
@@ -153,6 +141,7 @@ app.include_router(ai_tools.router, prefix="/api")
 
 @app.get("/")
 def root() -> Dict[str, str]:
+
     return {
         "status": "ok",
         "app": "ao-collector",
@@ -169,6 +158,7 @@ def list_portals_endpoint(
     only_active: bool = Query(default=True),
     country: str = Query(default="ALL"),
 ):
+
     return registry_list_portals(
         enabled_only=only_active
     )
@@ -189,9 +179,6 @@ def list_tenders(
     q: str | None = Query(default=None),
     country: str = Query(default="ALL"),
     portal: str = Query(default="ALL"),
-    current_user: auth.AuthenticatedUser = Depends(
-        auth.get_current_user
-    ),
 ):
     """
     Retourne les tenders depuis tenders_v2.
@@ -200,6 +187,7 @@ def list_tenders(
     con = get_db()
 
     try:
+
         _ensure_search_logs_table(con)
 
         sql = """
@@ -219,22 +207,33 @@ def list_tenders(
         con.execute(
             """
             INSERT INTO search_logs (
+
                 searched_at,
+
                 country,
+
                 portal_code,
+
                 q,
+
                 limit_requested,
+
                 results_count
             )
             VALUES (?, ?, ?, ?, ?, ?)
             """,
             (
                 datetime.utcnow().isoformat(),
+
                 country,
+
                 None if portal == "ALL"
                 else portal,
+
                 q,
+
                 limit,
+
                 len(rows),
             ),
         )
@@ -244,10 +243,10 @@ def list_tenders(
         return {
             "items": rows,
             "count": len(rows),
-            "user": current_user.profile.dict(),
         }
 
     finally:
+
         con.close()
 
 
@@ -261,10 +260,8 @@ def report_categories(
     q: str | None = Query(default=None),
     top_n: int = Query(default=5),
     max_rows: int = Query(default=5000),
-    current_user: auth.AuthenticatedUser = Depends(
-        auth.get_current_user
-    ),
 ):
+
     return {
         "items": [],
         "total": 0,
@@ -276,10 +273,8 @@ def report_keywords(
     q: str | None = Query(default=None),
     top_n: int = Query(default=5),
     max_rows: int = Query(default=5000),
-    current_user: auth.AuthenticatedUser = Depends(
-        auth.get_current_user
-    ),
 ):
+
     return {
         "items": [],
         "total": 0,
@@ -292,9 +287,13 @@ def report_keywords(
 
 
 class PortalCandidateIn(BaseModel):
+
     discovered_url: str
+
     label: str = ""
+
     country: str = ""
+
     source_type: str = "html"
 
 
@@ -309,22 +308,33 @@ def list_portal_candidates():
     )
 
     conn = sqlite3.connect(str(DB_PATH))
+
     conn.row_factory = sqlite3.Row
 
     try:
+
         ensure_portal_registry(conn)
 
         rows = conn.execute(
             """
             SELECT
+
                 id,
+
                 discovered_url,
+
                 label,
+
                 country,
+
                 source_type,
+
                 status,
+
                 created_at
+
             FROM portal_candidates
+
             ORDER BY id DESC
             """
         ).fetchall()
@@ -343,6 +353,7 @@ def list_portal_candidates():
         ]
 
     finally:
+
         conn.close()
 
 
@@ -350,6 +361,7 @@ def list_portal_candidates():
 def create_portal_candidate(
     payload: PortalCandidateIn,
 ):
+
     return add_candidate(
         discovered_url=payload.discovered_url,
         label=payload.label,

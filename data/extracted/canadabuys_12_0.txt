@@ -1,0 +1,586 @@
+Page 1 of 14 
+REQUEST FOR INFORMATION 
+DEMANDE DE D’INFORMATION 
+RETURN TO: 
+RETOURNER À : 
+Title/Titre 
+Diesel Driven Fire Pump - 
+Halifax Class/ Pompes à 
+incendie entraînées par 
+moteur diesel pour les 
+frégates de la classe 
+Halifax.
+Solicitation No – No de l’invitation 
+W8482- 275197 
+Devin McClellan
+DGMEPM - D Mar P 9
+Devin.mcclellan@forces.gc.ca 
+Date of  Solicitation – Date de l’invitation 
+May/Mai 7 2026 
+Proposal To: National Defence Canada 
+Telephone No. – No de 
+téléphone 
+See hererin - 
+Voir aux présentes 
+Destination 
+See herein -  
+Voir aux présentes 
+Proposition à : Défense nationale Canada 
+Solicitation Closes –  
+L’invitation prend fin 
+At – à : 14 :00 EDT 
+On  - le : June/Juin 16 2026 
+Instructions: 
+Municipal taxes are not applicable. Unless otherwise specified herein all 
+prices quoted must include all applicable Canadian customs duties, 
+GST/HST, excise taxes and are to be delivered Delivery Duty Paid including 
+all delivery charges to destination(s) as indicated. The amount of the Goods 
+and Services Tax/Harmonized Sales Tax is to be shown as a separate item. 
+Instructions: Les taxes municipales ne s'appliquent pas. Sauf indication 
+contraire, les prix indiqués doivent comprendre les droits de douane 
+canadiens, la TPS/TVH et la taxe d'accise. Les biens doivent être livrés « 
+rendu droits acquittés », tous frais de livraison compris, à la ou aux 
+destinations indiquées. Le montant de la taxe sur les produits et 
+services/taxe de vente harmonisée doit être indiqué séparément. 
+Delivery required - Livraison 
+exigée
+Delivery offered - Livraison 
+proposée
+Vendor Name and Address - Raison sociale et adresse du 
+fournisseur
+Name and title of person authorized to sign on behalf of vendor 
+(type orprint) - Nom et titre de la personne autorisée à signer au 
+nom du fournisseur (caractère d'imprimerie)
+Name/Nom __________________ Title/Titre_______________ 
+Signature _________________                Date 
+___________________
+
+2 
+ Solicitation No.
+W8482- 275197 
+Contents 
+1.
+Purpose and Nature of the Request for Information (RFI)............................................................................................. 3 
+2.
+Background Information................................................................................................................................................. 4 
+3.
+Potential Work Scope ..................................................................................................................................................... 4 
+4.
+Procurement Approach .................................................................................................................................................. 4 
+5.
+Technical ......................................................................................................................................................................... 5 
+6.
+Certifications ................................................................................................................................................................... 6 
+7.
+Security Requirements ................................................................................................................................................... 6 
+8.
+Legislation, Trade Agreements, and Government Policies: ........................................................................................... 6 
+9.
+Schedule. ........................................................................................................................................................................ 7 
+10. Requested Information................................................................................................................................................... 7 
+11. Buy Canadian Policy ........................................................................................................................................................ 7 
+12. Enquiries ......................................................................................................................................................................... 7 
+13. Contact............................................................................................................................................................................ 8 
+14. Closing date for the RFI .................................................................................................................................................. 8 
+15. Annex A – Requirement .................................................................................................................................................. 9 
+16. Annex B – Industry Engagement Questions ................................................................................................................. 11 
+17. Annex C – Definitions ................................................................................................................................................... 13 
+
+3 
+ Solicitation No.
+W8482- 275197 
+1. Purpose and Nature of the Request for Information (RFI)
+The Department of National Defence (DND) is requesting Industry feedback regarding the procurement 
+of fourteen (14) new Diesel Driven Fire Pumps (DDFP) for use by the Royal Canadian Navy (RCN) on the 
+Halifax-Class Frigates. The DND is also requesting an option to procure twelve (12) additional DDFP’s if 
+necessary. 
+The objective of this RFI is to share the DND’s requirement and seek feedback from Industry on potential 
+options to meet the DND’s needs. This is the first step of a procurement process and is intended to 
+determine availability of goods, Industry capability to meet our technical requirements, and to provide 
+sustainment solutions. 
+This RFI is neither a call for tender nor a Request for Proposal (RFP). No agreement or contract will be 
+entered into based on this RFI. The issuance of this RFI is not to be considered in any way a commitment 
+by the Government of Canada, nor as authority to potential respondents to undertake any work that 
+could be charged to Canada. This RFI is not to be considered as a commitment to issue a subsequent 
+solicitation or award contract(s) for the work described herein. 
+Although the information collected may be provided as commercial-in-confidence (and, if identified as 
+such, will be treated accordingly by Canada), Canada may use the information to assist in drafting 
+performance specifications (which are subject to change) and for budgetary purposes. 
+Respondents are encouraged to identify, in the information they share with Canada, any information 
+that they feel is proprietary, third party or personal information. Please note that Canada may be 
+obligated by law (e.g. in response to a request under the Access of Information and Privacy Act) to 
+disclose proprietary or commercially-sensitive information concerning a respondent (for more 
+information: http://laws-lois.justice.gc.ca/eng/acts/a-1/). 
+Respondents are asked to identify if their response, or any part of their response, is subject to the 
+Controlled Goods Regulations. 
+Participation in this RFI is encouraged but is not mandatory. There will be no short-listing of potential 
+suppliers for the purposes of undertaking any future work as a result of this RFI. Similarly, participation 
+in this RFI is not a condition or prerequisite for the participation in any potential subsequent solicitation. 
+Respondents will not be reimbursed for any cost incurred by participating in this RFI. 
+The RFI closing date published herein is not the deadline for comments or input. Comments and input 
+will be accepted any time up to the time when/if a follow-on solicitation is published. 
+
+ 
+4 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+ 
+2. Background Information 
+ 
+ 
+ 
+The existing Diesel Driven Fire Pumps (DDFP) configuration consists of a Deutz Motoren Werke 
+Mannheim (MWM )D226 diesel engine driving a FF704121 INGERSOLL-RAND centrifugal pump. These 
+components are installed directly onto a steel base which is mounted onto the ship’s hull by means of 
+four (4) resilient mounts. 
+ 
+The Deutz MWM D226 engines are obsolete. 
+ 
+ 
+3. Potential Work Scope 
+ 
+The DND intends to procure fourteen (14) DDFP, plus Spares, Packaging, and Support &Test Equipment 
+(S&TE) for recommended first and second level maintenance enough to ensure maintenance of the 
+engines for two years, and to allocate work responsibilities between Canada and the Contractor. In 
+addition, DND is requesting an option to procure an additional twelve (12) DDFP. 
+ 
+The term “DDFP” includes the diesel engine and centrifugal pump solidly mounted onto a steel sub-base 
+and connected to each other by a flexible coupling.  It also includes any appendages mounted off the raft 
+assembly such as control panels, motor starters, and freshwater expansion/header tanks, etc., that are 
+intended to be fitted in the ship separately. 
+ 
+Installation of the DDFPs into the ships will be conducted by Canada either in a shipyard contracted by 
+Canada during a contracted refit period or within one of His Majesty’s Canadian (HMC) Dockyards. 
+ 
+ 
+ 
+4. Procurement Approach 
+ 
+The current plan is to solicit a competitive Solicitation of Offers on Canadabuys for design, testing, 
+delivery and support. Basis of Payment - Milestones for deliverables will be considered, if applicable. 
+ 
+ 
+ 
+ 
+
+ 
+5 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+ 
+5. Technical 
+ 
+ 
+5.1 Mandatory Technical Requirements 
+ 
+1) Capacity 147 m3/h and total head 10 bar 
+ 
+2) Weight no more than 1,214 kg complete without fluids 
+ 
+3) Fit in the following dimensions: 
+a) Length 80 inches  
+b) Width 41 inches 
+c) Height 52 inches including the mounts 
+ 
+4) Duty Cycle: 100% load continuous load for 100 hours/year. 
+ 
+5) Must maintain rated output under the following conditions: 
+a) Roll: +/- 40° for a 10 second period (i.e. from 0° to starboard to 40° port and back to 0° 
+within a 10 second period) 
+b) Pitch: +/- 10° within a 6 second period 
+c) Permanent list: +/- 20° max 
+d) Permanent trim: +/- 5° max 
+ 
+6) Must withstand and operate under the following ambient environments: 
+a) Fresh Air Supply 
+ 
+i) -32°C min (mandatory) 
+ii) -40°C min (desirable) 
+iii) +48°C max (mandatory) 
+b) Sea Temperature: 
+i)  -2.2°C min; 35°C max 
+c) Relative Humidity 
+ 
+ 
+i) 0% min; 100% max 
+d) Machinery Space Temp  
+i) -2°C min; 57°C max 
+ 
+7) Fuel Type: standard Naval distillate fuel to Canadian General Standards Board CGSB-3.11-2017, 
+with sulphur content of 15 ppm or less supplied by the existing Fuel Oil Services System 
+ 
+8) Engine Lubrication: 15W40 DEO-ULS CAT Oil 
+ 
+9) The DDFP to be installed will be lowered into the ships’ spaces through the hatches that are 
+914mm x 914 mm large. The design must allow the possibility that the DDFP, including the base 
+
+ 
+6 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+frame, be disassembled in components to pass through the hatches. 
+10) The contractor has the option to reuse the existing base frame for the new design. 
+ 
+11) The Contractor must provide the DDFP that meets the MIL-DTL-901E, for Grade A equipment - 
+“Shock Test, H.I. (High-Impact) Shipboard Machinery, Equipment, and Systems, Requirements 
+for”, Detail Specification, Department of Defense, Washington, 142 pages, 20 June 2017. 
+ 
+12) The Contractor must provide the DDFP that meets the MIL-STD-167-1A, “Mechanical Vibration of 
+Shipboard Equipment”, Department of Defense Test Method Standard, 2 November 2005, 15 
+pages. 
+ 
+5.2 Design Changes and Modifications during contract 
+ 
+Any technical changes, substitutes and alternatives proposed by the winning bidder must be evaluated 
+for acceptance by the Technical Authority (TA). Any substitutes and alternatives must be equivalent in 
+form, fit, function, quality and performance to what is being replaced and must be at no additional cost 
+to Canada. Substitutes and alternatives that are offered as equivalent will only be acceptable once they 
+are approved by the TA as an equivalent. A contract amendment or a completed Design 
+Change/Deviation form will be issued. Should the TA not accept the substitute or the alternative, and the 
+winning bidder is unable to meet the technical requirement, Canada reserves the right to source the 
+material elsewhere. 
+ 
+ 
+6. Certifications 
+ 
+ISO 9001 2015 – Quality anagement Systems (Q) 
+the Contractor must provide a Quality Management System (QMS) that conforms to ISO 
+9001:2015 Quality Management Systems – Requirements’, or other internationally Accepted 
+equivalent Standard as agreed by Canada. 
+Lloyds Registry  
+The Contractor must provide a DDFP engine with a Lloyd’s Register (LR) Type approval Certificate 
+and a LR Certificate for Oil Engines. The pump must be provided with a LR Certificate for Pumps. 
+ 
+7. Security Requirements 
+ 
+The security requirements will depend on the nature of the follow-on solicitation but is unlikely to have 
+security requirements if the contractor will only be required to deliver goods. 
+ 
+8. Legislation, Trade Agreements, and Government Policies: 
+ 
+The following is indicative of some of the legislation, trade agreements and government policies that 
+could impact any follow-on solicitation(s): 
+ 
+
+ 
+7 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+• 
+Defence Production Act 
+• 
+Canadian Free Trade Agreement (CFTA) 
+• 
+World Trade Organization Agreement on Government Procurement (WTO) 
+• 
+Our North Strong And Free (ONSAF) 
+• 
+Federal Contractors Program for Employment Equity (FCP-EE) 
+• 
+Buy Canadian Policy Suite 
+• 
+Security, Sovereignty and Prosperity – Canada’s Defence Industrial Strategy 
+ 
+9. Schedule. 
+In providing responses, the following schedule should be utilized as a baseline: 
+ 
+RFI Release – May 7 , 2026 
+RFI Response – June 12, 2026 
+Request for Proposal Release – August 2026 
+Contract Award – Fall 2026 
+ 
+10. Requested Information 
+ 
+Interested suppliers are requested to submit responses to Annex A – Requirement, Annex B – Industry 
+Engagement Questionnaire and are encouraged to provide suggestions and recommendations to 
+solutions to DND’s requirements. 
+  
+11. Buy Canadian Policy 
+ 
+The Government of Canada is strengthening opportunities for Canadian businesses in federal 
+procurement through the following measures: 
+ 
+• 
+Buy Canadian Procurement Policy Framework.  
+• 
+Policy on Prioritizing Canadian Materials in Federal Procurement. 
+• 
+Policy on Prioritizing Canadian Suppliers and Canadian Content in Strategic Federal 
+Procurement.  
+ 
+These polices may apply to the subsequent RFP. Respondents are requested to submit information in 
+response to the questions attached (Annex B) as engagement through this Request for Information (RFI) 
+which will help determine the Buy Canadian Policy’s application and how it could be applied to this 
+procurement. 
+ 
+12. Enquiries 
+ 
+All enquiries and other communications related to this RFI must be directed exclusively to the 
+Contracting Authority. All enquiries are to be submitted to the Contracting Authority no later than five 
+(5) calendar days before the closing date. Enquiries received after that time may not be answered. Care 
+shall be taken by vendors to explain each question in sufficient detail in order to enable Canada to 
+
+ 
+8 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+provide an accurate answer. Technical enquiries that are of a proprietary nature must be clearly marked 
+"proprietary" at each relevant item. Items identified as "proprietary" will be treated as such except 
+where Canada determines that the enquiry is not of a proprietary nature. Canada may edit the questions 
+or may request that the vendor do so, so that the proprietary nature of the question is eliminated, and 
+the enquiry can be answered with copies to all vendors. Enquiries not submitted in a form that can be 
+distributed to all vendors may not be answered by Canada. 
+ 
+All pertinent Questions and Answers (Q&A) from written communication will be published on the 
+Government Electronic Tendering System (Buy and Sell). 
+ 
+13. Contact 
+ 
+Interested Respondents may submit their responses to the DND Contracting Authority, identified below, 
+preferably via email: 
+ 
+Name: Devin McClellan 
+Section: DGMEPM – D Mar P 9 
+Title: Senior Material Acquisition and Support, Team Lead 
+Address: Department of National Defence 101 Colonel by, Ottawa, Ontario, Canada 
+Telephone: (343-571-1916) 
+E-mail: devin.mcclellan@forces.gc.ca 
+ 
+A point of contact for the Respondent should be included in the package. 
+ 
+Changes to this RFI may occur and will be advertised on CanadaBuys. Canada asks Respondents to visit 
+https://canadabuys.canada.ca/en regularly to check for changes, if any. 
+ 
+ 
+14. Closing date for the RFI 
+ 
+Responses to this RFI are to be submitted to the DND Contracting Authority identified above, on or 
+before June 12, 2026.  
+ 
+ 
+
+ 
+9 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+ 
+15. Annex A – Requirement 
+ 
+The Contractor must ensure that the items delivered to Canada are accompanied by Certification of 
+conformance from the Original Equipment Manufacturer (OEM) to meet Canada regulatory and 
+assurance requirements. 
+15.1 Integration Requirements 
+The Contractor must design the DDFP into the Physical Envelope Requirements stated in section 5, and 
+the Contractor must integrate the DDFP fully with the existing System Alarm, Monitoring, Control, and 
+Safety Device signals. 
+The Contractor must develop and deliver an Interface Control Document (ICD) to ensure that interface 
+management processes are in place to identify and control all external and internal interfaces. The 
+Contractor must identify each interface and describe its purpose in the ICD. 
+The Contractor must include in the ICD installation specifications and directions which will form part of 
+the Department of National Defence (DND) Engineering Change package. Canada may provide this 
+specification to a third party involved in the installation. 
+15.2 Manuals 
+The Contractor must provide operating and maintenance manuals. The manuals must detail all 
+maintenance activity and procedures for DDFP and component repairs, strip-down and overhaul. 
+The Contractor must provide parts manuals. The manuals must provide a complete breakdown of all 
+DDFP component parts. 
+The contractor must provide a letter to provide the right to DND to share the manuals with a third party 
+for the development of the preventive maintenance schedules and instructions. 
+15.3 Provisioning Documentation (PD) 
+Prior to producing or procuring Spares, Packaging, Support & Test Equipment (S&TE), or Training Devices, 
+the Contractor must conduct the Provisioning Documentation. 
+The PD must include the following: 
+− 
+the recommended Spares, Packaging (such as special-to-type Packaging), S&TE, and Training Device will 
+Support the DDFP in the intended operational and Support environments at the operating rates in 
+accordance with the System Requirements Document (SRD);  
+− 
+the recommended range and quantity of Spares, Packaging, S&TE, and Training Device are in accordance 
+with the SRD; and  
+− 
+Spares, Packaging, S&TE, and Training Device analyses provide the justification to enable Canada to 
+
+ 
+10 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+Approve the S&TE and Training Devices. 
+The Contractor must provide the list of Spares, Packaging, and S&TE for recommended 1st and 2nd level 
+maintenance for two years of operation. 
+15.4 Training 
+After delivery of the first DDFP, the Contractor must provide Training sessions for the DDFP on task-by-
+task basis. 
+Training sessions will be held in Halifax, NS or Victoria, BC. 
+15.5 Acceptance Testing 
+The Contractor must develop, deliver, and update an Acceptance Test Plan (ATP). 
+For delivery and acceptance of the first DDFP, the Contractor must include in the ATP a plan for the First 
+Article Acceptance Test (FAAT), and a Final Inspection and Test (FI&T) for each subsequent DDFP 
+The Contractor must demonstrate that each DDFP offered for Acceptance complies with the 
+Requirements of the Contract by the conduct of a: 
+− 
+FAAT for the first DDFP in accordance with the Approved ATP; and 
+− 
+FI&T for each subsequent DDFP, in accordance with the Approved ATP. 
+The Contractor must invite Canada or representatives appointed by Canada to witness the FAAT or FI&T 
+activities for each DDFP offered for Acceptance.  
+15.6 Quality Management 
+At the Contract award, the Contractor must provide a Quality Management System (QMS) that conforms 
+to ISO 9001:2015 ‘Quality Management Systems – Requirements’, or other internationally Accepted 
+equivalent Standard as agreed by Canada. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+11 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+ 
+16. Annex B – Industry Engagement Questions 
+ 
+Instructions – Please answer as many questions as possible and you are encouraged to provide suggestions or 
+industry standards if applicable. 
+ 
+Question 1 
+ 
+Is there industry capacity to design and deliver a DDFP to our specifications? We would consider envelope 
+dimensions slightly larger than stated in paragraph 5. Please explain. 
+ 
+Question 2 
+ 
+ 
+Is industry capable of delivering a DDFP that is ISO 9001 certified? 
+ 
+Question 3 
+ 
+What is industries capacity to support the equipment in service: sustainment through technical support, repairs 
+and overhaul? If yes, do you have repair facilities in Canada? Where? 
+ 
+Question 4 
+ 
+Can respondents provide Lloyd’s Register (LR) Certification If not, can the respondent   obtain LR certification? 
+ 
+Question 6 
+ 
+What would be the estimated design lead time? What would be the estimated manufacturing lead time? 
+ 
+Question 7 
+ 
+Is industry capable of meeting shock/vibration tested to the MIL standards for the proposed DDFP?  
+ 
+Question 8 
+ 
+Does Industry have the capability to modify an existing Commercial of the Shelf (COTS) DDFP to meet our 
+requirements? 
+ 
+Question 9 
+ 
+Can you provide an estimated project schedule and delivery schedule? 
+ 
+
+ 
+12 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+Question 10 
+Do you have experience in providing DDFP’s of similar technical requirements for other ships. If so, provide details 
+as to which you’ve manufactured, and/or designed. 
+ 
+ 
+
+ 
+13 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+ 
+17. Annex C – Definitions 
+ 
+In the Contract, unless the context otherwise requires, the following terms have the following meanings. 
+"Canada", “His Majesty” or "the Government" means His Majesty the King in right of Canada as represented by 
+the Minister of Public Works and Government Services and any other person duly authorized to act on behalf of 
+that minister or, if applicable, an appropriate minister to whom the Minister of Public Works and Government 
+Services has delegated his or her powers, duties or functions and any other person duly authorized to act on behalf 
+of that minister. 
+“Canadian Good” means: a good wholly manufactured or originating in Canada; or a product containing imported 
+components that has undergone sufficient change in Canada in a manner that satisfies the definition specified 
+under the Canada-United-States-Mexico Agreement (CUSMA) Rules of Origin. For the purposes of this definition, 
+the reference to "territory of the Parties" in the CUSMA Rules of Origin is to be replaced with "Canada". 
+"Canadian Supplier" means: a supplier that has a place of business in Canada where it conducts activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours; or, a joint venture 
+where each member of the joint venture has a place of business in Canada where it conducts activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours; and is registered 
+and files taxes in Canada (e.g., GST/HST, corporate income tax); maintains a registered address in Canada and 
+employs personnel and/or conducts day-to-day business activities in Canada; and will not subcontract work to non-
+Canadian suppliers or individuals located outside Canada, in a manner that results in minimal value-added 
+activities being performed within Canada. 
+“Canadian Service” means a service wholly provided by (natural persons/individuals) based in Canada. Services 
+include construction services. 
+“Canadian Value-Added" means: 
+-in relation to services, a Canadian Service or the proportion of the service contract performed by natural persons 
+based in Canada; and  
+-in relation to goods, a Canadian Good or the value of the portion of the good produced in Canada or the 
+difference between the dutiable value of the imported goods and the selling price, taking into account any value 
+added by manufacturers and distributors, and including any costs incurred in Canada related to research and 
+development, sales and marketing, communications and manuals, customization, modifications, installation, and 
+support, warehousing, distribution, and logistics, training and after-sales service. 
+"Party" means Canada, the Contractor, or any other signatory to the Contract and "Parties" means all of them. 
+" 
+"Specifications" means the description of the essential, functional or technical requirements of the Work in the 
+Contract, including the procedures for determining whether the requirements have been met. 
+"Work" means all the activities, services, goods, equipment, matters and things that the Contractor is required to 
+do, deliver or perform under the Contract. 
+“Aluminum Smelted and Cast in Canada” means that: 
+a) for all aluminum material except aluminum sheets and plates: the largest volume of primary aluminum 
+contained in the material was produced in Canada; and 
+b) for all aluminum sheets and plates: any percentage of primary aluminum contained in the material was 
+produced in Canada. 
+Canadian Aluminum” means a) a product listed in the Annex Schedule of Materials - Canadian Aluminum; and b) 
+fabricated from Aluminum Smelted and Cast in Canada. 
+
+ 
+14 
+ 
+ 
+ Solicitation No. 
+W8482- 275197 
+ 
+“Canadian Steel” means a) a product listed in the Annex Schedule of Materials - Canadian Steel; and b) fabricated 
+from Steel Melted and Poured in Canada. 
+“Canadian Wood Products” means any wood product listed in Annex Schedule of Materials – Canadian Wood 
+Products, and fabricated in Canada.  
+“Materials” means Canadian Steel, Canadian Wood Products, and Canadian Aluminum. 
+“Steel Melted and Poured in Canada” means the raw steel, or any portion of the raw steel, contained in the 
+material first produced in a liquid state in a steel-making furnace and poured into its first solid state in Canada. 
+Solid state can take the form of a semi-finished or finished steel mill product. 

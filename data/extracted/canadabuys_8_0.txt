@@ -1,0 +1,2866 @@
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 1 of 52 
+ 
+ 
+RETURN BIDS TO : 
+ 
+ 
+See herein for bid submission instructions - section 
+SI03 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+INVITATION TO TENDER (ITT) 
+TRADES 
+ 
+Tender To: Natural Resources Canada 
+ 
+We hereby offer to sell to His Majesty the King in right 
+of Canada, in accordance with the terms and 
+conditions set out herein, referred to herein or 
+attached hereto, the goods, services, and construction 
+listed herein and on any attached sheets at the price(s) 
+set out therefor. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Issuing Office  
+ 
+Finance and Procurement Management Branch  
+Natural Resources Canada 
+580 Booth Street 
+Ottawa (Ontario)  K1A 0E4 
+ 
+ Title  
+Welding Services for High-Pressure Piping System 
+Solicitation No. 
+NRCan-5000094712 
+Date 
+MAY 7, 2026 
+Client Reference No.  
+188961 
+Solicitation Closes  
+at 
+02:00 PM (Eastern Daylight Savings Time (EDT))   
+on :  
+MAY 28, 2026  
+ 
+Address Enquiries to:  
+Steve Verner; steve.verner@nrcan-rncan.gc.ca 
+Telephone No.  
+ 
+343-543-6090 
+Destination – of Goods, Services and Construction: 
+ 
+Natural Resources Canada 
+1 Haanel Drive  
+Ottawa (Ontario) K1A 1M1 
+Security  
+ 
+THERE ARE SECURITY REQUIREMENTS ASSOCIATED 
+WITH THIS REQUIREMENT. 
+ 
+ 
+Instructions: See Herein 
+ 
+Vendor/Firm Name and Address 
+ 
+ 
+ 
+ 
+ 
+Telephone No.: 
+ 
+Email address: 
+ 
+Name and Title of person authorized to sign on behalf of Vendor/Firm 
+(type or print) 
+ 
+ 
+ 
+ 
+____________________________________________________________________ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+________ 
+Signature  
+ 
+ 
+Date 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 2 of 52 
+ 
+INVITATION TO TENDER 
+ 
+ 
+IMPORTANT NOTICE TO BIDDERS 
+ 
+ 
+NOTE TO BIDDERS There will be no Public Opening for the purposes of this solicitation.  
+ 
+SOLICITATION OF OFFER SUBMISSION ELIGIBILITY. This solicitation of offers is subject to the Policy 
+on Reciprocal Procurement. This means that only Canadian Suppliers Suppliers and Suppliers of an Applicable 
+Trading Partner, as defined below, are eligible for this RFP. Proposals (bids) submitted by Suppliers of a Non-
+Trading Partner will be rejected. 
+  
+Canadian Supplier means a supplier that has a place of business in Canada where it conducts activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours; or, a joint 
+venture where each member of the joint venture has a place of business in Canada where it conducts activities 
+on a permanent basis that is clearly identified by name and accessible during normal business hours. 
+Supplier of an Applicable Trading Partner means a supplier that has a place of business in an Applicable 
+Trading Partner where it conducts activities on a permanent basis that is clearly identified by name and 
+accessible during normal business hours; or, a joint venture where at least one member of the joint venture 
+has a place of business in an Applicable Trading Partner where it conducts activities on a permanent basis that 
+is clearly identified by name and accessible during normal business hours, and all other members of the joint 
+venture either have a place of business in an Applicable Trading Partner where they conduct activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours or are a 
+Canadian Supplier. 
+Supplier of a Non-Trading Partner means any supplier that is not a Canadian Supplier or a Supplier of an 
+Applicable Trading Partner; or, a joint venture where any member of the joint venture is not a Canadian 
+Supplier or a Supplier of an Applicable Trading Partner. 
+Applicable Trading Partner means a country or customs territory other than Canada that is listed, pursuant to 
+the schedule to the Canadian International Trade Tribunal Procurement Inquiry Regulations, as a party to any 
+of the trade agreements applicable to this solicitation; 
+ 
+FEDERAL PROMPT PAYMENT FOR CONSTRUCTION WORK ACT 
+The resulting contract will be subject to the Federal Prompt Payment for Construction Work Act. Under the 
+terms of the legislation, the federal government will have 28 calendar days to pay after the contractor submits 
+a proper invoice. The contractor will then have 7 days to pay its subcontractors, subcontractors will have 
+another 7 days to pay their sub-subcontractors, and so on down the contracting payment chain. 
+https://laws.justice.gc.ca/eng/acts/f-7.7/FullText.html 
+ 
+ 
+TENDER DOCUMENTS 
+Firms intending to submit tenders on this project should obtain tender documents through the website  
+Homepage | CanadaBuys (https://canadabuys.canada.ca/en) 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 3 of 52 
+ 
+THIS DOCUMENT CONTAINS AN INDUSTRIAL SECURITY REQUIREMENT 
+For further instructions please consult “Special Instruction to Bidders”, SI09, “Industrial Security Related 
+Requirements” and “Supplementary Conditions” SC01 “Industrial Security Related Requirements, Document 
+Safeguarding Location”. 
+ 
+LISTING OF SUBCONTRACTORS AND SUPPLIERS 
+Take note that GI “Listing of Subcontractors and Suppliers” has been amended. The Bidder must submit the 
+names of Subcontractors and Suppliers for the part or parts of the Work listed. Failure to do so will result in 
+the disqualification of its bid. 
+ 
+GREENHOUSE GAS EMISSIONS AND THE SETTING OF REDUCTION TARGETS  
+Canada is committed to achieving net zero greenhouse gas (GHG) emissions by 2050 in an effort to position 
+Canada for success in a green economy and to mitigate climate change impacts. As a result, future solicitations 
+may include the following: 
+ 
+• there may be evaluation criteria or other instructions in the solicitation or contract documents related 
+to measuring and disclosing your company’s GHG emissions;  
+• you may be requested or required to join one of the following initiatives to submit a bid, offer or 
+arrangement or if you are awarded the contract: 
+o Canada’s Net-Zero Challenge;  
+o the United Nations Race to Zero; 
+o the Science-based Targets Initiative; 
+o the Carbon Disclosure Project; 
+o the International Organization for Standardization; 
+• you may be required to provide other evidence of your company’s commitment and actions toward 
+meeting net zero targets by 2050. 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 4 of 52 
+ 
+TABLE OF CONTENTS 
+ 
+SPECIAL INSTRUCTIONS TO BIDDERS (SI) 
+SI01 
+Bid Documents 
+SI02 
+Bid preparation instructions 
+SI03 
+Submission of bid 
+SI04 
+Procurement business number  
+SI05 
+Enquiries during the Solicitation Period 
+SI06 
+Revision of Bid 
+SI07 
+Bid Result 
+SI08 
+Insufficient Funding 
+SI09 
+Bid Validity Period 
+SI10 
+Right of Canada 
+SI11 
+Industrial Security Related Requirements  
+SI12 
+Bid challenge and recourse mechanisms 
+SI13 
+Technical difficulties of bid transmission Web Sites 
+SI14 
+Completeness of the bid  
+SI15  
+Web Sites 
+SI16 
+Financial Bid 
+ 
+ 
+R2410T GENERAL INSTRUCTIONS - CONSTRUCTION SERVICES (GI) (2022-01-28) 
+The following GI’s are included by reference and are available at the following Web Site 
+https://buyandsell.gc.ca/policy-and-guidelines/standard-acquisition-clauses-and-conditions-manual/5/R 
+GI01 
+Integrity Provisions - Bid   
+GI02    Completion of Bid 
+GI03    Identity or Legal Capacity of the Bidder 
+GI04    Applicable Taxes 
+GI05    Capital Development and Redevelopment Charges 
+GI06    Listing of Subcontractors and Suppliers 
+GI07    Submission of Bid  
+GI08    Revision of Bid 
+GI09    Rejection of Bid 
+GI10    Bid Costs 
+GI11    Procurement Business Number  
+GI12    Compliance with Applicable Laws 
+GI13    Approval of Alternative Materials 
+GI14    Performance Evaluation 
+GI15 
+Conflict of Interest-Unfair Advantage 
+GI16  Code of Conduct for Procurement—bid 
+ 
+SUPPLEMENTARY CONDITIONS (SC) 
+SC01 Industrial Security Related Requirements, Documents Safeguarding 
+SC02 Insurance Terms 
+SC03  Compliance with on-site measures, standing orders, policies, and rules 
+SC04 Departmental representative’s authority 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 5 of 52 
+ 
+SC05 Base of payment 
+SC06 Method of payment 
+SC07 Invoicing Instructions 
+SC08 Reciprocal procurement compliance. 
+ 
+ 
+CONTRACT DOCUMENTS (CD) 
+ 
+BID AND ACCEPTANCE FORM (BA) 
+BA01 Identification 
+BA02 Business Name and Address of Bidder 
+BA03 The Offer 
+BA04 Bid Validity Period 
+BA05 Acceptance and Contract 
+BA06 Construction Time 
+BA07 Signature  
+ 
+APPENDIX 1 - FINANCIAL BID PRESENTATION SHEET 
+APPENDIX 2 – INTEGRITY PROVISIONS 
+APPENDIX 3 – CERTIFICATIONS INDIGENOUS DESIGNATION 
+APPENDIX 4 – EVALUATION CRITERIA 
+ 
+ANNEX A – STATEMENT OF WORK  
+ANNEX B – BASIS OF PAYMENT 
+ANNEX C – SECURITY REQUIREMENT CHECK LIST (SRCL) 
+ANNEX D – CERTIFICATE OF INSURANCE 
+ANNEX E – LISTING OF SUBCONTRACTORS  
+ANNEX F – TIME SHEET and TASK REPORT 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 6 of 52 
+ 
+SPECIAL INSTRUCTIONS TO BIDDERS (SI) 
+ 
+SI01 
+BID DOCUMENTS 
+ 
+1. 
+The following are the bid documents: 
+ 
+a. 
+Invitation to Tender - Page 1; 
+b. 
+Special Instructions to Bidders; 
+c. 
+General Instructions - Construction Services, R2410T (2022-01-28)  
+d. 
+Clauses & Conditions identified in “Contract Documents”; 
+e. 
+Drawings and Specifications; 
+f. 
+Bid and Acceptance Form and related Appendix(s); and 
+g. 
+Any amendment issued prior to solicitation closing. 
+ 
+ 
+Submission of a bid constitutes acknowledgement that the Bidder has read and agrees to be bound by 
+these documents. 
+ 
+2. 
+General Instructions- Construction Services R2410T is incorporated by reference and is set out in the 
+Standard  acquisition Clauses and Conditions (SACC) Manual, issued by Public Works and Government 
+Services Canada (PWGSC). The SACC Manual is available on the PWGSC Web site: 
+http://canadabuys.canada.ca/en/how-procurement-works/policies-and-guidelines/standard-
+acquisition-clauses-and-conditions-manual?utm_campaign=pspc-spac-sacc-24-25&utm_content=sacc-
+bas-interstitial-fr&utm_medium=pog&utm_source=buyandsell-gc-ca 
+ 
+In the complete text content: Delete: Public Works and Government Services Canada” and Insert:  
+“Natural Resources Canada.”  Delete:  “PWGSC” and Insert:  “NRCan” 
+ 
+SI02 
+BID PREPARATION INSTRUCTIONS  
+ 
+Canada requests that the following sections be included, and these should be presented in separate 
+sections as follows: 
+ 
+Section I: Bid and Acceptance Form (BA) 
+Section II: Financial Bid presentation Sheet (Appendix 1) 
+Section III: Evaluation Criteria – Appendix 4 
+Section IV: Appendix 2 - Integrity Provisions 
+Section V: Appendix 3 - Certification of Aboriginal Designation 
+Section VI: Annex F - List of Subcontractors 
+ 
+Prices must appear on the Financial Bid presentation Sheet only. No prices are to be shown in any other 
+section of the bid. 
+ 
+SI03 
+SUBMISSION OF BID  
+ 
+R2410T General Instructions - Construction Services, (GI07) Submission of bid, delete the following:  
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 7 of 52 
+ 
+ 
+1. The Bid and Acceptance Form, duly completed, shall be enclosed and sealed in an envelope provided 
+by the Bidder, and shall be addressed and submitted to the office designated on the Front Page 
+"Invitation to Tender" for the receipt of bids. The bid must be received on or before the date and time 
+set for solicitation closing. 
+ 
+R2410T General Instructions - Construction Services, (GI07) Submission of bid, add the following: 
+ 
+ 
+Bidders must submit all bids using the Canada Post Canada (CPC) Connect service.  Given the current 
+constraints on NRCan’s networks, the electronic mail system has a limit of 1GB per single message 
+received and a limit of 20GB per conversation.   
+ 
+ 
+Bids must be submitted no later than the date and time indicated on page 1 of the bid solicitation.  
+ 
+ 
+Only bids submitted using CPC Connect service will be accepted.  
+ 
+ 
+ 
+At least five (5) business days before the bid solicitation closing date, it is necessary for the 
+Bidder to send an email requesting to open CPC Connect conversation to the following address:  
+ 
+procurement-approvisionnement@NRCan-RNCan.gc.ca 
+ 
+ 
+ 
+ 
+Note 1: Bids will not be accepted if e-mailed directly to this address. This e-mail address is to be 
+used to open CPC Connect conversation, as detailed in the Standard Instructions 2003 (article 08, 
+paragraph 2), or to send bids through CPC Connect message if the bidder is using its own licensing 
+agreement for CPC Connect.  
+ 
+ 
+Note 2: Send as early as possible in order to ensure a response, Requests to open a CPC Connect 
+conversation received after that time may not be answered. 
+ 
+ 
+IMPORTANT:  It is requested that you write the bid solicitation number in “Subject” of the email:  
+ 
+NRCan-5000094712-Welding Services-188961 
+ 
+ 
+NRCan will not assume responsibility for bids directed to any other location.  
+ 
+The onus is on the Bidder to ensure that the bid is submitted correctly using CPC Connect service. Not 
+complying with the instructions may result in NRCan’s inability to ascertain reception date and/or to 
+consider the bid prior to contract award.  Therefore, NRCan reserves the right to reject any bid not 
+complying with these instructions. 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 8 of 52 
+ 
+Due to the nature of the bid solicitation, bids transmitted by email, mail or facsimile to NRCan will not be 
+accepted. 
+ 
+SI04 
+ PROCUREMENT BUSINESS NUMBER 
+ 
+R2410T  General Instructions - Construction Services, GI11 Procurement Business Number, Delete the entire 
+section 
+ 
+SI05 
+ENQUIRIES DURING THE SOLICITATION PERIOD 
+ 
+1. 
+Enquiries regarding this bid must be submitted in writing to the Contracting Officer named on the 
+Invitation to Tender - Page 1 as early as possible within the solicitation period. Except for the approval 
+of alternative materials as described in GI13 of R2410T, enquiries should be received no later than five 
+(5) calendar days prior to the date set for solicitation closing to allow sufficient time to provide a 
+response. Enquiries received after that time may not result in an answer being provided.  
+ 
+2. 
+To ensure consistency and quality of the information provided to Bidders, the Contracting Officer shall 
+examine the content of the enquiry and shall decide whether or not to issue an amendment. 
+ 
+3. 
+All enquiries and other communications related to this bid sent throughout the solicitation period are 
+to be directed ONLY to the Contracting Officer named on the Invitation to Tender - Page 1. Failure to 
+comply with this requirement may result in the bid being declared non-responsive.  
+ 
+ 
+SI06 
+REVISION OF BID 
+ 
+A bid may be revised by email in accordance with GI08 of R2410T.   
+The email address for receipt of revisions is steve.verner@nrcan-rncan.gc.ca  
+ 
+SI07 
+BID RESULTS 
+ 
+1. 
+There will be no public bid opening. 
+ 
+2. 
+The responsive bid that meets all mandatory technical evaluation criteria and carrying the lowest price 
+will be recommended for contract award. 
+ 
+3. 
+Following solicitation closing, bid results may be obtained by email at the following address: 
+steve.verner@nrcan-rncan.gc.ca 
+ 
+SI08 
+INSUFFICIENT FUNDING 
+ 
+In the event that the lowest compliant bid exceeds the amount of funding allocated for the Work, Canada in 
+its sole discretion may 
+ 
+a. cancel the solicitation; or 
+ 
+b. obtain additional funding and award the Contract to the Bidder submitting the lowest compliant bid; 
+and/or 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 9 of 52 
+ 
+c. negotiate a reduction in the bid price and/or scope of work of not more than 15% with the Bidder 
+submitting the lowest compliant bid.  Should an agreement satisfactory to Canada not be reached, 
+Canada shall exercise option (a) or (b). 
+ 
+SI09 
+BID VALIDITY PERIOD 
+ 
+1. 
+Canada reserves the right to seek an extension to the bid validity period prescribed in BA04 of the Bid 
+and Acceptance Form. Upon notification in writing from Canada, Bidders shall have the option to either 
+accept or reject the proposed extension. 
+ 
+2. 
+If the extension referred to in paragraph 1. of SI07 is accepted, in writing, by all those who submitted 
+bids, then Canada shall continue immediately with the evaluation of the bids and its approvals 
+processes.   
+ 
+3. 
+If the extension referred to in paragraph 1. of SI07 is not accepted in writing by all those who 
+submitted bids then Canada shall, at its sole discretion, either 
+ 
+a. 
+continue to evaluate the bids of those who have accepted the proposed extension and seek the 
+necessary approvals; or 
+ 
+b. 
+cancel the invitation to tender. 
+ 
+4. 
+The provisions expressed herein do not in any manner limit Canada’s rights in law or under GI09 of 
+R2410T. 
+ 
+SI10 
+RIGHTS OF CANADA 
+ 
+Canada reserves the right to: 
+ 
+a. Reject any or all bids received in response to the bid solicitation; 
+b. Enter into negotiations with bidders on any or all aspects of their bids; 
+c. Accept any bid in whole or in part without negotiations; 
+d. Cancel the bid solicitation at any time; 
+e. Reissue the bid solicitation; 
+f. If no compliant bids are received and the requirement is not substantially modified, reissue the bid 
+solicitation by inviting only the bidders who bid to resubmit bids within a period designated by Canada; 
+and 
+g. Negotiate with the sole compliant Bidder to ensure best value to Canada. 
+ 
+SI11 
+INDUSTRIAL SECURITY RELATED REQUIREMENTS 
+ 
+1. 
+At bid closing, the Bidder must hold a valid Security Clearance as indicated in section SC01 of the 
+Supplementary Conditions. Failure to comply with this requirement will render the Bid non-compliant 
+and no further consideration will be given to the Bid. 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 10 of 52 
+ 
+2. 
+The Successful Bidder's personnel, as well as any subcontractor and its personnel, who are required to 
+perform any part of the Work pursuant to the subsequent contract must meet the mandatory security 
+requirement as indicated in section SC01 of the Supplementary Conditions. Individuals who do not 
+have the required level of security will not be allowed on site. It is the responsibility of the successful 
+bidder to ensure that the security requirements are met throughout the performance of the contract. 
+Canada will not be held liable or accountable for any delays or additional costs associated with the 
+successful bidder's non-compliance with the mandatory security requirement.  
+ 
+3. 
+For additional information on security requirements, bidders should consult the “Security 
+Requirements for PWGSC Bid Solicitations - Instructions for Bidders” on the Standard Procurement 
+Documents Web site Industrial Security Program (http://www.tpsgc-pwgsc.gc.ca/esc-src/introduction-
+eng.html). 
+ 
+SI12 
+BID CHALLENGE AND RECOURSE MECHANISMS 
+ 
+(a) Several mechanisms are available to potential suppliers to challenge aspects of the procurement process 
+up to and including contract award.  
+ 
+(b) Canada encourages suppliers to first bring their concerns to the attention of the Contracting Authority.  
+Canada’s CanadaBuys website, under the heading “Following up on a bid | CanadaBuys” contains 
+information on potential complaint bodies such as: 
+ 
+• 
+Office of the Procurement Ombudsman (OPO) 
+• 
+Canadian International Trade Tribunal (CITT) 
+ 
+(c) Suppliers should note that there are strict deadlines for filing complaints, and the time periods vary 
+depending on the complaint body in question. Suppliers should therefore act quickly when they want to 
+challenge any aspect of the procurement process.  
+ 
+The Office of the Procurement Ombud (OPO) was established by the Government of Canada to provide an 
+impartial, independent venue for Canadian bidders to raise complaints regarding the award of certain federal 
+contracts under $34,700 for goods and $139,000 for services. If you have concerns regarding the award of a 
+federal contract below these dollar amounts, you should contact OPO by e-mail at ombudsman@opo-
+boa.gc.ca, by telephone at 1-866-734-5169, or by web at www.opo-boa.gc.ca. For more information on 
+OPO’s services or to determine if your concerns are within the Ombud’s mandate, please see 
+the Procurement Ombudsman Regulations or visit the Office of the Procurement Ombud website. 
+ 
+SI13 
+TECHNICAL DIFFICULTIES OF BID TRANSMISSION 
+ 
+This section applies despite anything to the contrary in this solicitation or the General Instructions. 
+ 
+Where a Bidder has commenced transmission of its bid through an electronic submission method (such as 
+facsimile or Canada Post Corporation's (CPC) Connect service, CanadaBuys (SAP Business Network) or other 
+online service) in advance of the bid solicitation closing date and time, but due to technical difficulties, Canada 
+was unable to receive or decode the entirety of the Bid by the deadline, Canada may nonetheless accept the 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 11 of 52 
+ 
+entirety of the Bid received after the bid solicitation closing date and time, provided that the Bidder can 
+demonstrate the following: 
+ 
+(i) The bidder contacted Canada in advance of the bid solicitation closing date and time to attempt to resolve 
+its technical difficulties; OR 
+ 
+(ii) The electronic properties of the Bid documentation clearly indicate that all components of the Bid were 
+prepared in advance of the bid solicitation closing date and time. 
+ 
+SI14 
+COMPLETENESS OF THE BID 
+ 
+After the closing date and time of this bid solicitation, Canada will examine the Bid to determine 
+completeness. The review for completeness will be limited to identifying whether any information submitted 
+as part of the bid can be accessed, opened, and/or decoded. This review does not constitute an evaluation of 
+the content, will not assess whether the Bid meets any standard or is responsive to all solicitation 
+requirements, but will be solely limited to assessing completeness. Canada will provide the Bidder with the 
+opportunity to submit information found to be missing or incomplete in this review within two business days 
+of notice.  
+ 
+Specifically, the bid will be reviewed and deemed to be complete when the following elements have been 
+submitted by the bidder: 
+ 
+1. That certifications and securities required at bid closing are included. 
+2. That bids are properly signed, that the bidder is properly identified. 
+3. Acceptance of the terms and conditions of the bid solicitation and resulting contract. 
+4. That all documents created prior to bid closing but due to technical difficulties Canada was unable to 
+receive them, have been properly submitted and received by Canada. 
+5. All certifications, declarations and proofs created prior to bid closing but due to technical difficulties 
+Canada was unable to receive them, have been properly submitted and received by Canada. 
+ 
+SI15 
+WEB SITES 
+ 
+The connection to some of the Web sites in the solicitation documents is established by the use of hyperlinks.  
+The following is a list of the addresses of the Web sites: 
+ 
+CanadaBuys https://canadabuys.canada.ca/en 
+ 
+PWGSC, Contract Security Program  
+http://www.tpsgc-pwgsc.gc.ca/esc-src/introduction-eng.html  
+ 
+Construction and Consultant Services Contract Administration Forms Real Property Contracting  
+http://www.tpsgc-pwgsc.gc.ca/app-acq/forms/formulaires-forms-eng.html 
+ 
+Declaration Form 
+http://www.tpsgc-pwgsc.gc.ca/ci-if/formulaire-form-eng.html 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 12 of 52 
+ 
+ 
+Trade agreements 
+https://buyandsell.gc.ca/policy-and-guidelines/Policy-and-Legal-Framework/Trade-Agreements 
+ 
+Canadian economic sanctions  
+https://www.international.gc.ca/world-monde/international_relations-
+relations_internationales/sanctions/index.aspx?lang=eng 
+ 
+Standard Acquisition Clauses and Conditions (SACC) Manual  
+http://canadabuys.canada.ca/en/how-procurement-works/policies-and-guidelines/standard-acquisition-
+clauses-and-conditions-manual?utm_campaign=pspc-spac-sacc-24-25&utm_content=sacc-bas-interstitial-
+fr&utm_medium=pog&utm_source=buyandsell-gc-ca 
+ 
+PWGSC, Industrial Security Services  
+http://www.canada.ca/en/public-services-procurement/services/industrial-security.html  
+ 
+PWGSC, Code of Conduct and Certifications 
+https://www.canada.ca/en/public-services-procurement/services/acquisitions/supplier-conduct/code.html 
+ 
+Construction and Consultant Services Contract Administration Forms Real Property Contracting  
+http://www.tpsgc-pwgsc.gc.ca/app-acq/forms/formulaires-forms-eng.html 
+ 
+ 
+SI16 
+FINANCIAL BID 
+ 
+The total amount of the bid excludes taxes 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 13 of 52 
+ 
+SUPPLEMENTARY CONDITIONS (SC) 
+ 
+SC01 INDUSTRIAL SECURITY RELATED REQUIREMENTS, DOCUMENT SAFEGUARDING 
+ 
+The following security requirement (SRCL and related clauses) applies and form part of the Contract. 
+ 
+1. 
+The Contractor must, at all times during the performance of the Contract, hold a valid Designated 
+Organization Screening (DOS), issued by the Contract Security Program (CSP), Public Works and 
+Government Services Canada (PWGSC). 
+ 
+2. 
+The Contractor personnel requiring access to sensitive site(s) must EACH hold a valid RELIABILITY 
+STATUS, granted or approved by the CSP, PWGSC. 
+ 
+3.  
+Subcontracts which contain security requirements are NOT to be awarded without the prior written 
+permission of the CSP, PWGSC. 
+ 
+4. 
+The Contractor must comply with the provisions of the: 
+ 
+a) 
+Security Requirements Check List and Supplemental Security and Classification Guide (if 
+applicable), attached at Annex C; 
+b) 
+Contract Security Manual (Latest Edition). 
+ 
+SC02 INSURANCE TERMS  
+ 
+1) 
+Insurance Contracts 
+ 
+(a) The Contractor must, at the Contractor's expense, obtain and maintain insurance contracts in 
+accordance with the requirements of the Certificate of Insurance. Coverage must be placed with 
+an Insurer licensed to carry out business in Canada. 
+ 
+(b) Compliance with the insurance requirements does not release the Contractor from or reduce its 
+liability under the Contract. The Contractor is responsible for deciding if additional insurance 
+coverage is necessary to fulfill its obligation under the Contract and to ensure compliance with any 
+applicable law. Any additional insurance coverage is at the Contractor's expense, and for its own 
+benefit and protection. 
+ 
+2) 
+Period of Insurance 
+ 
+(a) The policies required in the Certificate of Insurance must be in force from the date of contract 
+award and be maintained throughout the duration of the Contract. 
+ 
+(b) The Contractor must be responsible to provide and maintain coverage for Products/Completed 
+Operations hazards on its Commercial General Liability insurance policy, for a period of six (6) 
+years beyond the date of the Certificate of Substantial Performance. 
+ 
+3) 
+Proof of Insurance 
+ 
+(a) Before commencement of the Work, and no later than ten (10) days after acceptance of its bid, 
+the Contractor must deposit with Canada a Certificate of Insurance on the form attached herein.  
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 14 of 52 
+ 
+ 
+(b) Upon request by Canada, the Contractor must provide originals or certified true copies of all 
+contracts of insurance maintained by the Contractor pursuant to the Certificate of Insurance. 
+ 
+4) 
+Insurance Proceeds 
+ 
+In the event of a claim, the Contractor must, without delay, do such things and execute such 
+documents as are necessary to effect payment of the proceeds. 
+ 
+5) 
+Deductible 
+ 
+The payment of monies up to the deductible amount made in satisfaction of a claim must be borne by 
+the Contractor. 
+ 
+SC03 COMPLIANCE WITH ON-SITE MEASURES, STANDING ORDERS, POLICIES, AND RULES (SACC 4013) 
+ 
+The Contractor must comply and ensure that its employees and subcontractors comply with all security 
+measures, standing orders, policies or other rules in force at the site where the Work is performed. 
+ 
+SC04 DEPARTMENTAL REPRESENTATIVE’S AUTHORITY 
+ 
+Contracting Authority is: 
+ 
+Name:  
+ 
+ 
+Steve Verner  
+ 
+ 
+ 
+ 
+Title:  
+ 
+ 
+Procurement Specialist 
+ 
+ 
+Organization: 
+ 
+Natural Resources Canada 
+Address:   
+ 
+580 Booth Street, Ottawa (Ontario)  K1A 0E4 
+ 
+ 
+Telephone: 
+ 
+343-543-6090 
+E-mail address: 
+ 
+steve.verner@nrcan-rncan.gc.ca  
+ 
+ 
+Project Authority is : (To be completed at contract award) 
+ 
+Name :  
+ 
+ 
+ 
+Title:  
+ 
+ 
+ 
+Organisation :  
+ 
+Natural Resources Canada 
+Address :  
+ 
+ 
+Telephone : 
+ 
+ 
+Email :  
+ 
+ 
+ firstname, name@nrcan-rncan.gc.ca 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 15 of 52 
+ 
+Representive of the bidder: (To be completed at contract award) 
+ 
+Name :  
+ 
+ 
+ 
+Title:  
+ 
+ 
+ 
+Organisation :  
+ 
+ 
+Address :  
+ 
+ 
+Telephone : 
+ 
+ 
+Email :  
+ 
+ 
+  
+ 
+SC05 BASE OF PAYMENT 
+Basis of Payment - Limitation of Expenditure 
+ 
+The Contractor will be paid for its costs reasonably and properly incurred in the performance of the Work, in 
+accordance with the Basis of Payment in Annex B, to a limitation of expenditure of $________ ( insert the 
+amount at contract award). Customs duties are included, and Applicable Taxes are extra. 
+ 
+Limitation of Expenditure 
+ 
+1. Canada's total liability to the Contractor under the Contract must not exceed $ _________.(will be 
+completed at contract award) Customs duties are included, and Applicable Taxes are extra. 
+2. No increase in the total liability of Canada or in the price of the Work resulting from any design changes, 
+modifications or interpretations of the Work, will be authorized or paid to the Contractor unless these 
+design changes, modifications or interpretations have been approved, in writing, by the Contracting 
+Authority before their incorporation into the Work. The Contractor must not perform any work or 
+provide any service that would result in Canada's total liability being exceeded before obtaining the 
+written approval of the Contracting Authority. The Contractor must notify the Contracting Authority in 
+writing as to the adequacy of this sum: 
+a. when it is 75% committed, or 
+b. four months before the contract expiry date, or 
+c. as soon as the Contractor considers that the contract funds provided are inadequate for the 
+completion of the Work, whichever comes first. 
+3. If the notification is for inadequate contract funds, the Contractor must provide to the Contracting 
+Authority a written estimate for the additional funds required. Provision of such information by the 
+Contractor does not increase Canada's liability. 
+ 
+SC06 METHOD OF PAYMENT  
+ 
+As provided in the General Conditions CG5 - Terms of Payment H1008C (2008-05-12) : 
+Monthly Payment 
+Canada will pay the Contractor on a monthly basis for work performed during the month covered by the 
+invoice in accordance with the payment provisions of the Contract if: 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 16 of 52 
+ 
+a. an accurate and complete invoice and any other documents required by the Contract have been 
+submitted in accordance with the invoicing instructions provided in the Contract;  
+b. all such documents have been verified by Canada;  
+c. the Work performed has been accepted by Canada. 
+SC07 INVOICING INSTRUCTIONS 
+ 
+Invoices shall be submitted using the following method: 
+ 
+E-mail:   
+ 
+Invoicing-Facturation@nrcan-rncan.gc.ca  
+ 
+Note: Attach “PDF” file. No other formats will be accepted 
+ 
+ 
+Invoices and all documents relating to a contract must be submitted on the Contractor’s own form and shall 
+bear the Contract number: ___________________ (To be completed at contract award) 
+ 
+Invoicing Instructions to suppliers: http://www.nrcan.gc.ca/procurement/3485 
+ 
+SC09 RECIPROCAL PROCUREMENT COMPLIANCE. 
+ 
+Change of Location of Place of Business. The Contractor must notify the Contracting Authority in writing 
+within 10 calendar days of any change in the location of its place of business taking effect, or, if the Contractor 
+is a joint venture, any change in the location of the place of business of any member of the joint venture. 
+Where possible, Canada requests that the Contractor provide as much advance notice as possible in writing of 
+any proposed of planned change to the Contractor’s place of business. 
+ 
+Termination Due to Change of Location. If Canada determines in its sole discretion that a change in location 
+results in the Contractor no longer qualifying as a Canadian Supplier or a Supplier of an Applicable Trading 
+Partner as defined below under this solicitation of offers, Canada may terminate the contract for default. It 
+may also terminate the contract on a “no-fault” basis by providing thirty days notice to the Contractor.  
+ 
+Canada will only pay according to the Basis of Payment, for any part of the Work delivered, inspected, and 
+accepted up to the date of termination. Despite any other provision of the Contract, there will be no other 
+costs that will be paid to the Contractor as a result of the termination. 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 17 of 52 
+ 
+CONTRACT DOCUMENTS (CD)  
+ 
+1.  
+The following are the contract documents: 
+ 
+a. Contract Page when signed by Canada; 
+b. Duly completed Bid and Acceptance Form and any Appendices attached thereto; 
+c. Drawings and Specifications; 
+d. General Conditions and clauses 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+GC1 
+General Provisions – Construction Services  
+R2810D 
+(2022-12-01);  
+ 
+ 
+GC2 
+Administration of the Contract 
+R2820D 
+(2016-01-28); 
+ 
+ 
+GC3 
+Execution and Control of the Work 
+R2830D 
+(2019-11-28); 
+ 
+ 
+GC4 
+Protective Measures 
+R2840D 
+(2008-05-12); 
+ 
+ 
+GC5 
+Terms of Payment 
+H1008C 
+(2008-05-12); 
+ 
+ 
+GC6 
+Delays and Changes in the Work 
+R2865D 
+(2019-05-30); 
+ 
+ 
+GC7 
+Default, Suspension or Termination of Contract R2870D 
+(2018-06-21); 
+ 
+ 
+GC8 
+Dispute Resolution 
+R2880D 
+(2019-11-28); 
+ 
+ 
+GC10 Insurance 
+R2900D 
+(2008-05-12); 
+ 
+ 
+Allowable Costs for Contract Changes Under GC6.4.1 
+R2950D 
+(2015-02-25);  
+ 
+e. Supplementary Conditions 
+f. Any amendment issued or any allowable bid revision received before the date and time set for 
+solicitation closing; 
+g. Any amendment incorporated by mutual agreement between Canada and the Contractor 
+before acceptance of the bid; and 
+h. Any amendment or variation of the contract documents that is made in accordance with the 
+General Conditions. 
+ 
+2. 
+The documents identified by title, number and date above are incorporated by reference and are set 
+out in the Standard Acquisition Clauses and Conditions (SACC) Manual, issued by Public Works and 
+Government Services Canada (PWGSC). The SACC Manual is available on the PWGSC Web site: 
+https://buyandsell.gc.ca/policy-and-guidelines/standard-acquisition-clauses-and-conditions-
+manual/5/R 
+ 
+3. 
+The language of the contract documents is the language of the Bid and Acceptance Form submitted. 
+ 
+4. 
+Contract Administration – supplemental to GC2 
+The Office of the Procurement Ombud (OPO) was established by the Government of Canada to provide 
+an impartial, independent venue for Canadian bidders to raise complaints regarding the administration 
+of certain federal contracts, regardless of dollar value. If you have concerns regarding the 
+administration of a federal contract, you should contact OPO by e-mail at ombudsman@opo-boa.gc.ca, 
+by telephone at 1-866-734-5169, or by web at www.opo-boa.gc.ca. For more information on OPO’s 
+services, please see the Procurement Ombudsman Regulations or visit the Office of the Procurement 
+Ombud website. 
+ 
+5. 
+Dispute Resolution – supplemental to GC8 
+The Parties agree to make every reasonable effort, in good faith, to settle amicably all disputes or 
+claims relating to the Contract, through negotiations between the Parties’ representatives authorized 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 18 of 52 
+ 
+to settle. If the Parties do not reach a settlement within 25 working days after the dispute was initially 
+raised to the other party in writing, either Party may contact the Office of the Procurement Ombud 
+(OPO) to request dispute resolution services including mediation, arbitration and mediation-
+arbitration. OPO may be contacted by e-mail at ombudsman@opo-boa.gc.ca, by telephone at 1-866-
+734-5169, or by web at www.opo-boa.gc.ca. For more information on the OPO’s services, please see 
+the Procurement Ombudsman Regulations or visit the Office of the Procurement Ombud website. 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 19 of 52 
+ 
+BID AND ACCEPTANCE FORM (BA)  
+ 
+BA01 IDENTIFICATION 
+ 
+Welding Services for High-Pressure Piping System 
+ 
+CanmetENERGY-Ottawa, Bells Corners Complex 
+1 Haanel Drive, Ottawa (Ontario) K1A 1M1 
+ 
+BA02 BUSINESS NAME AND ADDRESS OF BIDDER 
+ 
+Name:    ____________________________________________________________________________ 
+ 
+Address: ____________________________________________________________________________ 
+ 
+Telephone: __________________________________________________________________________ 
+ 
+E-mail address: _______________________________________________________________________ 
+ 
+ 
+BA03 THE OFFER  
+ 
+ 
+ 
+ 
+The Bidder offers to Canada to perform and complete the Work for the above named project in accordance 
+with the Bid Documents for the TOTAL BID AMOUNT INDICATED IN APPENDIX 1. 
+ 
+BA04 BID VALIDITY PERIOD 
+ 
+The bid shall not be withdrawn for a period of (thirty) [30] days following the date of solicitation closing. 
+ 
+BA05 ACCEPTANCE AND CONTRACT 
+ 
+Upon acceptance of the Contractor’s offer by Canada, a binding Contract shall be formed between Canada and 
+the Contractor.  The documents forming the Contract shall be the contract documents identified in Contract 
+Documents (CD). 
+ 
+BA06 CONSTRUCTION TIME 
+ 
+The period of Work is from date of Contract to March 31, 2027 inclusive.  
+ 
+BA06.1 OPTION TO EXTEND THE CONTRACT 
+ 
+The Contractor grants to Canada the irrevocable option to extend the term of the Contract by up to four 
+(4) additional one (1) year period under the same conditions. The Contractor agrees that, during the extended 
+period of the Contract, it will be paid in accordance with the applicable provisions as set out in the Basis of 
+Payment. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 20 of 52 
+ 
+Canada may exercise this option at any time by sending a written notice to the Contractor before the expiry 
+date of the Contract. The option may only be exercised by the Contracting Authority, and will be evidenced for 
+administrative purposes only, through a contract amendment. 
+ 
+ 
+BA07 SIGNATURE 
+ 
+ 
+                                                                                                                                   
+Name and title of person authorized to sign on behalf of Bidder (Type or print) 
+ 
+ 
+                                                                                                                                  
+Signature 
+ Date 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 21 of 52 
+ 
+APPENDIX 1 - FINANCIAL BID PRESENTATION SHEET 
+ 
+FIRM HOURLY RATE – Limitation of Expenditure 
+ 
+1. 
+Fees 
+ 
+The all-inclusive firm hourly rate for the completion of this project is in Canadian funds and does not include 
+applicable taxes. Any Travel and Living Expenses and other miscellaneous expenses must be included in the 
+firm price.  
+ 
+FIRM CONTRACT PERIOD YEAR 1 
+For the period - initial contract award to March 31, 2027 
+NON-EMERGENCY SERVICE CALL 
+A 
+B 
+C 
+D (BxC) 
+Category of Personnel 
+(On-Site Work Hours) 
+Firm Hourly  
+Rate ** 
+Estimated Number of 
+Hours for Evaluation * 
+Total Costs  
+(Applicable Taxes Excluded) 
+A. During Regular Working Hours: Monday through Friday (0700-1600 hours) 
+Certified welders 
+$_________ 
+400 hrs 
+ $______________ 
+1 - Estimated Total Price – Hourly Firm Rate  
+ $______________ 
+ 
+* LEVEL OF EFFORT PRESENTED HEREIN IS USED FOR EVALUATION PURPOSES ONLY AND IT IS NOT A 
+COMMITMENT BY CANADA. 
+ 
+** FOR ANY ERRORS IN THE CALCULATION, THE HOURLY RATE SCHEDULE WILL BE UPHELD. 
+ 
+Any estimated level of effort specified in the Pricing Details detailed above is provided for financial proposal 
+evaluation purposes only.  It is only an approximation of the requirements and is not to be considered as a 
+contract guarantee nor as a commitment by NRCan to respect those estimated in any resulting contract. 
+ 
+2. 
+Miscellaneous Expenses  
+ 
+The Contractor will be paid for pre-authorized reasonable and proper miscellaneous expenses supported by 
+appropriate receipts. All miscellaneous expenses must have prior authorization of the Project Authority. 
+ 
+FIRM CONTRACT PERIOD YEAR 1 
+For the period - initial contract award to March 31, 2027 
+Miscellaneous Materials and Replacement Parts 
+A 
+B 
+C 
+D (BXC) 
+Description of Materials 
+Rate 
+(Indicate percent 
+markup to be 
+applied) 
+Estimated quantity 
+required  
+(Applicable Taxes Excluded) 
+Extended Total Amount 
+of Markup 
+(Total $ X markup) 
+($) 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 22 of 52 
+ 
+Miscellaneous materials and 
+replacement parts (except free 
+issue/warranty covered) at laid-
+down cost (which includes invoice 
+cost, transportation cost, 
+exchange, customs and brokerage 
+charges) plus a mark-up of   % 
+(which includes purchasing 
+expenses, internal handling, G & A 
+expenses and profit) excluding 
+sales tax, sales tax to be shown as 
+a separate item.  
+% __________ 
+$25,000.00 
+ $______________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+ $______________ 
+ 
+Table-1 
+Firm Contract Period Year 1 - Evaluated Price (From Contract Award to March 31, 2027) 
+1 - Estimated Total Price – Hourly Firm Rate  
+$ _________________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$ _________________ 
+1 + 2 = Total Tendered Price for Financial Proposal Evaluation (Taxes Extra): 
+$ _________________ 
+ 
+ 
+OPTION YEAR 1 
+For the period – April 1, 2027 to March 31, 2028 
+NON-EMERGENCY SERVICE CALL 
+A 
+B 
+C 
+D (BxC) 
+Category of Personnel 
+(On-Site Work Hours) 
+Firm Hourly  
+Rate ** 
+Estimated Number of 
+Hours for Evaluation * 
+Total Costs  
+(Applicable Taxes Excluded) 
+A. During Regular Working Hours: Monday through Friday (0700-1600 hours) 
+Certified welders 
+$_________ 
+200 hrs 
+ $______________ 
+1 - Estimated Total Price – Hourly Firm Rate  
+ $______________ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 23 of 52 
+ 
+OPTION YEAR 1 
+For the period - April 1, 2027 to March 31, 2028 
+Miscellaneous Materials and Replacement Parts 
+A 
+B 
+C 
+D (BXC) 
+Description of Materials 
+Rate 
+(Indicate percent 
+markup to be 
+applied) 
+Estimated quantity 
+required  
+(Applicable Taxes Excluded) 
+Extended Total Amount 
+of Markup 
+(Total $ X markup) 
+($) 
+Miscellaneous materials and 
+replacement parts (except free 
+issue/warranty covered) at laid-
+down cost (which includes invoice 
+cost, transportation cost, 
+exchange, customs and brokerage 
+charges) plus a mark-up of   % 
+(which includes purchasing 
+expenses, internal handling, G & A 
+expenses and profit) excluding 
+sales tax, sales tax to be shown as 
+a separate item.  
+% __________ 
+$12,500.00 
+ $______________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+ $______________ 
+ 
+Table-2 
+OPTION YEAR 1- Evaluated Price (From April 1, 2027 to March 31, 2028) 
+1 - Estimated Total Price – Hourly Firm Rate  
+$ _________________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$ _________________ 
+1 + 2 = Total Tendered Price for Financial Proposal Evaluation (Taxes Extra): 
+$ _________________ 
+ 
+ 
+OPTION YEAR 2 
+For the period – April 1, 2028 to March 31, 2029 
+NON-EMERGENCY SERVICE CALL 
+A 
+B 
+C 
+D (BXC) 
+Category of Personnel 
+(On-Site Work Hours) 
+Firm Hourly Rate 
+** 
+Estimated Number of 
+Hours for Evaluation * 
+Total Costs  
+(Applicable Taxes Excluded) 
+B. During Regular Working Hours: Monday through Friday (0700-1600 hours) 
+Certified welders 
+$_________ 
+200 hrs 
+$______________ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 24 of 52 
+ 
+1 - Estimated Total Price – Hourly Firm Rate  
+$______________ 
+ 
+OPTION YEAR 2 
+For the period - April 1, 2028 to March 31, 2029 
+Miscellaneous Materials and Replacement Parts 
+A 
+B 
+C 
+D (BXC) 
+Description of Materials 
+Rate 
+(Indicate percent 
+markup to be 
+applied) 
+Estimated quantity 
+required  
+(Applicable Taxes Excluded) 
+Extended Total Amount 
+of Markup 
+(Total $ X markup) 
+($) 
+Miscellaneous materials and 
+replacement parts (except free 
+issue/warranty covered) at laid-
+down cost (which includes invoice 
+cost, transportation cost, 
+exchange, customs and brokerage 
+charges) plus a mark-up of   % 
+(which includes purchasing 
+expenses, internal handling, G & A 
+expenses and profit) excluding 
+sales tax, sales tax to be shown as 
+a separate item.  
+% __________ 
+$12,500.00 
+$__________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$__________ 
+ 
+Table-3 
+OPTION YEAR 2 - Evaluated Price (From April 1, 2028 to March 31, 2029) 
+1 - Estimated Total Price – Hourly Firm Rate  
+$ _________________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$ _________________ 
+1 + 2 = Total Tendered Price for Financial Proposal Evaluation (Taxes Extra): 
+$ _________________ 
+ 
+ 
+OPTION YEAR 3 
+For the period – April 1, 2029 to March 31, 2030 
+NON-EMERGENCY SERVICE CALL 
+A 
+B 
+C 
+D (BXC) 
+Category of Personnel 
+(On-Site Work Hours) 
+Firm Hourly Rate 
+** 
+Estimated Number of 
+Hours for Evaluation * 
+Total Costs  
+(Applicable Taxes Excluded) 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 25 of 52 
+ 
+A. During Regular Working Hours: Monday through Friday (0700-1600 hours) 
+Certified welders 
+$_________ 
+200 hrs 
+$______________ 
+1 - Estimated Total Price – Hourly Firm Rate  
+$______________ 
+ 
+OPTION YEAR 3 
+For the period - April 1, 2029 to March 31, 2030 
+Miscellaneous Materials and Replacement Parts 
+A 
+B 
+C 
+D (BXC) 
+Description of Materials 
+Rate 
+(Indicate percent 
+markup to be 
+applied) 
+Estimated quantity 
+required  
+(Applicable Taxes Excluded) 
+Extended Total Amount 
+of Markup 
+(Total $ X markup) 
+($) 
+Miscellaneous materials and 
+replacement parts (except free 
+issue/warranty covered) at laid-
+down cost (which includes invoice 
+cost, transportation cost, 
+exchange, customs and brokerage 
+charges) plus a mark-up of   % 
+(which includes purchasing 
+expenses, internal handling, G & A 
+expenses and profit) excluding 
+sales tax, sales tax to be shown as 
+a separate item.  
+% __________ 
+$12,500.00 
+$__________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$__________ 
+ 
+Table-4 
+OPTION YEAR 3 - Evaluated Price (From April 1, 2029 to March 31, 2030) 
+1 - Estimated Total Price – Hourly Firm Rate  
+$ _________________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$ _________________ 
+1 + 2 = Total Tendered Price for Financial Proposal Evaluation (Taxes Extra): 
+$ _________________ 
+ 
+ 
+OPTION YEAR 4 
+For the period – April 1, 2030 to March 31, 2031 
+NON-EMERGENCY SERVICE CALL 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 26 of 52 
+ 
+A 
+B 
+C 
+D (BXC) 
+Category of Personnel 
+(On-Site Work Hours) 
+Firm Hourly Rate 
+** 
+Estimated Number of 
+Hours for Evaluation * 
+Total Costs  
+(Applicable Taxes Excluded) 
+A. During Regular Working Hours: Monday through Friday (0700-1600 hours) 
+Certified welders 
+$_________ 
+200 hrs 
+$______________ 
+1 - Estimated Total Price – Hourly Firm Rate  
+$______________ 
+ 
+OPTION YEAR 4 
+For the period - April 1, 2030 to March 31, 2031 
+Miscellaneous Materials and Replacement Parts 
+A 
+B 
+C 
+D (BXC) 
+Description of Materials 
+Rate 
+(Indicate percent 
+markup to be 
+applied) 
+Estimated quantity 
+required  
+(Applicable Taxes Excluded) 
+Extended Total Amount 
+of Markup 
+(Total $ X markup) 
+($) 
+Miscellaneous materials and 
+replacement parts (except free 
+issue/warranty covered) at laid-
+down cost (which includes invoice 
+cost, transportation cost, 
+exchange, customs and brokerage 
+charges) plus a mark-up of   % 
+(which includes purchasing 
+expenses, internal handling, G & A 
+expenses and profit) excluding 
+sales tax, sales tax to be shown as 
+a separate item.  
+% __________ 
+$12,500.00 
+$__________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$__________ 
+ 
+Table-5 
+OPTION YEAR 4 - Evaluated Price (From April 1, 2030 to March 31, 2031) 
+1 - Estimated Total Price – Hourly Firm Rate  
+$ _________________ 
+2 - Estimated Total Price for Miscellaneous Expenses 
+$ _________________ 
+1 + 2 = Total Tendered Price for Financial Proposal Evaluation (Taxes Extra): 
+$ _________________ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 27 of 52 
+ 
+TOTAL EVALUATED PRICE 
+Subtotal Table 1: Firm Contract Period Year 1 - Evaluated Price 
+$ _________________ 
+Subtotal Table 2: OPTION YEAR 1 - Evaluated Price 
+$ _________________ 
+Subtotal Table 3: OPTION YEAR 2 - Evaluated Price 
+$ _________________ 
+Subtotal Table 4: OPTION YEAR 3 - Evaluated Price 
+$ _________________ 
+Subtotal Table 5: OPTION YEAR 4 - Evaluated Price 
+$ _________________ 
+Total Evaluated Price: 
+$ _________________ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 28 of 52 
+ 
+APPENDIX 2 - INTEGRITY PROVISIONS 
+ 
+Please include APPENDIX 2 with your offer. 
+ 
+INTEGRITY PROVISION – LIST OF NAMES FOR INTEGRITY VERIFICATION FORM (PWGSC-TPSGC 708E (2024-
+05-24) 
+Section 13 of the Ineligibility and Suspension Policy (the Policy) requires suppliers to provide a list of names 
+for verification when submitting a bid or offer. 
+Regardless of a supplier’s status under the Policy, this is a mandatory requirement for the award of a 
+contract or real property agreement to which the Policy applies. 
+The list of names differs depending on the supplier’s organizational 
+structure, as listed below. The following names must be provided for 
+verification: 
+• For a sole proprietor, the name of the owner 
+• For a private corporation, the names of all directors and the names of all individuals or entities that hold 
+5% or more of ownership 
+• For a public corporation, the names of all directors 
+• For a non-profit, the names of all directors 
+• For a general partnership, the names of all of the partners 
+• For limited partnerships (LP) and limited liability partnerships (LLP): 
+• the names of all the general partners, in addition: 
+• if the general partner is a public or non-profit corporation, the names of all directors 
+•  if the general partner is a private corporation, the names of all of the directors as well as 
+the names of all individuals or entities that hold 5% or more of ownership 
+• For a trust, the names of the trustee(s): 
+• if the trustee is a public or non-profit corporation, the names of all directors must also be included 
+•  if the trustee is a private corporation, the names of all of the directors as well as the names of 
+all individuals or entities that hold 5% or more of ownership 
+Failure to submit this information with an offer, where required, will render the offer non-compliant, or 
+the supplier otherwise disqualified for award of a contract or real property agreement. 
+ 
+Fields marked with an asterisk (*) are mandatory. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 29 of 52 
+ 
+Privacy statement 
+The personal information is collected pursuant to the Criminal Code of Canada, section 750(3), the 
+Financial Administration Act, paragraph 42(1)(c), the Department of Public Works and Government 
+Services Act and in accordance with the Ineligibility and Suspension Policy. The personal information will 
+be used by the Departmental Oversight Branch of Public Services and Procurement Canada for the 
+purpose of enhancing the integrity of the contracting process. The personal information is described in 
+the Personal Information Bank, PWGSC PPU 184 - Integrity Assessment Program. Your personal 
+information is protected, used, and disclosed in accordance with the Privacy Act. Under the Privacy Act, 
+you have the right to access and correct your personal information, if erroneous or incomplete. The 
+personal information provided in this process will be retained for a period of seven years after the last 
+administrative action, and then destroyed. 
+If you require clarification about this privacy notice, you may contact Public Services and Procurement 
+Canada’s Access to Information and Privacy Directorate by email at TPSGC.ViePrivee-
+Privacy.PWGSC@tpsgc-pwgsc.gc.ca. If you are not satisfied with the response to your privacy concern or if 
+you want to file a complaint about the handling of your personal information, you may wish to contact the 
+Office of the Privacy Commissioner of Canada. 
+ 
+Information to provide 
+Supplier information 
+Legal name * 
+Supplier’s procurement business number 
+ 
+Solicitation or transaction number * 
+Date of bid, offer submission or closing date of Invitation to Offer (YYYYMMDD) * 
+ 
+Organizational structure * 
+ 
+Sole proprietor 
+ 
+Private corporation 
+ 
+Public corporation 
+ 
+Non profit corporation 
+ 
+General partnerships 
+ 
+Limited partnerships (LP) and Limited Liability Partnerships (LLP) 
+ 
+Trust 
+Official business address * 
+ 
+Canadian address 
+ 
+International address 
+Canadian address 
+Post office box or civic (street) address * 
+City/Town * 
+ 
+Province/Territory * 
+ 
+Postal code (A9A9A9) * 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 30 of 52 
+ 
+International address 
+Post office box or civic (street) address * 
+City/Town *                     
+ 
+Province/State/Region * 
+ 
+Postal/Zip code * 
+ 
+Country * 
+ 
+Name of owner 
+Name * 
+Name of Trustees 
+Name 1 * 
+Name 2 
+Name 3 
+Names of Partners 
+Name 1 * 
+Name 2 
+Name 3 
+Names of individuals or entities that hold 5% or more of ownership (if applicable) 
+Name 1 
+Name 2 
+Name 3 
+Names of all Directors (if applicable) 
+Name 1  
+Name 2 
+Name 3 
+Declaration - Reciprocal Procurement 
+This solicitation of offers is only open to Canadian Suppliers as defined below. 
+Canadian Supplier means a supplier that has a place of business in Canada where it conducts activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours; or, a joint 
+venture where each member of the joint venture has a place of business in Canada where it conducts 
+activities on a permanent basis that is clearly identified by name and accessible during normal business 
+hours.  
+Supplier of an Applicable Trading Partner means a supplier that has a place of business in an Applicable 
+Trading Partner where it conducts activities on a permanent basis that is clearly identified by name and 
+accessible during normal business hours; or, a joint venture where at least one member of the joint venture 
+has a place of business in an Applicable Trading Partner where it conducts activities on a permanent basis 
+that is clearly identified by name and accessible during normal business hours, and all other members of the 
+joint venture either have a place of business in an Applicable Trading Partner where they conduct activities 
+on a permanent basis that is clearly identified by name and accessible during normal business hours or are a 
+Canadian Supplier. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 31 of 52 
+ 
+Supplier of a Non-Trading Partner means any supplier that is not a Canadian Supplier or a Supplier of an 
+Applicable Trading Partner; or, a joint venture where any member of the joint venture is not a Canadian 
+Supplier or a Supplier of an Applicable Trading Partner. 
+Applicable Trading Partner means a country or customs territory other than Canada that is listed, pursuant 
+to the schedule to the Canadian International Trade Tribunal Procurement Inquiry Regulations, as a party to 
+any of the trade agreements applicable to this solicitation; 
+The Offeror certifies that: 
+( ) it is a Canadian Supplier, as defined in Annex Solicitation of Offers Definitions. 
+( ) the address provided below is the Offeror’s place of business; or in the case of a joint venture, the 
+address(es) provided below are the place of business for each member of the joint venture. 
+Insert Address(es) of Place of Business 
+____________________________ 
+____________________________ 
+____________________________ 
+____________________________ 
+____________________________ 
+ 
+For the purpose of determining the location of an offeror’s place of business for eligibility under the Policy 
+on Reciprocal Procurement, Canada will only use the address(es) provided in this declaration. 
+DECLARATION 
+I, (insert name *) ____________________________________  
+(Insert position*) _________________________________________ 
+of (insert supplier's name *) _________________________________    
+declare that the information provided in this form is, to the best of my knowledge and belief, true, 
+accurate and complete. I am aware that failing to provide the list of names within the prescribed time will 
+result in my exclusion from the contract award process. I am aware that after contract award I must 
+inform the Registrar of Ineligibility and Suspension within 10 working days of any changes to the list of 
+names submitted. 
+__________________________________________                                                                     ___________ 
+Signature *                                                                                                                                                       Date* 
+                                                                                                                                                                (YYYY-MM-DD) 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 32 of 52 
+ 
+APPENDIX 3 – CERTIFICATIONS INDIGENOUS DESIGNATION 
+ 
+Please include APPENDIX 3 with your offer. 
+ 
+Bidders must provide the required certifications and additional information to be awarded a contract.  
+ 
+The certifications provided by Bidders to Canada are subject to verification by Canada at all times. Unless 
+specified otherwise, Canada will declare a bid non-responsive, or will declare a contractor in default if any 
+certification made by the Bidder is found to be untrue, whether made knowingly or unknowingly, during the 
+bid evaluation period or during the contract period. 
+ 
+The Contracting Authority will have the right to ask for additional information to verify the Bidder’s 
+certifications. Failure to comply and to cooperate with any request or requirement imposed by the 
+Contracting Authority will render the bid non-responsive or constitute a default under the Contract. 
+INDIGENOUS DESIGNATION 
+Who is eligible?  
+An Indigenous business can be: 
+• 
+a band as defined by the Indian Act 
+• 
+a sole proprietorship 
+• 
+a limited company 
+• 
+a co-operative 
+• 
+a partnership 
+• 
+a not-for-profit organization 
+in which Indigenous persons have at least 51% ownership and control. 
+An Indigenous business can also be a joint venture consisting of 2 or more Indigenous businesses or an 
+Indigenous business and a non-Indigenous business, provided that the Indigenous business or businesses 
+have at least 51% ownership and control of the joint venture. 
+In instances where 1 or more Indigenous businesses, as defined under the rules of PSIB, are involved in a 
+contract with 1 or more non-Indigenous businesses or individual contractors, 33% of the total monetary 
+value of the work contracted for must be performed by Indigenous businesses. 
+The Contractor must certify in its submitted bid that it is an Indigenous business, or a joint venture 
+constituted as described above. 
+☐  Our Company is an Indigenous Firm, as identified above. 
+☐  Our Company is NOT an Indigenous Firm 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 33 of 52 
+ 
+APPENDIX 4 – EVALUATION CRITERIA 
+ 
+Bidders are advised to address these criteria in the following order and in sufficient depth in their proposals to 
+enable a thorough assessment.  NRCan’s assessment will be based solely on the information contained within 
+the proposal.  NRCan may confirm information or seek clarification from bidders.  
+ 
+Bidders are advised that only listing experience without providing any supporting data to describe 
+responsibilities, duties and relevance to the criteria will not be considered demonstrated for the purpose of 
+this evaluation.   
+ 
+The Bidder should provide complete details as to where, when (month and year) and how (through which 
+activities/ responsibilities) the stated qualifications/experience were obtained.  Experience gained during 
+formal education shall not be considered work experience.  All criteria for work experience shall be obtained 
+in a legitimate work environment as opposed to an educational setting.  Co-op terms are considered work 
+experience provided they are related to the required services. 
+ 
+Bidders are also advised that the month(s) of experience listed for a project whose time frame overlaps that of 
+another referenced project will only be counted once.  For example: project one time frame is July 2001 to 
+December 2001; project two time frame is October 2001 to January 2002; the total months of experience for 
+these two project references is seven (7) months. 
+1. 
+Technical Criteria  
+1.1  
+Mandatory Evaluation Criteria  
+The Mandatory Criteria listed below will be evaluated on a simple pass/fail basis.  Proposals which fail to meet 
+the mandatory criteria will be deemed non-responsive. 
+ 
+Criterion
+ID 
+Mandatory Criteria 
+Proposal 
+Page # 
+Pass/Fail 
+M1 
+The Bidder’s Fabrication Shop MUST be located within 125km 
+of the Bells Corners Complex (1 Haanel Drive, Ottawa (Ontario)) 
+and the TSSA Certificates of Authorization must be valid for that 
+shop location. 
+ 
+ 
+M2 
+The Bidder MUST possess a current and valid TSSA Certificate 
+of Authorization for Boiler & Pressure Vessel Repair/Alteration 
+(SHOP & FIELD). 
+ 
+The Bidder MUST provide the valid certificate with the bid. 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 34 of 52 
+ 
+Criterion
+ID 
+Mandatory Criteria 
+Proposal 
+Page # 
+Pass/Fail 
+M3 
+The Bidder MUST possess a current and valid TSSA Certificate 
+of Authorization for Process Piping Installation ASME B31.3 
+(SHOP & FIELD) and for Process Piping Installation ASME B31.1 
+(SHOP & FIELD). 
+ 
+The Bidder MUST provide the valid certificates with the bid. 
+ 
+ 
+M4 
+The Bidder MUST possess current and valid welding procedures 
+for high pressure welding of stainless and carbon steels, 
+including the following materials: 
+- 
+Carbon steel to carbon steel (P-1 to P-1) 
+- 
+Carbon steel to stainless steel (P-1 to P-8) 
+- 
+Stainless steel to stainless steel (P-8 to P-8) 
+ 
+The Bidder MUST provide the valid procedures with the bid. 
+ 
+ 
+M5 
+The Bidder MUST propose 2 resources and demonstrate that 
+each resource has 5 years of continuous experience in welding 
+& installation of pressure piping systems. 
+ 
+The proposed resources MUST be certified in the following 
+processes: 
+- 
+Gas tungsten arc welding (GTAW) 
+- 
+Gas metal arc welding (GMAW) 
+- 
+Shielded metal arc welding (SMAW) 
+ 
+The Bidder MUST provide the CVs and valid certificates with the 
+bid. 
+ 
+ 
+M6 
+The Bidder MUST propose 2 resources with current and valid 
+CWB or TSSA welding certifications.  
+ 
+The Bidder MUST provide valid CWB or TSSA welder certificates 
+for the 2 resources with the bid. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 35 of 52 
+ 
+ANNEX A – STATEMENT OF WORK  
+ 
+SW.1.0 TITLE 
+Welding Services for High-Pressure Piping System 
+SW.2.0 BACKGROUND 
+The Zero-Emission Technologies group at CanmetENERGY-Ottawa is building a supercritical-CO2 pilot facility in 
+Building 4 of Natural Resources Canada’s Bells Corners Complex in Ottawa Ontario. The facility will operate at 
+high-temperatures and high-pressures and utilize high-speed turbomachinery and advanced compact heat 
+exchangers.  
+ 
+SW.3.0 OBJECTIVE  
+Natural Resources Canada (NRCan) has a requirement for a qualiﬁed Contractor to perform installation and 
+modiﬁcation of welded pressure piping, pressure tubing, repair and alteration of pressure vessels, and general 
+welding services. Work will be carried out at the Contractor’s shop and in the ﬁeld, working both indoors and 
+outdoors, at Natural Resources Canada’s Bells Corners Complex in Ottawa Ontario. 
+SW.4.0 WORK REQUIREMENTS 
+SW.4.1 Tasks, deliverables, milestones and schedule 
+The Contractor shall complete the following tasks. Note this is not an exhaustive list and other work may be 
+needed. 
+4.1.1. Cut, weld, ﬁt, assemble, and install process piping per layout designs and pipe speciﬁcations provided 
+by NRCan. 
+4.1.2. Cut, ﬁt, assemble, and install Swagelok tubing systems per layout designs and tube speciﬁcations 
+provided by NRCan. 
+4.1.3. Install all necessary piping and tubing supports; including, but not limited to, pipe clamps, pipe hangers, 
+threaded rod, beam clamps and strut. 
+4.1.4. Carry out repairs or alterations to boilers and pressure vessels in accordance with CSA Standard B51. 
+4.1.5. Perform pressure tests on all installed piping and tubing system as required by the TSSA and the 
+appropriate design code. 
+4.1.6. Install vent and drain points to facilitate hydrostatic testing and depressurization of the system. 
+4.1.7. Co-ordinate all non-destructive testing required per appropriate design code for the registration of 
+piping systems or pressure vessel alterations with TSSA. 
+4.1.8. Co-ordinate all required TSSA inspections and pressure tests with both NRCan staﬀ and TSSA inspectors. 
+4.1.9. Provide copies of all pressure test records. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 36 of 52 
+ 
+4.1.10. Provide copies of all non-destructive testing reports. 
+4.1.11. Provide feedback and/or suggested improvements on NRCan provided piping designs for fabrication 
+feasibility. 
+4.1.12. Perform general welding services. This includes, but not limited to, welding of plate, rod, pipe, and tube 
+to construct components excluding structural welding and welding of pressurized piping, boilers and 
+pressure vessels. 
+SW.4.2 Work Schedule  
+4.2.1 A summary chart of typical hours of work appear below: 
+Monday to Friday - 7:00 to 16:00. 
+4.2.2 Regular Hours- Planned Work: 
+• The normal work week is from Monday to Friday, between 7:00 a.m. and 16:00 p.m. (except statutory 
+holidays). Please note that during this period the regular service rates must apply. 
+4.2.3 Services outside business hours - Planned Work: 
+• Work is not permitted on weekends or statutory holidays without obtaining authorization from the Project 
+Authority. This authorization must be requested with a notice equal to or greater than twenty-four (24) 
+business hours in advance. 
+• There is no minimum number of hours of compensation when the vendor has originated the request for 
+work access outside of Regular hours.  
+SW.4.3 Reporting Requirements 
+The Contractor must complete the provided Annex F form: Time Sheet/Task Report and have it approved and 
+signed by the Project Authority to ensure the validity of the document. In addition to the items already 
+requested on the Time Sheet/Task Report, the contractor must indicate in detail the following items: the work 
+performed, the material used, the site conditions, whether the work is temporary or ﬁnal, the details of the 
+technical and safety procedures. The invoice must be issued in relation to the work completed and the 
+materials used, and this according to the rates pre-established in the basis of payment. No other expenses will 
+be reimbursed. In the absence of the Project Authority, the work order must be signed by an NRCan 
+representative mandated by the Project Authority. 
+SW.4.4 Method and Source of Acceptance of Work 
+All deliverables under the Contract are subject to inspection by the Project Authority. The Project Authority 
+shall have the right to reject any deliverable that is deemed unsatisfactory or requires correction before 
+payment is authorized. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 37 of 52 
+ 
+SW.4.5 Speciﬁcations and Standards 
+4.5.1 The Contractor shall comply with all laws and regulations relating to the Work, whether federal, 
+provincial or municipal. 
+4.5.2 The Contractor shall perform the Work in accordance with Canadian Standards Association Code B51 and 
+Technical Standards and Safety Authority Boilers and Pressure Vessel Code. In the event of any discrepancy or 
+contradiction, the more stringent requirements shall prevail. 
+4.5.3 The Contractor shall pay the fees for all permits, certiﬁcates and licenses relating to the Work. Upon 
+request from the Project Authority, the Contractor shall provide proof that it complies with its legal obligations 
+relating to said permits, certiﬁcates and licenses. 
+SW.4.6 Technical, operational or organizational environments 
+4.6.1 No equipment belonging to NRCan may be used by the Contractor to carry out the work. Any request for 
+an exception must be approved by the Technical Authority. 
+4.6.2 The structure of buildings must not be used to lift equipment. 
+SW.5.0 OTHER TERMS OF THE SW 
+SW.5.1 Contractor’s obligations 
+5.1.1 To establish the work schedule, the Contractor must cooperate with the Project Authority to ensure that 
+the arrangements made are acceptable to both parties. 
+5.1.2 NRCan has instituted a scent-free policy within the premises to protect the health and well-being of its 
+occupants and visitors. Due to potential health issues, including respiratory distress and headaches, arising 
+from exposure to scented products, the use of such products is prohibited. 
+5.1.3 The Contractor shall submit to the Project Authority a detailed work plan on the work schedule, an 
+assessment of the site-speciﬁc health and safety risks, before carrying out the maintenance work. 
+5.1.4 The Contractor shall perform the work diligently, satisfactorily and in accordance with the rules of the 
+trade. All work carried out under a service call relating to this administrative agreement shall be subject to 
+inspection and acceptance by the Project Authority. 
+5.1.5 All materials must be new and original. In the event of substitution, the supplier must obtain from the 
+manufacturer a certiﬁcate of equivalence and a guarantee that the use of the parts is suitable for the 
+equipment. The performance, reliability and longevity (life cycle) of the unit must not be reduced at any cost. 
+5.1.6 The contractor must keep the premises clean and free of scrap and/or waste at the end of the work. 
+Debris is disposed of during working hours at NRCan. If necessary, the Project Authority will indicate to the 
+Contractor where to take the scrap. 
+5.1.7 Contractors must present government-issued photo identiﬁcation upon signing in.  
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 38 of 52 
+ 
+1. Contractors must sign in and out of the NRCan facility each time they enter the building or exit the 
+building to leave the site. The NRCan maintains attendance logs for the health, safety and security of 
+all occupants within the facility.  
+2. Upon arrival, Contractor’s will be issued an ID security badge (i.e. visitor, or Contractor badge). 
+Contractors must wear their issued ID badge while in the facility. ID badge MUST be returned at 
+the end of the each shift and during lunch. NRCan property (badge or equipment) cannot be 
+taken oﬀ site.  
+3. The NRCan access card provided must be worn at all times and be visible on the Contractor’s 
+uniform when they are in the building. 
+ 
+SW.5.2 NRCan Obligations. 
+5.2.1 Provide a daily access card that complies with current security standards authorizing access to the 
+various premises and facilities of the building. 
+5.2.2 The Project Authority must provide comments on the work, reports and plans within ﬁve (5) working 
+days and/or provide any other assistance or support. 
+5.2.3 Natural Resources Canada is committed to making our Department more inclusive for everyone and 
+fostering an equitable workplace culture that values diversity and creates an environment that is welcoming 
+and rewarding for all.  We encourage the businesses that work with us to reﬂect these values. More 
+information can be found at: https://www.canada.ca/en/government/publicservice/wellness-inclusion-
+diversity-public-service/diversity-inclusion-public-service2.html 
+ 
+SW.5.3 Workplace 
+Natural Resources Canada, Bells Corners Complex, 1 Haanel Dr. Nepean, Ontario, K1A1M1 
+SW.6.0 REQUIRED RESOURCES OR TYPES OF ROLES TO BE PERFORMED 
+• Certiﬁed welder 
+• Any Contractor’s employee performing work under this contract must hold a valid recognized trade 
+credential, and such certiﬁcation must remain valid for the entire duration of the contract. 
+• Valid TSSA Certiﬁcate of Authorization for Process Piping Installation ASME B31.3 (SHOP & FIELD) and 
+for Process Piping Installation ASME B31.1 (SHOP & FIELD). 
+• Valid TSSA Certiﬁcate of Authorization for Boiler & Pressure Vessel Repair/Alteration (SHOP & FIELD). 
+• Valid welding procedures for high pressure welding of stainless and carbon steels, including the 
+following materials: 
+o Carbon steel to carbon steel (P-1 to P-1) 
+o Carbon steel to stainless steel (P-1 to P-8) 
+o Stainless steel to stainless steel (P-8 to P-8) 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 39 of 52 
+ 
+SW.7.0 HEALTH AND SAFETY 
+SW 7.1 Risk/Hazard Assessment 
+• Conduct a risk/hazard assessment for safety present on this site with respect to the execution of the work. 
+• The Contractor must plan and organize the work in such a way as to promote the elimination of hazards at 
+source or collective protection. 
+• Equipment, tools or protective equipment that cannot be installed or used without compromising the health 
+and safety of workers, the public and users/occupants of the premises is deemed to be inadequate for the 
+work to be performed. 
+SW 7.2 General Requirements 
+• A plan of appropriate measures at all stages of the work must be created and must be submitted to the 
+Project Authority for approval. 
+• The Contractor must demarcate the work area and ensure its safety. 
+SW 7.3 Responsibility 
+• Contractor must assume responsibility for the health and safety of persons present in the work area, as well 
+as the protection of property and buildings located on or near the work area such as, but not limited to, trees, 
+mechanical rooms, parking area, buried cables, ﬁre hydrants. Also assume, in areas adjacent to the work site, 
+the protection of persons and the environment to the extent that they are aﬀected by the work. 
+ • In the context of the work, the Contractor must be Constructor as described in the Occupational Health and 
+Safety Act (OHSA or the Act) and is to perform only the work that is part of its scope.  
+• Comply, and ensure that employees and subcontractors comply, with the safety requirements set out in the 
+contract documents, applicable local, territorial, provincial and federal laws and regulations, as well as in the 
+health and safety plan prepared for the site. 
+SW 7.4 Compliance Requirements 
+Comply with the Occupational Health and Safety Act (OHSA or the Act) and the Canada Labour Code. In the 
+event of any discrepancy or contradiction, the more stringent requirements shall prevail. 
+SW 7.5 Unforeseen Risks/Hazards 
+In the presence of special or unforeseen conditions, risks/hazards or factors aﬀecting safety during the 
+execution of the work, notify the Project Authority orally and in writing immediately after the observation, and 
+follow the procedures in accordance with the laws and regulations of the Province of Ontario. 
+SW 7.6 Corrective Action in the Event of Non-Compliance 
+• Take the necessary measures immediately to correct situations deemed non-compliant, in terms of health 
+and safety, by the competent authority or by the Project Authority. 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 40 of 52 
+ 
+• Provide the Project Authority with a written report of the measures taken to correct the situation in the 
+event of non-compliance in terms of health and safety. 
+• The Project Authority may order work to be stopped if the Contractor does not make the necessary 
+corrections to the conditions deemed non-compliant in terms of health and safety. 
+SW 7.7 Work Stoppage 
+Give priority to the health and safety of the public and site personnel, and to environmental protection, the 
+equipment over issues related to the cost and schedule of the work. 
+SW 8.0 CONSTRUCTION WASTE MANAGEMENT FOLLOWING WORK 
+SW.8.1 Waste Management Criteria 
+1. The contractor commits to responsible management of construction/demolition waste at all stages of 
+work until their disposal. 
+The contractor is responsible for considering environmental preservation criteria and applicable laws in 
+how they will dispose of waste.  
+2. The contractor must prioritize waste management actions in the following order: source reduction, 
+reuse, recycling, recovery, and disposal 
+3. The contractor must ensure that recyclable, recoverable, and valuable materials and construction 
+waste are properly sorted at the source and are sent to a compliant waste sorting center, using landfill 
+as a last resort. 
+4. The contractor ensures the prevention of contamination of waste materials intended for recovery and 
+recycling, in accordance with the acceptance conditions of designated facilities. 
+5. The contractor ensures at all times to properly protect materials from weather conditions so that they 
+do not become waste. 
+6. The transport by a verified carrier and the delivery of non-recoverable waste following the work to an 
+authorized disposal facility remains the responsibility of the contractor. 
+7. All construction waste materials that must be evacuated/disposed of become the property of the 
+contractor. 
+ 
+SW 9.0 SCHEDULE AND CONDITIONS FOR CARRYING OUT WORK-SITE PARTICULARITY 
+ 
+SW.9.1 Plans and Specifications 
+ 
+• 
+The original plans and specifications, and any notice of modification will be sent, if necessary, to the 
+Contractor in paper or PDF format.  
+ 
+SW.9.2 Work schedule, site access, and parking   
+ 
+• 
+Work hours are Monday to Friday from 7:00 AM to 4:00 PM. The site is not accessible outside these 
+hours. No subcontractor will be accepted on the premises without the presence of the Contractor.  
+• 
+All service and personal vehicles of the contractor must be parked in the spaces provided for this 
+purpose within the building's parking areas. Visitor parking spaces must not be used at any time.  
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 41 of 52 
+ 
+SW.9.3 Hot or open flame work  
+The contractor must comply with the following instructions: 
+• Informing the Project Authority and waiting for the issuance of a Hot Work Permit is mandatory 
+(documents completed in the workplace in collaboration with building technicians and the same 
+procedure for lockout and confined spaces.), before starting work. 
+• The organization of the site must allow for the presence of the contractor at least one hour after the 
+end of the hot work. An inspection must be carried out at the end of the daily work by an employee of 
+the Contractor. 
+SW.9.4 Lockout 
+• 
+Appropriate lockout must be done when there is a cut-off of energy sources. 
+• 
+The Contractor must obtain a lockout permit and comply with local establishment practices in this 
+regard. 
+• 
+When work requires lockout, the Contractor must provide the necessary number of lockouts free of 
+charge. 
+• 
+The Contractor's employees must have the valid certification to perform the lockout procedure and 
+must remain valid during the contract. 
+SW.9.5 Work in Confined Spaces 
+• The Contractor must carry out a preliminary assessment and subsequently, submit a safe work plan if 
+working in a confined space is required. The Contractor’s workers must obtain a confined space entry 
+permit provided by the NRCan Project Authority and comply with the establishment's local practices in 
+this regard. 
+• The preliminary assessment must consider the working conditions in confined spaces. Exceedances in 
+the preliminary assessment cannot be justified by the omission of this consideration. When working in 
+confined spaces, the Contractor must provide all necessary equipment including 1 tripod, lifelines, 
+ventilation, carabiners and other personal protective equipment. Such as: 
+ 
+o Safety harness for each employee; 
+o Personal protective equipment, boots, glasses, gloves, helmets, respiratory protection masks, 
+hearing protection earmuffs, etc. 
+o Protective clothing against arcs and electrical discharges; 
+o Locks and equipment for lockout; 
+o 4-gas detectors calibrated as needed; 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 42 of 52 
+ 
+SW.9.6 Work at Height 
+• The preliminary assessment must consider working at height conditions. Overestimates to the 
+preliminary assessment cannot be justified by the omission of this consideration. 
+• For work at height, the Contractor must provide all personal protective equipment. 
+• The Contractor's employees must have the valid certification to perform work at height and must 
+remain valid during the contract. 
+ 
+SW.9.7 Delivery and Storage of Construction Materials 
+• 
+The reception of materials must be carried out by the contractor during site access hours. 
+• 
+No delivery of materials will be accepted by NRCan. 
+• 
+Materials must be delivered and stored on the construction site. 
+ 
+SW.9.8 Remove of Contractor’s Personnel 
+• The Project Authority reserves the right to remove any contractor personnel from the site at any time, 
+should their conduct, performance, or presence be deemed unsatisfactory or non-compliant with site 
+requirements.  
+ 
+SW.9.9 Building evacuation   
+• In the event of a building alarm and evacuation, all Contractor's employees onsite must report to 
+Muster Point, located at the front of the Yellow Barn (Northwest corner of the staﬀ parking area). 
+ 
+SW.9.10 Presence of asbestos 
+In NRCan facilities, there are materials containing asbestos. The inhalation of asbestos ﬁbres can be dangerous 
+to health. 
+These materials have been characterized and are inventoried annually. In particular, asbestos is found in pipe 
+and ventilation insulation, as well as in various materials such as joint compound, mortar, stucco, vinyl tile and 
+acoustics, to name but a few. Before drilling or altering any existing material, it is the Contractor's responsibility 
+to check with the Project Authority at the site for the presence of asbestos. In all cases any asbestos 
+abatement required must fully comply with all applicable laws and regulations. 
+ If, during the execution of work, the Contractor discovers materials resembling asbestos, he must stop work 
+and immediately notify the Project Authority. Do not resume work until you have received written instructions 
+in this regard from the Project Authority. 
+SW.9.12 Cigarettes, Alcohol, and Drugs 
+• Any consumption of alcohol and drugs is strictly forbidden on NRCan property. 
+• Smoking is allowed 9m away from the building. 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 43 of 52 
+ 
+ANNEX B – BASIS DE PAYMENT 
+ 
+ 
+(to be completed upon contract award) 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 44 of 52 
+ 
+ANNEX C - SECURITY REQUIREMENT CHECK LIST (SRCL) 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 45 of 52 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 46 of 52 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 47 of 52 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(The last page of the SRCL will be added at contract award) 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 48 of 52 
+ 
+ANNEX D - CERTIFICATE OF INSURANCE (Not required at solicitation closing) 
+ 
+ 
+Description and Location of Work  
+ 
+Project No. 
+ 
+188961 
+Welding Services for High-Pressure Piping System 
+CanmetENERGY-Ottawa, Bells Corners Complex 
+1 Haanel Drive, Ottawa (Ontario) K1A 1M1 
+ 
+Name of Insurer, Broker or Agent       Address (No., Street)               
+City                    
+Province        
+Postal Code  
+ 
+ 
+ 
+Name of Insured (Contractor)              Address (No., Street)                      City                   
+Province        
+Postal Code  
+ 
+ 
+Additional Insured 
+ 
+His Majesty the King in Right of Canada as represented by the Minister of Natural Resources Canada  
+ 
+Type of Insurance 
+Insurer Name 
+and Policy Number 
+Inception 
+Date 
+D / M / Y 
+Expiry Date 
+D / M / Y 
+Limits of Liability 
+ 
+ 
+  
+ 
+Commercial General            
+Liability   
+ 
+ Umbrella/Excess Liability 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Per 
+Occurrence 
+ 
+ 
+$ 
+ 
+$ 
+Annual 
+General 
+Aggregate 
+ 
+$ 
+ 
+$ 
+Completed 
+Operations 
+Aggregate 
+ 
+$ 
+ 
+$ 
+ 
+I certify that the above policies were issued by insurers in the course of their Insurance business in Canada, are currently in force 
+and include the applicable insurance coverage’s of this Certificate of Insurance, including advance notice of cancellation / 
+reduction in coverage. 
+ 
+ 
+ 
+                                                                                                 
+Name of person authorized to sign on behalf of Insurer(s) (Officer, Agent, Broker 
+ 
+                                                Telephone number  
+ 
+ 
+___________________________________________________________________                  
+Signature                                                                                                                                                                                                                Date  D / M / Y                  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 49 of 52 
+ 
+General 
+ 
+The insurance policies required on page 1 of the Certificate of Insurance must be in force and must include the 
+insurance 
+coverage listed under the corresponding type of insurance on this page. 
+ 
+The policies must insure the Contractor and must include His Majesty the King in Right of Canada as 
+represented by the Minister of Natural Resources Canada as an additional Insured. 
+ 
+The insurance policies must be endorsed to provide Canada with not less than thirty (30) days’ notice in 
+writing in advance of a cancellation of insurance or any reduction in coverage. 
+ 
+Without increasing the limit of liability, the policies must protect all insured parties to the full extent of 
+coverage provided. Further, the policies must apply to each Insured in the same manner and to the same 
+extent as if a separate policy had been issued to each. 
+ 
+ 
+Commercial General Liability 
+ 
+The insurance coverage provided must not be substantially less than that provided by the latest edition of IBC 
+Form 2100.  
+The policy must either include or be endorsed to include coverage for the following exposures or hazards if 
+the Work is subject thereto: 
+ 
+(a) Blasting. 
+(b) Pile driving and caisson work. 
+(c) Underpinning.    
+(d) Removal or weakening of support of any structure or land whether such support be natural or otherwise 
+if the work is performed by the insured contractor. 
+ 
+ The policy must have the following minimum limits: 
+ 
+(a) $2,000,000 Each Occurrence Limit;  
+(b) $5,000,000 General Aggregate Limit per policy year if the policy contains a General Aggregate; and 
+(c) $2,000,000 Products/Completed Operations Aggregate Limit. 
+ 
+Umbrella or excess liability insurance may be used to achieve the required limits. 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 50 of 52 
+ 
+ANNEX E - LISTING OF SUBCONTRACTORS  
+ 
+Please include ANNEX E with your offer. 
+ 
+ 
+ 
+1) 
+In accordance with GI06 – Listing of Subcontractors and Suppliers of R2410T- General Instructions - 
+Construction Services, the Bidder should provide a list of Subcontractors with his Bid. 
+ 
+2) 
+The Bidder should submit the list of Subcontractors and for any portion of the Work valued at 20% or 
+greater of the submitted Bid Price. 
+ 
+ 
+Subcontractor 
+Division 
+Estimated value of 
+work 
+1 
+ 
+ 
+ 
+2 
+ 
+ 
+ 
+3 
+ 
+ 
+ 
+4 
+ 
+ 
+ 
+5 
+ 
+ 
+6 
+ 
+ 
+ 
+7 
+ 
+ 
+ 
+8 
+ 
+ 
+ 
+9 
+ 
+ 
+ 
+10 
+ 
+ 
+ 
+11 
+ 
+ 
+ 
+12 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 51 of 52 
+ 
+ANNEX F – TIME SHEET and TASK REPORT 
+ 
+ 
+Task Description: _____________________________ 
+ 
+Note: This form must be completed by the contractor. It must then be reviewed and signed off by the 
+Contractor's Site Supervisor or Management Representative and an NRCan Departmental Representative. It 
+must then be submitted with the corresponding invoice. Failure to submit this completed form with the 
+invoice for a task will result in rejection of the invoice as the task will not be considered complete until this 
+form is completed and signed off. 
+ 
+Date Started: ___________________________ 
+ 
+Date 
+Name 
+Time sign into 
+NRCan building 
+Time sign out of 
+NRCan building 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Parts/Materials 
+Description 
+Quantity 
+Unit Cost 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ITT # : NRCan-5000094712 
+ 
+Page 52 of 52 
+ 
+Additional Information/Comments 
+ 
+The contractor must indicate in detail the following additional items in this section: summary of the work 
+performed, the material used, the site conditions, whether the work is temporary or final, the details of the 
+technical and safety procedures. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Date Completed: __________________________ 
+ 
+Contractor Site Supervisor 
+or Management Representative 
+Date 
+ 
+ 
+NRCan Dept. Representative 
+Date 
+ 
+ 
+ 
+ 

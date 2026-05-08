@@ -1159,3 +1159,90 @@ def report_pdf(analysis_id: str, user: AuthenticatedUser = Depends(get_current_u
         media_type="application/pdf",
         headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
+from pathlib import Path
+
+EXTRACTED_DIR = (
+    Path(__file__).resolve().parent.parent
+    / "data"
+    / "extracted"
+)
+
+
+@router.get("/analyze-extracted/{filename}")
+def analyze_extracted_file(
+    filename: str,
+):
+    path = EXTRACTED_DIR / filename
+
+    if not path.exists():
+
+        return {
+            "error": "file not found"
+        }
+
+    text = path.read_text(
+        encoding="utf-8",
+        errors="ignore",
+    )
+
+    key_dates = extract_key_dates(text)
+
+    mandatory = (
+        extract_mandatory_requirements(text)
+    )
+
+    deliverables = (
+        extract_deliverables(text)
+    )
+
+    evaluation = (
+        extract_evaluation_criteria(text)
+    )
+
+    fields = parse_fields(text)
+
+    confidence = compute_confidence(
+        text_len=len(text),
+        extracted_fields={
+            "mandatory_requirements": mandatory,
+            "deliverables": deliverables,
+            "evaluation_criteria": evaluation,
+            "closing_date": key_dates.get(
+                "closing_date"
+            ),
+            "buyer": fields.get("buyer"),
+            "estimated_value": fields.get(
+                "estimated_value"
+            ),
+        },
+    )
+
+    return {
+        "status": "ok",
+
+        "filename": filename,
+
+        "summary": build_summary(
+            len(text),
+            fields,
+            {},
+        ),
+
+        "confidence": confidence,
+
+        "buyer": fields.get("buyer"),
+
+        "estimated_value": fields.get(
+            "estimated_value"
+        ),
+
+        "key_dates": key_dates,
+
+        "mandatory_requirements": mandatory,
+
+        "deliverables": deliverables,
+
+        "evaluation_criteria": evaluation,
+
+        "preview": text[:2000],
+    }

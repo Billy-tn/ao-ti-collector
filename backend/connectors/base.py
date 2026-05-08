@@ -6,6 +6,7 @@ from typing import List
 class Tender:
     source: str
     portal_name: str
+
     title: str
     url: str
 
@@ -26,6 +27,22 @@ class Tender:
     procurement_method: str = ""
 
     documents_url: str = ""
+
+    supplier_name: str = ""
+
+    award_amount: float = 0.0
+    award_currency: str = ""
+
+    contact_name: str = ""
+    contact_email: str = ""
+
+    unspsc: str = ""
+
+    notice_type: str = ""
+
+    delivery_region: str = ""
+
+    award_status: str = ""
 
 
 class BaseConnector:

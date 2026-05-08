@@ -1,0 +1,3409 @@
+National Defence 
+National Defence Headquarters 
+Ottawa, Ontario  
+K1A 0K2 
+Défense nationale 
+Quartier général de la Défense nationale 
+Ottawa (Ontario) 
+K1A 0K2 
+Nous offrons par la présente de vendre à Sa 
+Majesté le Roi du chef du Canada, aux 
+conditions énoncées ou incluses par référence 
+dans la présente et aux annexes ci-jointes, les 
+biens et services énumérés ici et sur toute feuille 
+ci-annexée, au(x) prix indique(s).
+REQUEST FOR PROPOSAL 
+DEMANDE DE PROPOSITION 
+RETURN BIDS TO: 
+RETOURNER LES SOUMISSIONS À : 
+Bid Receiving Mailbox – Réception des 
+soumissions 
+Email – Courriel: 
+DLP53BidsReceiving.DAAT53receptiondessoumissions 
+@forces.gc.ca    
+Proposal To: National Defence Canada 
+We hereby offer to sell to His Majesty the King in 
+right of Canada, in accordance with the terms and 
+conditions set out herein, referred to herein or attached 
+hereto, the goods and services listed herein and on any 
+attached sheets at the price(s) set out therefore. 
+Proposition à : Défense nationale Canada 
+Title/Titre 
+Construction Engineering Equipment - 
+Équipements de construction
+Solicitation No – No de 
+l’invitation 
+W8486-270789/A 
+Date of Solicitation – Date de l’invitation 
+May 7, 2026 – le 7 mai 2026 
+Address Enquiries to – Adresser toutes questions à 
+Contracting Authority: 
+Name: Karen Benedikt 
+Directorate:  Directorate Land Procurement 
+National Defence Headquarters 
+101 Colonel By Dr. 
+Ottawa, Ontario 
+K1A 0K2 
+Telephone No. – No de téléphone 
+1-873-469-7646
+Email – Courriel 
+Karen.benedikt@forces.gc.ca 
+Destination 
+Specified Herein 
+Précisé dans les présentes 
+Solicitation Closes – L’invitation prend fin 
+At – à: 2:00 PM EST – Eastern Standard Time – 
+Heure normale de l’Est 
+On June 16, 2026 – le 16 juin 2026 
+Delivery required - Livraison 
+exigée 
+See Herein 
+Delivery offered - Livraison 
+proposée 
+Vendor Name and Address - Raison sociale et adresse du fournisseur 
+Name and title of person authorized to sign on behalf of vendor (type or 
+print) - Nom et titre de la personne autorisée à signer au nom du 
+fournisseur (caractère d'imprimerie) 
+Name/Nom ____________________
+Title/Titre __________________ 
+Signature ______________________           Date _____________________ 
+Instructions: 
+Municipal taxes are not applicable. Unless otherwise specified herein all 
+prices quoted must include all applicable Canadian customs duties, 
+GST/HST, excise taxes and are to be delivered Delivery Duty Paid 
+including all delivery charges to destination(s) as indicated. The amount 
+of the Goods and Services Tax/Harmonized Sales Tax is to be shown as 
+a separate item. 
+Instructions : 
+Les taxes municipales ne s'appliquent pas. Sauf indication contraire, les 
+prix indiqués doivent comprendre les droits de douane canadiens, la 
+TPS/TVH et la taxe d'accise. Les biens doivent être livrés « rendu droits 
+acquittés », tous frais de livraison compris, à la ou aux destinations 
+indiquées. Le montant de la taxe sur les produits et services/taxe de 
+vente harmonisée doit être indiqué séparément. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 2 of 50 
+TABLE OF CONTENTS 
+1.
+Solicitation of Offers. ............................................................................................................ 4 
+2.
+Offer Requirements. ............................................................................................................ 4 
+3.
+Offeror Responsibilities..... ...................................................................................................5  
+4.
+Offer Submission. ................................................................................................................ 7 
+5.
+Communications. ................................................................................................................. 9 
+6.
+Technical Proposal and Forms. ......................................................................................... 10 
+7.
+Financial Proposal. ............................................................................................................ 11 
+8.
+Technical Evaluation. ......................................................................................................... 12 
+9.
+Financial Evaluation. .......................................................................................................... 12 
+10.
+Evaluation Procedures. ...................................................................................................... 12 
+11.
+Basis of Selection. ............................................................................................................. 14 
+12.
+Additional Information. ....................................................................................................... 14 
+RESULTING CONTRACT CLAUSES ......................................................................................... 15 
+1.
+Summary. ........................................................................................................................... 15 
+2.
+Performance of Work. ........................................................................................................15 
+3.
+Term of the Contract. ......................................................................................................... 15 
+4.
+Delivery of Goods. ............................................................................................................. 15 
+5.
+Transportation. ................................................................................................................... 17 
+6.
+Inspection and Acceptance. ............................................................................................... 18 
+7.
+Basis of Payment. .............................................................................................................. 19 
+8.
+Fees. .................................................................................................................................. 19 
+9.
+Payments. .......................................................................................................................... 19 
+10.
+Method of Payment. ........................................................................................................... 21 
+11.
+Warranties. ........................................................................................................................ 21 
+12.
+Ownership and Risk of Loss. ............................................................................................. 22 
+13.
+Government Property. ........................................................................................................ 22 
+14.
+Accounts and Audit. ........................................................................................................... 22 
+15.
+Insurance. .......................................................................................................................... 23 
+16.
+Certifications and Additional Information. .......................................................................... 23 
+17.
+International Sanctions. ..................................................................................................... 26 
+18.
+Anti-forced Labour Requirements. ..................................................................................... 28 
+19.
+Defence Contract. .............................................................................................................. 29 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 3 of 50 
+20.
+Termination and Suspension. ............................................................................................ 29 
+21.
+General Provisions. ........................................................................................................... 31 
+22.
+Authorities. ......................................................................................................................... 32 
+Annex Solicitation of Offers Definitions ....................................................................................... 34 
+Annex Contract Definitions ......................................................................................................... 38 
+Annex Offer Submission Form .................................................................................................... 42 
+Annex Offeror Declaration Form ................................................................................................. 43 
+Annex Requirement .................................................................................................................... 44 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 4 of 50 
+1.
+Solicitation of Offers.
+1.1.   Introduction. Canada requests offers from Offerors to meet its requirements. For the 
+convenience of Offerors, a brief description is set out below with detailed requirements in 
+subsequent sections of this solicitation of offers. If interested and able to meet these 
+requirements, Canada appreciates and welcomes an offer. 
+1.2.   Offers. Canada is seeking proposals from qualified Offerors to provide goods to the 
+Department of National Defence as defined in the Annex Requirement. 
+1.3.   Delivery Date. All the deliverables must be received on or before October 1, 2026. 
+1.4.   Delivery Points. Delivery of the requirement will be made to delivery point(s) specified at 
+Annex Requirement of the contract. 
+1.5.   Disclosure of Greenhouse Gas Emissions and Setting of Reduction Targets. Canada 
+is committed to achieving net-zero greenhouse gas (GHG) emissions by 2050 to position 
+Canada for success in a green economy and to mitigate climate change impacts. As a result, 
+future solicitation of offers may include the following:  
+a.
+Evaluation criteria or other instructions in the solicitation of offers or contract
+documents related to measuring and disclosing your company’s GHG emissions;
+b.
+Requested or required to join one of the following initiatives in order to submit an offer
+or if awarded a contract:
+i.
+Canada’s Net-Zero Challenge
+ii.
+the United Nations Race to Zero
+iii. the Science-based Targets Initiative
+iv. the Carbon Disclosure Project (CDP);
+v.
+the International Organization for Standardization (ISO);
+vi. Climate Action 100+;
+vii. Climate Engagement Canada
+c.
+An optional or mandatory requirement to provide other evidence of your company’s
+commitment and actions toward meeting net-zero targets by 2050.
+2.
+Offer Requirements.
+2.1.  Security Requirements. There are no security requirements associated with this 
+solicitation of offers.  
+2.2.  Solicitation of Offer Submission Eligibility. Barring any other conditions or international 
+sanctions, Canadian Suppliers, Suppliers of an Applicable Trading Partner and Suppliers of a 
+Non-Trading Partner, as defined in the Annex Solicitation of Offers definitions, are eligible for 
+this solicitation of offers. 
+2.3.  Environmentally Preferable Packaging - Optional. 
+a.
+Procurement of Environmentally Preferable Plastic Products. The Government of
+Canada is committed to promoting the procurement of environmentally preferable
+plastic products and the reduction of associated plastic packaging waste to protect the
+environment by including environmentally preferable packaging specifications, in
+accordance with the Policy on Green Procurement, the Greening Government
+Strategy: A Government of Canada Directive, and the Ocean Plastics Charter.
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 5 of 50 
+b.
+Packaging Material. All packaging material related to this requirement, except for
+excluded material and specialized packaging as defined below, should be reusable,
+returnable, or recyclable in accordance with Annex Solicitation of Offers Definitions.
+c.
+Excluded material. Environmentally preferable material alternatives in packaging tape
+are not widely available. As a result, packaging tape is considered to be excluded from
+the environmentally preferable packaging specifications until the market has
+progressed and studies become available to determine otherwise.
+d.
+Specialized packaging. Packaging can be considered “specialized” if the intended
+use of the packaging requires technical performance specifications with no
+environmentally preferable alternatives. For example, when transporting hazardous
+materials, if there is a need for a specific density of materials, or if they must be
+temperature controlled.
+3. Offeror Responsibilities.
+3.1.   Each Offeror should: 
+a.
+obtain any clarification it considers necessary of the solicitation of offers requirements
+before submitting an offer;
+b.
+prepare its offer in accordance with the solicitation of offers instructions;
+c.
+submit a complete offer by the closing date and time as per the instructions noted in
+section titled "Offer Submission";
+d.
+provide a comprehensible and sufficiently detailed offer, including all requested pricing
+details that will enable Canada to complete its evaluation based on the solicitation of
+offers criteria, and
+e.
+comply with all other requirements of this solicitation of offers.
+3.2.   Legal Capacity. The offeror must have the legal capacity to contract. If the Offeror is a 
+sole proprietorship, a partnership (if Common Law) or a general partnership (if Civil Law), or a 
+corporate body, the Offeror must provide, if requested by the Contracting Authority, a statement 
+and any requested supporting documentation indicating the laws under which it is registered or 
+incorporated together with the registered or corporate name and place of business. This also 
+applies to offerors submitting an offer as a joint venture. 
+3.3.   Compliance with Code of Conduct. The Offeror must comply with Canada's Code of 
+Conduct for Procurement. 
+3.4.   Ineligibility and Suspension Policy. 
+a.
+Mandatory Compliance. The Ineligibility and Suspension Policy (the “Policy”) in effect
+on the date the solicitation of offers is issued, and all related Directives in effect on that
+date, are incorporated by reference into, and form a binding part of the solicitation of
+offers. The Offeror must comply with the Policy and Directives, which can be found at
+the Office of Supplier Integrity and Compliance website.
+b.
+Policy Summary. The Policy sets out the circumstances under which Canada may
+determine that the Supplier is ineligible to enter, or is suspended from entering into a
+Contract with Canada. The list of ineligible and suspended Suppliers is maintained on
+the Office of Supplier Integrity and Compliance website.
+c.
+Offeror Responsibilities. The Offeror must provide the following:
+i.
+a List of Names for integrity verification that includes all information required by
+the Policy (section 13 – Disclosure); and
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 6 of 50 
+ii.
+if the Offeror is unable to certify all of the statements in the sub-clause below
+entitled ‘’Offeror Certifications’’, a completed Integrity Declaration Form
+providing all requested information and details of any material event that may
+affect the status of itself, its affiliates or its proposed first-tier subcontractors
+under the Policy.
+d.
+Offeror Certifications. Subject to the sub-clause below entitled ‘’Integrity Declaration
+Form’’, by submitting an offer in response to this solicitation of offers, the Offeror
+certifies that:
+i.
+it has read and understands the Ineligibility and Suspension Policy;
+ii.
+it understands that certain circumstances, as described in the Policy, will or may
+result in a determination of ineligibility or suspension under the Policy;
+iii. it is aware that Canada may request additional information, certifications, and
+validations from the Offeror or a third party for the purpose of making a
+determination of ineligibility or suspension;
+iv. none of the circumstances described in Appendix 2 of the Policy that will or may
+result in a determination of ineligibility or suspension, apply to itself, its affiliates
+or its proposed first tier subcontractors; and
+v.
+it is not aware of a determination of ineligibility or suspension issued by Canada
+that applies to it.
+e.
+Integrity Declaration Form. Where an Offeror is unable to provide any of the
+certifications required by the sub-clause above entitled ‘’Offeror Certifications’’, at the
+time of its offer it must submit a completed Integrity Declaration Form.
+f.
+Compliance with Certifications. Canada will declare non-compliant any offer in
+respect of which the information requested is incomplete or inaccurate, or in respect of
+which the information contained in a certification or declaration is found by Canada to
+be false or misleading in any respect. If Canada establishes after award of the
+Contract that the Offeror provided a false or misleading certification or declaration,
+Canada may terminate the Contract for default. Pursuant to the Policy, Canada may
+also determine the Offeror to be ineligible for award of a Contract for providing a false
+or misleading certification or declaration.
+3.5.   Conflict of Interest. 
+a.
+Right to Reject. Canada may reject an offer if the Offeror, any of its subcontractors, or
+any of their respective employees or former employees
+i. was involved in any manner in the preparation of the solicitation of offers or in any
+situation of conflict of interest or appearance of a conflict of interest, or
+ii. had access to information related to the solicitation of offers that was not available
+to other offerors and that would, in Canada's opinion, give or appear to give the
+Offeror an unfair advantage.
+b.
+Experience Not an Unfair Advantage. Canada will not consider any experience any
+Offeror has acquired by providing the goods and/or services described in the
+solicitation of offers (or similar goods and/or services), in itself, as conferring an unfair
+advantage or creating a conflict of interest.
+c.
+Notification of Rejection. If Canada intends to reject an offer under this section, the
+Contracting Authority will inform the Offeror and provide the Offeror an opportunity to
+make representations.
+3.6.   Insurance. The successful Offeror will be responsible to meet insurance requirements in 
+accordance with the resulting contract section entitled "Insurance".  
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 7 of 50 
+4.
+Offer Submission.
+4.1.   Offer Receipt. Canada will consider only offers submitted to the Department of National 
+Defence (DND) Bid Receiving Mailbox by the date and time indicated on page 1 and the "Offer 
+Submission" section of the solicitation.  
+4.2.   Offer Sections. Offerors are requested to submit their offers separated into the following 
+sections: 
+Section I: Technical Offer; 
+Section II: Financial Offer; 
+Section III: Offer Submission Form and Offeror Declaration Form; and 
+Section IV: Additional Information  
+4.3.   Delayed Offers. 
+a.
+Late Offers. Canada will not consider offers delivered after the offer submission closing
+date and time as indicated on the cover page.
+b. Cause of Delay. Misrouting or other electronic delivery issues resulting in late
+submission of bids will not be accepted.
+4.4.   Offers Submitted by Electronic Mail (E-Mail). 
+a.
+Submission by Electronic Mail. Offerors must submit their offers by e-mail.
+b. Bid Receiving Mailbox Address. As specified on the first page of the solicitation,
+Offerors must submit offers by e-mail to:
+i.
+DLP53BidsReceiving.DAAT53receptiondessoumissions@forces.gc.ca
+Note: Offers addressed to the Contracting Authority will not be accepted.
+c.
+E-mail Requirements.
+i.
+Transmission Capacity. Canada has the capacity to receive multiple
+documents. A limit of five (5) MB per e-mail is recommended, as individual e-
+mails exceeding this limit, or that includes other factors such as embedded
+macros and/or links, may be rejected by the DND e-mail system and/or firewall(s)
+without notice to the Offeror or Contracting Authority.
+ii.
+Message Fields. The Offeror must identify the solicitation number in the subject
+line of the e-mail(s).
+iii. Acknowledgement of Receipt. The offer Receiving Unit will send an
+acknowledgement of the receipt of offer document(s) via e-mail. This
+acknowledgement will confirm only the receipt of offer document(s) and will not
+confirm if Canada is able to open the attachments or that the content is readable.
+4.5.   Offer Submission Method Restrictions. Canada will not accept offers submitted in any 
+other manner. 
+4.6.   Offer Submission Requirements. 
+a.
+Authority. Each Offeror (and each member of a Joint Venture submitting an offer)
+must
+i.
+have legal capacity to contract and
+ii.
+sign the offer by an authorized representative of the Offeror. If a Joint Venture
+Offeror submits an offer, the Joint Venture will be required to identify its
+representative chosen to act on behalf of the Joint Venture (if the Offeror has
+not done so in the offer, Canada will provide it a deadline to do so).
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 8 of 50 
+b.
+Offer Identification. Each Offeror must ensure that its name, its return address, the
+solicitation of offers number, and the solicitation of offers closing date and time are
+clearly visible on any envelope or parcels containing samples or any paper offer as
+applicable
+c.
+Validity of Offers. Offers will remain open for acceptance for a period of not less than
+90 calendar days from solicitation of offers closing date, unless specified otherwise in
+the solicitation of offers. Canada reserves the right to seek an extension of the offer
+validity period from all compliant Offerors in writing, at least three calendar days before
+the end of the offer validity period. If all compliant Offerors agree to extend their offers,
+Canada will continue with the evaluation of the offers. If not all compliant Offerors
+extend their offers, Canada, at its sole discretion, will either continue with the
+evaluation of the offers of those who have accepted the extension or cancel the
+solicitation of offers.
+d.
+Offer Language. Offerors may submit their documents and supporting information in
+either English or French.
+e.
+Offer Become Property of Canada. Offers received on or before the solicitation of
+offers closing date and time will become the property of Canada and Canada will not
+return them to Offerors. Canada will treat all offers as confidential, subject to the
+provisions of the Access to Information Act and the Privacy Act.
+f.
+No Assignment of Offers. An offer cannot be assigned or transferred in whole or in
+part.
+g.
+Joint Ventures. If a contract is awarded to a Joint Venture, all members of the Joint
+Venture will be jointly and severally or solidarily liable for the performance of any
+resulting contract.
+4.7.   Technical Difficulties of Offer Transmission. Despite anything to the contrary in this 
+solicitation of offers, where an Offeror has commenced transmission of its offer through an 
+electronic submission method in advance of the solicitation of offers closing date and time, but 
+due to technical difficulties, Canada was unable to receive or decode the entirety of the Offer by 
+the deadline, Canada may nonetheless accept the entirety of the Offer received after the 
+solicitation of offers closing date and time, provided that the Offeror can demonstrate the 
+following:  
+a.
+The offeror contacted Canada in advance of the solicitation of offers closing date and
+time to attempt to resolve its technical difficulties; OR
+b.
+The electronic properties of the Offer documentation clearly indicate that all
+components of the Offer were prepared in advance of the solicitation of offers closing
+date and time.
+4.8.   Completeness of the Offer. After the closing date and time of this solicitation of offers, 
+Canada will examine the Offer to determine completeness. The review for completeness will be 
+limited to identifying whether any information submitted as part of the offer can be accessed, 
+opened, and/or decoded. This review does not constitute an evaluation of the content, will not 
+assess whether the Offer meets any standard or is compliant to all solicitation of offers 
+requirements, but will be solely limited to assessing completeness. Canada will provide the 
+Offeror with the opportunity to submit information found to be missing or incomplete in this 
+review within two business days of notice. The offer will be reviewed and deemed to be 
+complete when the following elements have been submitted by the offeror:  
+a.
+certifications and securities required at offer closing are included;
+b.
+offers are properly signed, that the offeror is properly identified;
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 9 of 50 
+c.
+acceptance of the terms and conditions of the solicitation of offers and resulting
+contract;
+d.
+that all documents (including certifications, declarations and proofs) created prior to
+offer closing but due to technical difficulties Canada was unable to receive them, have
+been properly submitted and received by Canada.
+4.9.   Provision of Documentation. Canada will make available Notices of Proposed 
+Procurement, solicitation of offers, and related documents for download through the 
+Government Electronic Tendering Service. Canada is not responsible and will not assume any 
+liabilities whatsoever for the information found on websites of third Parties. Canada will not 
+notify Offerors if it amends a Notice of Proposed Procurement, a solicitation of offers, or any 
+related documentation. It will post all amendments (including significant enquiries received and 
+their replies) using Government Electronic Tendering Service. Offerors are responsible for 
+regularly consulting Government Electronic Tendering Service for the most up-to-date 
+information. Canada will not be liable for any oversight on the Offeror's part nor for notification 
+services offered by a third Party. 
+4.10.   Offer Costs. The Offeror is solely responsible for all costs associated with preparing and 
+submitting its offer, as well as any costs it incurs in the evaluation of its offer. 
+4.11.   Applicable Laws. Any Contract must be interpreted and governed, and the relations 
+between the Parties determined, by the laws in force in a Canadian province or territory. 
+Offerors may insert the Canadian province or territory of their choice in the Offer Submission 
+Form. If the Offeror does not include this information in the Offer Submission Form, the 
+applicable laws will be those of Ontario. 
+4.12.   Entire Requirement. The solicitation of offers documents contain all the requirements 
+relating to the solicitation of offers; no other information or documentation is relevant. Offerors 
+should not assume that practices used under previous solicitations of offers or contracts will 
+continue or that the Offeror's existing capabilities meet the requirements of the solicitation of 
+offers simply because they have met previous requirements. 
+5.
+Communications.
+5.1.   Communications During Solicitation of Offers Period. To ensure the integrity of the
+competitive process, the Offeror must direct all questions and other communications regarding
+the solicitation of offers only to the Contracting Authority identified in the solicitation of offers.
+Failure to comply may result in Canada rejecting the offer.
+a.
+Period for Questions. Offerors should submit all questions in writing no later than
+7 business days before the offer closing date. Canada may not respond to questions
+submitted after this.
+b.
+Detail of Questions. Offerors must accurately reference the numbered item of the
+solicitation of offers to which the question relates and explain each question in
+sufficient detail to enable Canada to provide an accurate answer.
+c.
+Proprietary Questions. For any technical questions containing proprietary
+information, Offerors must clearly mark those questions as "proprietary". Canada will
+treat such questions as proprietary except where Canada determines that the question
+is not of a proprietary nature. Canada may edit the question(s) or may request that the
+Offeror revise the question(s) to eliminate the proprietary nature of the question(s) and
+Canada can provide the answer to all Offerors. Canada may not answer questions that
+are not in a form it can distribute to all Offerors.
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 10 of 50 
+5.2.   Offer Debriefings. Offerors may request a debriefing on the results of the solicitation of 
+offers process. Offerors should make such a request to the Contracting Authority within 
+15 business days from its receipt of the results of the solicitation of offers process. Canada 
+may provide the debriefing in writing, by telephone, or in person. 
+5.3.   Offer Challenge and Recourse Mechanisms. 
+a.
+Challenges to Procurement Process. Several mechanisms are available to potential
+suppliers to challenge aspects of the procurement process up to and including contract
+award.
+b.
+Offer Challenge and Recourse Mechanisms. Canada encourages suppliers to bring
+their concerns first to the attention of the Contracting Authority. Canada’s Buy and Sell
+website, under the heading “Bid Challenge and Recourse Mechanisms”, contains
+information on potential complaint bodies such as:
+i.
+Office of the Procurement Ombudsman (OPO)
+ii.
+Canadian International Trade Tribunal (CITT)
+c.
+Deadlines for Filing Complaints. There are strict deadlines for filing complaints; the
+time periods vary depending on the particular complaint body. Suppliers should
+therefore act quickly when they want to challenge any aspect of the procurement
+process.
+6.
+Technical Proposal and Forms.
+6.1.  Technical Offer Contents. 
+a.
+Requirements. Offerors should: demonstrate their understanding of the requirements
+contained in the solicitation of offers;
+i.
+concisely explain how they will meet these requirements; and
+ii.
+address the points that are subject to the evaluation criteria against which the
+Offer will be evaluated. Simply repeating a statement contained in the solicitation
+of offers is not sufficient.
+b. Organization. Offerors should address and present topics in the order of the evaluation
+criteria under the same headings. To avoid duplication, an Offeror may refer to different
+sections of its offer by identifying where it has already addressed the subject topic, by
+identifying the specific paragraph and page.
+6.2.  Offer Submission Form. Each Offeror is required to include the Offer Submission Form 
+(Annex Offer Submission Form) with their offers. If Canada determines that the information 
+required by the Offer Submission Form is incomplete or requires correction, Canada will provide 
+the Offeror with a deadline to do so. 
+6.3.   Offeror Declaration Form. Each Offeror is required to include the Offeror Declaration 
+Form (Annex Offeror Declaration Form) in which it certifies to Canada all the information 
+required by the Offeror Declaration. If Canada determines that the information required by the 
+Offeror Declaration Form is incomplete or requires correction, Canada will provide the Offeror 
+with a deadline to do so. 
+6.4.  Equivalent Products. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 11 of 50 
+a.
+Products To Be Considered. Products that are equivalent in form, fit, function, quality
+and performance to the item(s) specified in the solicitation of offers will be considered
+where the Offeror:
+i.
+designates the brand name, model and/or part number, and NATO
+commercial and government entity code (NCAGE) of the substitute product;
+ii.
+provide at least one of the following technical data;
+a.
+The manufacturer’s engineering drawing (minimum level 2), or
+b. Industrial specification data / information sheets from the true (Design
+Control) manufacturer, or
+c.
+Manufacturer’s catalogue of components.
+b.
+Products Not To Be Considered. Products offered as equivalent in form, fit, function,
+quality and performance will not be considered if:
+i.
+the offer fails to provide all the information requested to allow the Contracting
+Authority to fully evaluate the equivalency of each substitute product; or
+ii.
+the substitute product fails to meet or exceed the mandatory performance
+criteria specified in the solicitation of offers for that item; or
+iii.
+the technical documentation fails to have been acquired from the design
+control authority (note that the technical documentation from a supplier or
+subsidiary manufacturer is not acceptable).
+c.
+Demonstration of Equivalent Product. In conducting its evaluation of the offers,
+Canada may, but will have no obligation to, request Offerors offering a substitute
+product to provide technical information demonstrating the equivalency (e.g. drawings,
+specifications, engineering reports, and/or test reports), or to demonstrate, at the sole
+cost of Offerors, that the substitute product is equivalent to the item specified in the
+solicitation of offers within 7 calendar days of the request. If the Offeror fails to
+provide the requested information within the specified delay, Canada may declare the
+bid non-responsive.
+6.5.  Substitute Products - Samples. 
+a.
+Canada’s Request for Sample. If the Offeror offers a substitute product, Canada
+may request a sample in order to determine its equivalency in form, fit, function,
+quality and performance to the item specified in solicitation of offers.
+b.
+Canada’s Review of Sample. If the Contracting Authority so requests, the Offeror
+must provide a sample to the Technical Authority, transportation charges prepaid and
+without charge, within 14 calendar days from the date of request. The sample will
+remain Canada’s property; Canada will not consider it as part of the deliverables in
+any resulting contract. If the sample does not meet the requirements of the solicitation
+of offers or the Offeror fails to comply with the Contracting Authority’s request,
+Canada will declare the offer to be non-compliant.
+7.
+Financial Proposal.
+7.1.   Financial Offer. Offerors must submit firm prices, Delivered Duty Paid (DDP) at 25 CFSD 
+Montreal and 7 CFSD Edmonton Incoterms 2020, Applicable Taxes excluded. The total 
+amount of Applicable Taxes must be shown separately. 
+7.2.   Pricing. Offerors must provide individual prices for each item and destination. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 12 of 50 
+7.3.   Exchange Rate Fluctuation. Canada is not offering exchange rate fluctuation risk 
+mitigation for this solicitation of offer. Canada will declare any offer non-compliant if there is any 
+indication that offer is conditional on exchange rate fluctuation protection. 
+8.
+Technical Evaluation.
+8.1.   Mandatory Technical Criteria. Offerors must provide the Part Number or equivalent and 
+the NCAGE as noted in Annex Requirement.  
+9.
+Financial Evaluation.
+9.1.   Evaluation of Price. Canada will evaluate all offers in Canadian dollars, Applicable Taxes 
+excluded, delivery, and Canadian customs duties and excise taxes included. 
+9.2.  Price Justification. If an offer is the sole compliant offer received, the Offeror must 
+provide, on Canada's request, one or more of the following:  
+a.
+a current published price list indicating the percentage discount available to Canada;
+b.
+a copy of paid invoices for the like quality and quantity of the goods, services, or both
+sold to other customers;
+c.
+a price breakdown of all costs (including labour, materials, transport, general and
+administrative overhead, transportation, etc.) and profit;
+d.
+price or rate certifications; and
+e.
+any other supporting documentation that Canada may request.
+10.
+Evaluation Procedures.
+10.1.  Assessment. Canada will assess offers in accordance with the entire requirement of the 
+solicitation of offers including the Technical and Financial evaluation criteria. Canada will declare 
+any offer that fails to meet all mandatory solicitation requirements non-compliant. 
+10.2.  Conduct of Evaluation. 
+a.
+Support for Offer Requirements. Canada may, but will have no obligation to, do the
+following:
+i. seek clarification or verification as to any information provided,
+ii. contact any references to verify any information it submitted,
+iii. request information about the Offeror’s legal status,
+iv. conduct a survey of the Offeror’s facilities,
+v. examine the Offeror's its technical, managerial, and financial capabilities,
+vi. correct any error in;
+1.
+the extended pricing of offers by using unit pricing, or
+2.
+the quantities in offers to reflect the quantities stated in the solicitation of offers
+(and, in the case of error in the extension of prices, the unit price will govern),
+vii.
+verify any information the Offeror provided, or
+viii. interview, at the Offeror’s sole cost, the Offeror, any resources it proposes to fulfill
+the solicitation of offers requirements or both.
+b. Compliance. The Offeror must comply with any such request within the time specified in
+Canada’s request. Failure to comply will render the offer non-compliant.
+10.3.   Evaluation Based on Documents Provided. Unless otherwise specified in this 
+solicitation of offers, Canada will evaluate only the documentation provided with the offer. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 13 of 50 
+Canada will not consider information such as references to website addresses where additional 
+information can be found, or technical manuals or brochures not submitted with the offer. 
+10.4.   Evaluation Team. An evaluation team composed of representatives of Canada will 
+evaluate the offers. 
+10.5.  Rights of Canada. Canada may: 
+a.
+reject any or all offers in response to the solicitation of offers;
+b.
+enter into negotiations with Offerors on any or all aspects of their offers;
+c.
+accept any offer in whole or in part without negotiations;
+d.
+cancel the solicitation at any time;
+e.
+reissue the solicitation;
+f.
+if no compliant offers are received and the requirement is not substantially modified,
+reissue the solicitation of offers by inviting only the Offerors who submitted an offer to
+resubmit within a period designated by Canada; or
+g.
+negotiate with the sole compliant Offeror to ensure the best value to Canada.
+10.6.  Rejection of Offer. 
+a.
+Corrective Measure Rejection. Canada will reject an offer where the Offeror or
+subcontractor included as part of the offer is subject to a corrective measure, following
+an assessment under the Vendor Performance Corrective Measure (VPCM) Policy,
+which renders them ineligible to offer on the requirement.
+b.
+Rejection for Other Causes. Canada may reject an offer where:
+i. Bankruptcy. The Offeror is bankrupt or its activities are inoperable for an extended
+period;
+ii. Improper Conduct. The Offeror or an employee or subcontractor included as part
+of the offer:
+1.
+based on evidence satisfactory to Canada, has committed fraud, bribery,
+fraudulent misrepresentation or failed to comply with laws protecting
+individuals against any manner of discrimination;
+2.
+based on evidence satisfactory to Canada, has conducted themselves
+improperly in the past;
+iii. Suspension or Termination. The Offeror or an employee or subcontractor
+included as part of the offer has been suspended or terminated by Canada for
+default under a contract with Canada;
+iv. Poor Performance. In Canada’s opinion, the Offeror’s performance on other
+contracts, including the efficiency and workmanship as well as the extent to which
+the Offeror performed the work in accordance with contractual clauses and
+conditions, is sufficiently poor to jeopardize the successful completion of the
+requirement;
+v. Not Good Value. In Canada’s opinion, it does not offer good value to Canada;
+vi. Prejudicing Integrity or Fairness - Multiple Offers from Single Offeror or Joint
+Venture. Canada may apply additional scrutiny when it receives multiple offers in
+response to a solicitation of offers from a single Offeror or a Joint Venture. Canada
+may reject any offer submitted by a single Offeror or Joint Venture if their inclusion
+1.
+in the evaluation has the effect of prejudicing the integrity and fairness of the
+process, or
+2.
+in the procurement process would distort the solicitation of offers evaluation or
+would not provide good value to Canada.
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 14 of 50 
+vii. Ability to Make Representations. If Canada intends to reject an offer under (iii) or
+(iv), the Contracting Authority will inform the Offeror and give the Offeror ten
+calendar days within which to make representations, before making a final decision
+on the offer rejection.
+11.
+Basis of Selection.
+11.1.   Lowest Evaluated Price with Mandatory Technical Criteria. For Canada to declare an 
+offer compliant, the offer must comply with the requirements of the solicitation of offers and 
+meet all mandatory technical evaluation criteria. Canada will consider the compliant offer with 
+the lowest evaluated price for award. 
+12.
+Additional Information.
+12.1.  Condition of Material - Offer. The Contractor must supply material that is new, and that 
+conforms to the latest issue of the applicable drawing, specification and part number that is in 
+effect on the solicitation of offers closing date. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur
+W8486-270789/A 
+ DLP 5-2-4 
+Page 15 of 50 
+RESULTING CONTRACT CLAUSES 
+The following clauses and conditions apply to and form part of any contract resulting from the 
+solicitation of offer being accepted.  
+1.
+Summary
+1.1.   The Contract is for Spare parts for Construction Engineering Equipment as described in 
+Annex Requirement  
+ 
+ 
+ 
+. 
+2.
+Performance of Work
+2.1.   Security Requirement. There is no security requirement applicable to the Contract. 
+2.2.   Condition of Material. Unless provided otherwise in the Contract, material supplied must 
+be new and conform to the latest issue of the applicable drawing, specifications and part 
+number that is in effect on the offer closing date or, if there was no offer solicitation, the date of 
+the Contract. 
+3.
+Term of the Contract
+3.1.   Delivery Date.  All the deliverables must be received on or before (To be inserted at 
+Contract Award). 
+4.
+Delivery of Goods.
+4.1.   Delivery Obligation. The Contractor must deliver the Goods Delivered Duty Paid (DDP) 
+25 CFSD Montreal and 7 CFSD Edmonton Incoterms 2020. 
+4.2.   Delivery Points. Delivery of the requirement will be made to the delivery point(s) specified 
+in Annex Requirement of the Contract.  
+4.3.   Delivery Costs. The Contractor will arrange delivery by the most direct and economical 
+means that are consistent with Canada’s shipping practice.  
+4.4.   Packaging Requirement using Specification D-LM-008-036/SF-000. 
+a.
+Package Specifications. The Contractor must prepare item number(s) 4, 5, 14, 17, and
+18 for delivery in accordance with the latest issue of the Canadian Forces Packaging
+Specification D-LM-008-036/SF-000, DND Minimum Requirements for Manufacturer's
+Standard Pack.
+b. Package Quantities. The contractor must package item numbers 4, 5, 14, 17, and 18 in
+quantities of one per package.
+4.5.   Preparation for Delivery - Canadian Forces Packaging Specifications. The Contractor 
+must prepare item 16 for delivery in accordance with the latest issue of the Canadian Forces 
+packaging specifications; 
+a.
+D-LM-008-026/SF-001, Preformed Packing, Gaskets or Seals (rubber natural/synthetic,
+cork, asbestos or leather);
+b. The Contractor must package item number 16 in quantities of one (1) per package.
+4.6.   Preparation for Delivery - Canadian-based Contractor. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 16 of 50 
+ 
+a. Technical Requirements. Preservation and packaging for items 1, 2, 3, 6, 7, 8, 9, 10, 
+11, 12, 13, and 15 must be in accordance with the Canadian Forces packaging 
+specification D-LM-008-001/SF-001, and must be marked to D-LM-008-002/SF-001. 
+Form Level B Pkg Data Form Reqd must be in accordance with D-LM-008-011/SF-001. 
+b. Previously Approved Packaging Data Forms. Canada will accept packaging data 
+forms that it has previously approved 
+c. Approved Coded Packaging Data. Approved coded packaging data is shown 
+immediately below the description of the item to which it applies. If no data is shown, the 
+Contractor must submit a packaging data form to Canada for approval. 
+4.7.   Excess Goods.  The Contract specifies the quantity of goods that the Contractor will 
+deliver. The Contractor is liable for any shipment in excess of that quantity. Canada will not pay 
+the Contractor for any goods shipped in excess of the specified quantity. Canada will not return 
+such goods to the Contractor unless the Contractor agrees to pay all costs related to the return. 
+Canada may deduct such costs from any invoice that the Contractor submits. 
+ 
+4.8.   The clauses below will also be required and apply to all items: 
+a. WOOD PACKAGING MATERIALS Use SACC clause D2025C for items wherever a 
+potential for the use of wood packaging materials may exist (Search D2025C Standard 
+Contract Clause Inventory | CanadaBuys) 
+b. SACC D6010C A palletization clause (D6010C) may be required for bulky or large 
+demands (for depot stock)  (Search D6010C Standard Contract Clause Inventory | 
+CanadaBuys) 
+As applicable, when there are items with Quality Assurance Code “Q” (One of three “Release 
+Documents (Department of National Defence)” clauses to be inserted at Contract Award.) 
+4.9.   Release Documents (Department of National Defence) - Canadian-based contractor. 
+As applicable, when there are items with Quality Assurance Code “Q” - Applicable for Item #8. 
+a. Signature Requirement. The Department of National Defence (DND) Quality 
+Assurance Representative’s signature on the release document is not required, unless 
+otherwise directed by the DND Quality Assurance Authority. 
+b. Release Form 
+i. 
+The Contractor must prepare either DND form CF 1280 - Certificate of Release, 
+Inspection and Acceptance, or a release document containing the same 
+information, before any material is released for shipment. 
+ii. 
+For the return of repair and overhaul material to the Defence Supply Chain, the 
+Contractor must use forms DND 2227/DND 2228 instead of DND form CF 1280. 
+4.9.   Release Documents (Department of National Defence) - Foreign-based Contractor. 
+The Contractor must prepare a Certificate of Conformity in accordance with NATO STANAG 
+4107 before any material is released for shipment. As applicable, when there are items with 
+Quality Assurance Code “Q” 
+4.9.   Release Documents (Department of National Defence) - United States-based 
+Contractor. The Contractor must prepare either a DD Form 250 - Material Inspection and 
+Receiving Report, or a release document containing the same information in a format 
+acceptable to the Quality Assurance Representative, before any material is released for 
+shipment. As applicable, when there are items with Quality Assurance Code “Q” 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 17 of 50 
+ 
+4.10.   Release Documents - Distribution. As applicable, when there are items with Quality 
+Assurance Code “Q” The Contractor must prepare the release documents and distribute them 
+as follows:  
+a. one copy mailed to consignee marked "Attention: Receipts Officer", 
+b. two copies with shipment (in a waterproof envelope) to the consignee, 
+c. one copy to the Contracting Authority, 
+d. one copy to: 
+National Defence Headquarters 
+Mgen George R. Pearkes Building 
+101 Colonel By Drive 
+Ottawa, ON K1A OK2 
+Attention: [insert name] 
+e. one copy to the Quality Assurance Representative, 
+f. one copy to the Contractor, and 
+g. For all non-Canadian contractors, one copy to: 
+DQA/Contract Administration 
+National Defence Headquarters 
+Mgen George R. Pearkes Building 
+101 Colonel By Drive 
+Ottawa, ON K1A OK2 
+Email: ContractAdmin.DQA@forces.gc.ca.  
+ 
+5. Transportation. 
+5.1 Transportation Costs and Carrier Liability.  
+a. Transportation Costs. If transportation costs are payable by Canada under the 
+Contract and the Contractor makes the transportation arrangements, the Contractor 
+must ship using the most direct and economical means consistent with normal shipping 
+practice. The Contractor must show these costs as a separate item on the invoice. 
+b. Transportation Carriers’ Liability. The federal government's policy of underwriting its 
+own risks precludes payment of insurance or valuation charges for transportation 
+beyond the point at which ownership of goods passes to the federal government 
+determined by the Incoterms applicable to the Contract. Where increased carrier liability 
+is available without charge, the Contractor must obtain the increased liability for 
+shipment. 
+5.2.   Shipping Documentation. When shipping goods, the transportation bill of lading must 
+accompany the original invoice, except for "collect" shipments (when stipulated), in which event 
+it must accompany the shipment. In addition, a packing slip must accompany each shipment, 
+showing item, quantity, part or reference numbers, description of the goods and contract 
+number, including the CRN and PBN. If Canada has inspected the goods at the Contractor's 
+plant, the Contractor must attach the signed inspection voucher to the packing slip.  
+5.3.   Incomplete Assemblies. The Contractor must not ship incomplete assemblies without the 
+Contracting Authority’s prior written authorization.  
+5.4.   Labelling. The Contractor must ensure that the manufacturer's and specification numbers 
+appear on each item, either printed on the container or on an adhesive label of highest 
+commercial standard affixed to the container. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 18 of 50 
+ 
+5.5.   Marking. The Contractor must ensure that the manufacturer's name and part number are 
+clearly stamped or etched on each item for positive identification purposes. As applicable. 
+5.6.   Palletization.  
+a. Detailed Requirements. For all shipments exceeding 0.566 m3 or 15.88 kg (20 ft3 or 35 
+lbs), except for those shipped by courier, the following applies: 
+i. 
+The Contractor must strap and, if necessary, wrap shipments on standard 1.22 m 
+x 1.02 m (48 in. x 40 in.) wood pallets. The Contractor must supply a four-way 
+forklift entry pallet at no charge to the Department of National Defence. Total 
+height, including pallet, must not exceed 1.19 m (47 in.). The pallet load must not 
+extend farther than 2.54 cm (1 in.) from any edge of the pallet. 
+ii. 
+The Contractor must group items by stock number (on the same pallet) within 
+consolidated shipments. The Contractor must mark pallet loads composed of 
+more than one stock number as "Mixed Items." 
+iii. 
+The Contractor must secure individual items exceeding 1.22 m (48 in.) in length 
+or 453.6 kg (1000 lbs) to larger pallets or must have 10.16 cm x 10.16 cm (4 in. x 
+4 in.) skids securely fastened to the bottom of the item. The Contractor must 
+separate skids by a minimum of 71.12 cm (28 in.). 
+b. Exceptions. The Contracting Authority must approve any exception in advance. 
+ 
+5.7.   Shipping Instructions: Delivery at Destination.  
+a. Delivery Charges. Goods must be consigned to the destination specified in the Contract 
+and delivered (DDP) Delivered Duty Paid to 25 CFSD Montreal and 7 CFSD Edmonton 
+Incoterms 2020 for shipments from a commercial contractor.  
+b. Delivery to CF Supply Depots. The Contractor must deliver the goods to Canadian 
+Forces (CF) Supply Depots by appointment only. The Contractor or its carrier must 
+arrange delivery appointments by contacting the Depot Traffic Section at the appropriate 
+location shown below. If prior arrangements have not been made, the consignee may 
+refuse shipments. 
+i. 
+25 CF Supply Depot Montreal 
+Montreal, QC 
+Email: 25DAFCTrafficRDV@forces.gc.ca  
+ii. 
+7 CF Supply Depot Edmonton 
+Edmonton, Alberta 
+Email: edm7cfsdnmds@forces.gc.ca  
+ 
+6.   Inspection and Acceptance. 
+6.1.   Inspection, Acceptance and Cure. Canada’s Rights. All the Work is subject to 
+inspection and acceptance by Canada.  
+i. Inspection and Acceptance. Canada has the right to inspect and accept all 
+Work. Canada’s inspection and acceptance of the Work by Canada do not relieve 
+the Contractor of its responsibility for defects or other failures to meet the 
+requirements of the Contract.  
+ii. Rejection and Cure. If Canada rejects any Work, it may require the Contractor to 
+correct or replace the Work at no additional cost. 
+ 
+ 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 19 of 50 
+ 
+7.   Basis of Payment. 
+ 
+7.1.   Basis of Payment – Firm Price (all Work). In consideration of the Contractor 
+satisfactorily completing all of its obligations under the Contract, Canada will pay the Contractor 
+a firm unit price(s), as specified in Annex Requirement for a cost of [Amount]. Customs duties 
+are included and Applicable Taxes are extra. Canada will not pay the Contractor for any design 
+changes, modifications or interpretations of the Work, unless they have been approved, in 
+writing, by the Contracting Authority before their incorporation into the Work. 
+ 
+8.   Fees. 
+ 
+8.1.   Limitation of price. Canada will not pay the Contractor for any design changes, 
+modifications or interpretations of the Work unless they have been approved, in writing, by the 
+Contracting Authority before their incorporation into the Work. 
+ 
+9.   Payments. 
+ 
+9.1.   Invoices.  
+a. Invoice Submission. The Contractor must submit invoices for each delivery in 
+accordance with the Contract. Each invoice must indicate whether it covers partial or 
+final delivery. 
+b. Invoice Details. Invoices must show:  
+i.   the date, the name and address of the client department, item or reference 
+numbers, deliverable or description of the Work, contract number, Client 
+Reference Number, Procurement Business Number, and financial code(s); 
+ii.   details of expenditures (such as item, quantity, unit of issue, unit price, fixed time 
+labour rates and level of effort, subcontracts, as applicable) in accordance with 
+the Basis of Payment, exclusive of Applicable Taxes; 
+iii. deduction for holdback, if applicable; 
+iv. the extension of the totals, if applicable; 
+v.   if applicable, the method of delivery together with date, case numbers and part or 
+reference numbers, shipment charges and any other additional charges; and 
+vi. Applicable Taxes as a separate item along with corresponding registration 
+numbers from the tax authorities. The Contractor must identify on all invoices all 
+items that are zero-rated, exempt or to which Applicable Taxes do not apply. 
+c. Payment of Taxes. Canada will pay Applicable Taxes. It is the sole responsibility of the 
+Contractor to charge Applicable Taxes at the correct rate. The Contractor must pay 
+Applicable Taxes, ancillary taxes, and any commodity tax, on taxable goods or services 
+used or consumed in the performance of the Contract (in accordance with applicable 
+legislation), including for material incorporated into real property. 
+d. Exemptions. The Contractor is not entitled to use Canada’s exemptions from any tax, 
+such as provincial sales taxes, unless otherwise specified by law. 
+e. Withholding for Non-Residents. Canada will withhold 15 percent of the amount to pay 
+the Contractor in respect of services provided in Canada if the Contractor is not a 
+resident of Canada unless the Contractor obtains a valid waiver from the Canada 
+Revenue Agency. 
+ 
+ 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 20 of 50 
+ 
+9.2.   Invoicing Instructions.  
+a. Invoice Submission. The Contractor cannot submit any invoices until all Work identified 
+in the invoice is completed. 
+b. Invoice Distribution. The Contractor must forward:  
+i. 
+the invoice to the email address for each applicable Canadian Forces Supply 
+Depot (CFSD) as per Annex Requirement for certification and payment; and 
+ii. 
+one copy to the Contracting Authority. 
+ 
+ 
+9.3.   Payment Period. Canada will pay the Contractor’s undisputed invoice amount within 30 
+days after receipt of invoice in acceptable form and content. In the event an invoice is not of an 
+acceptable form and content, Canada will notify the Contractor within 15 days of receipt, and 
+the 30 days payment period will begin on receipt of a conforming invoice. 
+9.4.   Late Payments.  
+a. Interest on Late Payments. Canada will pay the Contractor simple interest at the 
+Average Rate plus 3 percent per year on any amount that is Overdue, from the date that 
+amount becomes Overdue until the day before the date of payment, inclusive. The 
+Contractor is not required to provide notice to Canada for interest payable. 
+b. Exceptions. Canada will pay interest only if Canada is responsible for the delay in 
+paying the Contractor. Canada will not pay interest on Overdue advance payments. 
+ 
+9.5.   Electronic Payment of Invoices. The Contractor accepts that Canada will use the 
+following electronic payment instruments: (To be inserted at Contract Award) 
+a. Direct Deposit (Domestic and International), 
+b. Electronic Data Interchange (EDI), 
+c. Wire Transfer (International Only) 
+9.6.   Right to Set-Off. When Canada makes a payment to the Contractor, Canada may deduct 
+any amount payable to Canada by the Contractor under this or any other current contract. 
+9.7.   Taxes.  
+a. Federal government departments and agencies are required to pay Applicable Taxes. 
+b. Applicable Taxes will be paid by Canada as provided in the Invoice Submission section. 
+It is the sole responsibility of the Contractor to charge Applicable Taxes at the correct 
+rate in accordance with applicable legislation. The Contractor agrees to remit to 
+appropriate tax authorities any amounts of Applicable Taxes paid or due. 
+c. The Contractor is not entitled to use Canada’s exemptions from any tax, such as 
+provincial sales taxes, unless otherwise specified by law. The Contractor must pay 
+applicable provincial sales tax, ancillary taxes, and any commodity tax, on taxable goods 
+or services used or consumed in the performance of the Contract (in accordance with 
+applicable legislation), including for material incorporated into real property. 
+d. In those cases where Applicable Taxes, customs duties, and excise taxes are included in 
+the Contract Price, the Contract Price will be adjusted to reflect any increase, or 
+decrease, of Applicable Taxes, customs duties, and excise taxes that will have occurred 
+between offer submission and contract award. However, there will be no adjustment for 
+any change to increase the Contract Price if public notice of the change was given 
+before offer submission date in sufficient detail to have permitted the Contractor to 
+calculate the effect of the change. 
+e. Tax Withholding of 15 Percent – Canada Revenue Agency. 
+Pursuant to the Income Tax Act, 1985, c. 1 (5th Supp.) and the Income Tax Regulations, 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 21 of 50 
+ 
+Canada must withhold 15 percent of the amount to be paid to the Contractor in respect 
+of services provided in Canada if the Contractor is not a resident of Canada, unless the 
+Contractor obtains a valid waiver from the Canada Revenue Agency. The amount 
+withheld will be held on account for the Contractor in respect to any tax liability which 
+may be owed to Canada. 
+ 
+ 
+10.   Method of Payment.  
+ 
+10.1.   Multiple Payments. Canada will pay the Contractor upon completion and delivery of 
+units if: 
+a. the Contractor has properly submitted an accurate and complete invoice along with 
+any other necessary documents, 
+b. Canada has verified all such documents, and 
+c. Canada has accepted the Work delivered. 
+ 
+11.   Warranties. 
+11.1.   Warranty.  
+a. General Warranty. The Contractor states that the Work will be new, conform to the 
+Specifications, and be free from defects in design, material and workmanship during 
+the longer of Contractor’s standard warranty period or 12 months after Canada 
+accepts the Work (the “Warranty Period”). 
+b. Government Property. With respect to Government Property not supplied by the 
+Contractor, the Contractor's warranty will extend only to its proper incorporation into 
+the Work. 
+c. Replacement or Repair. Upon Canada’s request during the Warranty Period the 
+Contractor at its expense, must replace or repair any nonconforming or defective 
+goods within 5 days or such other time as specified by Canada. 
+d. Defective or Non-conforming Work. The Work or any part of the Work found to be 
+defective or non-conforming, will be returned to the Contractor's plant for replacement, 
+repair or making good. However, when in the opinion of Canada it is not expedient to 
+remove the Work from its location, the Contractor must carry out any necessary repair 
+or making good of the Work at that location. In such cases, the Contractor will be paid 
+the fair and reasonable Cost (including reasonable travel and living expenses) incurred 
+in so doing, with no allowance for profit, less an amount equal to the Cost of rectifying 
+the defect or non-conformance at the Contractor's plant. 
+e. Transportation Costs. Canada must pay the transportation cost associated with 
+returning the Work or any part of the Work to the Contractor’s plant. The Contractor 
+must pay the transportation cost associated with forwarding the replacement or 
+returning the Work or part of the Work when rectified to the delivery point specified in 
+the Contract or to another location directed by Canada. 
+ 
+11.2.   Extension of Warranty. The Contractor must automatically extend the Warranty Period 
+by the duration of any period or periods where the Work is unavailable for use by Canada or 
+Canada cannot use the Work because of a defect or non-conformance during the original 
+Warranty Period. The warranty applies to any part of the Work repaired, replaced or otherwise 
+made good, for the greater of:  
+a. the Warranty Period remaining, including the extension, or 
+b. 90 days or such other period as the Parties may specify for that purpose.  
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 22 of 50 
+ 
+ 
+12.   Ownership and Risk of Loss. 
+ 
+12.1.   Ownership.  
+a. Transfer of Ownership to Canada. Unless provided otherwise, the Work or any part of 
+the Work belongs to Canada after acceptance by or on behalf of Canada. 
+b. Partial Payments. However, if any payment is made to the Contractor for or on account 
+of any work, either by way of progress or milestone payments, that work paid for by 
+Canada belongs to Canada upon such payment being made. This transfer of ownership 
+does not constitute acceptance by Canada of the Work or any part of the Work and does 
+not relieve the Contractor of its obligation to perform the Work in accordance with the 
+Contract. 
+ 
+ 
+12.2.   Risk of Loss. Despite any transfer of ownership, the Contractor is responsible for any 
+loss or damage the Contractor or its subcontractor causes to the Work or any part of the Work in 
+accordance with the Contract. 
+12.3.   Title. Upon transfer of ownership to the Work or any part of the Work to Canada, the 
+Contractor must, if requested by Canada, establish to Canada's satisfaction that the title is free 
+and clear of all claims, liens, attachments, charges or encumbrances. The Contractor must 
+execute any conveyances and other instruments necessary to perfect the title that Canada may 
+require. 
+ 
+13.   Government Property. 
+13.1.   Care of Property. The Contractor must take reasonable and proper care of all 
+Government Property while it is in its possession or subject to its control. The Contractor is 
+responsible for any loss or damage resulting from its failure to do so other than loss or damage 
+caused by ordinary wear and tear. 
+ 
+14.   Accounts and Audit. 
+ 
+ 
+14.1.   Accounts and Records.  
+a. Requirement to Keep Records. The Contractor must maintain complete and 
+accurate records of the estimated and actual cost of the Work, to enable Canada to 
+determine whether the Contractor has performed the Work, the price charged for the 
+Work is in accordance with the Contract terms and Canada has achieved best value. 
+b. Types of Records. Such records include all tender calls, quotations, contracts, 
+correspondence, source documents for accounting entries such as Excel or other 
+spread sheets in numeric and machine readable form (not PDF copies), books and 
+ledgers of initial accounting entries, work sheets, spreadsheets and other 
+documentation supporting cost allocations, computations, reconciliations and 
+assumptions made by the Contractor in relation to the Contract. The Contractor can 
+only use copies if originals are unavailable due to unusual circumstances, such as fire, 
+flood or theft. 
+c. Accounting System. The Contractor must establish and maintain an accounting 
+system that enables Canada to readily identify these records. 
+d. Availability of Records. The Contractor must make these records available on 
+request, for examination by Canada, or by Canada’s representatives during normal 
+business hours at the Contractor’s office or place of business. If no such location is 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 23 of 50 
+ 
+available, then the Contractor must make financial records, with the supporting or 
+underlying documents and records, available for examination at a time and location 
+that is convenient for Canada. 
+e. Retention of Records. The Contractor must maintain such records, and Canada and 
+its authorized representatives may examine such records, at all times during the period 
+of this Contract and until the later of seven years after final payment and the 
+settlement of all outstanding claims and disputes. Should an examination reveal any 
+overpayments by Canada, these will be claimed by Canada and immediately repaid by 
+the Contractor. 
+f. 
+Review by Canada. Canada and its authorized representatives may examine, and 
+make copies of, or extract from, all such records in whatever form they may be kept, 
+relating to or pertaining to this Contract, including but not limited to those kept by the 
+Contractor, its employees, agents, successors, and subcontractors. 
+g. Full Compliance. The Contractor must ensure that all subcontractors and affiliates 
+comply with the requirements of this clause. 
+ 
+15.   Insurance. 
+15.1.   Insurance Requirements. The Contractor is responsible for deciding if insurance 
+coverage is necessary to fulfill its obligations under the Contract and to ensure compliance with 
+any applicable law. Any insurance acquired or maintained by the Contractor is at the 
+Contractor’s expense and for its own benefit and protection. It does not release the Contractor 
+from or reduce its liability under the Contract. 
+ 
+16.   Certifications and Additional Information.  
+16.1.   Compliance with Certifications. Unless specified otherwise, the Contractor will be in 
+default if it does not continuously comply with the certifications it provided in its offer or before 
+contract award or if the Contractor does not provide evidence about its compliance when 
+requested by the Contracting Authority. Canada may verify the Contractor's certifications 
+throughout the Contract Period. 
+ 
+16.2.   Compliance with Laws. The Contractor must comply with all laws applicable to the 
+performance of the Contract. The Contractor must provide evidence of compliance with such 
+laws to Canada at such times as Canada may reasonably request. 
+ 
+16.3.   Compliance with Code of Conduct. The Contractor must comply with the Code of 
+Conduct for Procurement. 
+16.4.   Contingency Fees. The Contractor certifies and agrees that it has not paid and will not 
+pay, directly or indirectly, any contingency fee for the solicitation, negotiation or obtaining of the 
+Contract to any person (including, without limitation any individual who is required to file a return 
+with the registrar pursuant to section 5 of the Lobbying Act), other than an employee of the 
+Contractor acting in the normal course of the employee's duties. In this section:  
+a. "contingency fee" means any payment or other compensation that depends or is 
+calculated based on a degree of success in solicitating, negotiating or obtaining the 
+Contract; and 
+b. "person" included any individual who is required to file a return with the registrar 
+pursuant to section 5 of the Lobbying Act 1985, c. 44 (4th Supplement). 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 24 of 50 
+ 
+16.5.   No Bribe. The Contractor certifies that it has not and will not offer, promise, give or pay 
+any bribe, gift, benefit, or other inducement directly or indirectly to any official or employee of 
+Canada or to any member of their family, in order to influence the issuance or administration of 
+the Contract. 
+16.6.   No Influence; No Financial Interest. The Contractor must not influence, seek to 
+influence, or otherwise take part in any decision of Canada that might further the Contractor's 
+own interests. The Contractor must have no financial interest in the business of any third party 
+that causes or would appear to cause a conflict of interest in connection with the performance of 
+the Work. The Contractor must immediately declare any such financial interest to the 
+Contracting Authority. 
+16.7.   No Conflict. The Contractor warrants that, to the best of its knowledge after making 
+diligent inquiry, no conflict exists or is likely to arise in its performance of the Contract. If the 
+Contractor becomes aware of any matter that causes or is likely to cause such a conflict, the 
+Contractor must immediately disclose it to the Contracting Authority. If the Contracting Authority 
+is of the reasonable opinion that such a conflict exists, it may either (i) require the Contractor to 
+take steps to deal with the conflict or (ii) terminate the Contract for default. In this section, 
+“conflict” means any matter, circumstance, interest, or activity affecting the Contractor, its 
+personnel, or its subcontractors, that may impair or may appear to impair its ability to perform 
+the Work diligently and independently. 
+16.8.   Ethics Codes for Public Service. The Contractor acknowledges that individuals who 
+are subject to the provisions of the Conflict of interest Act, the Conflict of interest Code for 
+Members of the House of Commons, the Values and Ethics Code for the Public Service or all 
+other codes of values and ethics applicable within specific organizations cannot derive any 
+direct or indirect benefit from the Contract. 
+16.9.   Ineligibility and Suspension Policy Provisions. The Contract incorporates the 
+Ineligibility and Suspension Policy and all related Directives incorporated by reference into the 
+solicitation of offers on its closing date, and form a binding part of the Contract. The Contractor 
+must comply with the provisions of the Ineligibility and Suspension Policy and Directives, found 
+on Public Works and Government Services Canada’s website at Ineligibility and Suspension 
+Policy.  
+16.10.   Invoice Submittal Certification. By submitting an invoice, the Contractor certifies that 
+the invoice is consistent with the Work delivered and is in accordance with the Contract. 
+16.11.   ISO 9001 2015 - Quality Management Systems - Requirements (Quality Assurance 
+Code C). Applicable to item numbers 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18.  
+a. Implementation of Quality System. The Contractor must implement a quality system 
+appropriate to the scope of the Work. Canada recommends that the Contractor base this 
+quality system on ISO 9001:2015 "Quality management systems - Requirements." 
+b. Performance of Tests. The Contractor must perform or have performed all inspections 
+and tests necessary to substantiate that the provided materiel or services conform to the 
+requirements of the Contract. The Contractor must keep accurate and complete 
+inspection records and make them available upon request to the authorized Department 
+of National Defence (DND) representative, who may make copies and take extracts 
+during the duration of the Contract and for a period of one year after its termination or 
+expiration. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 25 of 50 
+ 
+c. Verification and Acceptance. DND may verify and accept all materiel at destination. 
+The authorized DND representative at destination may be the consignee, the Technical 
+Authority, or the Quality Assurance Authority. 
+ 
+16.12.   ISO 9001 2015 Quality Management Systems - Requirements (Quality Assurance 
+Code Q). Applicable to item # 8. 
+a. ISO Compliance. While performing the Work, the Contractor must comply with the 
+requirements of ISO 9001:2015 - Quality management systems - Requirements, 
+published by the International Organization for Standardization (ISO), current edition at 
+date of offer submission. 
+b. ISO Requirements. Canada does not require the Contractor to be registered to ISO 
+9001; however, the Contractor's quality management system must address all 
+requirements appropriate to the scope of the Work. The only exclusions that Canada 
+may accept are those in accordance with clauses A.5 and 4.3 of ISO 9001. 
+c. Assistance for Government Quality Assurance (GQA) 
+i. 
+Accommodation and Facilities. The Contractor must provide the Quality 
+Assurance Representative (QAR) 
+1. with the accommodation and facilities required to properly accomplish the 
+GQA, and 
+2. any assistance required to evaluate, verify, validate, document, or release 
+any product. 
+ii. 
+Access to Facilities, etc. The Contractor must 
+1. ensure that the QAR can access any site of the Contractor’s, sub-
+contractors or any sub-tier external providers of goods or services where 
+any part of the Work is being performed, 
+2. provide the QAR unrestricted opportunity to evaluate and verify the 
+Contractor’s conformity with quality system procedures and to validate 
+product or service conformity with the requirements of the Contract, 
+3. make available for the QAR’s reasonable use the equipment necessary 
+for all validation purposes, and 
+4. make its personnel available to operate such equipment as required. 
+iii. 
+GQA at Other Facilities. If the QAR determines that GQA is required at a 
+subcontractor’s or external provider's facilities, the Contractor must provide for 
+this in the purchasing document or other documented means and forward copies 
+to the QAR, together with relevant technical data that the QAR may request. 
+iv. 
+Notification of Non-conformity. If a particular product or service has been 
+subject to GQA, the Contractor must notify the QAR of any non-conforming 
+product or service received from a subcontractor or external provider. 
+v. 
+Software Requirements. For the design, development or maintenance of 
+software, the Contractor must interpret the requirements of ISO 9001:2015 
+"Quality management systems – Requirements," according to the guidelines of 
+the latest issue (at contract date) of ISO/IEC 90003:2018 "Software engineering - 
+Guidelines for the application of ISO 9001:2015 to computer software." 
+ 
+16.13.   Quality assurance authority (Department of National Defence) - Canadian-based 
+contractor. Applicable to Item #8 
+a. Quality Assurance. All work is subject to Government Quality Assurance performed at 
+the Contractor's or subcontractor's facility, and at the installation site, by the Director of 
+Quality Assurance, or its designated Quality Assurance Representative (QAR). 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 26 of 50 
+ 
+ 
+Director of Quality Assurance 
+National Defence Headquarters 
+MGen George R. Pearkes Building 
+101 Colonel By Drive 
+Ottawa, ON K1A 0K2 
+E-mail: ContractAdmin.DQA@forces.gc.ca 
+ 
+b. Contractor to Contact QAR. The Contractor must contact the QAR within 48 hours of 
+contract award. The Contractor can obtain the name, location, and phone number of the 
+QAR from the nearest National Defence Quality Assurance Region (NDQAR) listed 
+below: 
+Atlantic - Halifax 902-427-7150 / RDIMSHFXNDQARHALIFAX@forces.gc.ca 
+Atlantic - Enfield 902-427-7224 / rdimshfxndqarenfield@forces.gc.ca 
+Atlantic - East Marine 902-427-2354 
+Quebec - Lévis 418-564-4728 / RAQDNQcLevisHCWPC@forces.gc.ca 
+Quebec - Montreal 514-732-4401 or 514-732-4477 / NDQARMtlsvcclient@forces.gc.ca 
+Quebec - Quebec City 418-844-5000, ext. 1518 / RAQDNQcQuebec@forces.gc.ca 
+National Capital Region - Ottawa 343-549-3073 / ncr.dqa-rcn.daq@forces.gc.ca 
+Ontario - Toronto 416-633-6200 ext. 5080 / NDQAR.GTA.QAM@forces.gc.ca 
+Ontario - London 226-678-0704 / +NDQAR@forces.gc.ca 
+Manitoba/Saskatchewan - Winnipeg 204-833-2500, ext. 6574 
+/ Joe.Taferner@forces.gc.ca 
+Alberta - 403-410-2320, ext. 3830 / Diane.Tupper@forces.gc.ca 
+British Columbia - Vancouver 604-225-2520, ext. 2461 / CRNDQA.VAN@forces.gc.ca 
+British Columbia - Victoria 250-363-1900 ext. 60236 
+/ ESQQAWCVictoriaQAM@forces.gc.ca 
+British Columbia - Esquimalt 250-363-1900 ext. 60241 
+/ ESQQAWCVictoriaQAM@forces.gc.ca 
+ 
+c. Contractor Responsibility. The Contractor must perform all inspections and tests 
+necessary to substantiate that the provided materiel or services conform to the 
+requirements of the Contract. 
+d. Test Samples. The Contractor must provide, at no additional cost, all applicable test 
+data, all technical data, test pieces and samples that the QAR may reasonably require to 
+verify conformity to the requirements of the Contract. The Contractor must forward this 
+technical data, test data, test pieces and samples at its expense to any location the QAR 
+may direct. 
+e. Retention of Test Records. The Contractor must retain the following for a period of 
+three years from the date of completion or termination of the Contract: quality control, 
+inspection and test records that substantiate conformity to the specified requirements, 
+including records of corrective actions. The Contractor must make these records 
+available to the QAR upon request. 
+ 
+16.14.   Quality Assurance Authority - Foreign-based and United States Contractor. As 
+applicable, when there are items with Quality Assurance Code “Q” 
+a. Government Quality Assurance. All work is subject to Government Quality Assurance 
+(GQA) performed at the Contractor's or subcontractor's facility, and at the installation 
+site, by the Director of Quality Assurance, or its designated Quality Assurance 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 27 of 50 
+ 
+Representative (QAR). 
+Director of Quality Assurance 
+National Defence Headquarters 
+Major-General George R. Pearkes Building 
+101 Colonel By Drive 
+Ottawa, ON K1A 0K2 
+E-mail: ContractAdmin.DQA@forces.gc.ca 
+b. Notice to Contracting Authority. The Contractor must notify the Contracting Authority 
+if the QAR performing GQA at the Contractor's site has not contacted the Contractor 
+within 45 business days of Contract award. 
+c. National Quality Assurance Authority. If the Parties have not concluded any official 
+arrangements for mutual GQA, the Department of National Defence will arrange for a 
+National Quality Assurance Authority acceptable to the Director of Quality Assurance to 
+conduct the GQA services. If the GQA services must be provided on a cost-recovery 
+basis, the costs for the services must be accrued against the Contract and be 
+discharged through separate invoicing. 
+d. Contractor Responsibility. The Contractor must perform all inspections and tests 
+necessary to substantiate that the provided materiel or services conform to the 
+requirements of the Contract. 
+e. Test Samples. The Contractor must provide, at no additional cost, all applicable test 
+data, all technical data, test pieces and samples that the QAR may reasonably require to 
+verify conformity to the requirements of the Contract. The Contractor must forward this 
+technical data, test data, test pieces and samples at its expense to any location the QAR 
+may direct. 
+f. Retention of Test Records. The Contractor must retain the following for a period of 
+three years from the date of completion or termination of the Contract: quality control, 
+inspection and test records that substantiate conformity to the specified requirements, 
+including records of corrective actions. The Contractor must make these records 
+available to the QAR upon request. 
+ 
+16.15.   Shelf Life. There is no shelf life applicable to the contract.  
+ 
+17.   International Sanctions. 
+17.1.   Sanctions Limitations. Canada cannot accept delivery of goods or services that 
+originate, directly or indirectly, from the countries or persons subject to economic sanctions. 
+17.2.   Contractor Obligations.  
+     a. The Contractor must:  
+i. not supply to the Government of Canada any goods or services that are subject to 
+economic sanctions, 
+ii. comply with changes to the regulations imposed during the Contract Period, and 
+                  iii. immediately advise Canada if it is unable to perform the Work because of the   
+                imposition of economic sanctions against a country or person or the addition of a     
+                good or service to the list of sanctioned goods or services. 
+      b. If the Parties cannot agree on a workaround plan, Canada will terminate the Contract for  
+          convenience. 
+ 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 28 of 50 
+ 
+18.   Anti-forced Labour Requirements. 
+ 
+18.1.   Contractor's Statement. The Contractor states that the Work is not mined, 
+manufactured, or produced wholly or in part by forced labour. In performing the Contract and 
+regardless of who acts as an importer, the Contractor must not, directly or indirectly, deliver 
+Work to Canada or import Work into Canada the importation of which is prohibited under ss. 
+136(1) of the Customs Tariff Act and tariff item No. 9897.00.00 of the Customs Tariff – Schedule 
+(as amended from time to time), because it is mined, manufactured, or produced wholly or in 
+part by forced labour. 
+18.2.   Effect of Tariff Classification Determination or Investigation. If a tariff classification 
+determination is made under the Customs Act that the importation of the Work or any part of the 
+Work is prohibited, the Contractor must immediately so notify the Contracting Authority. If the 
+Work or any part of the Work is classified under tariff item no. 9897.00.00 of the Customs Tariff – 
+Schedule as mined, manufactured, or produced wholly or in part by forced labour, Canada may 
+immediately terminate the Contract for default. If the Contractor is aware that the Work, or any 
+part of it, is being or has been investigated regarding whether it is prohibited from entry under to 
+tariff item No. 9897.00.00, the Contractor must immediately notify the Contracting Authority of 
+that investigation. 
+18.3.   Canada’s Reasonable Grounds for Termination. If Canada has reasonable grounds to 
+believe the Work was or is mined, manufactured, or produced in whole or in part by forced 
+labour or was or is linked to human trafficking, Canada may terminate the Contract for default. 
+Reasonable grounds for making such a determination may include; 
+a. Findings or Withhold Release Orders issued by the United States Customs and Border 
+Protection, under the US Trade Facilitation and Trade Enforcement Act (TFTEA) of 2015, 
+or 
+b. Credible evidence from a reliable source. 
+18.4.   Contractor’s Conviction in Canada of Specified Offences. Canada may terminate the 
+Contract for default if the Contractor has, in the past three years, been convicted of any of the 
+following offences under the Criminal Code or the Immigration and Refugee Protection Act:  
+a. Criminal Code.  
+i. section 279.01 (Trafficking in persons), 
+ii. section 279.011 (Trafficking of a person under the age of eighteen years), 
+iii. subsection 279.02(1) (Material benefit - trafficking), 
+iv. subsection 279.02(2) (Material benefit - trafficking of person under 18 years), 
+v. subsection 279.03(1) (Withholding or destroying documents - trafficking), 
+vi. subsection 279.03(2) (Withholding or destroying documents - trafficking of person 
+under 18 years), or 
+b. Immigration and Refugee Protection Act.  
+i. Section 118 (Trafficking in persons). 
+18.5.   Contractor’s Conviction Abroad of Similar Offences. If the Contractor has, in the past 
+three years, been convicted of an offence in a jurisdiction other than Canada that, in Canada’s 
+opinion, is similar to any of the offences identified in the immediately preceding paragraph 
+entitled Contractor’s Conviction in Canada of Specified Offences, Canada may immediately 
+terminate the Contract for default. 
+18.6.   Determination of Similarity of Offences. For the purposes of determining whether a 
+foreign offence is similar to a listed offence, Canada will take into account the following factors:  
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 29 of 50 
+ 
+a. in the case of a conviction, whether the court acted within its jurisdiction, 
+b. whether the Contractor was afforded the right to appear during the court’s proceedings 
+or to submit to the court’s jurisdiction, 
+c. whether the court’s decision was obtained by fraud, or 
+d. whether the Contractor was entitled to present to the court every defence that the 
+Contractor would have been entitled to present if the proceeding had been tried in 
+Canada. 
+18.7.   Representations from Contractor. If Canada intends to terminate the Contract under 
+this section, Canada will so inform the Contractor and give the Contractor an opportunity to 
+make written representations before making a final decision. Unless Canada establishes a 
+different deadline, the Contractor must submit such written representations within 30 calendar 
+days from receiving Canada’s notice of concern. 
+ 
+19.   Defence Contract.  
+a. Governing Act. The Contract is a defence contract within the meaning of the Defence 
+Production Act and must be governed accordingly. 
+b. Work Free from Claims. The Contractor must ensure that Canada’s title to the Work 
+and to any materials, parts, work-in-process, and finished work remains free of all third-
+party claims. 
+c. Canada’s Ownership of Work. Canada may, at any time, remove, sell, or dispose of 
+the Work or any part of it in accordance with section 20 of the Defence Production Act. 
+20.   Termination and Suspension. 
+20.1.   Termination for Convenience.  
+a. Right to Terminate. Canada may terminate the Contract for convenience in whole or in 
+part by giving written notice to the Contractor. The termination for convenience will take 
+effect immediately or at the time specified in the termination notice. 
+b. Effect of Termination. Upon termination for convenience of the Contract  
+i. the Contractor must comply with the requirements of the termination notice; or 
+ii. if Canada terminates the Contract in part only, the Contractor must proceed to 
+complete any part of the Work that is not part of the termination notice. 
+c. Payments. Canada will pay the Contractor  
+i. according to the Basis of Payment, for any part of the Work delivered, 
+inspected, and accepted whether completed before, or after the termination in 
+accordance with the Contract; 
+ii. Costs incurred by the Contractor plus a fair and reasonable profit thereon as 
+determined by Canada in accordance with the profit provisions found in 
+PWGSC Supply Manual section 10.65 Calculation of profit on negotiated 
+contracts, for any part of the Work commenced, but not completed, before the 
+date of the termination notice; and 
+iii. Costs incidental to the termination of the Work incurred by the Contractor but 
+not including the cost of severance payments or damages to employees whose 
+services are no longer required, except wages that the Contractor is obligated 
+by statute to pay. 
+d. Maximum Payment. The total of the amounts, which Canada may pay the Contractor 
+under this section, together with any amounts paid, due or becoming due to the 
+Contractor must not exceed the Contract Price. Canada may reduce the payment in 
+respect of any part of the Work, if upon inspection, it does not meet the requirements of 
+the Contract. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 30 of 50 
+ 
+e. Acknowledgments.  
+i. Claims. The Contractor will have no claim for damages, compensation, loss of 
+profit, interest, allowance arising out of any termination notice given by Canada 
+under this section except to the extent that this section expressly provides; 
+ii. Anticipated Profits. The Contractor agrees that it is not entitled to any 
+anticipated profit on any part of the Contract terminated; and 
+iii. Repayments. The Contractor agrees to repay immediately to Canada the 
+portion of any advance payment that is unliquidated at the date of the 
+termination.  
+     20.2.   Termination for Default.  
+a. Right to Terminate. Canada may, by giving written notice to the Contractor, terminate 
+the Contract or any part of the Contract if the Contractor  
+i. fails to perform any term of the Contract, or  
+ii. becomes bankrupt, makes an assignment for the benefit of creditors, or if a 
+receiver is appointed under a debt instrument or a receiving order is made 
+against the Contractor, or an order is made or a resolution passed for the 
+winding-up of the Contractor. 
+b. Effect of Termination.  
+i. For (a)(i) above, the termination will take effect immediately or at the expiration 
+of a cure period specified in the notice, if the Contractor has not cured the 
+default to the satisfaction of the Contracting Authority within that cure period. 
+ii. For (a)(ii) above, the termination will take effect immediately. 
+iii. No Further Payment. If Canada terminates the Contract for default, the 
+Contractor will have no claim for further payment except as provided in this 
+section; 
+iv. Payment of Outstanding Amounts. The Contractor must immediately pay 
+Canada any amounts paid by Canada, including milestone payments, and all 
+losses and damages suffered by Canada because of the default or occurrence 
+upon which the notice was based, including any increase in the cost incurred by 
+Canada in procuring the Work from another source; 
+v. Refund of Advance Payments. The Contractor agrees to repay immediately to 
+Canada the portion of any advance payment that is unliquidated at the date of 
+the termination; and 
+vi. Completed Parts of the Work. Upon termination of the Contract for default, the 
+Contracting Authority may require the Contractor to deliver to Canada, in the 
+manner and to the extent directed by the Contracting Authority, any completed 
+parts of the Work, not delivered and accepted before the termination and 
+anything the Contractor has acquired or produced specifically to perform the 
+Contract. In such a case, subject to the deduction of any claim that Canada may 
+have against the Contractor arising under the Contract or out of the termination, 
+Canada will pay or credit to the Contractor:  
+1. 
+the value, of all completed parts of the Work delivered to and accepted by 
+Canada, based on the Contract Price, including the proportionate part of 
+the Contractor's profit or fee included in the Contract Price; and 
+2. 
+the cost to the Contractor that Canada considers reasonable in respect of 
+anything else delivered to and accepted by Canada. 
+vii. Assessment under the Vendor Performance Corrective Measure Policy. In 
+the event of a full or partial termination for default, Canada will trigger a 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 31 of 50 
+ 
+mandatory assessment of the Contractor’s performance under the Vendor 
+Performance Corrective Measure (VPCM) Policy. 
+ 
+21.   General Provisions. 
+21.1.   Status of Contractor. The Contractor is an independent contractor engaged by Canada 
+to perform the Work. The Contract does not create a partnership, a joint venture or an agency 
+between Canada and the other Party or Parties. The Contractor must not represent itself as an 
+agent or representative of Canada to anyone. Neither the Contractor nor any of its personnel 
+are an employee or agent of Canada. The Contractor is responsible for all deductions and 
+remittances required by law in relation to its employees. 
+21.2.   Entire Agreement. The Contract and the offer document are the entire agreement 
+between the Parties and supersedes all previous negotiations, communications and 
+agreements. 
+21.3.   Amendment.  
+a. 
+Amendments to the Contract must be in writing and signed by the Parties. 
+b. While the Contractor may discuss any proposed modifications to the Work with other 
+representatives of Canada, Canada will not be responsible for the cost of any 
+modification unless it has been incorporated into the Contract in writing and signed 
+by the Parties. 
+ 
+21.4.   Counterparts. The Parties may execute the Contract in several counterparts, each of 
+which is an original and all of which constitute one single agreement between the Parties. 
+21.5.   Assignment.  
+a. 
+The Contractor may only assign this agreement if  
+i. Canada agrees to the assignment in writing; and 
+ii. the Contractor remains responsible for the assignee’s performance. 
+b. The assignment will be effective upon execution of an assignment agreement 
+signed by the Parties and the assignee.  
+21.6.   Applicable Laws. The laws in force in Ontario will govern the Contract and the relations 
+between the Parties and be used to interpret the Contract. The Contractor must comply with all 
+laws applicable to the performance of the Contract and provide evidence of compliance with 
+those laws to Canada if requested by the Contracting Authority. 
+21.7.   Dispute Resolution.  
+a. 
+Open Communication Between Parties. The Parties agree to maintain open and 
+honest communication about the Work during and after the period of the Contract. 
+b. Parties' Cooperation. The Parties agree to consult and co-operate with each other 
+to further the objectives of the Contract. They will promptly notify each other of, and 
+attempt to resolve, any problems or differences that may arise. 
+c. 
+Alternative Dispute Resolution. If the Parties cannot resolve a dispute through 
+consultation and cooperation, they will consult a neutral third party that offers 
+alternative dispute resolution services. 
+d. Dispute Resolution Options. Parties can find alternative dispute resolution options 
+on Canada’s Buy and Sell website under the heading "Dispute Resolution".  
+21.8.   Powers of Canada.  All rights, remedies, powers and discretions granted or acquired by 
+Canada under the Contract or by law are cumulative, not exclusive. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 32 of 50 
+ 
+21.9.   Time of the Essence. It is essential that the Contractor deliver or perform the Work 
+within or at the time stated in the Contract. 
+21.10.   Excusable Delay.  
+a. Definition of Excusable Delay. A delay in the performance by the Contractor or Canada 
+of any obligation under the Contract that is caused by an event that  
+i. is beyond the reasonable control of the party, 
+ii. could not reasonably have been foreseen, 
+iii. could not reasonably have been prevented by means reasonably available to 
+the party, and 
+iv. occurred without the fault or neglect of the party, is an "Excusable Delay" if the 
+party advises the other party's Contracting Authority or Contractor's 
+Representative of the occurrence of the delay or of the likelihood of the delay as 
+soon as the party becomes aware of it. The party must also advise the other, 
+within 15 Business Days, of all the circumstances relating to the delay and 
+provide to the Contracting Authority or Contractor's Representative for approval 
+a clear Workaround plan explaining in detail the steps that the party proposes to 
+take in order to minimize the impact of the event causing the delay. 
+b. Postponement of Delivery. Either party will postpone for a reasonable time any 
+delivery date or another date directly affected by an Excusable Delay. Any postponement 
+will not exceed the duration of the Excusable Delay. 
+c. Right to Terminate. However, if an Excusable Delay has continued for 30 days or more, 
+the party may terminate the Contract on written notice to the other party. In such a case, 
+the Parties agree that neither will make any claim against the other for damages, costs, 
+expected profits or any other loss arising out of the termination or the event that 
+contributed to the Excusable Delay. The Contractor agrees to repay immediately to 
+Canada the portion of any advance payment that is unliquidated at the date of the 
+termination. 
+d. Liability for Costs Incurred. Unless Canada has caused the delay by failing to meet an 
+obligation under the Contract, Canada will not be responsible for any costs incurred by 
+the Contractor or any of its subcontractors or agents because of an Excusable Delay. 
+ 
+21.11.   Priority of Documents. If there is a conflict between the wording of any documents that 
+appear on the list, the wording of the document that first appears on the list has priority over the 
+wording of any document that subsequently appears on the list:  
+a. these Articles of Agreement; 
+b. Annex Contract Definitions; 
+c. Annex Requirement; 
+d. the Contractor's offer dated (Date) (To be inserted at Contract Award) 
+ 
+22.   Authorities. 
+22.1.   Contracting Authority.  
+a. The Contracting Authority for the Contract is: Karen Benedikt 
+Tel: 873-469-7646 
+E-mail: karen.benedikt@forces.gc.ca 
+Address: 101 Colonel By Drive, Ottawa Ontario K1A 0K2 
+Department Name: Director General Land Equipment Program Management 
+b. The Contracting Authority is responsible for the management of the Contract and must 
+authorize in writing any changes to the Contract. The Contractor must not perform work 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 33 of 50 
+ 
+in excess of or outside the scope of the Contract based on verbal or written requests or 
+instructions from anybody other than the Contracting Authority. 
+22.2.   Technical Authority. (To be inserted at Contract Award) 
+a. The Technical Authority for the Contract is: TECHNICAL AUTHORITY 
+Tel: 
+E-mail: 
+Address: 
+Department Name:  
+b. The Work is for a department or agency. The Technical Authority represents that 
+department or agency. The Technical Authority is responsible for all matters concerning 
+the technical content of the Work under the Contract. The Contractor may discuss 
+technical matters with the Technical Authority, however the Technical Authority has no 
+authority to authorize changes to the scope of the Work. Only the Contracting Authority 
+can issue a contract amendment to make changes to the scope of the Work. 
+ 
+22.3.   Contractor's Representative.  (To be inserted at Contract Award) 
+a. The Contractor's Representative for the Contract is: CONTRACTOR 
+REPRESENTATIVE 
+Tel: 
+E-mail: 
+Address: 
+b. Insert and revise if applicable: Delivery follow-up contact: CONTRACTOR 
+REPRESENTATIVE  
+Tel: 
+E-mail: 
+Address:  
+ 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 34 of 50 
+ 
+Annex Solicitation of Offers Definitions  
+In this solicitation of offers, unless the context otherwise requires, the following terms have the 
+following meanings. 
+"Applicable Trading Partner" means a country or customs territory other than Canada that is 
+listed, pursuant to the schedule to the Canadian International Trade Tribunal Procurement 
+Inquiry Regulations, as a party to any of the trade agreements applicable to this solicitation; 
+"Articles of Agreement" means the clauses and conditions incorporated in full text to form the 
+body of the Contract; it does not include the annexes, the Contractor's offer or any other 
+document; 
+“Canadian Good” means a good that is wholly manufactured or originated in Canada. Canada 
+may also consider a product that contains imported components to be a Canadian Good for the 
+purpose of the Canadian Content Policy when it has undergone sufficient change in Canada in 
+a manner that satisfies the definition specified under the Canada-United States-Mexico 
+Agreement (CUSMA) Rules of Origin. For the purposes of this determination, the reference in 
+the CUSMA Rules of Origin to "territory of one or more of the Parties" is replaced with "Canada". 
+(Consult Section 3.130 and Annex 3.6 of the Supply Manual for further information.) 
+"Canadian Supplier" means a supplier that has a place of business in Canada where it 
+conducts activities on a permanent basis that is clearly identified by name and accessible during 
+normal business hours; or, a joint venture where each member of the joint venture has a place 
+of business in Canada where it conducts activities on a permanent basis that is clearly identified 
+by name and accessible during normal business hours. 
+“Canadian Service” means a service provided by an individual based in Canada. If a 
+requirement consists of only one service provided by two or more individuals, Canada will 
+consider the service to be a Canadian Service if a minimum of 80 percent of the total offer price 
+for the service is provided by individuals based in Canada. 
+"Variety of Goods" means that if a requirement consists of more than one good, Canada will 
+apply one of the following methods: 
+a. Aggregate evaluation: No less than 80 percent of the total offer price must consist of 
+Canadian Goods, or 
+b. Item-by-item evaluation: In some cases, Canada may conduct the offer evaluation on an 
+item-by-item basis and award contracts to more than one Offeror. In such a case, Canada will 
+ask the Offeror to identify separately each item that meets the definition of Canadian Goods. 
+"Variety of Services" means that if a requirement consists of more than one service, a 
+minimum of 80 percent of the total offer price must be provided by individuals based in Canada. 
+"Mix of Goods and Services" means that if a requirement consists of a mix of goods and 
+services, no less than 80 percent of the total offer price must consist of Canadian Goods and 
+Canadian Services. 
+For more information on how to determine the Canadian Content for a mix of goods, a mix of 
+services or a mix of goods and services, consult Annex 3.6, Example 2, of the Supply Manual. 
+"Other Canadian Goods and Services" means Canada may consider textiles to be Canadian 
+Goods according to a modified rule of origin, copies of which are available from the Clothing and 
+Textiles Division, Commercial and Consumer Products Directorate. 
+“Client" means the department or agency for which the Work is performed; 
+"Contracting Authority" means the person designated by that title in the Contract, or by notice 
+to the Contractor, to act as Canada's representative to manage the Contract; 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 35 of 50 
+ 
+"Contractor" means the person, entity or entities named in the Contract to supply goods, 
+services, or both to Canada; 
+"Contract Price" means the amount stated in the Contract to be payable to the Contractor for 
+the Work, exclusive of Applicable Taxes; 
+"Cost" means cost determined according to Contract Cost Principles 1031-2 as revised to the 
+date of the solicitation of offers or, if there was no solicitation of offers, the date of the Contract; 
+“Date of payment” means the date of the negotiable instrument drawn by the Receiver General 
+for Canada to pay any amount under the Contract; 
+“Excluded Material” refers to packaging tape - environmentally preferable material alternatives 
+for packaging tape are not widely available. As a result, packaging tape is excluded from the 
+environmentally preferable packaging specifications until the market has progressed and 
+studies become available to determine otherwise; 
+“Former Public Servant” is any former member of a department as defined in the Financial 
+Administration Act, R.S., 1985, c. F-11, a former member of the Canadian Armed Forces or a 
+former member of the Royal Canadian Mounted Police. A former public servant may be: 
+(a) an individual; 
+(b) an individual who has incorporated; 
+(c) a partnership made of former public servants; or 
+(d) a sole proprietorship or entity where the affected individual has a controlling or major interest 
+in the entity; 
+“Joint Venture” means an association of two or more Parties who combine their money, 
+property, knowledge, expertise or other resources in a single joint business enterprise, 
+sometimes referred as a consortium, to offer together on a requirement; 
+“Lump Sum Payment” means the payment which has been made to facilitate the transition to 
+retirement or to other employment as a result of the implementation of various programs to 
+reduce the size of the Public Service. The lump sum payment period does not include the period 
+of severance pay, which is measured in a like manner; 
+“Net-Zero Challenge or Equivalent” means the following accepted initiatives are deemed 
+equivalents to the Net-Zero Challenge, ‘United Nations Race to Zero’ or ‘Science-Based Targets 
+Initiative (SBTI)’ or ‘Carbon Disclosure Project (CDP)’ or ‘International Organization for 
+Standardization (ISO) – ISO 14064-1:2018’ 
+“Offeror” means the person or entity (or, in the case of a Joint Venture, the persons or entities) 
+submitting an offer. An Offeror can be a sole proprietorship, corporation, a partnership, a Joint 
+Venture or a natural person. It does not include the parent, subsidiaries or other affiliates of the 
+Offeror, or its subcontractors; 
+“Packaging” means product to be used for the containment, protection, handling, delivery, 
+storage, transport and presentation of goods. (Source: ISO 21067-1:2016, Clause 2.1.1); 
+"Party" means Canada, the Contractor, or any other signatory to the Contract, and "Parties" 
+means all of them; 
+“Pension” means a pension or annual allowance paid under the Public Service Superannuation 
+Act (PSSA), R.S., 1985, c. P-36, and any increases paid pursuant to the Supplementary 
+Retirement Benefits Act, R.S., 1985, c. S-24 as it affects the PSSA. It does not include pensions 
+payable pursuant to the Canadian Forces Superannuation Act, R.S., 1985, c. C-17, the Defence 
+Services Pension Continuation Act, 1970, c. D-3, the Royal Canadian Mounted Police Pension 
+Continuation Act, 1970, c. R-10, and the Royal Canadian Mounted Police Superannuation Act, 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 36 of 50 
+ 
+R.S., 1985, c. R-11, the Members of Parliament Retiring Allowances Act, R.S. 1985, c. M-5, and 
+that portion of pension payable to the Canada Pension Plan Act, R.S., 1985, c. C-8; 
+“Recyclable” means capable of being diverted from the waste stream through available 
+processes and programs and can be collected, sorted, processed and returned to use in the 
+form of raw materials or products. (Source: CAN/CSA-ISO 14021, Clause 7.7.1); 
+“Recyclable packaging” means packaging or a packaging component is recyclable if its 
+successful post consumer collection, sorting, and recycling is proven to work in practice and at 
+scale. This means that there is an existing (collection, sorting and recycling) system in place 
+that actually recycles the packaging and that covers significant and relevant geographical areas 
+as measured by population size. (Source: adapted from the New Plastics Economy Global 
+Commitment); 
+“Returnable (to the Contractor)” means there is an existing and functional program in place 
+for the packaging to be returned to the Contractor to reuse, refill, or recycle at no additional cost 
+to the client; 
+“Reusable (by Canada)” means designed to be used multiple times for the same purpose 
+without losing its original functionality, physical capability or quality. A characteristic of a product 
+or packaging that has been conceived and designed to accomplish within its life cycle a certain 
+number of trips, rotations or uses for the same purpose for which it was conceived. (Source: 
+CAN/CSA-ISO 14021, Clause 7.12.1.1); 
+"Security Deposit" means (a) a bill of exchange that is payable to the Receiver General for 
+Canada and certified by an approved financial institution or drawn by an approved financial 
+institution on itself; or (b) a government guaranteed bond; or (c) an irrevocable standby letter of 
+credit, or (d) such other security as may be considered appropriate by the Contracting Authority 
+and approved by Treasury Board; 
+"Approved Financial Institution" means (a) any corporation or institution that is a member of 
+the Canadian Payments Association (Payments Canada); (b) a corporation that accepts 
+deposits that are insured by the Canada Deposit Insurance Corporation or the Régie de 
+l'assurance-dépôts du Québec to the maximum permitted by law; (c) a credit union as defined in 
+paragraph 137(6) of the Income Tax Act; (d) a corporation that accepts deposits from the public, 
+if repayment of the deposits is guaranteed by a Canadian province or territory; or (e) the 
+Canada Post Corporation; 
+"Government-guaranteed Bond" means a bond of the Government of Canada or a bond 
+unconditionally guaranteed as to principal and interest by the Government of Canada that is: (a) 
+payable to bearer; (b) accompanied by a duly executed instrument of transfer of the bond to the 
+Receiver General for Canada in accordance with the Domestic Bonds of Canada Regulations; 
+(c) registered in the name of the Receiver General for Canada; 
+"Irrevocable Standby Letter of Credit" (a) means any arrangement, however named or 
+described, whereby a financial institution (the "Issuer"), acting at the request and on the 
+instructions of a customer (the "Applicant"), or on its behalf, (i) will make a payment to or to the 
+order of Canada, as the beneficiary; (ii) will accept and pay bills of exchange drawn by Canada; 
+(iii) authorizes another financial institution to effect such payment, or accept and pay such bills 
+of exchange; or (iv) authorizes another financial institution to negotiate, against written 
+demand(s) for payment, provided that the conditions of the letter of credit are complied with; (b) 
+must state the face amount which may be drawn against it; (c) must state its expiry date; (d) 
+must provide for sight payment to the Receiver General for Canada by way of the financial 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 37 of 50 
+ 
+institution's draft against presentation of a written demand for payment signed by the authorized 
+departmental representative identified in the letter of credit by his or her office; (e) must provide 
+that more than one written demand for payment may be presented subject to the sum of those 
+demands not exceeding the face amount of the letter of credit; (f) must provide that it is subject 
+to the International Chamber of Commerce (ICC) Uniform Customs and Practice (UCP) for 
+Documentary Credits, 2007 Revision, ICC Publication No. 600. Pursuant to the ICC UCP, a 
+credit is irrevocable even if there is no indication to that effect; and (g) must be issued (Issuer) 
+or confirmed (Confirmer), in either official language, by a financial institution that is a member of 
+the Canadian Payments Association (Payments Canada) and is on the letterhead of the Issuer 
+or Confirmer. The format is left to the discretion of the Issuer or Confirmer; 
+“Specialized packaging” means packaging can be considered “specialized” if the intended 
+use of the packaging requires technical performance specifications with no environmentally 
+preferable alternatives. For example, when transporting hazardous materials, if there is a need 
+for a specific density of materials, or if they must be temperature controlled; 
+"Supplier of an Applicable Trading Partner" means a supplier that has a place of business in 
+an Applicable Trading Partner where it conducts activities on a permanent basis that is clearly 
+identified by name and accessible during normal business hours; or, a joint venture where at 
+least one member of the joint venture has a place of business in an Applicable Trading Partner 
+where it conducts activities on a permanent basis that is clearly identified by name and 
+accessible during normal business hours, and all other members of the joint venture either have 
+a place of business in an Applicable Trading Partner where they conduct activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours 
+or are a Canadian Supplier; 
+"Supplier of a Non-Trading Partner" means any supplier that is not a Canadian Supplier or a 
+Supplier of an Applicable Trading Partner; or, a joint venture where any member of the joint 
+venture is not a Canadian Supplier or a Supplier of an Applicable Trading Partner; 
+"Specifications" means the description of the essential, functional, or technical requirements of 
+the Work in the Contract, including the procedures for determining whether the requirements 
+have been met; 
+"Work" means all the activities, services, goods, equipment, matters and things required to be 
+done, delivered or performed by the Contractor under the Contract. 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 38 of 50 
+ 
+Annex Contract Definitions  
+In the Contract, unless the context otherwise requires, the following terms have the following 
+meanings. 
+"Applicable Taxes" means the Goods and Services Tax (GST), the Harmonized Sales Tax 
+(HST), and any provincial tax, by law, payable by Canada. 
+"Applicable Trading Partner" means a country or customs territory other than Canada that is 
+listed, pursuant to the schedule to the Canadian International Trade Tribunal Procurement 
+Inquiry Regulations, as a party to any of the trade agreements applicable to this solicitation. 
+"Articles of Agreement" means the clauses and conditions incorporated in full text to form the 
+body of the Contract; it does not include the annexes, the Contractor's offer or any other 
+document. 
+"Average Rate" means the simple arithmetic mean of the Bank Rates in effect at 4:00 p.m. 
+Eastern Time each day during the calendar month immediately before the calendar month in 
+which payment is made. 
+"Bank Rate" means the rate of interest established from time to time by the Bank of Canada as 
+the minimum rate at which the Bank of Canada makes short term advances to members of the 
+Canadian Payments Association. 
+"Canada", “His Majesty” or "the Government" means His Majesty the King in right of Canada 
+as represented by the Minister of National Defence and any other person duly authorized to act 
+on behalf of that minister or, if applicable, an appropriate minister to whom the Minister of 
+National Defence has delegated his or her powers, duties or functions and any other person 
+duly authorized to act on behalf of that minister. 
+“Canadian Good” means a good that is wholly manufactured or originated in Canada. Canada 
+may also consider a product that contains imported components to be a Canadian Good for the 
+purpose of the Canadian Content Policy when it has undergone sufficient change in Canada in 
+a manner that satisfies the definition specified under the Canada-United States-Mexico 
+Agreement (CUSMA) Rules of Origin. For the purposes of this determination, the reference in 
+the CUSMA Rules of Origin to "territory of one or more of the Parties" is replaced with "Canada". 
+(Consult Section 3.130 and Annex 3.6 of the Supply Manual for further information.) 
+"Canadian Supplier" means a supplier that has a place of business in Canada where it 
+conducts activities on a permanent basis that is clearly identified by name and accessible during 
+normal business hours; or, a joint venture where each member of the joint venture has a place 
+of business in Canada where it conducts activities on a permanent basis that is clearly identified 
+by name and accessible during normal business hours. 
+“Canadian Service” means a service provided by an individual based in Canada. If a 
+requirement consists of only one service provided by two or more individuals, Canada will 
+consider the service to be a Canadian Service if a minimum of 80 percent of the total offer price 
+for the service is provided by individuals based in Canada. 
+"Variety of Goods" means that if a requirement consists of more than one good, Canada will 
+apply one of the following methods: 
+a. Aggregate evaluation: No less than 80 percent of the total offer price must consist of 
+Canadian Goods, or 
+b. Item-by-item evaluation: In some cases, Canada may conduct the offer evaluation on an 
+item-by-item basis and award contracts to more than one Offeror. In such a case, Canada will 
+ask the Offeror to identify separately each item that meets the definition of Canadian Goods. 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 39 of 50 
+ 
+"Variety of Services" means that if a requirement consists of more than one service, a 
+minimum of 80 percent of the total offer price must be provided by individuals based in Canada. 
+"Mix of Goods and Services" means that if a requirement consists of a mix of goods and 
+services, no less than 80 percent of the total offer price must consist of Canadian Goods and 
+Canadian Services. 
+For more information on how to determine the Canadian Content for a mix of goods, a mix of 
+services or a mix of goods and services, consult Annex 3.6, Example 2, of the Supply Manual. 
+"Other Canadian Goods and Services" means Canada may consider textiles to be Canadian 
+Goods according to a modified rule of origin, copies of which are available from the Clothing and 
+Textiles Division, Commercial and Consumer Products Directorate. 
+"Contract" means the Articles of Agreement, the terms and conditions, annexes and any other 
+document specified or referred to as forming part of the Contract, all as amended by agreement 
+of the Parties from time to time. 
+"Contractor" means the person, entity or entities named in the Contract to supply goods, 
+services or both to Canada. 
+"Contract Price" means the amount stated in the Contract to be payable to the Contractor for 
+the Work, exclusive of Applicable Taxes. 
+“Contract Period” means the entire period of time during which the Contractor is obliged to 
+perform the Work, which includes initial Contract Period and the period during which the 
+Contract is extended, if Canada chooses to exercise any options set out in the Contract. 
+"Cost" means cost determined according to Contract Cost Principles 1031-2 as revised to the 
+date of the solicitation of offers or, if there was no solicitation of offers, the date of the Contract. 
+"Date of payment" means the date of the negotiable instrument drawn by the Receiver General 
+for Canada to pay any amount under the Contract. 
+“Excluded Material” refers to packaging tape - environmentally preferable material alternatives 
+for packaging tape are not widely available. As a result, packaging tape is excluded from the 
+environmentally preferable packaging specifications until the market has progressed and 
+studies become available to determine otherwise. 
+"Government Property" means anything supplied to the Contractor by or on behalf of Canada 
+for the purposes of performing the Contract and anything acquired by the Contractor in any 
+manner in connection with the Work, the cost of which is paid by Canada under the Contract. 
+“Net-Zero Challenge or Equivalent” means the following accepted initiatives are deemed 
+equivalents to the Net-Zero Challenge, ‘United Nations Race to Zero’ or ‘Science-Based Targets 
+Initiative (SBTI)’ or ‘Carbon Disclosure Project (CDP)’ or ‘International Organization for 
+Standardization (ISO) – ISO 14064-1:2018’ 
+"Overdue" means an amount that is unpaid on the first day following the day on which it is due 
+and payable according to the Contract. 
+“Packaging” means product to be used for the containment, protection, handling, delivery, 
+storage, transport and presentation of goods. (Source: ISO 21067-1:2016, Clause 2.1.1). 
+"Party" means Canada, the Contractor, or any other signatory to the Contract and "Parties" 
+means all of them. 
+“Recyclable” means capable of being diverted from the waste stream through available 
+processes and programs and can be collected, sorted, processed and returned to use in the 
+form of raw materials or products. (Source: CAN/CSA-ISO 14021, Clause 7.7.1). 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 40 of 50 
+ 
+“Recyclable packaging” means packaging or a packaging component is recyclable if its 
+successful post consumer collection, sorting, and recycling is proven to work in practice and at 
+scale. This means that there is an existing (collection, sorting and recycling) system in place 
+that actually recycles the packaging and that covers significant and relevant geographical areas 
+as measured by population size. (Source: adapted from the New Plastics Economy Global 
+Commitment). 
+“Returnable (to the Contractor)” means there is an existing and functional program in place 
+for the packaging to be returned to the Contractor to reuse, refill, or recycle at no additional cost 
+to the client. 
+“Reusable (by Canada)” means designed to be used multiple times for the same purpose 
+without losing its original functionality, physical capability or quality. A characteristic of a product 
+or packaging that has been conceived and designed to accomplish within its life cycle a certain 
+number of trips, rotations or uses for the same purpose for which it was conceived. (Source: 
+CAN/CSA-ISO 14021, Clause 7.12.1.1). 
+"Security Deposit" means (a) a bill of exchange that is payable to the Receiver General for 
+Canada and certified by an approved financial institution or drawn by an approved financial 
+institution on itself; or (b) a government guaranteed bond; or (c) an irrevocable standby letter of 
+credit, or (d) such other security as may be considered appropriate by the Contracting Authority 
+and approved by Treasury Board. 
+"Approved Financial Institution" means (a) any corporation or institution that is a member of 
+the Canadian Payments Association (Payments Canada); (b) a corporation that accepts 
+deposits that are insured by the Canada Deposit Insurance Corporation or the Régie de 
+l'assurance-dépôts du Québec to the maximum permitted by law; (c) a credit union as defined in 
+paragraph 137(6) of the Income Tax Act; (d) a corporation that accepts deposits from the public, 
+if repayment of the deposits is guaranteed by a Canadian province or territory; or (e) the 
+Canada Post Corporation. 
+"Government-guaranteed Bond" means a bond of the Government of Canada or a bond 
+unconditionally guaranteed as to principal and interest by the Government of Canada that is: (a) 
+payable to bearer; (b) accompanied by a duly executed instrument of transfer of the bond to the 
+Receiver General for Canada in accordance with the Domestic Bonds of Canada Regulations; 
+(c) registered in the name of the Receiver General for Canada. 
+"Irrevocable Standby Letter of Credit" (a) means any arrangement, however named or 
+described, whereby a financial institution (the "Issuer"), acting at the request and on the 
+instructions of a customer (the "Applicant"), or on its behalf, (i) will make a payment to or to the 
+order of Canada, as the beneficiary; (ii) will accept and pay bills of exchange drawn by Canada; 
+(iii) authorizes another financial institution to effect such payment, or accept and pay such bills 
+of exchange; or (iv) authorizes another financial institution to negotiate, against written 
+demand(s) for payment, provided that the conditions of the letter of credit are complied with; (b) 
+must state the face amount which may be drawn against it; (c) must state its expiry date; (d) 
+must provide for sight payment to the Receiver General for Canada by way of the financial 
+institution's draft against presentation of a written demand for payment signed by the authorized 
+departmental representative identified in the letter of credit by his or her office; (e) must provide 
+that more than one written demand for payment may be presented subject to the sum of those 
+demands not exceeding the face amount of the letter of credit; (f) must provide that it is subject 
+to the International Chamber of Commerce (ICC) Uniform Customs and Practice (UCP) for 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 41 of 50 
+ 
+Documentary Credits, 2007 Revision, ICC Publication No. 600. Pursuant to the ICC UCP, a 
+credit is irrevocable even if there is no indication to that effect; and (g) must be issued (Issuer) 
+or confirmed (Confirmer), in either official language, by a financial institution that is a member of 
+the Canadian Payments Association (Payments Canada) and is on the letterhead of the Issuer 
+or Confirmer. The format is left to the discretion of the Issuer or Confirmer. 
+“Specialized packaging” means packaging can be considered “specialized” if the intended 
+use of the packaging requires technical performance specifications with no environmentally 
+preferable alternatives. For example, when transporting hazardous materials, if there is a need 
+for a specific density of materials, or if they must be temperature controlled. 
+"Specifications" means the description of the essential, functional or technical requirements of 
+the Work in the Contract, including the procedures for determining whether the requirements 
+have been met. 
+"Supplier of an Applicable Trading Partner" means a supplier that has a place of business in 
+an Applicable Trading Partner where it conducts activities on a permanent basis that is clearly 
+identified by name and accessible during normal business hours; or, a joint venture where at 
+least one member of the joint venture has a place of business in an Applicable Trading Partner 
+where it conducts activities on a permanent basis that is clearly identified by name and 
+accessible during normal business hours, and all other members of the joint venture either have 
+a place of business in an Applicable Trading Partner where they conduct activities on a 
+permanent basis that is clearly identified by name and accessible during normal business hours 
+or are a Canadian Supplier. 
+"Supplier of a Non-Trading Partner" means any supplier that is not a Canadian Supplier or a 
+Supplier of an Applicable Trading Partner; or, a joint venture where any member of the joint 
+venture is not a Canadian Supplier or a Supplier of an Applicable Trading Partner. 
+"Work" means all the activities, services, goods, equipment, matters and things that the 
+Contractor is required to do, deliver or perform under the Contract. 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 42 of 50 
+ 
+Annex Offer Submission Form  
+1. Identification of Joint Venture Parties 
+For a proposal submitted on behalf of a Joint Venture, provide the information or indicate 
+“N/A” if not applicable.  
+Name(s) of Joint 
+Venture Member 
+Authorized 
+Representative of 
+the Offeror 
+Name 
+Title 
+Telephone Number 
+Fax Number 
+Email 
+Name of the Joint 
+Venture, if 
+applicable 
+2. Applicable Laws 
+Offerors may substitute the applicable laws of another Canadian province or territory by 
+deleting the name of the specified jurisdiction and inserting the name of the province or 
+territory of their choice. If the Offeror has not made a change, the Offeror acknowledges its 
+acceptance of the jurisdiction specified in this offer solicitation.  
+Applicable Laws 
+3. Electronic Payments 
+The Offeror accepts the following payments (please check all that apply): 
+( ) Direct Deposit (Domestic and International) 
+( ) Electronic Data Interchange (EDI) 
+( ) Wire Transfer (International Only) 
+ 
+4. Language preferences 
+The Offeror wishes that communications and documents be made in:  
+( ) English 
+( ) French 
+Signatures 
+Signature of 
+representative 
+authorized to sign on 
+behalf of the Offeror 
+Name: 
+Title: 
+Date: 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 43 of 50 
+ 
+Annex Offeror Declaration Form 
+Offeror's Full Legal 
+Name 
+Once you have read and understood each statement, please respond by checking ( ) for each 
+certification below. The Offeror certifies to Canada that its responses below are complete and 
+truthful. 
+Acceptance of Clauses and Conditions 
+( ) Offerors who submit an offer agree to be bound by the instructions, clauses and conditions 
+of the offer solicitation and accept the clauses and conditions of the resulting contract. 
+Federal Contractors Program for Employment Equity (FCP) 
+Eligibility to submit 
+an offer 
+Federal Contractors 
+Program for 
+Employment Equity 
+( ) The Offeror, and any of its members if it is a joint venture, is not 
+named on the Federal Contractors Program (FCP) for Employment 
+Equity "FCP Limited Eligibility to Bid" list. 
+Canada may declare an offer non-compliant if the Offeror, or any of 
+its members if the Offeror is a joint venture, appears on the “FCP 
+Limited Eligibility to Bid" list at the time of contract award. 
+Accuracy and Integrity 
+Accuracy of 
+information 
+( ) All the information that the Offeror submits with its offer is true, 
+accurate, and complete as of the date indicated below. 
+Code of Conduct for 
+Procurement 
+( ) The Offeror complies with Canada’s Code of Conduct for 
+Procurement. 
+Best Delivery Date 
+While delivery is requested by as soon as possible, the best delivery that could be offered is 
+_________________________.  
+ 
+Signatures 
+Signature of 
+representative 
+authorized to sign on 
+behalf of the Offeror 
+Name: 
+Title: 
+Date: 
+ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 44 of 50 
+ 
+Annex Requirement  
+ 
+Item 
+Description 
+Unit of 
+Issue 
+Quantity 
+Destination Address 
+Invoice Address 
+Firm Unit Price 
+Total Price 
+Delivery 
+Date 
+Proposed 
+ 
+Item 1 
+ 
+ 
+NSN: 3010-20-009-0939 
+ACTUATOR,HYDRAULIC-
+PNEUMATIC,LINEAR 
+ 
+P/N : 4010001 
+NCAGE: L0AU2 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered:  
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+10 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 2 
+ 
+ 
+NSN: 3010-20-009-0939 
+ACTUATOR,HYDRAULIC-
+PNEUMATIC,LINEAR 
+ 
+Part No.: 4010001 
+NSCM/CAGE: L0AU2  
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+6 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 45 of 50 
+ 
+ 
+Item 3 
+ 
+ 
+NSN: 3830-01-608-9354 
+BUCKET,SCOOP TYPE LOADER 
+ 
+Part No.: 376385A1 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+4 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 4 
+ 
+ 
+NSN: 5365-00-869-3574 
+BUSHING,BUCKET 
+ 
+Part No.: D37495 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+6 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 5 
+ 
+ 
+NSN: 3120-00-111-2253 
+BUSHING,SLEEVE 
+ 
+Part No.: D30933 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+4 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 46 of 50 
+ 
+ 
+Item 6 
+ 
+ 
+NSN: 3040-20-014-5286 
+CYLINDER ASSEMBLY, 
+ACTUATING,LINEAR 
+ 
+Part No.: 7881010 
+NSCM/CAGE: L0AU2 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+ 
+EA 
+ 
+ 
+4 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 7 
+ 
+ 
+NSN: 3040-20-014-5286  
+CYLINDER ASSEMBLY, 
+ACTUATING,LINEAR 
+ 
+Part No.: 7881010 
+NSCM/CAGE: L0AU2 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+ 
+EA 
+ 
+ 
+2 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 47 of 50 
+ 
+ 
+Item 8 
+ 
+ 
+NSN: 3040-12-326-1345  
+CYLINDER ASSEMBLY, 
+ACTUATING,LINEAR 
+ 
+Part No.: 4364213 
+NSCM/CAGE: D0704 
+ 
+Quality Assurance: Q 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+3 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 9 
+ 
+ 
+NSN: 3040-01-549-1408  
+CYLINDER ASSEMBLY, 
+ACTUATING,LINEAR 
+ 
+Part No.: 48061323 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+4 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 10 
+ 
+NSN: 3040-01-549-1408, CYLINDER 
+ASSEMBLY,ACTUATING,LINEAR 
+ 
+Part No.: 48061323 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+EA 
+ 
+2 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 48 of 50 
+ 
+ 
+Item 11 
+ 
+ 
+NSN: 3040-20-014-6692, CYLINDER 
+HYDRAULIC,LOADER ARM  
+ 
+Part No.: 7881000 
+NSCM/CAGE: L0AU2 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+3 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 12 
+ 
+NSN: 3040-20-014-6692, CYLINDER 
+HYDRAULIC,LOADER ARM 
+ 
+Part No.: 7881000 
+NSCM/CAGE: L0AU2 
+ 
+Quality Assurance: C 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+2 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 13 
+ 
+ 
+NSN: 3040-01-567-7270, 
+CYLINDER,ACTUATING,LINEAR 
+ 
+Part No.: 296434A1 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+2 
+ 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca 
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 49 of 50 
+ 
+ 
+Item 14 
+ 
+ 
+NSN: 2530-00-844-7586, 
+CYLINDER,MECHANICAL 
+ 
+Part No.: C1TT2062C 
+NSCM/CAGE: 57526 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+EA 
+ 
+ 
+3 
+ 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 15 
+ 
+NSN: 3815-01-708-0264, 
+DIPPER,BACKHOE 
+ 
+Part No.: 140965A1 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+EA 
+ 
+4 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 16 
+ 
+NSN: 5330-01-546-8710, PARTS KIT, 
+SEAL REPLACEMENT,MECHANICAL 
+EQUIPMENT 
+ 
+Part No.: 179011A1 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+KT 
+ 
+8 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+
+Solicitation No. - N° de l'invitation 
+Amd. No. - N° de la modif. 
+Buyer ID - Id de l'acheteur 
+W8486-270789/A 
+ 
+ DLP 5-2-4 
+ 
+ 
+ 
+Page 50 of 50 
+ 
+ 
+Item 17 
+ 
+NSN: 5325-01-507-0012, 
+RING,RETAINING 
+ 
+Part No.: 84158898 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+_________________________ 
+ 
+EA 
+ 
+6 
+ 
+Department of National Defence 
+25 Canadian Forces Supply 
+Depot (25 CFSD) Montreal 
+6363 Notre Dame St E. 
+Montreal, QC, H1N 3V9 
+Canada  
+ 
+Department of National Defence 
+25 Canadian Forces Supply Depot 
+(25 CFSD) 
+6560 Hochelaga St. 
+Montreal, QC H1N 1X9 
+Canada 
+25DAFCcontrat@forces.gc.ca  
+$__________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+Item 18 
+ 
+NSN: 4820-01-584-3075, VALVE 
+ASSEMBLY, MANIFOLD 
+ 
+Part No.: 87351496 
+NSCM/CAGE: 10988 
+ 
+Quality Assurance: C 
+ 
+Please state in your offer whether the 
+offered P/N is as requested or an 
+equivalent. 
+ 
+ 
+P/N offered: 
+ 
+NCAGE offered: 
+ 
+ 
+ 
+EA 
+ 
+2 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+BLDG 236 East End 
+195 Ave & 82nd St 
+Edmonton, AB T5J 4J5 
+Canada 
+ 
+Department of National Defence 
+7 CF Supply Depot 
+STN Forces P.O. Box 10500 
+Edmonton, AB T5J 4J5 
+Canada 
+Edm7CFSDinvoices@forces.gc.ca  
+$____________ 
+$_________ 
+ 
+__________ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sub Total:                                  _____________ 
+ 
+ 
+ 
+ 
+ 
+ 
+Applicable Taxes:                     _____________ 
+ 
+ 
+ 
+ 
+ 
+ 
+Total (GST/QST Included):       _____________   
+ 
+ 
+ 
