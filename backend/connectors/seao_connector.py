@@ -317,7 +317,7 @@ class SEAOConnector(BaseConnector):
             ).lower() == "json"
         ]
 
-        for r in json_resources[:2]:
+        for r in json_resources:
 
             resource_url = r.get("url")
 
@@ -345,7 +345,7 @@ class SEAOConnector(BaseConnector):
                     [],
                 )
 
-                for release in releases[:20]:
+                for release in releases:
 
                     try:
 
