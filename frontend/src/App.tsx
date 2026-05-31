@@ -7,7 +7,13 @@ import PortalCandidates from "./components/PortalCandidates";
 const API_BASE = "/api";
 const DEFAULT_LIMIT = 100;
 
-type TabKey = "ao" | "ai" | "reports" | "portals" | "others";
+type TabKey =
+  | "ao"
+  | "awards"
+  | "ai"
+  | "reports"
+  | "portals"
+  | "others";
 type SearchField = "title_buyer" | "title" | "buyer";
 
 interface RawTender {
@@ -1160,7 +1166,13 @@ const App: React.FC = () => {
       return hit(t.titre) || hit(t.acheteur);
     });
   }, [tenders, portalFilter, countryFilter, atsOnly, query, searchField]);
-
+const awardedTenders = useMemo(() => {
+  return visibleTenders.filter(
+    (t) =>
+      (t.supplier_name ?? "").trim() !== "" ||
+      (t.award_amount ?? 0) > 0
+  );
+}, [visibleTenders]);
   // -----------------------
   // Fetch portals & reports (on demand)
   // -----------------------
@@ -1276,10 +1288,11 @@ const App: React.FC = () => {
 
       if (!e.ctrlKey && !e.metaKey && !e.altKey) {
         if (e.key === "1") setTab("ao");
-        if (e.key === "2") setTab("ai");
-        if (e.key === "3") setTab("reports");
-        if (e.key === "4") setTab("portals");
-        if (e.key === "5") setTab("others");
+if (e.key === "2") setTab("awards");
+if (e.key === "3") setTab("ai");
+if (e.key === "4") setTab("reports");
+if (e.key === "5") setTab("portals");
+if (e.key === "6") setTab("others");
       }
     };
     window.addEventListener("keydown", onKey);
@@ -1399,10 +1412,11 @@ const App: React.FC = () => {
         <div className="ao-card__body-tight">
           <div className="ao-tabs">
             {tabBtn("ao", "AO", "1")}
-            {tabBtn("ai", "Analyses IA", "2")}
-            {tabBtn("reports", "Rapports", "3")}
-            {tabBtn("portals", "Portails", "4")}
-            {tabBtn("others", "Autres portails", "5")}
+{tabBtn("awards", "🏆 Contrats attribués", "2")}
+{tabBtn("ai", "Analyses IA", "3")}
+{tabBtn("reports", "Rapports", "4")}
+{tabBtn("portals", "Portails", "5")}
+{tabBtn("others", "Autres portails", "6")}
             
 
           </div>
@@ -1812,7 +1826,57 @@ const App: React.FC = () => {
           </div>
         </div>
       )}
+{tab === "awards" && (
+  <div className="ao-card" style={{ marginTop: 14 }}>
+    <SectionTitle
+      title="🏆 Contrats attribués"
+      right={
+        <span className="ao-small">
+          {awardedTenders.length} contrat(s)
+        </span>
+      }
+    />
 
+    <div className="ao-card__body">
+      {awardedTenders.length === 0 ? (
+        <div className="ao-small">
+          Aucun contrat attribué trouvé.
+        </div>
+      ) : (
+        <div style={{ display: "grid", gap: 10 }}>
+          {awardedTenders.map((t) => (
+            <div
+              key={t.id}
+              className="ao-tender"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setSelectedTenderId(t.id);
+                setTab("ao");
+              }}
+            >
+              <div style={{ fontWeight: 700 }}>
+                {t.supplier_name || "Fournisseur inconnu"}
+              </div>
+
+              <div className="ao-small">
+                {t.acheteur || "-"}
+              </div>
+
+              <div className="ao-small">
+                {(t.award_amount || 0).toLocaleString()}{" "}
+                {t.award_currency || ""}
+              </div>
+
+              <div className="ao-small">
+                {t.portail || "-"}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+)}
       {tab === "ai" && (
         <div className="ao-card" style={{ marginTop: 14 }}>
           <SectionTitle
