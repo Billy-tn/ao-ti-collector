@@ -1168,6 +1168,15 @@ EXTRACTED_DIR = (
 )
 
 
+from pathlib import Path
+
+EXTRACTED_DIR = (
+    Path(__file__).resolve().parent.parent
+    / "data"
+    / "extracted"
+)
+
+
 @router.get("/analyze-extracted/{filename}")
 def analyze_extracted_file(
     filename: str,
@@ -1185,32 +1194,29 @@ def analyze_extracted_file(
         errors="ignore",
     )
 
-    key_dates = extract_key_dates(text)
-
-    mandatory = (
-        extract_mandatory_requirements(text)
-    )
-
-    deliverables = (
-        extract_deliverables(text)
-    )
-
-    evaluation = (
-        extract_evaluation_criteria(text)
-    )
+    structured = build_structured_analysis(text)
 
     fields = parse_fields(text)
 
     confidence = compute_confidence(
         text_len=len(text),
         extracted_fields={
-            "mandatory_requirements": mandatory,
-            "deliverables": deliverables,
-            "evaluation_criteria": evaluation,
-            "closing_date": key_dates.get(
-                "closing_date"
+            "mandatory_requirements": structured.get(
+                "mandatory_requirements"
             ),
+
+            "deliverables": structured.get(
+                "deliverables"
+            ),
+
+            "evaluation_criteria": structured.get(
+                "evaluation_criteria"
+            ),
+
+  "closing_date": None,
+
             "buyer": fields.get("buyer"),
+
             "estimated_value": fields.get(
                 "estimated_value"
             ),
@@ -1228,6 +1234,10 @@ def analyze_extracted_file(
             {},
         ),
 
+        "summary_ai": structured.get(
+            "summary"
+        ),
+
         "confidence": confidence,
 
         "buyer": fields.get("buyer"),
@@ -1236,13 +1246,41 @@ def analyze_extracted_file(
             "estimated_value"
         ),
 
-        "key_dates": key_dates,
+        "detected_domains": structured.get(
+            "detected_domains"
+        ),
 
-        "mandatory_requirements": mandatory,
+        "opportunity_score": structured.get(
+            "opportunity_score"
+        ),
 
-        "deliverables": deliverables,
+        "recommendation": structured.get(
+            "recommendation"
+        ),
 
-        "evaluation_criteria": evaluation,
+        "risks": structured.get(
+            "risks"
+        ),
+
+        "key_dates": structured.get(
+            "key_dates"
+        ),
+
+        "mandatory_requirements": structured.get(
+            "mandatory_requirements"
+        ),
+
+        "deliverables": structured.get(
+            "deliverables"
+        ),
+
+        "evaluation_criteria": structured.get(
+            "evaluation_criteria"
+        ),
+
+        "budget_candidates": structured.get(
+            "budget_candidates"
+        ),
 
         "preview": text[:2000],
     }

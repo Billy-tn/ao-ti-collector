@@ -354,21 +354,173 @@ def extract_budget_candidates(text: str, max_items: int = 10) -> List[Dict[str, 
         uniq.append(it)
     return uniq[:max_items]
 
+# -----------------------------
+# Procurement intelligence
+# -----------------------------
+
+DOMAIN_KEYWORDS = {
+    "Cloud": ["cloud", "aws", "azure", "gcp"],
+    "Cybersecurity": ["cyber", "security", "soc", "iam", "siem"],
+    "Infrastructure": ["server", "network", "infrastructure"],
+    "ERP": ["sap", "oracle", "erp"],
+    "Data": ["data", "analytics", "bi", "warehouse"],
+}
+
+
+def detect_domains(text: str) -> List[str]:
+
+    low = text.lower()
+
+    scores = {}
+
+    for domain, keywords in DOMAIN_KEYWORDS.items():
+
+        score = 0
+
+        for kw in keywords:
+
+            occurrences = low.count(
+                kw.lower()
+            )
+
+            if occurrences > 0:
+
+                # pondération simple
+                if len(kw.split()) >= 2:
+                    score += occurrences * 3
+                else:
+                    score += occurrences
+
+        if score > 0:
+            scores[domain] = score
+
+    # trie par score décroissant
+    ranked = sorted(
+        scores.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    )
+
+    # garde top 3 seulement
+    top = [
+        domain
+        for domain, score in ranked[:3]
+        if score >= 2
+    ]
+
+    return top
+
+
+def build_opportunity_score(
+    text: str,
+    mandatory: List[str],
+) -> Dict[str, object]:
+
+    low = text.lower()
+
+    score = 50
+    risks = []
+
+    # positive signals
+    if "cloud" in low:
+        score += 10
+
+    if "integration" in low:
+        score += 5
+
+    if "erp" in low:
+        score += 10
+
+    # negative signals
+    if "security clearance" in low:
+        score -= 20
+        risks.append("Security clearance required")
+
+    if len(mandatory) > 15:
+        score -= 10
+        risks.append("Large number of mandatory requirements")
+
+    if "mandatory certification" in low:
+        score -= 15
+        risks.append("Mandatory certifications")
+
+    score = max(0, min(score, 100))
+
+    if score >= 75:
+        recommendation = "GO"
+    elif score >= 50:
+        recommendation = "REVIEW"
+    else:
+        recommendation = "NO-GO"
+
+    return {
+        "score": score,
+        "recommendation": recommendation,
+        "risks": risks,
+    }
+
+
+def generate_summary(
+    domains: List[str],
+    mandatory: List[str],
+) -> str:
+
+    if domains:
+        domain_text = ", ".join(domains)
+    else:
+        domain_text = "general procurement"
+
+    return (
+        f"Procurement opportunity related to "
+        f"{domain_text} with "
+        f"{len(mandatory)} detected mandatory requirements."
+    )
 
 def build_structured_analysis(text: str) -> Dict[str, object]:
     """
-    Bundle unique appelé par ai_tools.py
+    Main AI procurement analysis bundle
     """
+
     key_dates = extract_key_dates(text)
+
     mandatory = extract_mandatory_requirements(text)
+
     deliverables = extract_deliverables(text)
+
     eval_criteria = extract_evaluation_criteria(text)
+
     budget = extract_budget_candidates(text)
 
+    domains = detect_domains(text)
+
+    opportunity = build_opportunity_score(
+        text,
+        mandatory,
+    )
+
+    summary = generate_summary(
+        domains,
+        mandatory,
+    )
+
     return {
+        "summary": summary,
+
+        "detected_domains": domains,
+
+        "opportunity_score": opportunity["score"],
+
+        "recommendation": opportunity["recommendation"],
+
+        "risks": opportunity["risks"],
+
         "key_dates": key_dates,
+
         "mandatory_requirements": mandatory,
+
         "deliverables": deliverables,
+
         "evaluation_criteria": eval_criteria,
+
         "budget_candidates": budget,
     }

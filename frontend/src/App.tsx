@@ -347,7 +347,23 @@ function AnalysisSummary({ analysis }: { analysis: any }) {
   const closing = extracted?.closing_date ?? null;
   const buyer = extracted?.buyer ?? null;
   const value = extracted?.estimated_value ?? null;
+  const summaryAi = analysis?.summary_ai ?? null;
 
+  const opportunityScore =
+    analysis?.opportunity_score ?? null;
+
+  const recommendation =
+    analysis?.recommendation ?? null;
+
+  const risks: string[] =
+    Array.isArray(analysis?.risks)
+      ? analysis.risks
+      : [];
+
+  const domains: string[] =
+    Array.isArray(analysis?.detected_domains)
+      ? analysis.detected_domains
+      : [];
   return (
     <div style={{ display: "grid", gap: 10 }}>
       <div className="ao-banner" style={{ marginTop: 0 }}>
@@ -360,7 +376,134 @@ function AnalysisSummary({ analysis }: { analysis: any }) {
             confidence: {clamp01(confidence).toFixed(2)}
           </Pill>
         </div>
+        {summaryAi ? (
+          <div style={{ marginTop: 12 }}>
+            <div
+              style={{
+                fontWeight: 900,
+                marginBottom: 6,
+              }}
+            >
+              🧠 AI Summary
+            </div>
 
+            <div
+              className="ao-small"
+              style={{
+                color: "rgba(255,255,255,.88)",
+                lineHeight: 1.5,
+              }}
+            >
+              {summaryAi}
+            </div>
+          </div>
+        ) : null}
+
+        {opportunityScore !== null ? (
+          <div style={{ marginTop: 14 }}>
+            <div
+              style={{
+                fontWeight: 900,
+                marginBottom: 8,
+              }}
+            >
+              🎯 Opportunity Score
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                gap: 8,
+                flexWrap: "wrap",
+                alignItems: "center",
+              }}
+            >
+              <Pill
+                tone={
+                  opportunityScore >= 75
+                    ? "good"
+                    : opportunityScore >= 50
+                    ? "warn"
+                    : "bad"
+                }
+              >
+                {opportunityScore}/100
+              </Pill>
+
+              <Pill
+                tone={
+                  recommendation === "GO"
+                    ? "good"
+                    : recommendation === "REVIEW"
+                    ? "warn"
+                    : "bad"
+                }
+              >
+                {recommendation || "—"}
+              </Pill>
+            </div>
+          </div>
+        ) : null}
+
+        {domains.length > 0 ? (
+          <div style={{ marginTop: 14 }}>
+            <div
+              style={{
+                fontWeight: 900,
+                marginBottom: 8,
+              }}
+            >
+              🏷 Detected Domains
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                gap: 8,
+                flexWrap: "wrap",
+              }}
+            >
+              {domains.map((d, i) => (
+                <Pill key={i} tone="info">
+                  {d}
+                </Pill>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {risks.length > 0 ? (
+          <div style={{ marginTop: 14 }}>
+            <div
+              style={{
+                fontWeight: 900,
+                marginBottom: 8,
+              }}
+            >
+              ⚠️ Risks
+            </div>
+
+            <ul
+              style={{
+                margin: 0,
+                paddingLeft: 18,
+              }}
+            >
+              {risks.map((r, i) => (
+                <li
+                  key={i}
+                  className="ao-small"
+                  style={{
+                    color: "rgba(255,255,255,.86)",
+                    marginBottom: 4,
+                  }}
+                >
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         {summary ? (
           <div style={{ marginTop: 8 }}>
             <div style={{ fontWeight: 900, marginBottom: 4 }}>Résumé</div>
@@ -1592,8 +1735,8 @@ const App: React.FC = () => {
 
           const response =
             await fetch(
-              "API_BASE/api/ai/analyze-extracted/canadabuys_0_0.txt"
-            );
+  `${API_BASE}/ai/analyze-extracted/canadabuys_0_0.txt`
+);
 
           const data =
             await response.json();
