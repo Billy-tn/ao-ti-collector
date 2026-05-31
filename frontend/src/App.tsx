@@ -1848,25 +1848,26 @@ if (e.key === "6") setTab("others");
             <div
               key={t.id}
               className="ao-tender"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setSelectedTenderId(t.id);
-                setTab("ao");
-              }}
+              style={{ cursor: "default" }}
             >
               <div style={{ fontWeight: 700 }}>
                 {t.supplier_name || "Fournisseur inconnu"}
               </div>
+              <div className="ao-small">
+   📅 {t.date_publication || "-"}
+</div>
 
               <div className="ao-small">
-                {t.acheteur || "-"}
-              </div>
+  🏢 {t.acheteur || "-"}
+</div>
 
               <div className="ao-small">
-                {(t.award_amount || 0).toLocaleString()}{" "}
-                {t.award_currency || ""}
-              </div>
-
+  💰 {(t.award_amount || 0).toLocaleString()}{" "}
+  {t.award_currency || ""}
+</div>
+<div className="ao-small">
+  📄 {t.titre || t.title || "-"}
+</div>
               <div className="ao-small">
                 {t.portail || "-"}
               </div>
