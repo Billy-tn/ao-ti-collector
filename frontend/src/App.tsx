@@ -714,7 +714,8 @@ const App: React.FC = () => {
   // Data
   const [tenders, setTenders] = useState<Tender[]>([]);
   const [loadingTenders, setLoadingTenders] = useState(false);
-
+const [awards, setAwards] = useState<Tender[]>([]);
+const [loadingAwards, setLoadingAwards] = useState(false);
   // Selection
   const [selectedTenderId, setSelectedTenderId] = useState<number | null>(null);
 
@@ -1109,12 +1110,38 @@ const App: React.FC = () => {
     },
     [token, query, limit, portalFilter, countryFilter, searchField, atsOnly, apiFetchJson]
   );
+const fetchAwards = useCallback(async () => {
+  if (!token) return;
 
+  setLoadingAwards(true);
+
+  try {
+    const data = await apiFetchJson(`/awards?limit=5000`);
+
+    const normalized =
+      (data.items || []).map(normalizeTender);
+
+    setAwards(normalized);
+
+  } catch (e: any) {
+
+    setError(
+      e?.message || "Erreur awards"
+    );
+
+  } finally {
+
+    setLoadingAwards(false);
+  }
+}, [token, apiFetchJson]);
   useEffect(() => {
-    if (!token) return;
-    fetchTenders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  if (!token) return;
+
+  fetchTenders();
+  fetchAwards();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [token]);
 
   // -----------------------
   // Portal/Country options derived from data (prevents mismatch)
@@ -1832,19 +1859,19 @@ if (e.key === "6") setTab("others");
       title="🏆 Contrats attribués"
       right={
         <span className="ao-small">
-          {awardedTenders.length} contrat(s)
+          {awards.length} contrat(s)
         </span>
       }
     />
 
     <div className="ao-card__body">
-      {awardedTenders.length === 0 ? (
+      {awards.length === 0 ? (
         <div className="ao-small">
           Aucun contrat attribué trouvé.
         </div>
       ) : (
         <div style={{ display: "grid", gap: 10 }}>
-          {awardedTenders.map((t) => (
+          {awards.map((t) => (
             <div
               key={t.id}
               className="ao-tender"

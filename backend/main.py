@@ -255,6 +255,61 @@ def list_tenders(
 # ----------------------------------------------------------------------
 
 
+# ----------------------------------------------------------------------
+# Awards
+# ----------------------------------------------------------------------
+
+
+@app.get("/api/awards")
+def list_awards(
+    limit: int = Query(
+        default=200,
+        ge=1,
+        le=5000,
+    ),
+):
+    """
+    Retourne uniquement les contrats attribués.
+    """
+
+    con = get_db()
+
+    try:
+
+        rows = con.execute(
+            """
+            SELECT
+                id,
+                title,
+                buyer,
+                supplier_name,
+                award_amount,
+                award_currency,
+                award_status,
+                published_at
+            FROM tenders_v2
+            WHERE supplier_name IS NOT NULL
+              AND supplier_name <> ''
+            ORDER BY id DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+
+        return {
+            "items": rows,
+            "count": len(rows),
+        }
+
+    finally:
+
+        con.close()
+
+
+# ----------------------------------------------------------------------
+# Reports
+# ----------------------------------------------------------------------
+
 @app.get("/api/report/categories")
 def report_categories(
     q: str | None = Query(default=None),
