@@ -4,11 +4,13 @@ CREATE TABLE IF NOT EXISTS organizations (
 
     source TEXT NOT NULL,
 
-    org_id TEXT,
+    org_id TEXT NOT NULL,
 
     name TEXT NOT NULL,
 
     org_type TEXT,
+
+    street_address TEXT,
 
     city TEXT,
 
@@ -18,5 +20,7 @@ CREATE TABLE IF NOT EXISTS organizations (
 
     country TEXT,
 
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE(source, org_id)
 );

@@ -58,3 +58,5 @@ Principe :
 - Décision : classifications normalisées dans tender_classifications (UNSPSC principal et additionnels).
 
 - Décision : lots reporté à un audit futur. Les bids conservent temporairement lot_reference provenant de relatedLots.
+
+- Observation : organizations pourrait nécessiter street_address suite à l'audit SEAO. À confirmer avant implémentation finale.
