@@ -282,6 +282,7 @@ def list_awards(
                 id,
                 title,
                 buyer,
+                portal_name,
                 supplier_name,
                 award_amount,
                 award_currency,

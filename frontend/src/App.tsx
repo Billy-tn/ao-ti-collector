@@ -716,6 +716,8 @@ const App: React.FC = () => {
   const [loadingTenders, setLoadingTenders] = useState(false);
 const [awards, setAwards] = useState<Tender[]>([]);
 const [loadingAwards, setLoadingAwards] = useState(false);
+const [awardPortalFilter, setAwardPortalFilter] = useState("ALL");
+const [awardYearFilter, setAwardYearFilter] = useState("ALL");
   // Selection
   const [selectedTenderId, setSelectedTenderId] = useState<number | null>(null);
 
@@ -1155,7 +1157,29 @@ const fetchAwards = useCallback(async () => {
     const arr = Array.from(set).sort((a, b) => a.localeCompare(b));
     return ["ALL", ...arr];
   }, [tenders]);
+  const awardPortalOptions = useMemo(() => {
+  const values = new Set<string>();
 
+  awards.forEach((a) => {
+    if (a.portail) {
+      values.add(a.portail);
+    }
+  });
+
+  return ["ALL", ...Array.from(values).sort()];
+}, [awards]);
+const awardYearOptions = useMemo(() => {
+  const years = new Set<string>();
+
+  awards.forEach((a) => {
+    const d = a.date_publication || "";
+    if (d.length >= 4) {
+      years.add(d.substring(0, 4));
+    }
+  });
+
+  return ["ALL", ...Array.from(years).sort().reverse()];
+}, [awards]);
   const countryOptions = useMemo(() => {
     const set = new Set<string>();
     for (const t of tenders) {
@@ -1200,6 +1224,32 @@ const awardedTenders = useMemo(() => {
       (t.award_amount ?? 0) > 0
   );
 }, [visibleTenders]);
+
+const filteredAwards = useMemo(() => {
+  return awards.filter((a) => {
+
+    if (
+      awardPortalFilter !== "ALL" &&
+      a.portail !== awardPortalFilter
+    ) {
+      return false;
+    }
+
+    if (
+      awardYearFilter !== "ALL" &&
+      (a.date_publication || "").substring(0, 4) !== awardYearFilter
+    ) {
+      return false;
+    }
+
+    return true;
+
+  });
+}, [
+  awards,
+  awardPortalFilter,
+  awardYearFilter,
+]);
   // -----------------------
   // Fetch portals & reports (on demand)
   // -----------------------
@@ -1859,48 +1909,121 @@ if (e.key === "6") setTab("others");
       title="🏆 Contrats attribués"
       right={
         <span className="ao-small">
-          {awards.length} contrat(s)
+          {filteredAwards.length} contrat(s)
         </span>
       }
     />
 
-    <div className="ao-card__body">
-      {awards.length === 0 ? (
-        <div className="ao-small">
-          Aucun contrat attribué trouvé.
-        </div>
+   <div className="ao-card__body">
+
+  <div
+    style={{
+      display: "flex",
+      gap: 10,
+      marginBottom: 12,
+      alignItems: "center",
+    }}
+  >
+    <select
+      className="ao-select"
+      value={awardPortalFilter}
+      onChange={(e) =>
+        setAwardPortalFilter(e.target.value)
+      }
+    >
+      {awardPortalOptions.map((p) => (
+        <option key={p} value={p}>
+          {p === "ALL"
+            ? "Tous les portails"
+            : p}
+        </option>
+      ))}
+    </select>
+    <select
+  className="ao-select"
+  value={awardYearFilter}
+  onChange={(e) =>
+    setAwardYearFilter(e.target.value)
+  }
+>
+  {awardYearOptions.map((y) => (
+    <option
+      key={y}
+      value={y}
+    >
+      {y === "ALL"
+        ? "Toutes les années"
+        : y}
+    </option>
+  ))}
+</select>
+  </div>
+
+  {filteredAwards.length === 0 ? (
+    <div className="ao-small">
+      Aucun contrat attribué trouvé.
+    </div>
       ) : (
-        <div style={{ display: "grid", gap: 10 }}>
-          {awards.map((t) => (
-            <div
-              key={t.id}
-              className="ao-tender"
-              style={{ cursor: "default" }}
-            >
-              <div style={{ fontWeight: 700 }}>
-                {t.supplier_name || "Fournisseur inconnu"}
-              </div>
-              <div className="ao-small">
-   📅 {t.date_publication || "-"}
-</div>
+<div style={{ overflowX: "auto" }}>
+  <table
+    style={{
+      width: "100%",
+      borderCollapse: "collapse",
+      fontSize: "14px",
+    }}
+  >
+   <thead>
+  <tr>
+    <th style={{ padding: "8px" }} align="left">Date</th>
+    <th style={{ padding: "8px" }} align="left">Portail</th>
+    <th style={{ padding: "8px" }} align="left">Fournisseur</th>
+    <th style={{ padding: "8px" }} align="left">Acheteur</th>
+    <th style={{ padding: "8px" }} align="right">Montant</th>
+  </tr>
+</thead>
 
-              <div className="ao-small">
-  🏢 {t.acheteur || "-"}
-</div>
+    <tbody>
+      {filteredAwards.map((t) => (
+        <tr key={t.id}>
+  <td style={{ padding: "8px" }}>
+    {t.date_publication || "-"}
+  </td>
 
-              <div className="ao-small">
-  💰 {(t.award_amount || 0).toLocaleString()}{" "}
-  {t.award_currency || ""}
+  <td style={{ padding: "8px" }}>
+    {t.portail || "-"}
+  </td>
+
+  <td style={{ padding: "8px" }}>
+    {t.supplier_name || "Fournisseur inconnu"}
+  </td>
+
+  <td
+    style={{
+      padding: "8px",
+      maxWidth: "450px",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    }}
+    title={t.acheteur || ""}
+  >
+    {t.acheteur || "-"}
+  </td>
+
+  <td
+    style={{
+      padding: "8px",
+      textAlign: "right",
+    }}
+  >
+            {(t.award_amount || 0).toLocaleString()}{" "}
+            {t.award_currency || ""}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 </div>
-<div className="ao-small">
-  📄 {t.titre || t.title || "-"}
-</div>
-              <div className="ao-small">
-                {t.portail || "-"}
-              </div>
-            </div>
-          ))}
-        </div>
       )}
     </div>
   </div>
