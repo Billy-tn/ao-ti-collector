@@ -54,3 +54,7 @@ Principe :
 
 
 - Décision : tenderers devient tender_participants pour supporter buyer, supplier et tenderer dans un modèle unique.
+
+- Décision : classifications normalisées dans tender_classifications (UNSPSC principal et additionnels).
+
+- Décision : lots reporté à un audit futur. Les bids conservent temporairement lot_reference provenant de relatedLots.
