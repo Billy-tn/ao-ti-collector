@@ -19,3 +19,4 @@ __pycache__/
 # local scratch
 /tmp/
 ao.db
+database/*.db
